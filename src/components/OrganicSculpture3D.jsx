@@ -7,13 +7,13 @@ import * as THREE from 'three';
 function Sculpture() {
   const meshRef = useRef(null);
 
-  useFrame((state) => {
+  useFrame((state, delta) => {
     const { x, y } = state.pointer || { x: 0, y: 0 };
     if (meshRef.current) {
-      meshRef.current.rotation.x += 0.003;
-      meshRef.current.rotation.y += 0.005;
-      meshRef.current.rotation.y = THREE.MathUtils.lerp(meshRef.current.rotation.y, x * 0.8, 0.04);
-      meshRef.current.rotation.x = THREE.MathUtils.lerp(meshRef.current.rotation.x, -y * 0.8, 0.04);
+      meshRef.current.rotation.x += delta * 0.35;
+      meshRef.current.rotation.y += delta * 0.55;
+      meshRef.current.position.x = THREE.MathUtils.lerp(meshRef.current.position.x, x * 0.3, 0.05);
+      meshRef.current.position.y = THREE.MathUtils.lerp(meshRef.current.position.y, y * 0.3, 0.05);
     }
   });
 

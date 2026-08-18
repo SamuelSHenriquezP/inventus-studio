@@ -1,124 +1,157 @@
 // src/components/ThreePhone3D.jsx
 import { useRef, useMemo, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, RoundedBox, Sparkles, OrbitControls, useTexture } from '@react-three/drei';
+import { Float, RoundedBox, useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 
-function PhoneModel({ texturePath, isGlowing }) {
+function PhoneModel({ 
+  texturePath, 
+  accentColor = '#f43f5e', 
+  isInteractive = true,
+  isHorizontal = false 
+}) {
   const groupRef = useRef(null);
-  const glowLightRef = useRef(null);
 
   const texture = useTexture(texturePath || '/assets/projects/cyber_rush.jpg');
 
-  useFrame((state) => {
-    const { x, y } = state.pointer || { x: 0, y: 0 };
-    if (groupRef.current) {
-      groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, x * 0.75, 0.06);
-      groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, -y * 0.5, 0.06);
-    }
-    if (glowLightRef.current) {
-      glowLightRef.current.intensity = 2.0 + Math.sin(state.clock.elapsedTime * 4) * 0.5;
+  useFrame((state, delta) => {
+    if (!groupRef.current) return;
+    
+    // Slow elegant continuous rotation
+    groupRef.current.rotation.y += delta * 0.12;
+
+    // Responsive pointer tilt
+    if (isInteractive) {
+      const { x, y } = state.pointer || { x: 0, y: 0 };
+      groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, x * 0.45 + Math.PI * 0.04, 0.05);
+      groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, -y * 0.3, 0.05);
+      groupRef.current.position.x = THREE.MathUtils.lerp(groupRef.current.position.x, x * 0.15, 0.05);
     }
   });
 
   const titaniumMaterial = useMemo(() => new THREE.MeshStandardMaterial({
-    color: '#26262b',
-    metalness: 0.95,
+    color: '#1a1a20',
+    metalness: 0.94,
     roughness: 0.15,
   }), []);
 
-  const glassBackMaterial = useMemo(() => new THREE.MeshPhysicalMaterial({
-    color: '#0d0d12',
-    roughness: 0.1,
-    metalness: 0.2,
-    transmission: 0.3,
-    transparent: true,
+  const bezelMaterial = useMemo(() => new THREE.MeshStandardMaterial({
+    color: '#060608',
+    roughness: 0.8,
   }), []);
 
   return (
-    <Float speed={3.0} rotationIntensity={0.8} floatIntensity={1.5}>
-      <group ref={groupRef} scale={1.25} position={[0, 0, 0]}>
+    <Float speed={2.2} rotationIntensity={0.35} floatIntensity={0.7}>
+      <group 
+        ref={groupRef} 
+        scale={isHorizontal ? 1.05 : 1.22} 
+        rotation={isHorizontal ? [0, 0, Math.PI / 2] : [0, 0, 0]}
+        position={[0, 0, 0]}
+      >
         
         {/* Main Titanium Chassis */}
-        <RoundedBox args={[1.55, 3.2, 0.15]} radius={0.16} smoothness={4} material={titaniumMaterial} />
+        <RoundedBox args={[1.56, 3.22, 0.16]} radius={0.18} smoothness={4} material={titaniumMaterial} />
 
-        {/* Glass Screen Front */}
-        <mesh position={[0, 0, 0.078]}>
-          <planeGeometry args={[1.45, 3.08]} />
-          <meshBasicMaterial map={texture} />
+        {/* Screen Bezel Background */}
+        <mesh position={[0, 0, 0.079]}>
+          <planeGeometry args={[1.48, 3.12]} />
+          <primitive object={bezelMaterial} attach="material" />
+        </mesh>
+
+        {/* High-Res Screen Texture */}
+        <mesh position={[0, 0, 0.081]}>
+          <planeGeometry args={[1.42, 3.04]} />
+          <meshBasicMaterial map={texture} toneMapped={false} />
         </mesh>
 
         {/* Dynamic Island Pill */}
-        <mesh position={[0, 1.35, 0.082]}>
-          <planeGeometry args={[0.42, 0.1]} />
-          <meshBasicMaterial color="#000000" />
+        <mesh position={[0, 1.34, 0.083]}>
+          <planeGeometry args={[0.38, 0.09]} />
+          <meshBasicMaterial color="#050507" />
         </mesh>
 
-        {/* Back Matte Glass */}
-        <mesh position={[0, 0, -0.078]} rotation={[0, Math.PI, 0]}>
-          <planeGeometry args={[1.48, 3.12]} />
-          <primitive object={glassBackMaterial} attach="material" />
+        {/* Glass Screen Reflection Overlay */}
+        <mesh position={[0, 0, 0.084]}>
+          <planeGeometry args={[1.42, 3.04]} />
+          <meshPhysicalMaterial 
+            transparent 
+            opacity={0.07} 
+            roughness={0.05} 
+            metalness={0.1} 
+            color="#ffffff" 
+          />
+        </mesh>
+
+        {/* Back Chassis */}
+        <mesh position={[0, 0, -0.081]} rotation={[0, Math.PI, 0]}>
+          <planeGeometry args={[1.46, 3.1]} />
+          <meshStandardMaterial color="#121216" roughness={0.3} metalness={0.88} />
         </mesh>
 
         {/* Rear Camera Island */}
-        <group position={[-0.38, 1.05, -0.09]}>
-          <RoundedBox args={[0.65, 0.65, 0.06]} radius={0.08} smoothness={4} material={titaniumMaterial} />
+        <group position={[-0.38, 1.05, -0.095]}>
+          <RoundedBox args={[0.65, 0.65, 0.05]} radius={0.08} smoothness={4} material={titaniumMaterial} />
           
-          {/* Lenses */}
-          <mesh position={[-0.14, 0.14, -0.04]} rotation={[Math.PI / 2, 0, 0]}>
+          {/* Triple Lenses */}
+          <mesh position={[-0.14, 0.14, -0.03]} rotation={[Math.PI / 2, 0, 0]}>
             <cylinderGeometry args={[0.1, 0.1, 0.03, 16]} />
-            <meshStandardMaterial color="#050508" metalness={0.9} roughness={0.1} />
+            <meshStandardMaterial color="#08080a" metalness={0.95} roughness={0.1} />
           </mesh>
-          <mesh position={[0.14, 0.14, -0.04]} rotation={[Math.PI / 2, 0, 0]}>
+          <mesh position={[0.14, 0.14, -0.03]} rotation={[Math.PI / 2, 0, 0]}>
             <cylinderGeometry args={[0.1, 0.1, 0.03, 16]} />
-            <meshStandardMaterial color="#050508" metalness={0.9} roughness={0.1} />
+            <meshStandardMaterial color="#08080a" metalness={0.95} roughness={0.1} />
           </mesh>
-          <mesh position={[-0.14, -0.14, -0.04]} rotation={[Math.PI / 2, 0, 0]}>
+          <mesh position={[-0.14, -0.14, -0.03]} rotation={[Math.PI / 2, 0, 0]}>
             <cylinderGeometry args={[0.1, 0.1, 0.03, 16]} />
-            <meshStandardMaterial color="#050508" metalness={0.9} roughness={0.1} />
+            <meshStandardMaterial color="#08080a" metalness={0.95} roughness={0.1} />
           </mesh>
         </group>
 
-        {/* Screen Light Emitter */}
+        {/* Ambient Subtle Accent Light */}
         <pointLight 
-          ref={glowLightRef}
-          position={[0, 0, 0.8]} 
-          color={isGlowing ? '#ff0077' : '#00f0ff'} 
-          intensity={2.2} 
+          position={[0, 0, 1.2]} 
+          color={accentColor} 
+          intensity={1.2} 
           distance={3.5} 
         />
-
-        {/* Floating Quantum Particles */}
-        <Sparkles count={40} scale={3.5} size={3.5} speed={0.5} color="#ff0077" />
-        <Sparkles count={35} scale={4.2} size={4} speed={0.7} color="#00f0ff" />
 
       </group>
     </Float>
   );
 }
 
-function FallbackPhone() {
+function FallbackPhone({ texturePath }) {
   return (
-    <div className="w-full h-full flex items-center justify-center">
-      <div className="w-40 h-72 rounded-3xl bg-zinc-900 border border-white/10 animate-pulse flex items-center justify-center font-mono text-xs text-zinc-500">
-        Cargando 3D Phone...
+    <div className="w-full h-full flex items-center justify-center p-6">
+      <div className="w-60 h-105 rounded-[36px] bg-zinc-900 border border-white/15 p-2.5 shadow-2xl overflow-hidden relative">
+        <img 
+          src={texturePath || '/assets/projects/cyber_rush.jpg'} 
+          alt="3D Mockup Fallback" 
+          className="w-full h-full object-cover rounded-[28px]"
+        />
       </div>
     </div>
   );
 }
 
-export default function ThreePhone3D({ texturePath, isGlowing }) {
+export default function ThreePhone3D({ 
+  texturePath, 
+  accentColor = '#f43f5e',
+  isHorizontal = false 
+}) {
   return (
-    <div className="w-full h-80 sm:h-96 md:h-110 relative cursor-grab active:cursor-grabbing select-none">
-      <Suspense fallback={<FallbackPhone />}>
-        <Canvas camera={{ position: [0, 0, 4.2], fov: 42 }} dpr={[1, 2]}>
-          <ambientLight intensity={1.4} />
-          <directionalLight position={[5, 6, 5]} intensity={2.8} color="#ffffff" />
-          <directionalLight position={[-5, -4, -3]} intensity={1.8} color="#ff0077" />
-          <pointLight position={[0, 0, 3]} intensity={2} color="#00f0ff" />
-          
-          <PhoneModel texturePath={texturePath} isGlowing={isGlowing} />
-          <OrbitControls enableZoom={false} enablePan={false} maxPolarAngle={Math.PI / 1.5} minPolarAngle={Math.PI / 3} />
+    <div className="w-full h-[420px] sm:h-[480px] lg:h-[530px] relative cursor-grab active:cursor-grabbing select-none">
+      <Suspense fallback={<FallbackPhone texturePath={texturePath} />}>
+        <Canvas camera={{ position: [0, 0, 4.3], fov: 42 }} dpr={[1, 1.5]}>
+          <ambientLight intensity={1.1} />
+          <directionalLight position={[4, 6, 5]} intensity={2.5} color="#ffffff" />
+          <directionalLight position={[-4, -3, -3]} intensity={1.2} color="#71717a" />
+          <pointLight position={[0, -2, 2]} intensity={0.8} color={accentColor} />
+          <PhoneModel 
+            texturePath={texturePath} 
+            accentColor={accentColor} 
+            isHorizontal={isHorizontal}
+          />
         </Canvas>
       </Suspense>
     </div>
