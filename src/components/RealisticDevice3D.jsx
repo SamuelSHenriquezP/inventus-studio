@@ -8,6 +8,9 @@ import NidoPhoneApp from './apps/NidoPhoneApp';
 import ServiIntelLaptopApp from './apps/ServiIntelLaptopApp';
 import DaysPhoneApp from './apps/DaysPhoneApp';
 import CyberRushPhoneApp from './apps/CyberRushPhoneApp';
+import OtekPowerApp from './apps/OtekPowerApp';
+
+import SopaSeniorApp from './apps/SopaSeniorApp';
 
 export default function RealisticDevice3D({ 
   type = 'phone-vertical', 
@@ -28,13 +31,11 @@ export default function RealisticDevice3D({
   }
 
   const isLaptop = type === 'laptop' || projectId === 'serviintel-ops';
+  const isTablet = type === 'tablet' || projectId === 'otek-powerapps';
   const isHorizontalPhone = projectId === 'cyber-rush';
 
   return (
-    <div 
-      data-mockup="true"
-      className="device-mockup w-full h-117.5 sm:h-132.5 lg:h-142.5 flex flex-col items-center justify-center relative select-none"
-    >
+    <div className="w-full h-117.5 sm:h-132.5 lg:h-142.5 flex flex-col items-center justify-center relative select-none">
       
       {/* Minimalist Controls Bar */}
       <div className="flex items-center gap-1 p-1 rounded-full bg-zinc-900/90 border border-white/10 backdrop-blur-md shadow-xl mb-3.5 z-30 font-mono text-[11px]">
@@ -71,7 +72,7 @@ export default function RealisticDevice3D({
           }`}
         >
           <Code2 className="w-3 h-3" />
-          <span>Código Dart</span>
+          <span>{codeSnippet?.language === 'powerfx' ? 'Power Fx' : 'Código Dart'}</span>
         </button>
       </div>
 
@@ -80,10 +81,42 @@ export default function RealisticDevice3D({
         <div className="relative">
           
           {/* ========================================================================= */}
-          {/* LAPTOP HARDWARE MOCKUP (MACBOOK UNIBODY) */}
+          {/* TABLET INDUSTRIAL / IPAD HARDWARE MOCKUP */}
           {/* ========================================================================= */}
-          {isLaptop ? (
-            <div className="relative w-85 sm:w-115 lg:w-125 flex flex-col items-center">
+          {isTablet ? (
+            <div 
+              data-prevent-slide="true"
+              className="mockup-interactive relative w-85 sm:w-120 lg:w-135 aspect-16/10 rounded-2xl sm:rounded-3xl bg-[#151720] p-2.5 sm:p-3 border border-sky-500/30 shadow-[0_30px_70px_rgba(0,0,0,0.9)] overflow-hidden"
+            >
+              {/* Static Specular Glass Glare */}
+              <div className="absolute inset-0 bg-linear-to-tr from-transparent via-white/4 to-transparent pointer-events-none z-30" />
+              
+              {/* Front Camera Dot */}
+              <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-black border border-white/10 flex items-center justify-center z-30 pointer-events-none">
+                <div className="w-0.5 h-0.5 rounded-full bg-sky-400/50" />
+              </div>
+
+              {/* Inner Screen */}
+              <div className="relative w-full h-full rounded-xl sm:rounded-2xl overflow-hidden bg-black border border-white/10 shadow-inner interactive-screen">
+                {screenMode === 'live-app' ? (
+                  <OtekPowerApp />
+                ) : (
+                  <img 
+                    src={image} 
+                    alt={title}
+                    className="w-full h-full object-cover select-none"
+                  />
+                )}
+              </div>
+            </div>
+          ) : isLaptop ? (
+            /* ========================================================================= */
+            /* LAPTOP HARDWARE MOCKUP (MACBOOK UNIBODY) */
+            /* ========================================================================= */
+            <div 
+              data-prevent-slide="true"
+              className="mockup-interactive relative w-85 sm:w-115 lg:w-125 flex flex-col items-center"
+            >
               {/* Display Chassis */}
               <div className="relative w-full aspect-16/10 rounded-2xl bg-[#18191e] p-3 border border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.85)] overflow-hidden">
                 {/* Static Specular Glass Glare */}
@@ -95,7 +128,7 @@ export default function RealisticDevice3D({
                 </div>
 
                 {/* Inner Screen */}
-                <div className="relative w-full h-full rounded-xl overflow-hidden bg-black border border-white/10 shadow-inner">
+                <div className="relative w-full h-full rounded-xl overflow-hidden bg-black border border-white/10 shadow-inner interactive-screen">
                   {screenMode === 'live-app' ? (
                     <ServiIntelLaptopApp />
                   ) : (
@@ -117,9 +150,12 @@ export default function RealisticDevice3D({
             /* ========================================================================= */
             /* HORIZONTAL PHONE HARDWARE MOCKUP */
             /* ========================================================================= */
-            <div className="relative w-85 sm:w-110 lg:w-120 aspect-18.8/9 rounded-[38px] bg-[#16171d] p-3 border border-white/15 shadow-[0_30px_70px_rgba(0,0,0,0.85)]">
+            <div 
+              data-prevent-slide="true"
+              className="mockup-interactive relative w-85 sm:w-110 lg:w-120 aspect-18.8/9 rounded-[38px] bg-[#16171d] p-3 border border-white/15 shadow-[0_30px_70px_rgba(0,0,0,0.85)]"
+            >
               <div className="absolute inset-0 rounded-[34px] bg-linear-to-tr from-transparent via-white/4 to-transparent pointer-events-none z-30" />
-              <div className="relative w-full h-full rounded-[28px] overflow-hidden bg-black border border-white/10 flex flex-col justify-between shadow-inner">
+              <div className="relative w-full h-full rounded-[28px] overflow-hidden bg-black border border-white/10 flex flex-col justify-between shadow-inner interactive-screen">
                 {screenMode === 'live-app' ? (
                   <CyberRushPhoneApp />
                 ) : (
@@ -135,11 +171,14 @@ export default function RealisticDevice3D({
             /* ========================================================================= */
             /* VERTICAL PHONE HARDWARE MOCKUP (TITANIUM SMARTPHONE) */
             /* ========================================================================= */
-            <div className="relative w-64 sm:w-72 lg:w-76 aspect-9/18.8 rounded-[44px] bg-[#15161c] p-3 border border-white/15 shadow-[0_35px_80px_rgba(0,0,0,0.9)]">
+            <div 
+              data-prevent-slide="true"
+              className="mockup-interactive relative w-64 sm:w-72 lg:w-76 aspect-9/18.8 rounded-[44px] bg-[#15161c] p-3 border border-white/15 shadow-[0_35px_80px_rgba(0,0,0,0.9)]"
+            >
               {/* Static Glass Specular Tone */}
               <div className="absolute inset-0 rounded-[40px] bg-linear-to-tr from-transparent via-white/4 to-transparent pointer-events-none z-30" />
               
-              <div className="relative w-full h-full rounded-[34px] overflow-hidden bg-black border border-white/10 flex flex-col justify-between shadow-inner">
+              <div className="relative w-full h-full rounded-[34px] overflow-hidden bg-black border border-white/10 flex flex-col justify-between shadow-inner interactive-screen">
                 {/* Dynamic Island */}
                 <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-20 h-4 bg-black rounded-full border border-white/10 flex items-center justify-between px-2 z-30 pointer-events-none">
                   <div className="w-1 h-1 rounded-full bg-white/40" />
@@ -151,6 +190,8 @@ export default function RealisticDevice3D({
                   {screenMode === 'live-app' ? (
                     projectId === 'days-focus-flow' ? (
                       <DaysPhoneApp />
+                    ) : projectId === 'sopa-senior' ? (
+                      <SopaSeniorApp />
                     ) : (
                       <NidoPhoneApp />
                     )
@@ -171,7 +212,10 @@ export default function RealisticDevice3D({
         </div>
       ) : (
         /* Architecture & Code Inspector */
-        <div className="w-full max-w-md h-84 rounded-2xl bg-zinc-950/95 border border-white/15 p-1 shadow-2xl overflow-hidden animate-fadeIn">
+        <div 
+          data-prevent-slide="true"
+          className="code-viewer-container w-full max-w-md h-84 rounded-2xl bg-zinc-950/95 border border-white/15 p-1 shadow-2xl overflow-hidden animate-fadeIn"
+        >
           <FlutterCodeViewer codeSnippet={codeSnippet} accentColor={accentColor} />
         </div>
       )}

@@ -13,7 +13,8 @@ export default function FullscreenDeck({
   onPlayDemo, 
   onSectionChange, 
   activeSectionIndex, 
-  setActiveSectionIndex
+  setActiveSectionIndex,
+  isModalOpen = false
 }) {
   const deckRef = useRef(null);
   const slidesRef = useRef([]);
@@ -23,89 +24,66 @@ export default function FullscreenDeck({
   const activeTimelineRef = useRef(null);
   const isTransitioningRef = useRef(false);
 
-  // Build the list of sections (Hero + 4 Projects + Stack + Contact)
-  const sections = useMemo(() => [
-    {
-      id: 'hero',
-      type: 'hero',
-      label: 'Inicio',
-      title: 'Inventus Tech Studio',
-      number: '00',
-      accent: '#f4f4f5',
-      transitionType: 'fade-scale'
-    },
-    {
-      id: 'project-lovecost-nido',
-      type: 'project',
-      project: projects[0],
-      index: 0,
-      label: projects[0]?.title || 'LoveCost / Nido',
-      title: projects[0]?.title || 'LoveCost / Nido',
-      number: '01',
-      accent: '#10b981',
-      transitionType: 'parallax-vertical'
-    },
-    {
-      id: 'project-serviintel-ops',
-      type: 'project',
-      project: projects[1],
-      index: 1,
-      label: projects[1]?.title || 'ServiIntel Ops',
-      title: projects[1]?.title || 'ServiIntel Ops',
-      number: '02',
-      accent: '#38bdf8',
-      transitionType: 'lateral-slide'
-    },
-    {
-      id: 'project-days-focus-flow',
-      type: 'project',
-      project: projects[2],
-      index: 2,
-      label: projects[2]?.title || 'Days: focus.flow',
-      title: projects[2]?.title || 'Days: focus.flow',
-      number: '03',
-      accent: '#8B9A86',
-      transitionType: 'parallax-vertical'
-    },
-    {
-      id: 'project-cyber-rush',
-      type: 'project',
-      project: projects[3],
-      index: 3,
-      label: projects[3]?.title || 'Cyber Rush',
-      title: projects[3]?.title || 'Cyber Rush',
-      number: '04',
-      accent: '#f43f5e',
-      transitionType: 'lateral-slide'
-    },
-    {
-      id: 'mas-proyectos',
-      type: 'more',
-      label: 'Más Proyectos',
-      title: 'Trabajo Adicional',
-      number: '05',
-      accent: '#a78bfa',
-      transitionType: 'parallax-vertical'
-    },
-    {
-      id: 'sobre-mi',
-      type: 'stack',
-      label: 'Stack & Servicios',
-      title: 'Stack & Tecnologías',
-      number: '06',
-      accent: '#d4d4d8',
-      transitionType: 'parallax-vertical'
-    },
-    {
-      id: 'contacto',
-      type: 'contact',
-      label: 'Contacto Directo',
-      title: 'Contacto & Cotizaciones',
-      number: '07',
-      accent: '#10b981',
-      transitionType: 'parallax-vertical'
-    }
-  ], [projects]);
+  // Build the list of sections (Hero + Dynamic Projects + More + Stack + Contact)
+  const sections = useMemo(() => {
+    const list = [
+      {
+        id: 'hero',
+        type: 'hero',
+        label: 'Inicio',
+        title: 'Inventus Tech Studio',
+        number: '00',
+        accent: '#f4f4f5',
+        transitionType: 'fade-scale'
+      }
+    ];
+
+    projects.forEach((proj, idx) => {
+      list.push({
+        id: `project-${proj.id}`,
+        type: 'project',
+        project: proj,
+        index: idx,
+        label: proj.title,
+        title: proj.title,
+        number: `0${idx + 1}`,
+        accent: proj.accent || '#38bdf8',
+        transitionType: idx % 2 === 0 ? 'lateral-slide' : 'parallax-vertical'
+      });
+    });
+
+    list.push(
+      {
+        id: 'mas-proyectos',
+        type: 'more',
+        label: 'Más Proyectos',
+        title: 'Trabajo Adicional',
+        number: `0${projects.length + 1}`,
+        accent: '#a78bfa',
+        transitionType: 'parallax-vertical'
+      },
+      {
+        id: 'sobre-mi',
+        type: 'stack',
+        label: 'Stack & Servicios',
+        title: 'Stack & Tecnologías',
+        number: `0${projects.length + 2}`,
+        accent: '#d4d4d8',
+        transitionType: 'parallax-vertical'
+      },
+      {
+        id: 'contacto',
+        type: 'contact',
+        label: 'Contacto Directo',
+        title: 'Contacto & Cotizaciones',
+        number: `0${projects.length + 3}`,
+        accent: '#10b981',
+        transitionType: 'parallax-vertical'
+      }
+    );
+
+    return list;
+  }, [projects]);
 
   const totalSections = sections.length;
   const currentSection = sections[activeSectionIndex] || sections[0];
@@ -275,10 +253,19 @@ export default function FullscreenDeck({
   // Wheel Listener
   useEffect(() => {
     const handleWheel = (e) => {
-      // Prevent changing page if mouse is inside any mockup, 3D canvas, app screen, or interactive area
+      // 1. If any modal is active or body scroll is locked, prevent slide transition
+      if (
+        isModalOpen ||
+        document.body.style.overflow === 'hidden' ||
+        document.querySelector('[data-modal="true"], [role="dialog"], .modal-backdrop, .modal-container')
+      ) {
+        return;
+      }
+
+      // 2. Prevent changing page if mouse is inside any modal, 3D canvas, app screen, or interactive area
       if (
         e.target.closest(
-          '[data-mockup], .device-mockup, .mockup-interactive, .scrollable-content, .code-viewer-container, canvas, [data-prevent-slide], .interactive-screen, [data-interactive]'
+          '[data-modal], [data-prevent-slide], [role="dialog"], .fixed.z-50, .modal-container, .modal-backdrop, .mockup-interactive, .scrollable-content, .code-viewer-container, canvas, .interactive-screen, [data-interactive]'
         )
       ) {
         return;
@@ -301,14 +288,17 @@ export default function FullscreenDeck({
 
     window.addEventListener('wheel', handleWheel, { passive: true });
     return () => window.removeEventListener('wheel', handleWheel);
-  }, [handleNext, handlePrev]);
+  }, [handleNext, handlePrev, isModalOpen]);
 
   // Touch Gesture Listeners
   useEffect(() => {
     const handleTouchStart = (e) => {
       if (
+        isModalOpen ||
+        document.body.style.overflow === 'hidden' ||
+        document.querySelector('[data-modal="true"], [role="dialog"], .modal-backdrop, .modal-container') ||
         e.target.closest(
-          '[data-mockup], .device-mockup, .mockup-interactive, .scrollable-content, .code-viewer-container, canvas, [data-prevent-slide], .interactive-screen, [data-interactive]'
+          '[data-modal], [data-prevent-slide], [role="dialog"], .fixed.z-50, .modal-container, .modal-backdrop, .mockup-interactive, .scrollable-content, .code-viewer-container, canvas, .interactive-screen, [data-interactive]'
         )
       ) {
         touchStartY.current = null;
@@ -319,6 +309,13 @@ export default function FullscreenDeck({
 
     const handleTouchEnd = (e) => {
       if (touchStartY.current === null) return;
+      if (
+        isModalOpen ||
+        document.body.style.overflow === 'hidden' ||
+        document.querySelector('[data-modal="true"], [role="dialog"], .modal-backdrop, .modal-container')
+      ) {
+        return;
+      }
       const touchEndY = e.changedTouches[0].clientY;
       const diffY = touchStartY.current - touchEndY;
 
@@ -337,11 +334,19 @@ export default function FullscreenDeck({
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [handleNext, handlePrev]);
+  }, [handleNext, handlePrev, isModalOpen]);
 
   // Keyboard Navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
+      if (
+        isModalOpen ||
+        document.body.style.overflow === 'hidden' ||
+        document.querySelector('[data-modal="true"], [role="dialog"], .modal-backdrop, .modal-container')
+      ) {
+        return;
+      }
+
       if (['ArrowDown', 'PageDown'].includes(e.key)) {
         e.preventDefault();
         handleNext();
@@ -359,7 +364,7 @@ export default function FullscreenDeck({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleNext, handlePrev, goToSection, totalSections]);
+  }, [handleNext, handlePrev, goToSection, totalSections, isModalOpen]);
 
   return (
     <div 

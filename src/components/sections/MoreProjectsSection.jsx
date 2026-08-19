@@ -34,10 +34,10 @@ export default function MoreProjectsSection({ isActive = true }) {
           mainChars,
           {
             opacity: 0,
-            y: 20,
-            duration: 0.45,
-            stagger: 0.015,
-            ease: 'power2.out',
+            y: 24,
+            duration: 0.85,
+            stagger: 0.035,
+            ease: 'power3.out',
             clearProps: 'all',
           },
           0.04
@@ -49,14 +49,14 @@ export default function MoreProjectsSection({ isActive = true }) {
           hlChars,
           {
             opacity: 0,
-            y: 20,
+            y: 24,
             scale: 0.92,
-            duration: 0.45,
-            stagger: 0.015,
-            ease: 'power2.out',
+            duration: 0.85,
+            stagger: 0.035,
+            ease: 'power3.out',
             clearProps: 'all',
           },
-          0.1
+          0.12
         );
       }
 
@@ -105,7 +105,7 @@ export default function MoreProjectsSection({ isActive = true }) {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-violet-500" />
                 </span>
-                <span>05 // MÁS PROYECTOS & HERRAMIENTAS</span>
+                <span>07 // MÁS PROYECTOS & HERRAMIENTAS</span>
               </div>
 
               {/* Animated 3D Cinematic Title */}

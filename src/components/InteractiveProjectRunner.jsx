@@ -8,6 +8,8 @@ import {
 import confetti from 'canvas-confetti';
 import { sounds } from '../utils/soundEngine';
 import { personalInfo } from '../Data/projectsData';
+import OtekPowerApp from './apps/OtekPowerApp';
+import SopaSeniorApp from './apps/SopaSeniorApp';
 
 const FLEET_NODES = [
   { id: 'OP-101', name: 'Carlos Mendoza', status: 'En Ruta', battery: '92%', lat: '4.6097', lng: '-74.0817' },
@@ -153,16 +155,26 @@ export default function InteractiveProjectRunner({ project, onClose }) {
   const loveCostDisponible = income - fixedCosts - extraExpenses;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 animate-in fade-in duration-200 select-none">
+    <div 
+      data-modal="true"
+      data-prevent-slide="true"
+      onWheel={(e) => e.stopPropagation()}
+      onTouchMove={(e) => e.stopPropagation()}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 animate-in fade-in duration-200 select-none modal-container"
+    >
       
       {/* Backdrop */}
       <div 
         onClick={onClose} 
-        className="fixed inset-0 bg-black/90 backdrop-blur-2xl" 
+        className="fixed inset-0 bg-black/90 backdrop-blur-2xl modal-backdrop" 
       />
 
       {/* Modal Container */}
-      <div className="relative w-full max-w-3xl bg-[#0f0f13] border border-white/15 rounded-3xl p-6 sm:p-8 z-10 shadow-2xl space-y-6 max-h-[92vh] overflow-y-auto font-sans text-zinc-100">
+      <div 
+        data-prevent-slide="true"
+        onWheel={(e) => e.stopPropagation()}
+        className="relative w-full max-w-3xl bg-[#0f0f13] border border-white/15 rounded-3xl p-6 sm:p-8 z-10 shadow-2xl space-y-6 max-h-[92vh] overflow-y-auto font-sans text-zinc-100"
+      >
         
         {/* Top Header */}
         <div className="flex items-center justify-between border-b border-white/10 pb-4">
@@ -286,6 +298,34 @@ export default function InteractiveProjectRunner({ project, onClose }) {
                   <RefreshCw className={`w-3.5 h-3.5 ${isDispatching ? 'animate-spin' : ''}`} />
                   <span>{isDispatching ? 'Despachando...' : 'Despachar Orden Urgente'}</span>
                 </button>
+              </div>
+            </div>
+          )}
+
+          {/* 3. O-TEK QUALITY CONTROL POWER APPS RUNNER */}
+          {project.id === 'otek-powerapps' && (
+            <div className="rounded-2xl border border-sky-500/30 overflow-hidden bg-[#071320] shadow-2xl h-[560px] flex flex-col">
+              <OtekPowerApp />
+            </div>
+          )}
+
+          {/* 4. SOPA SENIOR LIVE APP SIMULATION */}
+          {project.id === 'sopa-senior' && (
+            <div className="flex flex-col items-center justify-center p-2 rounded-2xl bg-amber-950/20 border border-amber-500/30 space-y-4">
+              <div className="w-full flex items-center justify-between px-3 pt-2 text-xs font-mono text-amber-300 border-b border-amber-500/20 pb-2">
+                <span>SIMULADOR MÓVIL ANDROID // ADMOB + IAP</span>
+                <a
+                  href={project.googlePlayUrl || "https://play.google.com/store/apps/details?id=com.inventus.sopasenior"}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="px-3 py-1 rounded-full bg-amber-500 hover:bg-amber-400 text-black font-bold text-[11px] flex items-center gap-1.5 transition-all"
+                >
+                  <span>Abrir Google Play</span>
+                  <ArrowRight className="w-3 h-3" />
+                </a>
+              </div>
+              <div className="w-[320px] sm:w-[350px] h-[520px] rounded-3xl overflow-hidden shadow-2xl border border-amber-500/30">
+                <SopaSeniorApp />
               </div>
             </div>
           )}

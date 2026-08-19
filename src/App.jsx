@@ -95,14 +95,23 @@ export default function App() {
               className={`hover:text-white transition-colors cursor-pointer ${
                 activeSectionIndex === projectsData.length + 1 ? 'text-white font-bold' : ''
               }`}
-              data-cursor="STACK"
+              data-cursor="MÁS"
             >
-              Stack & Servicios
+              Más Proyectos
             </button>
             <button
               onClick={() => handleSelectSection(projectsData.length + 2)}
               className={`hover:text-white transition-colors cursor-pointer ${
                 activeSectionIndex === projectsData.length + 2 ? 'text-white font-bold' : ''
+              }`}
+              data-cursor="STACK"
+            >
+              Stack & Servicios
+            </button>
+            <button
+              onClick={() => handleSelectSection(projectsData.length + 3)}
+              className={`hover:text-white transition-colors cursor-pointer ${
+                activeSectionIndex === projectsData.length + 3 ? 'text-white font-bold' : ''
               }`}
               data-cursor="CONTACTO"
             >
@@ -160,10 +169,16 @@ export default function App() {
                 onClick={() => handleSelectSection(projectsData.length + 1)}
                 className="text-left text-zinc-300 hover:text-white py-1"
               >
-                Stack & Filosofía
+                Más Proyectos
               </button>
               <button
                 onClick={() => handleSelectSection(projectsData.length + 2)}
+                className="text-left text-zinc-300 hover:text-white py-1"
+              >
+                Stack & Servicios
+              </button>
+              <button
+                onClick={() => handleSelectSection(projectsData.length + 3)}
                 className="text-left text-zinc-300 hover:text-white py-1"
               >
                 Contacto Directo
@@ -183,6 +198,7 @@ export default function App() {
         onPlayDemo={(p) => setSelectedProject(p)}
         soundEnabled={soundEnabled}
         onToggleSound={toggleSound}
+        isModalOpen={!!selectedProject}
       />
 
       {/* ========================================================================= */}

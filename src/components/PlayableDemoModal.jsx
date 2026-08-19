@@ -75,16 +75,26 @@ export default function PlayableDemoModal({ project, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 animate-in fade-in duration-200 select-none">
+    <div 
+      data-modal="true"
+      data-prevent-slide="true"
+      onWheel={(e) => e.stopPropagation()}
+      onTouchMove={(e) => e.stopPropagation()}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 animate-in fade-in duration-200 select-none modal-container"
+    >
       
       {/* Backdrop */}
       <div 
         onClick={onClose} 
-        className="fixed inset-0 bg-black/90 backdrop-blur-2xl" 
+        className="fixed inset-0 bg-black/90 backdrop-blur-2xl modal-backdrop" 
       />
 
       {/* Modal Container */}
-      <div className="relative w-full max-w-3xl bg-zinc-950 border border-white/15 rounded-3xl p-6 sm:p-8 z-10 shadow-2xl space-y-6 max-h-[92vh] overflow-y-auto font-sans text-zinc-100">
+      <div 
+        data-prevent-slide="true"
+        onWheel={(e) => e.stopPropagation()}
+        className="relative w-full max-w-2xl bg-[#0f0f13] border border-white/15 rounded-3xl p-6 sm:p-8 z-10 shadow-2xl space-y-6 max-h-[92vh] overflow-y-auto font-sans text-zinc-100"
+      >
         
         {/* Top Header Bar */}
         <div className="flex items-center justify-between border-b border-white/10 pb-4">

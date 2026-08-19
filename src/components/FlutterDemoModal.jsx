@@ -47,10 +47,20 @@ export default function FlutterDemoModal({ isOpen, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 animate-in fade-in duration-200 select-none">
-      <div onClick={onClose} className="fixed inset-0 bg-black/90 backdrop-blur-xl" />
+    <div 
+      data-modal="true"
+      data-prevent-slide="true"
+      onWheel={(e) => e.stopPropagation()}
+      onTouchMove={(e) => e.stopPropagation()}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 animate-in fade-in duration-200 select-none modal-container"
+    >
+      <div onClick={onClose} className="fixed inset-0 bg-black/90 backdrop-blur-xl modal-backdrop" />
 
-      <div className="relative w-full max-w-2xl bg-zinc-950 border border-white/15 rounded-3xl p-6 sm:p-8 z-10 shadow-2xl space-y-6">
+      <div 
+        data-prevent-slide="true"
+        onWheel={(e) => e.stopPropagation()}
+        className="relative w-full max-w-2xl bg-zinc-950 border border-white/15 rounded-3xl p-6 sm:p-8 z-10 shadow-2xl space-y-6"
+      >
         
         {/* Header */}
         <div className="flex items-center justify-between border-b border-white/10 pb-4">

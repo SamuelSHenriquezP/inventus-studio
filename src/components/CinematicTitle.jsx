@@ -22,10 +22,10 @@ export default function CinematicTitle({
         chars,
         {
           opacity: 0,
-          y: 45,
-          rotateX: -75,
-          rotateY: 10,
-          transformOrigin: '50% 100% -30px',
+          y: 40,
+          rotateX: -60,
+          rotateY: 8,
+          transformOrigin: '50% 100% -20px',
           filter: 'blur(8px)',
         },
         {
@@ -34,9 +34,9 @@ export default function CinematicTitle({
           rotateX: 0,
           rotateY: 0,
           filter: 'blur(0px)',
-          duration: 0.65,
-          stagger: 0.02,
-          ease: 'power4.out',
+          duration: 0.95,
+          stagger: 0.035,
+          ease: 'power3.out',
           delay: delay,
         }
       );
