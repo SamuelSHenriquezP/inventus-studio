@@ -64,7 +64,7 @@ export default function HorizontalShowcase({ onOpenProject }) {
         {projectsData.map((project, idx) => (
           <div
             key={project.id}
-            className="w-[85vw] sm:w-[480px] md:w-[560px] shrink-0"
+            className="w-[85vw] sm:w-120 md:w-140 shrink-0"
           >
             <HolographicCard
               onClick={() => onOpenProject(project)}

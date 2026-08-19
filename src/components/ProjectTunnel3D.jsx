@@ -7,6 +7,13 @@ import { projectsData } from '../Data/projectsData';
 import { ArrowLeft, ArrowRight, Play, ExternalLink } from 'lucide-react';
 import { sounds } from '../utils/soundEngine';
 
+// Preload all project images for instant 3D rendering
+projectsData.forEach((p) => {
+  if (p.image) {
+    useTexture.preload(p.image);
+  }
+});
+
 function ProjectCard3D({ project, index, total, activeIndex, onSelect }) {
   const meshRef = useRef(null);
   const texture = useTexture(project.image);

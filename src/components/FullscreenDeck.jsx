@@ -1,5 +1,4 @@
-// src/components/FullscreenDeck.jsx
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback, useMemo } from 'react';
 import { gsap } from 'gsap';
 import { ChevronUp, ChevronDown } from 'lucide-react';
 
@@ -25,7 +24,7 @@ export default function FullscreenDeck({
   const isTransitioningRef = useRef(false);
 
   // Build the list of sections (Hero + 4 Projects + Stack + Contact)
-  const sections = [
+  const sections = useMemo(() => [
     {
       id: 'hero',
       type: 'hero',
@@ -106,7 +105,7 @@ export default function FullscreenDeck({
       accent: '#10b981',
       transitionType: 'parallax-vertical'
     }
-  ];
+  ], [projects]);
 
   const totalSections = sections.length;
   const currentSection = sections[activeSectionIndex] || sections[0];

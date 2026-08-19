@@ -1,9 +1,6 @@
 // src/components/RealisticDevice3D.jsx
 import { useState } from 'react';
-import { 
-  Smartphone, Laptop, Code2, Play, Image as ImageIcon, 
-  Layers, Terminal, RotateCcw, Check
-} from 'lucide-react';
+import { Code2, Play, Image as ImageIcon } from 'lucide-react';
 
 import NexusSculpture3D from './NexusSculpture3D';
 import FlutterCodeViewer from './FlutterCodeViewer';
@@ -36,7 +33,7 @@ export default function RealisticDevice3D({
   return (
     <div 
       data-mockup="true"
-      className="device-mockup w-full h-[470px] sm:h-[530px] lg:h-[570px] flex flex-col items-center justify-center relative select-none"
+      className="device-mockup w-full h-117.5 sm:h-132.5 lg:h-142.5 flex flex-col items-center justify-center relative select-none"
     >
       
       {/* Minimalist Controls Bar */}
@@ -86,11 +83,11 @@ export default function RealisticDevice3D({
           {/* LAPTOP HARDWARE MOCKUP (MACBOOK UNIBODY) */}
           {/* ========================================================================= */}
           {isLaptop ? (
-            <div className="relative w-[340px] sm:w-[460px] lg:w-[500px] flex flex-col items-center">
+            <div className="relative w-85 sm:w-115 lg:w-125 flex flex-col items-center">
               {/* Display Chassis */}
               <div className="relative w-full aspect-16/10 rounded-2xl bg-[#18191e] p-3 border border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.85)] overflow-hidden">
                 {/* Static Specular Glass Glare */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.04] to-transparent pointer-events-none z-30" />
+                <div className="absolute inset-0 bg-linear-to-tr from-transparent via-white/4 to-transparent pointer-events-none z-30" />
                 
                 {/* Camera Notch */}
                 <div className="absolute top-1 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-black border border-white/10 flex items-center justify-center z-30 pointer-events-none">
@@ -112,7 +109,7 @@ export default function RealisticDevice3D({
               </div>
 
               {/* Aluminum Laptop Base */}
-              <div className="w-[104%] h-3.5 bg-gradient-to-b from-[#252730] to-[#14151a] rounded-b-xl border-t border-white/15 shadow-2xl relative -mt-0.5 flex justify-center pointer-events-none">
+              <div className="w-[104%] h-3.5 bg-linear-to-b from-[#252730] to-[#14151a] rounded-b-xl border-t border-white/15 shadow-2xl relative -mt-0.5 flex justify-center pointer-events-none">
                 <div className="w-16 h-1 bg-black/60 rounded-b-md" />
               </div>
             </div>
@@ -120,8 +117,8 @@ export default function RealisticDevice3D({
             /* ========================================================================= */
             /* HORIZONTAL PHONE HARDWARE MOCKUP */
             /* ========================================================================= */
-            <div className="relative w-[340px] sm:w-[440px] lg:w-[480px] aspect-18.8/9 rounded-[38px] bg-[#16171d] p-3 border border-white/15 shadow-[0_30px_70px_rgba(0,0,0,0.85)]">
-              <div className="absolute inset-0 rounded-[34px] bg-gradient-to-tr from-transparent via-white/[0.04] to-transparent pointer-events-none z-30" />
+            <div className="relative w-85 sm:w-110 lg:w-120 aspect-18.8/9 rounded-[38px] bg-[#16171d] p-3 border border-white/15 shadow-[0_30px_70px_rgba(0,0,0,0.85)]">
+              <div className="absolute inset-0 rounded-[34px] bg-linear-to-tr from-transparent via-white/4 to-transparent pointer-events-none z-30" />
               <div className="relative w-full h-full rounded-[28px] overflow-hidden bg-black border border-white/10 flex flex-col justify-between shadow-inner">
                 {screenMode === 'live-app' ? (
                   <CyberRushPhoneApp />
@@ -140,7 +137,7 @@ export default function RealisticDevice3D({
             /* ========================================================================= */
             <div className="relative w-64 sm:w-72 lg:w-76 aspect-9/18.8 rounded-[44px] bg-[#15161c] p-3 border border-white/15 shadow-[0_35px_80px_rgba(0,0,0,0.9)]">
               {/* Static Glass Specular Tone */}
-              <div className="absolute inset-0 rounded-[40px] bg-gradient-to-tr from-transparent via-white/[0.04] to-transparent pointer-events-none z-30" />
+              <div className="absolute inset-0 rounded-[40px] bg-linear-to-tr from-transparent via-white/4 to-transparent pointer-events-none z-30" />
               
               <div className="relative w-full h-full rounded-[34px] overflow-hidden bg-black border border-white/10 flex flex-col justify-between shadow-inner">
                 {/* Dynamic Island */}

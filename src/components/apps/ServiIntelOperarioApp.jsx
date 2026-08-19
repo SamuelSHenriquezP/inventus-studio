@@ -2,8 +2,8 @@
 // Interactive Field Terminal / Rugged Operario App simulator for ServiIntel
 import { useState, useEffect } from 'react';
 import { 
-  MapPin, CheckCircle2, Clock, AlertCircle, Navigation, 
-  ChevronRight, Radio, Battery, Wifi, RefreshCw, Zap, Shield
+  MapPin, CheckCircle2, Navigation, 
+  Radio, Battery, Wifi, RefreshCw
 } from 'lucide-react';
 import { sounds } from '../../utils/soundEngine';
 
@@ -134,11 +134,11 @@ export default function ServiIntelOperarioApp() {
       {/* ========================================================================= */}
       {/* VERTICAL PHONE WORKSPACE: ACTIVE TICKET HERO CARD + QUEUE LIST */}
       {/* ========================================================================= */}
-      <div className="flex-1 flex flex-col min-h-0 overflow-y-auto p-2 space-y-1.5 bg-gradient-to-b from-[#080b12] to-[#04060a]">
+      <div className="flex-1 flex flex-col min-h-0 overflow-y-auto p-2 space-y-1.5 bg-linear-to-b from-[#080b12] to-[#04060a]">
         
         {/* Active Ticket Hero Card */}
         {selectedTicket && (
-          <div className="p-2 rounded-lg bg-gradient-to-br from-sky-950/40 via-[#0e1424] to-[#0a0f1c] border border-sky-500/30 shadow-md space-y-1.5 shrink-0">
+          <div className="p-2 rounded-lg bg-linear-to-br from-sky-950/40 via-[#0e1424] to-[#0a0f1c] border border-sky-500/30 shadow-md space-y-1.5 shrink-0">
             <div className="flex items-center justify-between">
               <span className="font-mono text-[8.5px] text-sky-400 font-bold tracking-wider">
                 ORDEN ACTIVA // {selectedTicket.id}
@@ -162,7 +162,7 @@ export default function ServiIntelOperarioApp() {
             <div className="flex items-center justify-between text-[8.5px] font-mono pt-1 border-t border-white/10 text-zinc-300">
               <div className="flex items-center gap-1">
                 <span className="text-zinc-400">Servicio:</span>
-                <span className="text-white font-semibold truncate max-w-[90px]">{selectedTicket.type}</span>
+                <span className="text-white font-semibold truncate max-w-22.5">{selectedTicket.type}</span>
               </div>
               <span className={`px-1 py-0.2 rounded border text-[8px] ${PRIORITY_STYLE[selectedTicket.priority]}`}>
                 {selectedTicket.priority}
@@ -215,7 +215,7 @@ export default function ServiIntelOperarioApp() {
             </span>
           </div>
 
-          <div className="space-y-1 overflow-y-auto max-h-[85px] pr-0.5">
+          <div className="space-y-1 overflow-y-auto max-h-21.25 pr-0.5">
             {tickets.map(t => {
               const isSelected = t.id === selectedId;
               return (
@@ -228,7 +228,7 @@ export default function ServiIntelOperarioApp() {
                   className={`w-full text-left p-1.5 rounded-md border transition-all cursor-pointer ${
                     isSelected 
                       ? 'bg-sky-500/15 border-sky-500/40 shadow-sm' 
-                      : 'bg-white/[0.03] border-white/5 hover:bg-white/[0.06]'
+                      : 'bg-white/3 border-white/5 hover:bg-white/6'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-0.5">
@@ -252,7 +252,7 @@ export default function ServiIntelOperarioApp() {
       <div className="px-2 py-0.5 bg-[#0a0e18] border-t border-white/10 font-mono text-[8px] text-zinc-300 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-1">
           <Navigation className="w-2 h-2 text-sky-400" />
-          <span className="text-zinc-300 truncate max-w-[120px]">{gpsCoords}</span>
+          <span className="text-zinc-300 truncate max-w-30">{gpsCoords}</span>
         </div>
         <span className="text-emerald-400 font-bold">&lt;34ms Sync</span>
       </div>

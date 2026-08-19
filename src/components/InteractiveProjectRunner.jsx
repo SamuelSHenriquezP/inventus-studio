@@ -1,29 +1,30 @@
-// src/components/InteractiveProjectRunner.jsx
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { 
   X, Play, QrCode, Zap, 
-  Code2, RotateCcw, ArrowRight, ArrowLeft, ArrowUp,
-  CheckCircle2, Compass, Shield, Radio, DollarSign,
+  Code2, ArrowRight,
+  Compass, Radio,
   Plus, Minus, TrendingUp, Sliders, RefreshCw
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { sounds } from '../utils/soundEngine';
 import { personalInfo } from '../Data/projectsData';
 
+const FLEET_NODES = [
+  { id: 'OP-101', name: 'Carlos Mendoza', status: 'En Ruta', battery: '92%', lat: '4.6097', lng: '-74.0817' },
+  { id: 'OP-102', name: 'Laura Gómez', status: 'En Servicio', battery: '85%', lat: '4.6534', lng: '-74.0543' },
+  { id: 'OP-103', name: 'Andrés Silva', status: 'Disponible', battery: '98%', lat: '4.7110', lng: '-74.0721' }
+];
+
 export default function InteractiveProjectRunner({ project, onClose }) {
   const [showQR, setShowQR] = useState(false);
 
   // LoveCost State
-  const [income, setIncome] = useState(3800);
-  const [fixedCosts, setFixedCosts] = useState(1450);
+  const income = 3800;
+  const fixedCosts = 1450;
   const [extraExpenses, setExtraExpenses] = useState(420);
   
   // ServiIntel State
-  const [fleetNodes, setFleetNodes] = useState([
-    { id: 'OP-101', name: 'Carlos Mendoza', status: 'En Ruta', battery: '92%', lat: '4.6097', lng: '-74.0817' },
-    { id: 'OP-102', name: 'Laura Gómez', status: 'En Servicio', battery: '85%', lat: '4.6534', lng: '-74.0543' },
-    { id: 'OP-103', name: 'Andrés Silva', status: 'Disponible', battery: '98%', lat: '4.7110', lng: '-74.0721' }
-  ]);
+  const [fleetNodes] = useState(FLEET_NODES);
   const [activeTicketStatus, setActiveTicketStatus] = useState('En Espera');
   const [isDispatching, setIsDispatching] = useState(false);
 
@@ -43,12 +44,46 @@ export default function InteractiveProjectRunner({ project, onClose }) {
   const [gameScore, setGameScore] = useState(0);
   const [gameCombo, setGameCombo] = useState(1);
   const [playerX, setPlayerX] = useState(50);
-  const [highScore, setHighScore] = useState(3450);
 
   // Nexus 3D Controls
   const [noiseDistort, setNoiseDistort] = useState(1.0);
   const [isWireframe, setIsWireframe] = useState(false);
   const [glowSpeed, setGlowSpeed] = useState(1.2);
+
+  // Cyber Rush timer loop
+  useEffect(() => {
+    let interval;
+    if (isPlayingGame) {
+      interval = setInterval(() => {
+        setGameScore(s => s + 25 * gameCombo);
+      }, 100);
+    }
+    return () => clearInterval(interval);
+  }, [isPlayingGame, gameCombo]);
+
+  const handleCyberDodge = useCallback(() => {
+    sounds.playClick();
+    if (!isPlayingGame) {
+      setIsPlayingGame(true);
+      setGameScore(0);
+      setGameCombo(1);
+      return;
+    }
+    setGameCombo(c => {
+      const next = Math.min(8, c + 1);
+      if (next >= 3) {
+        confetti({
+          particleCount: 20,
+          spread: 40,
+          origin: { y: 0.6 },
+          colors: [project?.accent || '#f43f5e', '#ffffff', '#00f0ff']
+        });
+      }
+      return next;
+    });
+    setGameScore(s => s + 300);
+    setPlayerX(Math.floor(Math.random() * 70) + 15);
+  }, [isPlayingGame, project?.accent]);
 
   // Keyboard close & game controls
   useEffect(() => {
@@ -66,40 +101,7 @@ export default function InteractiveProjectRunner({ project, onClose }) {
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = '';
     };
-  }, [isPlayingGame, onClose]);
-
-  // Cyber Rush timer loop
-  useEffect(() => {
-    let interval;
-    if (isPlayingGame) {
-      interval = setInterval(() => {
-        setGameScore(s => s + 25 * gameCombo);
-      }, 100);
-    }
-    return () => clearInterval(interval);
-  }, [isPlayingGame, gameCombo]);
-
-  const handleCyberDodge = () => {
-    sounds.playClick();
-    if (!isPlayingGame) {
-      setIsPlayingGame(true);
-      setGameScore(0);
-      setGameCombo(1);
-      return;
-    }
-    setGameCombo(c => Math.min(8, c + 1));
-    setGameScore(s => s + 300);
-    setPlayerX(Math.floor(Math.random() * 70) + 15);
-
-    if (gameCombo >= 3) {
-      confetti({
-        particleCount: 20,
-        spread: 40,
-        origin: { y: 0.6 },
-        colors: [project?.accent || '#f43f5e', '#ffffff', '#00f0ff']
-      });
-    }
-  };
+  }, [isPlayingGame, onClose, handleCyberDodge]);
 
   const handleDaysSwipe = (bucket) => {
     sounds.playClick();

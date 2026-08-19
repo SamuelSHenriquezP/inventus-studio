@@ -16,13 +16,12 @@ export default function MoreProjectsSection({ isActive = true }) {
     if (!el || !isActive) return;
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ delay: 0.05 });
+      const tl = gsap.timeline({ delay: 0.1 });
 
       // Badge & Header elements
-      tl.fromTo(
+      tl.from(
         el.querySelectorAll('.more-header-anim'),
-        { opacity: 0, y: -18, filter: 'blur(6px)' },
-        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.45, ease: 'power3.out', stagger: 0.04 },
+        { opacity: 0, y: -12, duration: 0.4, ease: 'power2.out', stagger: 0.03, clearProps: 'all' },
         0
       );
 
@@ -31,75 +30,49 @@ export default function MoreProjectsSection({ isActive = true }) {
       const hlChars = el.querySelectorAll('.more-title-hl-char');
 
       if (mainChars.length) {
-        tl.fromTo(
+        tl.from(
           mainChars,
           {
             opacity: 0,
-            y: 40,
-            rotateX: -75,
-            rotateY: 10,
-            transformOrigin: '50% 100% -25px',
-            filter: 'blur(8px)',
+            y: 20,
+            duration: 0.45,
+            stagger: 0.015,
+            ease: 'power2.out',
+            clearProps: 'all',
           },
-          {
-            opacity: 1,
-            y: 0,
-            rotateX: 0,
-            rotateY: 0,
-            filter: 'blur(0px)',
-            duration: 0.55,
-            stagger: 0.02,
-            ease: 'back.out(1.5)',
-          },
-          0.05
+          0.04
         );
       }
 
       if (hlChars.length) {
-        tl.fromTo(
+        tl.from(
           hlChars,
           {
             opacity: 0,
-            y: 45,
-            rotateX: -85,
-            scale: 0.85,
-            filter: 'blur(8px)',
+            y: 20,
+            scale: 0.92,
+            duration: 0.45,
+            stagger: 0.015,
+            ease: 'power2.out',
+            clearProps: 'all',
           },
-          {
-            opacity: 1,
-            y: 0,
-            rotateX: 0,
-            scale: 1,
-            filter: 'blur(0px)',
-            duration: 0.55,
-            stagger: 0.025,
-            ease: 'back.out(1.7)',
-          },
-          0.12
+          0.1
         );
       }
 
-      // 3D Staggered Cards Entry
-      tl.fromTo(
+      // Staggered Cards Entry
+      tl.from(
         el.querySelectorAll('.more-card-anim'),
         {
           opacity: 0,
-          y: 45,
-          scale: 0.88,
-          rotateX: -20,
-          filter: 'blur(8px)',
+          y: 24,
+          scale: 0.95,
+          duration: 0.45,
+          stagger: 0.05,
+          ease: 'power2.out',
+          clearProps: 'all',
         },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          rotateX: 0,
-          filter: 'blur(0px)',
-          duration: 0.55,
-          stagger: 0.06,
-          ease: 'back.out(1.3)',
-        },
-        0.18
+        0.15
       );
     }, el);
 
@@ -120,9 +93,9 @@ export default function MoreProjectsSection({ isActive = true }) {
         }}
       >
         {/* Subtle Ambient Glow */}
-        <div className="absolute top-1/4 right-1/4 w-[450px] h-[450px] bg-violet-600/10 rounded-full blur-[130px] pointer-events-none -z-10" />
+        <div className="absolute top-1/4 right-1/4 w-112.5 h-112.5 bg-violet-600/10 rounded-full blur-[130px] pointer-events-none -z-10" />
 
-        <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-7 [perspective:1000px]">
+        <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-7 perspective-[1000px]">
 
           {/* Section Header */}
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/10 pb-5">
@@ -136,7 +109,7 @@ export default function MoreProjectsSection({ isActive = true }) {
               </div>
 
               {/* Animated 3D Cinematic Title */}
-              <h2 ref={titleRef} className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight [perspective:1000px] flex items-center gap-2 overflow-hidden py-0.5">
+              <h2 ref={titleRef} className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight perspective-[1000px] flex items-center gap-2 overflow-hidden py-0.5">
                 <span className="inline-flex">
                   {mainWord.map((ch, i) => (
                     <span key={`mw-${i}`} className="more-title-main-char inline-block will-change-transform text-white">
@@ -166,18 +139,18 @@ export default function MoreProjectsSection({ isActive = true }) {
 
           {/* Projects Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {secondaryProjectsData.map((project, i) => (
+            {secondaryProjectsData.map((project) => (
               <button
                 key={project.id}
                 onClick={() => {
                   sounds.playClick();
                   setSelectedProject(project);
                 }}
-                className="more-card-anim group text-left p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] hover:border-white/20 transition-all duration-300 cursor-pointer space-y-4 relative overflow-hidden active:scale-[0.98] hover:shadow-[0_15px_35px_rgba(0,0,0,0.6)]"
+                className="more-card-anim group text-left p-5 rounded-2xl bg-white/2 border border-white/5 hover:bg-white/5 hover:border-white/20 transition-all duration-300 cursor-pointer space-y-4 relative overflow-hidden active:scale-[0.98] hover:shadow-[0_15px_35px_rgba(0,0,0,0.6)]"
               >
                 {/* Top dynamic accent bar */}
                 <div
-                  className="absolute top-0 left-0 right-0 h-[2.5px] rounded-t-2xl transition-all duration-300 opacity-40 group-hover:opacity-100 group-hover:h-[3px] shadow-[0_0_12px_rgba(255,255,255,0.4)]"
+                  className="absolute top-0 left-0 right-0 h-[2.5px] rounded-t-2xl transition-all duration-300 opacity-40 group-hover:opacity-100 group-hover:h-0.75 shadow-[0_0_12px_rgba(255,255,255,0.4)]"
                   style={{ backgroundColor: project.accent }}
                 />
 

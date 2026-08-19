@@ -57,7 +57,7 @@ export default function ProjectModal({ project, onClose }) {
         <div className="p-6 md:p-10 space-y-8">
           
           {/* Main Visual Artwork Banner */}
-          <div className="relative rounded-2xl overflow-hidden border border-white/10 aspect-16/9 bg-zinc-900 shadow-2xl">
+          <div className="relative rounded-2xl overflow-hidden border border-white/10 aspect-video bg-zinc-900 shadow-2xl">
             <img 
               src={project.image} 
               alt={project.title} 

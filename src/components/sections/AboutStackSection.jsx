@@ -2,8 +2,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { 
-  Code2, MessageSquare, ArrowUpRight, 
-  Smartphone, Cloud, Database, Layout, Sparkles
+  Code2, MessageSquare, ArrowUpRight, Sparkles
 } from 'lucide-react';
 import { personalInfo } from '../../Data/projectsData';
 import { sounds } from '../../utils/soundEngine';
@@ -17,13 +16,12 @@ export default function AboutStackSection({ isActive = true }) {
     if (!el || !isActive) return;
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ delay: 0.05 });
+      const tl = gsap.timeline({ delay: 0.1 });
 
       // Badge & Header elements
-      tl.fromTo(
+      tl.from(
         el.querySelectorAll('.about-header-anim'),
-        { opacity: 0, y: -18, filter: 'blur(6px)' },
-        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.45, ease: 'power3.out', stagger: 0.04 },
+        { opacity: 0, y: -12, duration: 0.4, ease: 'power2.out', stagger: 0.03, clearProps: 'all' },
         0
       );
 
@@ -32,102 +30,70 @@ export default function AboutStackSection({ isActive = true }) {
       const hlChars = el.querySelectorAll('.about-title-hl-char');
 
       if (mainChars.length) {
-        tl.fromTo(
+        tl.from(
           mainChars,
           {
             opacity: 0,
-            y: 40,
-            rotateX: -75,
-            rotateY: 10,
-            transformOrigin: '50% 100% -25px',
-            filter: 'blur(8px)',
+            y: 20,
+            duration: 0.45,
+            stagger: 0.015,
+            ease: 'power2.out',
+            clearProps: 'all',
           },
-          {
-            opacity: 1,
-            y: 0,
-            rotateX: 0,
-            rotateY: 0,
-            filter: 'blur(0px)',
-            duration: 0.55,
-            stagger: 0.02,
-            ease: 'back.out(1.5)',
-          },
-          0.05
+          0.04
         );
       }
 
       if (hlChars.length) {
-        tl.fromTo(
+        tl.from(
           hlChars,
           {
             opacity: 0,
-            y: 45,
-            rotateX: -85,
-            scale: 0.85,
-            filter: 'blur(8px)',
+            y: 20,
+            scale: 0.92,
+            duration: 0.45,
+            stagger: 0.015,
+            ease: 'power2.out',
+            clearProps: 'all',
           },
-          {
-            opacity: 1,
-            y: 0,
-            rotateX: 0,
-            scale: 1,
-            filter: 'blur(0px)',
-            duration: 0.55,
-            stagger: 0.025,
-            ease: 'back.out(1.7)',
-          },
-          0.12
+          0.1
         );
       }
 
       // Technologies Slide-in (Left Column)
-      tl.fromTo(
+      tl.from(
         el.querySelectorAll('.about-tech-item'),
         {
           opacity: 0,
-          x: -30,
-          filter: 'blur(6px)',
+          x: -18,
+          duration: 0.45,
+          stagger: 0.04,
+          ease: 'power2.out',
+          clearProps: 'all',
         },
+        0.12
+      );
+
+      // Services Pop-in (Right Column)
+      tl.from(
+        el.querySelectorAll('.about-service-card'),
         {
-          opacity: 1,
-          x: 0,
-          filter: 'blur(0px)',
-          duration: 0.5,
+          opacity: 0,
+          y: 20,
+          scale: 0.95,
+          duration: 0.45,
           stagger: 0.05,
-          ease: 'power3.out',
+          ease: 'power2.out',
+          clearProps: 'all',
         },
         0.15
       );
 
-      // 3D Services Pop-in (Right Column)
-      tl.fromTo(
-        el.querySelectorAll('.about-service-card'),
-        {
-          opacity: 0,
-          y: 40,
-          scale: 0.9,
-          rotateX: -18,
-          filter: 'blur(8px)',
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          rotateX: 0,
-          filter: 'blur(0px)',
-          duration: 0.55,
-          stagger: 0.07,
-          ease: 'back.out(1.4)',
-        },
-        0.18
-      );
-
       // Buttons pop
-      tl.fromTo(
+      tl.from(
         el.querySelectorAll('.about-btn-anim'),
-        { opacity: 0, scale: 0.85 },
-        { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(2)', stagger: 0.06 },
-        0.25
+        { opacity: 0, y: 14, scale: 0.96, duration: 0.45, ease: 'power2.out', clearProps: 'all' },
+        0.2
       );
     }, el);
 
@@ -178,9 +144,9 @@ export default function AboutStackSection({ isActive = true }) {
       }}
     >
       {/* Subtle Ambient Glow */}
-      <div className="absolute top-1/3 left-1/4 w-[450px] h-[450px] bg-emerald-600/10 rounded-full blur-[140px] pointer-events-none -z-10" />
+      <div className="absolute top-1/3 left-1/4 w-112.5 h-112.5 bg-emerald-600/10 rounded-full blur-[140px] pointer-events-none -z-10" />
 
-      <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-8 [perspective:1000px]">
+      <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-8 perspective-[1000px]">
         
         {/* Clean Header Bar */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/10 pb-5">
@@ -194,7 +160,7 @@ export default function AboutStackSection({ isActive = true }) {
             </div>
 
             {/* Kinetic 3D Split Title */}
-            <h2 ref={titleRef} className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight [perspective:1000px] flex items-center gap-2 overflow-hidden py-0.5">
+            <h2 ref={titleRef} className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight perspective-[1000px] flex items-center gap-2 overflow-hidden py-0.5">
               <span className="inline-flex">
                 {mainChars.map((ch, i) => (
                   <span key={`amc-${i}`} className="about-title-main-char inline-block will-change-transform text-white">
@@ -251,7 +217,7 @@ export default function AboutStackSection({ isActive = true }) {
               {technologies.map((t) => (
                 <div 
                   key={t.name} 
-                  className="about-tech-item group p-2.5 rounded-xl bg-white/[0.015] border border-white/5 hover:bg-white/[0.04] hover:border-white/15 transition-all duration-300 space-y-1"
+                  className="about-tech-item group p-2.5 rounded-xl bg-white/1.5 border border-white/5 hover:bg-white/4 hover:border-white/15 transition-all duration-300 space-y-1"
                 >
                   <div className="text-sm font-semibold text-white flex items-center justify-between">
                     <div className="flex items-center gap-2">
@@ -281,10 +247,10 @@ export default function AboutStackSection({ isActive = true }) {
               {services.map((s) => (
                 <div 
                   key={s.num} 
-                  className="about-service-card group p-4 sm:p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] hover:border-emerald-500/30 transition-all duration-300 space-y-2 relative overflow-hidden active:scale-[0.98] hover:shadow-[0_12px_30px_rgba(0,0,0,0.5)]"
+                  className="about-service-card group p-4 sm:p-5 rounded-2xl bg-white/2 border border-white/5 hover:bg-white/5 hover:border-emerald-500/30 transition-all duration-300 space-y-2 relative overflow-hidden active:scale-[0.98] hover:shadow-[0_12px_30px_rgba(0,0,0,0.5)]"
                 >
                   {/* Subtle Top Accent */}
-                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-500/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-emerald-500/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
                   <div className="flex items-center justify-between font-mono text-[11px] font-bold">
                     <span className="text-emerald-400 group-hover:drop-shadow-[0_0_8px_rgba(52,211,153,0.5)]">{s.num} // SERVICIO</span>

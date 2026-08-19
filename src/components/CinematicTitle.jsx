@@ -6,8 +6,7 @@ export default function CinematicTitle({
   text, 
   className = '', 
   isActive = true,
-  delay = 0.05,
-  accentColor = '#ffffff'
+  delay = 0.05
 }) {
   const titleRef = useRef(null);
 
@@ -51,7 +50,7 @@ export default function CinematicTitle({
   return (
     <h2 
       ref={titleRef} 
-      className={`${className} [perspective:1000px] select-none`}
+      className={`${className} perspective-[1000px] select-none`}
     >
       {words.map((word, wIdx) => (
         <span key={wIdx} className="inline-block whitespace-nowrap mr-3 sm:mr-4 overflow-visible">

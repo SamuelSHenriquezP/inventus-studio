@@ -1,10 +1,8 @@
-// src/components/Showroom3D.jsx
 import { useState } from 'react';
 import { 
   Laptop, Smartphone, RefreshCw, Radio, Sparkles, 
   CheckCircle2
 } from 'lucide-react';
-import confetti from 'canvas-confetti';
 import ThreeLaptop3D from './ThreeLaptop3D';
 import ThreePhone3D from './ThreePhone3D';
 import { sounds } from '../utils/soundEngine';
@@ -25,12 +23,15 @@ export default function Showroom3D() {
       setSyncCount(prev => prev + 1);
       setIsSyncing(false);
 
-      confetti({
-        particleCount: 40,
-        spread: 60,
-        origin: { y: 0.65 },
-        colors: ['#00F0FF', '#FF0077', '#A855F7']
-      });
+      import('canvas-confetti').then((module) => {
+        const confetti = module.default;
+        confetti({
+          particleCount: 40,
+          spread: 60,
+          origin: { y: 0.65 },
+          colors: ['#00F0FF', '#FF0077', '#A855F7']
+        });
+      }).catch(() => {});
     }, 600);
   };
 
