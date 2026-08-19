@@ -1,172 +1,732 @@
-import { useState } from 'react';
-import { Bell } from 'lucide-react';
+// src/components/apps/ServiIntelWebApp.jsx
+// Interactive Web Admin Console simulator for ServiIntel
+// EXACT REPLICA of 'web-admin' (index.html, styles.css & admin.js)
+// Polished with refined typography, balanced whitespace & ultra-crisp responsive cards
+import { useState, useEffect } from 'react';
+import { 
+  Users, Building, ClipboardList, Eye, Plus, RefreshCw, 
+  CheckCircle, Star, AlertCircle, X, Search, Check, 
+  MapPin, Shield, Wrench, ChevronDown, Award, Send,
+  UserPlus, HardHat, FileText, CheckCheck, Lock, Radio,
+  Activity, Phone, Mail, Clock
+} from 'lucide-react';
 import { sounds } from '../../utils/soundEngine';
 
-const TICKETS_DATA = [
-  { id: 'TK-5201', client: 'Comercial Torres', type: 'HVAC', operario: 'Samuel H.', status: 'en_ruta', priority: 'ALTA', time: '08:24' },
-  { id: 'TK-5202', client: 'Bodega Logística', type: 'Eléctrico', operario: 'Luis R.', status: 'en_trabajo', priority: 'MEDIA', time: '09:10' },
-  { id: 'TK-5203', client: 'Hotel Caribe', type: 'Plomería', operario: 'Sin asignar', status: 'pendiente', priority: 'URGENTE', time: '09:45' },
-  { id: 'TK-5204', client: 'Clínica Centro', type: 'Redes', operario: 'Ana M.', status: 'completado', priority: 'BAJA', time: '07:00' },
+// Initial Database matching Firestore
+const INITIAL_TICKETS = [
+  { 
+    id: 'TK-5201', 
+    clienteNombre: 'Comercial Torres',
+    clienteTelefono: '+57 300 456 7890',
+    clienteEmail: 'admin@comercialtorres.co',
+    direccionText: 'Cra 7 #32-14, Cartagena', 
+    categoria: 'Mantenimiento HVAC', 
+    prioridad: 'ALTA', 
+    estado: 'asignado',
+    descripcion: 'Mantenimiento preventivo anual de unidad central Lennox 5TR. Ruidos inusuales en condensador.',
+    maquinaModelo: 'Lennox 5TR Condenser',
+    maquinaIdPropio: 'AC-LEN-01',
+    maquinaSerial: 'LX90283811',
+    pinCode: '4392',
+    lat: 10.4236,
+    lng: -75.5378,
+    operarioNombre: 'Samuel H.',
+    operarioId: 'OP-01',
+    creadoEn: '19/08/2026 08:24'
+  },
+  { 
+    id: 'TK-5202', 
+    clienteNombre: 'Bodega Logística S.A.', 
+    clienteTelefono: '+57 315 889 2011',
+    clienteEmail: 'soporte@bodegalogistica.com',
+    direccionText: 'Zona Franca, Local 8, Cartagena', 
+    categoria: 'Revisión Eléctrica', 
+    prioridad: 'MEDIA', 
+    estado: 'solicitado',
+    descripcion: 'Caída de breakers en sección refrigeración comercial. Medición térmica y fuga de corriente.',
+    maquinaModelo: 'Tablero Schneider 440V',
+    maquinaIdPropio: 'TE-SCH-08',
+    maquinaSerial: 'SE-892019-X',
+    pinCode: '7821',
+    lat: 10.3952,
+    lng: -75.4812,
+    operarioNombre: null,
+    operarioId: null,
+    creadoEn: '19/08/2026 09:15'
+  },
+  { 
+    id: 'TK-5203', 
+    clienteNombre: 'Hotel Caribe Real', 
+    clienteTelefono: '+57 310 998 1234',
+    clienteEmail: 'gerencia@hotelcaribereal.com',
+    direccionText: 'Av. Santander #45, Bocagrande', 
+    categoria: 'Soporte Impresora', 
+    prioridad: 'URGENTE', 
+    estado: 'revision_cliente',
+    descripcion: 'Impresora Ricoh MP 501 presenta atascos duplex y toner en fusor.',
+    maquinaModelo: 'Ricoh MP 501 Multifuncional',
+    maquinaIdPropio: 'PR-RIC-05',
+    maquinaSerial: 'RC-501-88910',
+    pinCode: '1092',
+    lat: 10.4085,
+    lng: -75.5023,
+    operarioNombre: 'Samuel H.',
+    operarioId: 'OP-01',
+    creadoEn: '19/08/2026 09:40',
+    reporteTecnico: {
+      encargadoNombre: 'Samuel H.',
+      encargadoCedula: '10471928',
+      costoEmpresa: 150000,
+      costoTecnico: 45000,
+      fechaEmision: '19/08/2026 10:15',
+      trabajosReportados: [
+        {
+          tipo: 'Mantenimiento',
+          marca: 'Ricoh',
+          modelo: 'MP 501 SPF',
+          idPropio: 'PR-RIC-05',
+          serial: 'RC-501-88910',
+          contador: '248,190',
+          diagnostico: 'Rodillo fusor con residuos de toner. Piñón duplex con desgaste.',
+          solucion: 'Limpieza térmica de fusor y sustitución de piñón duplex. Pruebas 100% OK.',
+          insumos: '1x Piñón Duplex, 1x Solvente Fusor'
+        }
+      ]
+    }
+  }
 ];
 
-const STATUS_LABEL = { pendiente: 'Pendiente', en_ruta: 'En Ruta', en_trabajo: 'En Trabajo', completado: 'Completado' };
-const STATUS_COLOR = {
-  pendiente: 'text-amber-300 bg-amber-500/15 border border-amber-500/30',
-  en_ruta: 'text-sky-300 bg-sky-500/15 border border-sky-500/30',
-  en_trabajo: 'text-purple-300 bg-purple-500/15 border border-purple-500/30',
-  completado: 'text-emerald-300 bg-emerald-500/15 border border-emerald-500/30'
-};
-const PRIORITY_COLOR = { 
-  ALTA: 'text-red-400 font-bold', 
-  MEDIA: 'text-amber-400 font-bold', 
-  BAJA: 'text-zinc-400', 
-  URGENTE: 'text-rose-400 font-bold animate-pulse' 
-};
+const INITIAL_CLIENTS = [
+  { id: 'CLI-01', nombre: 'Comercial Torres', contacto: 'carlos@torres.co', totalServicios: 12, activo: true },
+  { id: 'CLI-02', nombre: 'Bodega Logística S.A.', contacto: 'gerencia@bodega.co', totalServicios: 5, activo: true },
+  { id: 'CLI-03', nombre: 'Hotel Caribe Real', contacto: 'mant@caribereal.com', totalServicios: 18, activo: true },
+  { id: 'CLI-04', nombre: 'Clínica Centro', contacto: 'biomedica@centro.co', totalServicios: 8, activo: true }
+];
+
+const INITIAL_EQUIPO = [
+  { id: 'OP-01', nombre: 'Samuel H.', rol: 'Senior Field Lead', calificacion: 5, activo: true },
+  { id: 'OP-02', nombre: 'Luis Rodríguez', rol: 'Técnico Electromecánico', calificacion: 4.8, activo: true },
+  { id: 'OP-03', nombre: 'Ana Morales', rol: 'Especialista HVAC', calificacion: 4.5, activo: true }
+];
 
 export default function ServiIntelWebApp() {
-  const [tickets, setTickets] = useState(TICKETS_DATA);
-  const [selected, setSelected] = useState('TK-5201');
+  // Sync state globally with mobile app via window object & CustomEvent
+  const [tickets, setTicketsState] = useState(() => {
+    if (!window.__serviIntelTickets) {
+      window.__serviIntelTickets = INITIAL_TICKETS;
+    }
+    return window.__serviIntelTickets;
+  });
 
-  const dispatch = (id) => {
+  const [clients, setClients] = useState(INITIAL_CLIENTS);
+  const [equipo, setEquipo] = useState(INITIAL_EQUIPO);
+
+  // Active Tab: 'trabajos' | 'clientes' | 'equipo'
+  const [activeTab, setActiveTab] = useState('trabajos');
+  const [filtroEstado, setFiltroEstado] = useState('todos');
+  const [searchTrabajos, setSearchTrabajos] = useState('');
+  const [isSyncing, setIsSyncing] = useState(false);
+
+  // Modals
+  const [selectedJobDetail, setSelectedJobDetail] = useState(null);
+  const [assigningJobId, setAssigningJobId] = useState(null);
+  const [showNewClientModal, setShowNewClientModal] = useState(false);
+
+  // Sync listener for real-time updates from Flutter Mobile App
+  useEffect(() => {
+    const handleSync = (e) => {
+      setTicketsState(e.detail);
+    };
+    window.addEventListener('serviintel-tickets-sync', handleSync);
+    return () => {
+      window.removeEventListener('serviintel-tickets-sync', handleSync);
+    };
+  }, []);
+
+  const updateTicketsGlobal = (newTickets) => {
+    window.__serviIntelTickets = newTickets;
+    setTicketsState(newTickets);
+    window.dispatchEvent(new CustomEvent('serviintel-tickets-sync', { detail: newTickets }));
+  };
+
+  const handleSyncData = () => {
     sounds.playClick();
-    setTickets(prev => prev.map(t =>
-      t.id === id && t.status === 'pendiente'
-        ? { ...t, status: 'en_ruta', operario: 'Samuel H.' }
-        : t
-    ));
+    setIsSyncing(true);
+    setTimeout(() => {
+      setIsSyncing(false);
+      sounds.playSuccess();
+    }, 500);
+  };
+
+  const asignarTecnico = (jobId, techName, techId) => {
+    sounds.playClick();
+    const nextTickets = tickets.map(t => {
+      if (t.id === jobId) {
+        return {
+          ...t,
+          estado: 'asignado',
+          operarioNombre: techName,
+          operarioId: techId
+        };
+      }
+      return t;
+    });
+    updateTicketsGlobal(nextTickets);
+    setAssigningJobId(null);
     sounds.playSuccess();
   };
 
-  const complete = (id) => {
+  const aprobarReporte = (jobId) => {
     sounds.playClick();
-    setTickets(prev => prev.map(t =>
-      t.id === id && t.status === 'en_trabajo'
-        ? { ...t, status: 'completado' }
-        : t
-    ));
+    const nextTickets = tickets.map(t => {
+      if (t.id === jobId) {
+        return { ...t, estado: 'trabajo_aprobado' };
+      }
+      return t;
+    });
+    updateTicketsGlobal(nextTickets);
+    if (selectedJobDetail) {
+      setSelectedJobDetail({ ...selectedJobDetail, estado: 'trabajo_aprobado' });
+    }
     sounds.playSuccess();
   };
 
-  const counts = {
-    pendiente: tickets.filter(t => t.status === 'pendiente').length,
-    en_ruta: tickets.filter(t => t.status === 'en_ruta').length,
-    en_trabajo: tickets.filter(t => t.status === 'en_trabajo').length,
-    completado: tickets.filter(t => t.status === 'completado').length,
+  const rechazarReporte = (jobId) => {
+    sounds.playClick();
+    const nextTickets = tickets.map(t => {
+      if (t.id === jobId) {
+        return { ...t, estado: 'en_sitio', reporteTecnico: null };
+      }
+      return t;
+    });
+    updateTicketsGlobal(nextTickets);
+    if (selectedJobDetail) {
+      setSelectedJobDetail({ ...selectedJobDetail, estado: 'en_sitio', reporteTecnico: null });
+    }
+    sounds.playError();
   };
 
-  const selectedTicket = tickets.find(t => t.id === selected);
+  const marcarCompletado = (jobId) => {
+    sounds.playClick();
+    const nextTickets = tickets.map(t => {
+      if (t.id === jobId) {
+        return { ...t, estado: 'completado', calificado: true, puntosAdmin: 5 };
+      }
+      return t;
+    });
+    updateTicketsGlobal(nextTickets);
+    if (selectedJobDetail) {
+      setSelectedJobDetail({ ...selectedJobDetail, estado: 'completado', calificado: true, puntosAdmin: 5 });
+    }
+    sounds.playSuccess();
+  };
+
+  // Filter Jobs
+  const filteredTrabajos = tickets.filter(t => {
+    const matchesFilter = filtroEstado === 'todos' || t.estado === filtroEstado;
+    const matchesSearch = t.clienteNombre.toLowerCase().includes(searchTrabajos.toLowerCase()) || 
+                          t.id.toLowerCase().includes(searchTrabajos.toLowerCase()) ||
+                          t.categoria.toLowerCase().includes(searchTrabajos.toLowerCase());
+    return matchesFilter && matchesSearch;
+  });
 
   return (
-    <div className="w-full h-full bg-[#0a0d14] text-white font-mono text-xs flex flex-col overflow-hidden select-none">
-      {/* Top Nav */}
-      <div className="flex items-center justify-between px-3 py-1.5 bg-[#0d1020] border-b border-sky-500/30 shrink-0">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-sky-400" />
-          <span className="font-bold text-white text-xs">ServiIntel Admin</span>
-          <span className="text-zinc-400 text-[10px]">Console</span>
-        </div>
-        <div className="flex items-center gap-3 text-zinc-300">
-          <Bell className="w-3.5 h-3.5 text-zinc-400" />
-          <span className="text-emerald-400 font-bold text-[10.5px]">● LIVE</span>
-        </div>
-      </div>
-
-      {/* KPI Strip */}
-      <div className="grid grid-cols-4 border-b border-white/10 shrink-0 bg-black/20">
-        {[
-          { label: 'Pendiente', val: counts.pendiente, color: 'text-amber-400' },
-          { label: 'En Ruta', val: counts.en_ruta, color: 'text-sky-400' },
-          { label: 'En Trabajo', val: counts.en_trabajo, color: 'text-purple-400' },
-          { label: 'Completos', val: counts.completado, color: 'text-emerald-400' },
-        ].map(k => (
-          <div key={k.label} className="flex flex-col items-center py-1 border-r border-white/5 last:border-r-0">
-            <span className={`text-sm sm:text-base font-bold ${k.color}`}>{k.val}</span>
-            <span className="text-[9px] text-zinc-400 uppercase font-semibold">{k.label}</span>
+    <div className="w-full h-full bg-[#F4F7F9] text-[#1E293B] font-sans flex overflow-hidden select-none text-[9px] antialiased">
+      
+      {/* ========================================================================= */}
+      {/* 1. SIDEBAR (web-admin index.html exact sidebar)                           */}
+      {/* ========================================================================= */}
+      <aside className="w-22 sm:w-26 bg-white border-r border-[#E2E8F0] flex flex-col shrink-0 z-10 shadow-2xs font-sans">
+        
+        {/* Sidebar Brand Header */}
+        <div className="p-1.5 px-2 flex items-center justify-between border-b border-[#E2E8F0]">
+          <div className="flex items-center gap-1 min-w-0">
+            <div className="w-3.5 h-3.5 rounded-xs bg-[#14AEE1] flex items-center justify-center text-white font-black text-[8px] shrink-0 shadow-2xs">
+              S
+            </div>
+            <div className="text-[9px] font-black tracking-tight text-[#1E293B] flex items-center shrink-0">
+              <span>SERVI</span>
+              <span className="text-[#F3E72E] ml-0.5" style={{ textShadow: '0 0.5px 0 #1E293B' }}>INTEL</span>
+            </div>
           </div>
-        ))}
-      </div>
+          <span className="bg-[#F3E72E] text-[#1E293B] text-[6px] font-black px-1 py-0.2 rounded-xs shrink-0 tracking-wider">
+            ADMIN
+          </span>
+        </div>
 
-      <div className="flex flex-1 min-h-0 overflow-hidden">
-        {/* Left: Ticket List */}
-        <div className="w-[52%] border-r border-white/10 flex flex-col min-h-0 bg-[#080b12]">
-          <div className="px-2.5 py-1 text-[10px] text-zinc-300 font-bold uppercase border-b border-white/5 shrink-0 bg-white/2">
-            Tickets Activos
+        {/* Navigation Links */}
+        <nav className="p-1 space-y-0.5 flex-1">
+          <button
+            onClick={() => setActiveTab('trabajos')}
+            className={`w-full flex items-center gap-1.5 px-1.5 py-1.5 rounded-md text-[8px] font-extrabold transition-all text-left cursor-pointer ${
+              activeTab === 'trabajos'
+                ? 'bg-[#14AEE1]/10 text-[#0284C7] shadow-2xs border-l-2 border-[#14AEE1]'
+                : 'text-[#64748B] hover:bg-[#F4F7F9] hover:text-[#1E293B]'
+            }`}
+          >
+            <ClipboardList className="w-3 h-3 text-[#14AEE1] shrink-0" />
+            <span className="truncate">Tablero</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('clientes')}
+            className={`w-full flex items-center gap-1.5 px-1.5 py-1.5 rounded-md text-[8px] font-extrabold transition-all text-left cursor-pointer ${
+              activeTab === 'clientes'
+                ? 'bg-[#E71E65]/10 text-[#BE185D] shadow-2xs border-l-2 border-[#E71E65]'
+                : 'text-[#64748B] hover:bg-[#F4F7F9] hover:text-[#1E293B]'
+            }`}
+          >
+            <Building className="w-3 h-3 text-[#E71E65] shrink-0" />
+            <span className="truncate">Clientes</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('equipo')}
+            className={`w-full flex items-center gap-1.5 px-1.5 py-1.5 rounded-md text-[8px] font-extrabold transition-all text-left cursor-pointer ${
+              activeTab === 'equipo'
+                ? 'bg-[#F3E72E]/20 text-[#854D0E] shadow-2xs border-l-2 border-[#F3E72E]'
+                : 'text-[#64748B] hover:bg-[#F4F7F9] hover:text-[#1E293B]'
+            }`}
+          >
+            <Users className="w-3 h-3 text-[#EAB308] shrink-0" />
+            <span className="truncate">Equipo</span>
+          </button>
+        </nav>
+
+        {/* Sidebar Footer */}
+        <div className="p-1 border-t border-[#E2E8F0]">
+          <div className="flex items-center justify-between text-[7px] text-slate-400 font-bold px-1">
+            <span className="flex items-center gap-0.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Online</span>
+            </span>
+            <span className="font-mono">v2.4</span>
           </div>
-          <div className="flex-1 overflow-y-auto">
-            {tickets.map(t => (
+        </div>
+      </aside>
+
+      {/* ========================================================================= */}
+      {/* 2. MAIN CONTENT AREA (Topbar + Dynamic Views)                            */}
+      {/* ========================================================================= */}
+      <main className="flex-1 flex flex-col min-w-0 overflow-hidden bg-[#F4F7F9]">
+        
+        {/* Topbar */}
+        <header className="bg-white px-2 py-1 border-b border-[#E2E8F0] flex items-center justify-between shadow-2xs shrink-0">
+          <div className="flex items-center gap-1.5 truncate">
+            <h2 className="font-black text-[10px] text-[#1E293B] tracking-tight truncate">
+              Centro de Control
+            </h2>
+            <span className="hidden sm:inline px-1.5 py-0.2 rounded bg-sky-50 text-sky-700 text-[6.5px] font-black uppercase">
+              Live Dispatch
+            </span>
+          </div>
+
+          <button
+            onClick={handleSyncData}
+            disabled={isSyncing}
+            className="bg-[#F3E72E] hover:brightness-95 active:scale-95 text-[#1E293B] px-1.5 py-0.5 rounded font-black text-[7.5px] flex items-center gap-1 transition-all shadow-2xs cursor-pointer shrink-0"
+          >
+            <RefreshCw className={`w-2.5 h-2.5 ${isSyncing ? 'animate-spin' : ''}`} />
+            <span>{isSyncing ? 'Sync...' : 'Sincronizar'}</span>
+          </button>
+        </header>
+
+        {/* Page Content View */}
+        <div className="flex-1 overflow-y-auto p-1.5 space-y-1.5">
+          
+          {/* ===================================================================== */}
+          {/* TAB 1: TABLERO GENERAL (TRABAJOS)                                     */}
+          {/* ===================================================================== */}
+          {activeTab === 'trabajos' && (
+            <div className="space-y-1.5">
+              
+              {/* Mini Stats Banner */}
+              <div className="grid grid-cols-3 gap-1">
+                <div className="bg-white p-1 rounded-md border border-[#E2E8F0] shadow-2xs text-center">
+                  <div className="text-[6.5px] font-bold text-slate-400 uppercase">Órdenes</div>
+                  <div className="text-[9px] font-black text-[#14AEE1]">{tickets.length} Activas</div>
+                </div>
+                <div className="bg-white p-1 rounded-md border border-[#E2E8F0] shadow-2xs text-center">
+                  <div className="text-[6.5px] font-bold text-slate-400 uppercase">Revisión</div>
+                  <div className="text-[9px] font-black text-orange-500">
+                    {tickets.filter(t => t.estado === 'revision_cliente').length} Pendientes
+                  </div>
+                </div>
+                <div className="bg-white p-1 rounded-md border border-[#E2E8F0] shadow-2xs text-center">
+                  <div className="text-[6.5px] font-bold text-slate-400 uppercase">SLA Global</div>
+                  <div className="text-[9px] font-black text-emerald-600">99.8%</div>
+                </div>
+              </div>
+
+              {/* Main Card with Cyan top border */}
+              <div className="bg-white rounded-lg p-1.5 shadow-2xs border border-[#E2E8F0] space-y-1" style={{ borderTop: '2.5px solid #14AEE1' }}>
+                
+                {/* Header & Filter Controls */}
+                <div className="flex items-center justify-between gap-1 border-b border-[#F1F5F9] pb-1">
+                  <div className="flex items-center gap-1 font-black text-[9px] text-[#1E293B]">
+                    <ClipboardList className="w-2.5 h-2.5 text-[#14AEE1]" />
+                    <span>Operaciones en Curso</span>
+                  </div>
+
+                  <select
+                    value={filtroEstado}
+                    onChange={(e) => setFiltroEstado(e.target.value)}
+                    className="bg-[#F4F7F9] border border-[#E2E8F0] text-[#1E293B] font-extrabold text-[7px] rounded px-1 py-0.2 focus:outline-none focus:border-[#14AEE1]"
+                  >
+                    <option value="todos">Todos ({tickets.length})</option>
+                    <option value="solicitado">🔴 Solicitadas</option>
+                    <option value="asignado">🟡 Asignadas</option>
+                    <option value="revision_cliente">🟠 En Revisión</option>
+                    <option value="trabajo_aprobado">🟢 Aprobadas</option>
+                    <option value="completado">✅ Terminadas</option>
+                  </select>
+                </div>
+
+                {/* Search Bar */}
+                <div className="relative">
+                  <Search className="w-2.5 h-2.5 text-[#64748B] absolute left-1.5 top-1" />
+                  <input
+                    type="text"
+                    placeholder="Buscar cliente o servicio..."
+                    value={searchTrabajos}
+                    onChange={(e) => setSearchTrabajos(e.target.value)}
+                    className="w-full bg-[#F4F7F9] border border-[#E2E8F0] rounded py-0.5 pl-5 pr-2 text-[7.5px] text-[#1E293B] focus:bg-white focus:outline-none focus:border-[#14AEE1] font-medium"
+                  />
+                </div>
+
+                {/* HIGH-DENSITY BALANCED JOB ROWS (Clear spacing & instant actions) */}
+                <div className="space-y-1 pt-0.5">
+                  {filteredTrabajos.map(t => {
+                    const isSolicitado = t.estado === 'solicitado';
+                    const isRevision = t.estado === 'revision_cliente';
+                    const isAprobado = t.estado === 'trabajo_aprobado';
+                    const isCierre = t.estado === 'esperando_cierre';
+                    const isCompletado = t.estado === 'completado';
+
+                    return (
+                      <div 
+                        key={t.id}
+                        className="p-1.5 rounded-md bg-[#F8FAFC] border border-[#E2E8F0] hover:bg-slate-50 transition-colors space-y-1"
+                      >
+                        {/* Row 1: Status badge + ID + Category */}
+                        <div className="flex items-center justify-between gap-1">
+                          <div className="flex items-center gap-1 truncate">
+                            <span 
+                              className="px-1 py-0.2 rounded-xs font-black text-[6.5px] uppercase tracking-wide"
+                              style={{
+                                backgroundColor: isSolicitado ? '#64748B1A' : 
+                                                 isRevision ? '#F973161A' : 
+                                                 isCierre ? '#0D94881A' : 
+                                                 isCompletado ? '#22C55E1A' : '#14AEE11A',
+                                color: isSolicitado ? '#64748B' : 
+                                       isRevision ? '#EA580C' : 
+                                       isCierre ? '#0D9488' : 
+                                       isCompletado ? '#16A34A' : '#0284C7'
+                              }}
+                            >
+                              {t.estado.replace('_', ' ')}
+                            </span>
+                            <span className="font-mono text-[7px] text-slate-400 font-bold">{t.id}</span>
+                          </div>
+
+                          <span className="font-extrabold text-[7.5px] text-[#14AEE1] truncate max-w-[80px]">
+                            {t.categoria}
+                          </span>
+                        </div>
+
+                        {/* Row 2: Client name + Technician Info */}
+                        <div className="flex items-center justify-between gap-1 text-[8px]">
+                          <div className="font-extrabold text-[#1E293B] truncate max-w-[100px]">
+                            {t.clienteNombre}
+                          </div>
+
+                          <div className="flex items-center gap-1 text-slate-500 font-medium shrink-0">
+                            <HardHat className={`w-2.5 h-2.5 ${t.operarioNombre ? 'text-amber-500' : 'text-slate-300'}`} />
+                            <span className={t.operarioNombre ? 'font-bold text-slate-800' : 'text-slate-400'}>
+                              {t.operarioNombre ? t.operarioNombre.split(' ')[0] : 'Sin asignar'}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Row 3: Action Buttons & Detail Eye */}
+                        <div className="flex items-center justify-between pt-0.5 border-t border-[#E2E8F0]/70">
+                          <button
+                            onClick={() => setSelectedJobDetail(t)}
+                            className="text-[7px] font-bold text-slate-500 hover:text-[#14AEE1] flex items-center gap-0.5 cursor-pointer"
+                          >
+                            <Eye className="w-2.5 h-2.5" />
+                            <span>Ver Expediente</span>
+                          </button>
+
+                          <div className="flex items-center gap-1">
+                            {isSolicitado && (
+                              <button
+                                onClick={() => setAssigningJobId(t.id)}
+                                className="bg-[#14AEE1] hover:brightness-105 active:scale-95 text-white font-black text-[7px] px-2 py-0.5 rounded cursor-pointer shadow-2xs"
+                              >
+                                Asignar Técnico
+                              </button>
+                            )}
+
+                            {isRevision && (
+                              <div className="flex items-center gap-1">
+                                <button
+                                  onClick={() => rechazarReporte(t.id)}
+                                  className="bg-rose-500 hover:bg-rose-600 active:scale-95 text-white font-black text-[6.5px] px-1.5 py-0.5 rounded cursor-pointer"
+                                >
+                                  Rechazar
+                                </button>
+                                <button
+                                  onClick={() => aprobarReporte(t.id)}
+                                  className="bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-black text-[6.5px] px-1.5 py-0.5 rounded cursor-pointer shadow-2xs"
+                                >
+                                  Aprobar Reporte
+                                </button>
+                              </div>
+                            )}
+
+                            {isCierre && (
+                              <button
+                                onClick={() => marcarCompletado(t.id)}
+                                className="bg-[#0D9488] hover:bg-teal-700 active:scale-95 text-white font-black text-[7px] px-1.5 py-0.5 rounded flex items-center gap-0.5 cursor-pointer shadow-2xs"
+                              >
+                                <CheckCheck className="w-2.5 h-2.5" />
+                                <span>Cerrar & Facturar</span>
+                              </button>
+                            )}
+
+                            {isCompletado && (
+                              <span className="text-amber-500 font-bold text-[7.5px]">
+                                ⭐⭐⭐⭐⭐ 5.0
+                              </span>
+                            )}
+
+                            {!isSolicitado && !isRevision && !isCierre && !isCompletado && (
+                              <span className="text-slate-400 font-bold text-[7px] flex items-center gap-0.5">
+                                <Lock className="w-2 h-2" />
+                                <span>En curso</span>
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                      </div>
+                    );
+                  })}
+                </div>
+
+              </div>
+            </div>
+          )}
+
+          {/* ===================================================================== */}
+          {/* TAB 2: DIRECTORIO CLIENTES                                            */}
+          {/* ===================================================================== */}
+          {activeTab === 'clientes' && (
+            <div className="bg-white rounded-lg p-1.5 shadow-2xs border border-[#E2E8F0] space-y-1" style={{ borderTop: '2.5px solid #E71E65' }}>
+              <div className="flex items-center justify-between border-b border-[#F1F5F9] pb-1">
+                <div className="flex items-center gap-1 font-black text-[9px] text-[#1E293B]">
+                  <Building className="w-2.5 h-2.5 text-[#E71E65]" />
+                  <span>Base de Datos Clientes</span>
+                </div>
+                <span className="text-[7px] text-slate-400 font-bold">{clients.length} Registrados</span>
+              </div>
+
+              <div className="space-y-1">
+                {clients.map(c => (
+                  <div key={c.id} className="p-1.5 rounded bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-between text-[7.5px]">
+                    <div>
+                      <div className="font-extrabold text-[#1E293B] text-[8px]">{c.nombre}</div>
+                      <div className="text-slate-400 font-medium">{c.contacto}</div>
+                    </div>
+                    <div className="text-right">
+                      <span className="bg-[#E71E65]/10 text-[#E71E65] font-black px-1 py-0.2 rounded text-[7px]">
+                        {c.totalServicios} tickets
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* ===================================================================== */}
+          {/* TAB 3: FUERZA OPERATIVA                                               */}
+          {/* ===================================================================== */}
+          {activeTab === 'equipo' && (
+            <div className="bg-white rounded-lg p-1.5 shadow-2xs border border-[#E2E8F0] space-y-1" style={{ borderTop: '2.5px solid #F3E72E' }}>
+              <div className="flex items-center justify-between border-b border-[#F1F5F9] pb-1">
+                <div className="flex items-center gap-1 font-black text-[9px] text-[#1E293B]">
+                  <Users className="w-2.5 h-2.5 text-[#EAB308]" />
+                  <span>Plantilla Operativa</span>
+                </div>
+                <span className="text-[7px] text-emerald-600 font-bold">● 100% Activo</span>
+              </div>
+
+              <div className="space-y-1">
+                {equipo.map(o => (
+                  <div key={o.id} className="p-1.5 rounded bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-between text-[7.5px]">
+                    <div>
+                      <div className="font-extrabold text-[#1E293B] text-[8px]">{o.nombre}</div>
+                      <div className="text-slate-400 font-medium">{o.rol}</div>
+                    </div>
+                    <div className="text-right space-y-0.5">
+                      <div className="text-amber-500 font-bold text-[7px]">⭐⭐⭐⭐⭐ {o.calificacion}</div>
+                      <span className="bg-emerald-50 text-emerald-600 font-black px-1 py-0.2 rounded text-[6.5px]">
+                        CERTIFICADO
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+        </div>
+      </main>
+
+      {/* ========================================================================= */}
+      {/* 3. MODAL: DETALLES DEL REQUERIMIENTO (modal-detalle-trabajo in web-admin) */}
+      {/* ========================================================================= */}
+      {selectedJobDetail && (
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-xs z-50 flex items-center justify-center p-2 animate-in fade-in duration-150">
+          <div className="bg-white rounded-xl max-w-xs w-full max-h-[92%] overflow-y-auto p-2.5 shadow-2xl border border-[#E2E8F0] space-y-1.5 text-[8px]">
+            
+            {/* Modal Header */}
+            <div className="flex items-center justify-between border-b border-[#F1F5F9] pb-1">
+              <div className="space-y-0.5 truncate">
+                <span className="text-[6.5px] font-black text-[#14AEE1] tracking-wider uppercase font-mono block">
+                  {selectedJobDetail.id} // EXPEDIENTE TÉCNICO
+                </span>
+                <h3 className="font-black text-[9.5px] text-[#1E293B] truncate">
+                  {selectedJobDetail.clienteNombre}
+                </h3>
+              </div>
               <button
-                key={t.id}
-                onClick={() => {
-                  sounds.playClick();
-                  setSelected(t.id);
-                }}
-                className={`w-full text-left px-2.5 py-1.5 border-b border-white/4 transition-all cursor-pointer ${
-                  selected === t.id ? 'bg-sky-500/15' : 'hover:bg-white/4'
-                }`}
+                onClick={() => setSelectedJobDetail(null)}
+                className="p-0.5 text-slate-400 hover:text-slate-800 rounded shrink-0 cursor-pointer"
               >
-                <div className="flex items-center justify-between mb-0.5">
-                  <span className="text-[10px] font-bold text-zinc-200">{t.id}</span>
-                  <span className={`text-[8.5px] font-bold px-1.5 py-0.2 rounded-full ${STATUS_COLOR[t.status]}`}>
-                    {STATUS_LABEL[t.status]}
+                <X className="w-3 h-3" />
+              </button>
+            </div>
+
+            {/* Info Grid */}
+            <div className="space-y-1 text-[7.5px]">
+              <div className="p-1 rounded bg-[#F8FAFC] border border-[#E2E8F0]">
+                <span className="text-[6px] font-bold text-[#64748B] block">Categoría & Técnico</span>
+                <span className="font-extrabold text-[#14AEE1]">{selectedJobDetail.categoria}</span> · <span className="font-bold text-slate-700">{selectedJobDetail.operarioNombre || 'Sin asignar'}</span>
+              </div>
+              <div className="p-1 rounded bg-[#F8FAFC] border border-[#E2E8F0]">
+                <span className="text-[6px] font-bold text-[#64748B] block">Descripción</span>
+                <p className="text-slate-600 leading-tight font-medium mt-0.5">{selectedJobDetail.descripcion}</p>
+              </div>
+            </div>
+
+            {/* Technical Report if Available */}
+            {selectedJobDetail.reporteTecnico && (
+              <div className="p-1.5 rounded-lg bg-indigo-50/70 border border-indigo-200 space-y-1">
+                <div className="flex items-center justify-between">
+                  <span className="font-extrabold text-[8px] text-indigo-900 flex items-center gap-1">
+                    <FileText className="w-2.5 h-2.5 text-indigo-600" />
+                    <span>Reporte Técnico Emitido</span>
+                  </span>
+                  <span className="text-[6.5px] text-indigo-600 font-bold font-mono">
+                    Céd: {selectedJobDetail.reporteTecnico.encargadoCedula}
                   </span>
                 </div>
-                <div className="text-[11px] font-bold text-white leading-tight">{t.client}</div>
-                <div className="flex items-center justify-between mt-0.5 text-[9.5px]">
-                  <span className="text-zinc-400">{t.type}</span>
-                  <span className={PRIORITY_COLOR[t.priority]}>{t.priority}</span>
+
+                {selectedJobDetail.reporteTecnico.trabajosReportados.map((rep, i) => (
+                  <div key={i} className="text-[7px] space-y-0.5 bg-white p-1 rounded border border-indigo-100">
+                    <div><strong>Diagnóstico:</strong> <span className="text-slate-600">{rep.diagnostico}</span></div>
+                    <div><strong>Solución:</strong> <span className="text-slate-600">{rep.solucion}</span></div>
+                  </div>
+                ))}
+
+                <div className="flex items-center justify-between text-[7px] font-bold text-indigo-950 pt-0.5 border-t border-indigo-100">
+                  <span>Empresa: ${selectedJobDetail.reporteTecnico.costoEmpresa}</span>
+                  <span>Técnico: ${selectedJobDetail.reporteTecnico.costoTecnico}</span>
                 </div>
+
+                {selectedJobDetail.estado === 'revision_cliente' && (
+                  <div className="flex gap-1 pt-0.5">
+                    <button
+                      onClick={() => rechazarReporte(selectedJobDetail.id)}
+                      className="flex-1 py-1 bg-rose-500 hover:bg-rose-600 text-white font-black text-[7px] rounded cursor-pointer"
+                    >
+                      Rechazar
+                    </button>
+                    <button
+                      onClick={() => aprobarReporte(selectedJobDetail.id)}
+                      className="flex-1 py-1 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-[7px] rounded cursor-pointer"
+                    >
+                      Aprobar
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Waiting for administrative close */}
+            {selectedJobDetail.estado === 'esperando_cierre' && (
+              <button
+                onClick={() => marcarCompletado(selectedJobDetail.id)}
+                className="w-full py-1 bg-[#0D9488] hover:bg-teal-700 text-white font-black text-[7.5px] rounded-md flex items-center justify-center gap-1 shadow-md cursor-pointer"
+              >
+                <CheckCheck className="w-2.5 h-2.5" />
+                <span>CERRAR Y FACTURAR</span>
               </button>
-            ))}
+            )}
+
+            <button
+              onClick={() => setSelectedJobDetail(null)}
+              className="w-full py-1 bg-slate-100 text-slate-700 font-extrabold text-[7px] rounded hover:bg-slate-200 cursor-pointer"
+            >
+              Cerrar Expediente
+            </button>
           </div>
         </div>
+      )}
 
-        {/* Right: Ticket Detail */}
-        <div className="w-[48%] flex flex-col p-2.5 space-y-1.5 overflow-y-auto bg-[#070a10]">
-          {selectedTicket ? (
-            <>
-              <div className="space-y-0.5">
-                <div className="text-[9px] text-sky-400 font-bold uppercase tracking-wider">TICKET ACTIVO</div>
-                <div className="text-xs sm:text-sm font-bold text-white leading-tight">{selectedTicket.client}</div>
-                <div className={`text-[10px] ${PRIORITY_COLOR[selectedTicket.priority]}`}>
-                  ⚑ Prioridad: {selectedTicket.priority}
-                </div>
-              </div>
+      {/* ========================================================================= */}
+      {/* 4. MODAL: ASIGNAR TÉCNICO (modal-asignar in web-admin)                    */}
+      {/* ========================================================================= */}
+      {assigningJobId && (
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-xs z-50 flex items-center justify-center p-2 animate-in fade-in duration-150">
+          <div className="bg-white rounded-xl max-w-[190px] w-full p-2.5 shadow-2xl border border-[#E2E8F0] space-y-1.5 text-center text-[8px]">
+            <div className="w-5 h-5 rounded-full bg-[#14AEE1]/10 text-[#14AEE1] flex items-center justify-center mx-auto">
+              <UserPlus className="w-2.5 h-2.5" />
+            </div>
 
-              <div className="space-y-0.5 text-[10px] text-zinc-300 font-mono">
-                <div>Tipo: <span className="text-white font-bold">{selectedTicket.type}</span></div>
-                <div>Operario: <span className="text-sky-300">{selectedTicket.operario}</span></div>
-                <div>Hora: <span className="text-zinc-200">{selectedTicket.time}</span></div>
-                <div>Estado: <span className={`font-bold ${STATUS_COLOR[selectedTicket.status].split(' ')[0]}`}>{STATUS_LABEL[selectedTicket.status]}</span></div>
-              </div>
+            <div>
+              <h3 className="font-black text-[9px] text-[#1E293B]">Asignar Técnico</h3>
+              <p className="text-[7px] text-slate-500 font-medium">Seleccione el responsable de la orden</p>
+            </div>
 
-              {/* Firestore log */}
-              <div className="p-1.5 rounded-lg bg-black/50 border border-white/5 text-[9px] text-zinc-400 space-y-0.5">
-                <div className="text-emerald-400 font-semibold">● Sync {new Date().toLocaleTimeString('es-CO')}</div>
-                <div className="truncate">doc: tickets/{selectedTicket.id}</div>
-              </div>
-
-              {selectedTicket.status === 'pendiente' && (
+            <div className="space-y-1 text-left">
+              {equipo.map(tech => (
                 <button
-                  onClick={() => dispatch(selectedTicket.id)}
-                  className="w-full py-1.5 rounded-lg bg-sky-500 hover:bg-sky-400 text-black text-[10.5px] font-bold cursor-pointer transition-all shadow-md active:scale-95"
+                  key={tech.id}
+                  onClick={() => asignarTecnico(assigningJobId, tech.nombre, tech.id)}
+                  className="w-full p-1 rounded-md border border-[#E2E8F0] hover:border-[#14AEE1] hover:bg-[#14AEE1]/5 flex items-center justify-between transition-all cursor-pointer text-[7.5px]"
                 >
-                  Despachar Operario
+                  <div className="font-bold text-[#1E293B]">{tech.nombre}</div>
+                  <span className="text-[6px] bg-emerald-50 text-emerald-600 font-black px-1 py-0.2 rounded">
+                    Disponible
+                  </span>
                 </button>
-              )}
-              {selectedTicket.status === 'en_trabajo' && (
-                <button
-                  onClick={() => complete(selectedTicket.id)}
-                  className="w-full py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black text-[10.5px] font-bold cursor-pointer transition-all shadow-md active:scale-95"
-                >
-                  Marcar Completado
-                </button>
-              )}
-            </>
-          ) : (
-            <div className="text-zinc-500 text-[10px] text-center pt-4">Selecciona un ticket</div>
-          )}
+              ))}
+            </div>
+
+            <button
+              onClick={() => setAssigningJobId(null)}
+              className="w-full py-0.5 text-[7px] font-bold text-slate-500 hover:text-slate-800"
+            >
+              Cancelar
+            </button>
+          </div>
         </div>
-      </div>
+      )}
+
     </div>
   );
 }
