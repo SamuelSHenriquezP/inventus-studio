@@ -1,7 +1,5 @@
-// src/components/apps/InventusWebApp.jsx
-// "Dog food" demo — shows the portfolio itself as a laptop app simulator
 import { useState } from 'react';
-import { Code2, Layers, Cpu, Terminal, ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { Terminal } from 'lucide-react';
 
 const SECTIONS = [
   { id: 'hero', label: 'Inicio', accent: '#ffffff' },
@@ -66,7 +64,7 @@ export default function InventusWebApp() {
               className={`text-left px-2 py-1.5 text-[9px] transition-all cursor-pointer border-l-2 ${
                 i === activeSection
                   ? 'text-white bg-white/5 border-l-white/60'
-                  : 'text-zinc-500 border-l-transparent hover:text-zinc-300 hover:bg-white/[0.02]'
+                  : 'text-zinc-500 border-l-transparent hover:text-zinc-300 hover:bg-white/2'
               }`}
             >
               {s.label}

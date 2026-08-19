@@ -1,8 +1,6 @@
-// src/components/ProjectDetailModal.jsx
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-import { X, Code2, MessageSquare, Play, Image as ImageIcon } from 'lucide-react';
-import { useState } from 'react';
+import { X, Code2, MessageSquare, Play } from 'lucide-react';
 
 import FlutterCodeViewer from './FlutterCodeViewer';
 import SopaSeniorApp from './apps/SopaSeniorApp';
@@ -27,14 +25,14 @@ function AppSimulator({ simulator, deviceType }) {
 
   if (isLaptop) {
     return (
-      <div className="relative w-full max-w-[420px] flex flex-col items-center mx-auto">
+      <div className="relative w-full max-w-105 flex flex-col items-center mx-auto">
         <div className="relative w-full aspect-16/10 rounded-xl bg-[#18191e] p-2.5 border border-white/15 shadow-2xl overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-transparent pointer-events-none z-30" />
+          <div className="absolute inset-0 bg-linear-to-tr from-transparent via-white/3 to-transparent pointer-events-none z-30" />
           <div className="relative w-full h-full rounded-lg overflow-hidden bg-black border border-white/10 shadow-inner">
             {app}
           </div>
         </div>
-        <div className="w-[104%] h-3 bg-gradient-to-b from-[#252730] to-[#14151a] rounded-b-xl border-t border-white/15 shadow-xl relative -mt-0.5 flex justify-center pointer-events-none">
+        <div className="w-[104%] h-3 bg-linear-to-b from-[#252730] to-[#14151a] rounded-b-xl border-t border-white/15 shadow-xl relative -mt-0.5 flex justify-center pointer-events-none">
           <div className="w-12 h-0.5 bg-black/60 rounded-b-md mt-0.5" />
         </div>
       </div>
@@ -43,7 +41,7 @@ function AppSimulator({ simulator, deviceType }) {
 
   return (
     <div className="relative w-48 sm:w-56 aspect-9/18.8 rounded-[36px] bg-[#15161c] p-2.5 border border-white/15 shadow-2xl mx-auto">
-      <div className="absolute inset-0 rounded-[32px] bg-gradient-to-tr from-transparent via-white/[0.03] to-transparent pointer-events-none z-30" />
+      <div className="absolute inset-0 rounded-4xl bg-linear-to-tr from-transparent via-white/3 to-transparent pointer-events-none z-30" />
       <div className="relative w-full h-full rounded-[26px] overflow-hidden bg-black border border-white/10 shadow-inner">
         <div className="absolute top-2 left-1/2 -translate-x-1/2 w-16 h-3 bg-black rounded-full border border-white/10 z-30 pointer-events-none" />
         {app}

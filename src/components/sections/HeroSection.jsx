@@ -1,7 +1,6 @@
-// src/components/sections/HeroSection.jsx
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import { ChevronDown, Terminal, CheckCircle2, Cpu, ShieldCheck } from 'lucide-react';
+import { ChevronDown, Terminal, CheckCircle2 } from 'lucide-react';
 import { personalInfo } from '../../Data/projectsData';
 import { sounds } from '../../utils/soundEngine';
 
@@ -64,18 +63,18 @@ export default function HeroSection({ onExploreWorks, onExploreStack, isActive =
     <section 
       id="hero"
       ref={heroRef}
-      className="w-full h-full min-h-screen flex flex-col justify-center px-6 sm:px-10 md:px-16 lg:px-24 pt-24 sm:pt-28 md:pt-32 pb-16 relative select-none overflow-hidden"
+      className="w-full h-full min-h-screen flex flex-col justify-center px-6 sm:px-10 md:px-16 lg:px-24 pt-16 sm:pt-20 lg:pt-20 pb-20 sm:pb-24 lg:pb-24 relative select-none overflow-hidden"
       style={{
         background: 'radial-gradient(ellipse 100% 100% at 50% 20%, #111218 0%, #0a0b0f 55%, #050508 100%)'
       }}
     >
       {/* Subtle Ambient Aura */}
-      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-white/[0.02] rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/4 w-125 h-125 bg-white/2 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center my-auto">
+      <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center my-auto">
         
         {/* Left Column: Headline & Bio */}
-        <div className="lg:col-span-7 space-y-6">
+        <div className="lg:col-span-7 space-y-4 sm:space-y-5">
           
           {/* Status Capsule */}
           <div className="hero-capsule inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-zinc-300">

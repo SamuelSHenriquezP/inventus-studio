@@ -1,7 +1,5 @@
-// src/components/apps/ServiIntelWebApp.jsx
-// Web Admin Console simulator for ServiIntel
 import { useState } from 'react';
-import { MapPin, CheckCircle2, Clock, AlertCircle, Users, Zap, BarChart2, Bell } from 'lucide-react';
+import { Bell } from 'lucide-react';
 import { sounds } from '../../utils/soundEngine';
 
 const TICKETS_DATA = [
@@ -91,7 +89,7 @@ export default function ServiIntelWebApp() {
       <div className="flex flex-1 min-h-0 overflow-hidden">
         {/* Left: Ticket List */}
         <div className="w-[52%] border-r border-white/10 flex flex-col min-h-0 bg-[#080b12]">
-          <div className="px-2.5 py-1 text-[10px] text-zinc-300 font-bold uppercase border-b border-white/5 shrink-0 bg-white/[0.02]">
+          <div className="px-2.5 py-1 text-[10px] text-zinc-300 font-bold uppercase border-b border-white/5 shrink-0 bg-white/2">
             Tickets Activos
           </div>
           <div className="flex-1 overflow-y-auto">
@@ -102,8 +100,8 @@ export default function ServiIntelWebApp() {
                   sounds.playClick();
                   setSelected(t.id);
                 }}
-                className={`w-full text-left px-2.5 py-1.5 border-b border-white/[0.04] transition-all cursor-pointer ${
-                  selected === t.id ? 'bg-sky-500/15' : 'hover:bg-white/[0.04]'
+                className={`w-full text-left px-2.5 py-1.5 border-b border-white/4 transition-all cursor-pointer ${
+                  selected === t.id ? 'bg-sky-500/15' : 'hover:bg-white/4'
                 }`}
               >
                 <div className="flex items-center justify-between mb-0.5">

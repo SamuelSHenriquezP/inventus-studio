@@ -134,7 +134,7 @@ function FallbackLaptop({ texturePath }) {
 
 export default function ThreeLaptop3D({ texturePath, accentColor = '#38bdf8' }) {
   return (
-    <div className="w-full h-[420px] sm:h-[500px] lg:h-[560px] relative cursor-grab active:cursor-grabbing select-none">
+    <div className="w-full h-105 sm:h-125 lg:h-140 relative cursor-grab active:cursor-grabbing select-none">
       <Suspense fallback={<FallbackLaptop texturePath={texturePath} />}>
         <Canvas camera={{ position: [0, 0.6, 4.4], fov: 42 }} dpr={[1, 1.5]}>
           <ambientLight intensity={1.1} />

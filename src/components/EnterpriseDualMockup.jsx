@@ -1,11 +1,9 @@
-// src/components/EnterpriseDualMockup.jsx
 import { useState, useEffect } from 'react';
 import { 
   Smartphone, Monitor, Activity, ShieldCheck, 
   RefreshCw, Wifi, Database, CheckCircle2, ArrowRightLeft, 
   Zap, Lock, EyeOff, Eye, Cpu, Radio, TrendingUp
 } from 'lucide-react';
-import confetti from 'canvas-confetti';
 import { sounds } from '../utils/soundEngine';
 
 export default function EnterpriseDualMockup() {
@@ -66,12 +64,15 @@ export default function EnterpriseDualMockup() {
 
       setIsSyncing(false);
       
-      confetti({
-        particleCount: 30,
-        spread: 45,
-        origin: { y: 0.65, x: 0.75 },
-        colors: ['#00F0FF', '#A855F7', '#10B981']
-      });
+      import('canvas-confetti').then((module) => {
+        const confetti = module.default;
+        confetti({
+          particleCount: 30,
+          spread: 45,
+          origin: { y: 0.65, x: 0.75 },
+          colors: ['#00F0FF', '#A855F7', '#10B981']
+        });
+      }).catch(() => {});
 
       setTimeout(() => setSyncFeedback(false), 1500);
     }, 550);

@@ -1,6 +1,5 @@
-// src/components/apps/DaysPhoneApp.jsx
 import { useState } from 'react';
-import { Compass, CheckCircle2, Circle, Layers, SlidersHorizontal, Sparkles, Shuffle } from 'lucide-react';
+import { CheckCircle2, Circle, Shuffle } from 'lucide-react';
 
 export default function DaysPhoneApp() {
   const [activeSpace, setActiveSpace] = useState('menu'); // 'menu' | 'estantes' | 'radar'
@@ -85,7 +84,7 @@ export default function DaysPhoneApp() {
                   className={`p-2 rounded-xl border transition-all cursor-pointer flex items-center justify-between text-[10px] ${
                     t.completed 
                       ? 'bg-black/20 border-white/5 opacity-50 line-through text-zinc-400' 
-                      : 'bg-white/[0.04] border-[#8B9A86]/20 text-[#FAF8F5] hover:bg-white/[0.08]'
+                      : 'bg-white/4 border-[#8B9A86]/20 text-[#FAF8F5] hover:bg-white/8'
                   }`}
                 >
                   <div className="flex items-center gap-2">
@@ -109,19 +108,19 @@ export default function DaysPhoneApp() {
           <div className="space-y-2">
             <div className="text-[9px] font-mono text-[#8B9A86] px-1">LOS ESTANTES TEMÁTICOS</div>
             <div className="grid grid-cols-2 gap-1.5 font-mono text-[9px]">
-              <div className="p-2.5 rounded-xl bg-white/[0.03] border border-[#8B9A86]/20 space-y-1">
+              <div className="p-2.5 rounded-xl bg-white/3 border border-[#8B9A86]/20 space-y-1">
                 <div className="text-emerald-400 font-bold">🚀 Inventus Studio</div>
                 <div className="text-zinc-400 text-[8px]">4 proyectos activos</div>
               </div>
-              <div className="p-2.5 rounded-xl bg-white/[0.03] border border-[#8B9A86]/20 space-y-1">
+              <div className="p-2.5 rounded-xl bg-white/3 border border-[#8B9A86]/20 space-y-1">
                 <div className="text-[#8B9A86] font-bold">🌿 Bienestar & Salud</div>
                 <div className="text-zinc-400 text-[8px]">Rutina 100% al día</div>
               </div>
-              <div className="p-2.5 rounded-xl bg-white/[0.03] border border-[#8B9A86]/20 space-y-1">
+              <div className="p-2.5 rounded-xl bg-white/3 border border-[#8B9A86]/20 space-y-1">
                 <div className="text-amber-300 font-bold">📚 Lectura & Notas</div>
                 <div className="text-zinc-400 text-[8px]">2 libros en curso</div>
               </div>
-              <div className="p-2.5 rounded-xl bg-white/[0.03] border border-[#8B9A86]/20 space-y-1">
+              <div className="p-2.5 rounded-xl bg-white/3 border border-[#8B9A86]/20 space-y-1">
                 <div className="text-sky-300 font-bold">💡 Ideas de Apps</div>
                 <div className="text-zinc-400 text-[8px]">8 notas rápidas</div>
               </div>

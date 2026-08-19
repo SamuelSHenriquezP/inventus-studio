@@ -1,11 +1,10 @@
 // src/components/ProjectScreenStage.jsx
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import {
-  Code2, MessageSquare, Compass, Zap,
+  Code2, Compass, Zap,
   Activity, Eye, MapPin, Navigation, RefreshCw,
-  Cloud, Bell, BarChart2, ShieldCheck, Monitor,
-  Sliders, ArrowLeftRight, TrendingUp, Radio, Wifi, CheckCircle2, Signal
+  ShieldCheck, Monitor, ArrowLeftRight, Radio
 } from 'lucide-react';
 import RealisticDevice3D from './RealisticDevice3D';
 import CinematicTitle from './CinematicTitle';
@@ -32,43 +31,31 @@ function ServiIntelFieldTitle({ isActive }) {
       const mainChars = containerRef.current.querySelectorAll('.field-main-char');
       const hlChars = containerRef.current.querySelectorAll('.field-hl-char');
 
-      gsap.fromTo(
+      gsap.from(
         mainChars,
         {
           opacity: 0,
-          y: 25,
-          rotateX: -65,
-          scale: 0.8,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          rotateX: 0,
-          scale: 1,
-          duration: 0.45,
-          stagger: 0.025,
-          ease: 'back.out(2)',
-          delay: 0.06,
+          y: 20,
+          rotateX: -45,
+          duration: 0.4,
+          stagger: 0.015,
+          ease: 'power2.out',
+          clearProps: 'all',
         }
       );
 
-      gsap.fromTo(
+      gsap.from(
         hlChars,
         {
           opacity: 0,
-          y: 25,
-          rotateX: -65,
-          scale: 0.8,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          rotateX: 0,
-          scale: 1,
-          duration: 0.45,
-          stagger: 0.025,
-          ease: 'back.out(2)',
-          delay: 0.06 + (mainChars.length * 0.025),
+          y: 20,
+          rotateX: -45,
+          scale: 0.9,
+          duration: 0.4,
+          stagger: 0.015,
+          ease: 'power2.out',
+          delay: 0.08,
+          clearProps: 'all',
         }
       );
     }, containerRef);
@@ -114,43 +101,30 @@ function ServiIntelAdminTitle({ isActive }) {
       const mainChars = containerRef.current.querySelectorAll('.admin-main-char');
       const hlChars = containerRef.current.querySelectorAll('.admin-hl-char');
 
-      gsap.fromTo(
+      gsap.from(
         mainChars,
         {
           opacity: 0,
-          x: -22,
-          filter: 'blur(6px)',
-          scale: 0.88,
-        },
-        {
-          opacity: 1,
-          x: 0,
-          filter: 'blur(0px)',
-          scale: 1,
-          duration: 0.45,
-          stagger: 0.02,
-          ease: 'power3.out',
-          delay: 0.1,
+          x: -16,
+          scale: 0.95,
+          duration: 0.4,
+          stagger: 0.015,
+          ease: 'power2.out',
+          clearProps: 'all',
         }
       );
 
-      gsap.fromTo(
+      gsap.from(
         hlChars,
         {
           opacity: 0,
-          x: -22,
-          filter: 'blur(6px)',
-          scale: 0.88,
-        },
-        {
-          opacity: 1,
-          x: 0,
-          filter: 'blur(0px)',
-          scale: 1,
-          duration: 0.45,
-          stagger: 0.02,
-          ease: 'power3.out',
-          delay: 0.1 + (mainChars.length * 0.02),
+          x: -16,
+          scale: 0.95,
+          duration: 0.4,
+          stagger: 0.015,
+          ease: 'power2.out',
+          delay: 0.08,
+          clearProps: 'all',
         }
       );
     }, containerRef);
@@ -184,26 +158,24 @@ function ServiIntelAdminTitle({ isActive }) {
   );
 }
 
-export default function ProjectScreenStage({ project, index, total, onPlayDemo, isActive }) {
+export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
   const containerRef = useRef(null);
+  const [mobileTab, setMobileTab] = useState('mobile');
 
   useEffect(() => {
     if (!containerRef.current) return;
 
     const ctx = gsap.context(() => {
       if (isActive) {
-        gsap.fromTo(
+        gsap.from(
           containerRef.current.querySelectorAll('.custom-stage-anim'),
           {
             opacity: 0,
-            y: 10,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.28,
-            stagger: 0.01,
+            y: 12,
+            duration: 0.35,
+            stagger: 0.02,
             ease: 'power2.out',
+            clearProps: 'all',
           }
         );
       }
@@ -305,10 +277,10 @@ export default function ProjectScreenStage({ project, index, total, onPlayDemo, 
                     href={project.githubUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="px-5 py-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-zinc-300 hover:text-white flex items-center gap-2 transition-all"
+                    className="px-5 py-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-300 hover:text-white flex items-center gap-2 transition-all"
                   >
                     <Code2 className="w-3.5 h-3.5" />
-                    <span>Código Dart</span>
+                    <span>Ver Código</span>
                   </a>
                 )}
                 <a
@@ -316,7 +288,7 @@ export default function ProjectScreenStage({ project, index, total, onPlayDemo, 
                   target="_blank"
                   rel="noreferrer"
                   data-cursor="WHATSAPP"
-                  className="px-5 py-3 rounded-full border border-white/15 text-zinc-400 hover:text-white transition-all flex items-center gap-2 hover:border-emerald-500/50"
+                  className="px-5 py-3 rounded-full border border-white/15 text-zinc-300 hover:text-white transition-all flex items-center gap-2 hover:border-emerald-500/50"
                 >
                   <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-400 fill-current" />
                   <span>Cotizar</span>
@@ -332,28 +304,25 @@ export default function ProjectScreenStage({ project, index, total, onPlayDemo, 
   }
 
   // =========================================================================
-  // 2. SERVIINTEL ECOSYSTEM — BALANCED DUAL CARDS (NO NEON, VIEWPORT FIT)
-  // =========================================================================
-  // =========================================================================
-  // 2. SERVIINTEL ECOSYSTEM — BALANCED DUAL CARDS (SQUARISH TABLET + CENTERED)
+  // 2. SERVIINTEL ECOSYSTEM — BALANCED DUAL CARDS (VIEWPORT FIT & RESPONSIVE)
   // =========================================================================
   if (project.id === 'serviintel-ops') {
     return (
       <div 
         ref={containerRef}
-        className="w-full h-full min-h-screen flex flex-col justify-center px-4 sm:px-8 md:px-12 lg:px-16 pt-20 pb-16 relative select-none text-zinc-100 font-sans overflow-y-auto"
+        className="w-full h-full min-h-screen flex flex-col justify-center px-6 sm:px-10 md:px-16 lg:px-24 pt-24 pb-16 relative select-none text-zinc-100 font-sans overflow-y-auto lg:overflow-visible"
         style={{
           background: 'radial-gradient(ellipse 100% 100% at 50% 20%, #0d1017 0%, #080a10 60%, #040508 100%)'
         }}
       >
-        <div className="max-w-7xl w-full mx-auto flex flex-col justify-center space-y-4 my-auto">
+        <div className="max-w-7xl w-full mx-auto flex flex-col justify-between my-auto space-y-3 lg:space-y-2 xl:space-y-3">
           
           {/* Header Bar with Strategic Ecosystem Placement & Actions */}
-          <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-white/10 custom-stage-anim shrink-0">
-            <div className="flex flex-wrap items-center gap-3 font-mono text-xs sm:text-sm text-zinc-400">
+          <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 pb-2.5 sm:pb-3 border-b border-white/10 custom-stage-anim shrink-0">
+            <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 font-mono text-xs sm:text-sm text-zinc-400">
               <span className="font-bold tracking-widest text-zinc-200">02 // SERVIINTEL</span>
               <span className="text-zinc-600 hidden sm:inline">•</span>
-              <span className="px-3 py-0.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-zinc-200 flex items-center gap-1.5">
+              <span className="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] sm:text-xs font-mono text-zinc-200 flex items-center gap-1.5">
                 <ArrowLeftRight className="w-3.5 h-3.5 text-sky-400" />
                 ECOSISTEMA INTEGRADO
               </span>
@@ -362,14 +331,14 @@ export default function ProjectScreenStage({ project, index, total, onPlayDemo, 
               </span>
             </div>
 
-            <div className="flex items-center gap-3 shrink-0 font-mono text-xs">
-              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/50 border border-emerald-500/30 text-emerald-400 text-xs font-medium hidden sm:flex">
+            <div className="flex items-center gap-2.5 sm:gap-3 shrink-0 font-mono text-xs">
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-950/50 border border-emerald-500/30 text-emerald-400 text-xs font-medium hidden sm:flex">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 <span>Firestore &lt;38ms</span>
               </div>
               <button
                 onClick={() => onPlayDemo(project)}
-                className="px-4 py-1.5 rounded-full bg-white hover:bg-zinc-200 text-black font-bold flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 text-xs sm:text-sm shadow-md"
+                className="px-3.5 py-1.5 rounded-full bg-white hover:bg-zinc-200 text-black font-bold flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 text-xs sm:text-sm shadow-md"
               >
                 <Activity className="w-4 h-4" />
                 <span>Ver Consola</span>
@@ -379,7 +348,7 @@ export default function ProjectScreenStage({ project, index, total, onPlayDemo, 
                 target="_blank"
                 rel="noreferrer"
                 data-cursor="WHATSAPP"
-                className="px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-300 hover:text-white transition-all flex items-center gap-1.5 text-xs sm:text-sm hover:border-emerald-500/50"
+                className="px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-300 hover:text-white transition-all flex items-center gap-1.5 text-xs sm:text-sm hover:border-emerald-500/50"
               >
                 <WhatsAppIcon className="w-4 h-4 text-emerald-400 fill-current" />
                 <span>Cotizar</span>
@@ -388,252 +357,477 @@ export default function ProjectScreenStage({ project, index, total, onPlayDemo, 
           </div>
 
           {/* ================================================================= */}
-          {/* TOP SECTION: APP MÓVIL (Info Left + Callouts Center + Smartphone Right) */}
+          {/* DESKTOP VIEW (lg:flex): BALANCED 4-4-4 COLUMNS & EQUAL CARD SPACING */}
           {/* ================================================================= */}
-          <div className="w-full py-1.5 custom-stage-anim">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-center">
-              
-              {/* Left Column: App Móvil Info & Features */}
-              <div className="lg:col-span-5 space-y-2.5">
-                <div className="space-y-1.5">
+          <div className="hidden lg:flex lg:flex-col justify-between flex-1 min-h-0 space-y-2 xl:space-y-3">
+            
+            {/* TOP SECTION: APP MÓVIL (Info Left 4 + 3 Callouts Center 4 + Smartphone Right 4) */}
+            <div className="w-full custom-stage-anim">
+              <div className="grid grid-cols-12 gap-4 xl:gap-6 items-center">
+                
+                {/* Left Column (4 cols): App Móvil Info & Features */}
+                <div className="col-span-4 space-y-1.5 xl:space-y-2">
+                  <div className="space-y-1">
+                    <div className="inline-flex items-center gap-1.5 text-[11px] xl:text-xs font-mono font-bold text-sky-400 uppercase tracking-wider">
+                      <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
+                      <span>TERMINAL DE CAMPO & MÓVIL</span>
+                    </div>
+                    <ServiIntelFieldTitle isActive={isActive} />
+                    <p className="text-xs xl:text-sm font-semibold text-zinc-200">
+                      Aplicación de Terreno & Geo-Ticketing
+                    </p>
+                    <p className="text-[11px] xl:text-xs text-zinc-300 leading-snug font-sans">
+                      App nativa en <span className="text-white font-semibold">Flutter & Dart</span> para cuadrillas en campo con órdenes en tiempo real, geolocalización GPS y sincronización con <span className="text-sky-300 font-semibold">Cloud Firestore</span>.
+                    </p>
+                  </div>
+
+                  {/* 3 Key Features */}
+                  <div className="grid grid-cols-3 gap-2 pt-1.5 border-t border-white/10">
+                    <div className="flex items-start gap-1.5">
+                      <div className="w-5 h-5 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                        <MapPin className="w-2.5 h-2.5" />
+                      </div>
+                      <div>
+                        <div className="text-[11px] xl:text-xs font-bold text-zinc-100">Operaciones</div>
+                        <div className="text-[9.5px] text-zinc-400 leading-tight">En terreno</div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-1.5">
+                      <div className="w-5 h-5 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                        <Navigation className="w-2.5 h-2.5" />
+                      </div>
+                      <div>
+                        <div className="text-[11px] xl:text-xs font-bold text-zinc-100">Geo-GPS</div>
+                        <div className="text-[9.5px] text-zinc-400 leading-tight">Ruta en vivo</div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-1.5">
+                      <div className="w-5 h-5 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                        <RefreshCw className="w-2.5 h-2.5" />
+                      </div>
+                      <div>
+                        <div className="text-[11px] xl:text-xs font-bold text-zinc-100">Offline</div>
+                        <div className="text-[9.5px] text-zinc-400 leading-tight">Firestore</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Center Column (4 cols): 3 FIELD APP CARDS (Equal spacing to text & mockup) */}
+                <div className="col-span-4 flex flex-col justify-center gap-1.5 xl:gap-2 px-1">
+                  <div className="p-1.5 xl:p-2 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
+                    <div className="flex items-center gap-1.5 text-[11px] xl:text-xs font-bold text-zinc-100">
+                      <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
+                      <span>UX Táctil para Operarios</span>
+                    </div>
+                    <p className="text-[10px] xl:text-[10.5px] text-zinc-300 leading-tight pl-3">
+                      Interacción táctil de alto contraste y registro de evidencias fotográficas en ruta.
+                    </p>
+                  </div>
+
+                  <div className="p-1.5 xl:p-2 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
+                    <div className="flex items-center gap-1.5 text-[11px] xl:text-xs font-bold text-zinc-100">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                      <span>Sincronización Reactiva</span>
+                    </div>
+                    <p className="text-[10px] xl:text-[10.5px] text-zinc-300 leading-tight pl-3">
+                      Flujo de datos bidireccional instantáneo entre cuadrillas y despacho central.
+                    </p>
+                  </div>
+
+                  <div className="p-1.5 xl:p-2 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
+                    <div className="flex items-center gap-1.5 text-[11px] xl:text-xs font-bold text-zinc-100">
+                      <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
+                      <span>Geo-Ticketing & GPS en Ruta</span>
+                    </div>
+                    <p className="text-[10px] xl:text-[10.5px] text-zinc-300 leading-tight pl-3">
+                      Trazabilidad continua de recorridos y geolocalización de órdenes en tiempo real.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Right Column (4 cols): SMARTPHONE MOCKUP */}
+                <div className="col-span-4 flex justify-center py-0.5">
+                  <div 
+                    data-mockup="true"
+                    className="device-mockup relative w-full max-w-44 xl:max-w-50 2xl:max-w-56 aspect-9/11.5 rounded-2xl bg-linear-to-b from-[#2a2f42] via-[#161822] to-[#0b0d13] p-1.5 xl:p-2 border border-white/20 shadow-[0_20px_45px_rgba(0,0,0,0.85)] group transition-all duration-300"
+                  >
+                    {/* Dynamic Island Pill */}
+                    <div className="absolute top-1 left-1/2 -translate-x-1/2 w-10 xl:w-12 h-1.5 xl:h-2 rounded-full bg-black border border-white/10 flex items-center justify-between px-1.5 z-30 pointer-events-none">
+                      <div className="w-0.5 h-0.5 rounded-full bg-sky-400/80 shadow-[0_0_3px_#38bdf8] animate-pulse" />
+                      <div className="w-1 h-1 rounded-full bg-[#111] border border-white/20 flex items-center justify-center">
+                        <div className="w-0.5 h-0.5 rounded-full bg-emerald-400/60" />
+                      </div>
+                    </div>
+
+                    {/* Specular Glare */}
+                    <div className="absolute inset-0 rounded-2xl bg-linear-to-tr from-transparent via-white/4 to-transparent pointer-events-none z-30" />
+
+                    {/* Inner App Container */}
+                    <div className="relative w-full h-full rounded-xl overflow-hidden bg-[#07090e] border border-white/10 shadow-inner">
+                      <ServiIntelOperarioApp />
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            {/* REAL-TIME ECOSYSTEM SYNC STREAM RIBBON */}
+            <div className="w-full py-1 px-3 rounded-lg bg-sky-500/5 border border-sky-500/15 flex items-center justify-between font-mono text-[10px] xl:text-[11px] text-sky-400/90 custom-stage-anim shrink-0">
+              <div className="flex items-center gap-2">
+                <Radio className="w-3 h-3 text-sky-400 animate-pulse" />
+                <span className="font-bold tracking-wider">LIVE DATA BUS // FIRESTORE STREAM</span>
+                <span className="text-zinc-400 hidden xl:inline">|</span>
+                <span className="text-zinc-300 hidden xl:inline">Sincronización bidireccional campo ⇄ central</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-zinc-200 font-semibold">
+                <span>Vanilla JS Web</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
+              </div>
+            </div>
+
+            {/* BOTTOM SECTION: WEB ADMIN CONSOLE (Laptop Left 4 + 3 Callouts Center 4 + Info Right 4) */}
+            <div className="w-full custom-stage-anim">
+              <div className="grid grid-cols-12 gap-4 xl:gap-6 items-center">
+                
+                {/* Left Column (4 cols): MACBOOK / WEB CONSOLE MOCKUP */}
+                <div className="col-span-4 flex justify-center py-0.5">
+                  <div 
+                    data-mockup="true"
+                    className="device-mockup relative w-full max-w-68 xl:max-w-76 2xl:max-w-84 flex flex-col items-center group transition-all duration-300"
+                  >
+                    {/* Display Chassis */}
+                    <div className="relative w-full aspect-16/10 rounded-xl bg-linear-to-b from-[#1c1f2c] via-[#141722] to-[#0f1118] p-2 xl:p-2.5 border border-white/20 shadow-[0_20px_45px_rgba(0,0,0,0.85)] overflow-hidden">
+                      {/* Camera Notch */}
+                      <div className="absolute top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-black border border-white/15 flex items-center justify-center z-30 pointer-events-none">
+                        <div className="w-0.5 h-0.5 rounded-full bg-emerald-500/50" />
+                      </div>
+
+                      {/* Specular Glass Glare */}
+                      <div className="absolute inset-0 bg-linear-to-tr from-transparent via-white/4 to-transparent pointer-events-none z-30" />
+
+                      {/* Inner Screen */}
+                      <div className="relative w-full h-full rounded-lg overflow-hidden bg-[#07090e] border border-white/10 shadow-inner">
+                        <ServiIntelLaptopApp />
+                      </div>
+                    </div>
+
+                    {/* Aluminum Laptop Base */}
+                    <div className="w-[104%] h-2.5 bg-linear-to-b from-[#252838] to-[#12141c] rounded-b-lg border-t border-white/15 shadow-xl relative -mt-0.5 flex justify-center pointer-events-none">
+                      <div className="w-12 h-0.5 bg-black/60 rounded-b-sm mt-0.5" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Center Column (4 cols): 3 WEB CONSOLE CARDS (Equal spacing to mockup & text) */}
+                <div className="col-span-4 flex flex-col justify-center gap-1.5 xl:gap-2 px-1">
+                  <div className="p-1.5 xl:p-2 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
+                    <div className="flex items-center gap-1.5 text-[11px] xl:text-xs font-bold text-zinc-100">
+                      <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
+                      <span>Rendimiento Puro & 0 KB Overhead</span>
+                    </div>
+                    <p className="text-[10px] xl:text-[10.5px] text-zinc-300 leading-tight pl-3">
+                      Sin sobrecarga de librerías: carga instantánea y manipulación nativa ultra-rápida.
+                    </p>
+                  </div>
+
+                  <div className="p-1.5 xl:p-2 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
+                    <div className="flex items-center gap-1.5 text-[11px] xl:text-xs font-bold text-zinc-100">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                      <span>Monitoreo & Roles RBAC</span>
+                    </div>
+                    <p className="text-[10px] xl:text-[10.5px] text-zinc-300 leading-tight pl-3">
+                      Despacho de órdenes y supervisión de cuadrillas en tiempo real con seguridad.
+                    </p>
+                  </div>
+
+                  <div className="p-1.5 xl:p-2 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
+                    <div className="flex items-center gap-1.5 text-[11px] xl:text-xs font-bold text-zinc-100">
+                      <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
+                      <span>Despacho en Caliente Live</span>
+                    </div>
+                    <p className="text-[10px] xl:text-[10.5px] text-zinc-300 leading-tight pl-3">
+                      Canal WebSockets en vivo para actualización de estados sin recargar pantalla.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Right Column (4 cols): Web Admin Console Info & Features */}
+                <div className="col-span-4 space-y-1.5 xl:space-y-2">
+                  <div className="space-y-1">
+                    <div className="inline-flex items-center gap-1.5 text-[11px] xl:text-xs font-mono font-bold text-sky-400 uppercase tracking-wider">
+                      <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
+                      <span>WEB ADMIN CONSOLE</span>
+                    </div>
+                    <ServiIntelAdminTitle isActive={isActive} />
+                    <p className="text-xs xl:text-sm font-semibold text-zinc-200">
+                      Consola Web de Administración & Despacho
+                    </p>
+                    <p className="text-[11px] xl:text-xs text-zinc-300 leading-snug font-sans">
+                      Consola administrativa en <span className="text-white font-semibold">JavaScript Vanilla</span> puro: 0 KB sobrecarga, manipulación DOM nativa y sync sub-38ms con <span className="text-sky-300 font-semibold">Cloud Firestore & WebSockets</span>.
+                    </p>
+                  </div>
+
+                  {/* 3 Key Features */}
+                  <div className="grid grid-cols-3 gap-2 pt-1.5 border-t border-white/10">
+                    <div className="flex items-start gap-1.5">
+                      <div className="w-5 h-5 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                        <Zap className="w-2.5 h-2.5" />
+                      </div>
+                      <div>
+                        <div className="text-[11px] xl:text-xs font-bold text-zinc-100">Cero Overhead</div>
+                        <div className="text-[9.5px] text-zinc-400 leading-tight">Ultra rápido</div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-1.5">
+                      <div className="w-5 h-5 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                        <Monitor className="w-2.5 h-2.5" />
+                      </div>
+                      <div>
+                        <div className="text-[11px] xl:text-xs font-bold text-zinc-100">Dashboard</div>
+                        <div className="text-[9.5px] text-zinc-400 leading-tight">En vivo</div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-1.5">
+                      <div className="w-5 h-5 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                        <ShieldCheck className="w-2.5 h-2.5" />
+                      </div>
+                      <div>
+                        <div className="text-[11px] xl:text-xs font-bold text-zinc-100">Seguridad</div>
+                        <div className="text-[9.5px] text-zinc-400 leading-tight">RBAC</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+          {/* ================================================================= */}
+          {/* MOBILE VIEW (lg:hidden): CLEAN SEGMENTED TAB SWITCHER & NATIVE FIT */}
+          {/* ================================================================= */}
+          <div className="flex lg:hidden flex-col space-y-4 pb-20 pt-1 custom-stage-anim">
+            
+            {/* Segmented Switcher */}
+            <div className="flex items-center p-1 rounded-xl bg-white/5 border border-white/10 font-mono text-xs">
+              <button
+                onClick={() => setMobileTab('mobile')}
+                className={`flex-1 py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer font-bold ${
+                  mobileTab === 'mobile'
+                    ? 'bg-sky-400 text-black shadow-md'
+                    : 'text-zinc-400 hover:text-white'
+                }`}
+              >
+                <span>📱 App Terreno</span>
+              </button>
+              <button
+                onClick={() => setMobileTab('web')}
+                className={`flex-1 py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer font-bold ${
+                  mobileTab === 'web'
+                    ? 'bg-sky-400 text-black shadow-md'
+                    : 'text-zinc-400 hover:text-white'
+                }`}
+              >
+                <span>💻 Consola Web</span>
+              </button>
+            </div>
+
+            {/* Realtime Stream Pill */}
+            <div className="flex items-center justify-between px-3 py-1.5 rounded-lg bg-sky-500/10 border border-sky-500/20 font-mono text-[11px] text-sky-300">
+              <div className="flex items-center gap-1.5">
+                <Radio className="w-3 h-3 text-sky-400 animate-pulse" />
+                <span>FLIGHT SYNC STREAM // FIRESTORE</span>
+              </div>
+              <span className="text-emerald-400 font-bold">&lt;38ms Live</span>
+            </div>
+
+            {/* TAB 1: FIELD MOBILE APP */}
+            {mobileTab === 'mobile' ? (
+              <div className="space-y-4">
+                {/* Smartphone Mockup */}
+                <div className="flex justify-center py-1">
+                  <div 
+                    data-mockup="true"
+                    className="device-mockup relative w-full max-w-[215px] aspect-9/11.5 rounded-2xl bg-linear-to-b from-[#2a2f42] via-[#161822] to-[#0b0d13] p-2 border border-white/20 shadow-2xl"
+                  >
+                    {/* Dynamic Island */}
+                    <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-12 h-2 rounded-full bg-black border border-white/10 flex items-center justify-between px-1.5 z-30 pointer-events-none">
+                      <div className="w-1 h-1 rounded-full bg-sky-400/80 shadow-[0_0_3px_#38bdf8] animate-pulse" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#111] border border-white/20 flex items-center justify-center">
+                        <div className="w-0.5 h-0.5 rounded-full bg-emerald-400/60" />
+                      </div>
+                    </div>
+
+                    <div className="absolute inset-0 rounded-2xl bg-linear-to-tr from-transparent via-white/4 to-transparent pointer-events-none z-30" />
+
+                    <div className="relative w-full h-full rounded-xl overflow-hidden bg-[#07090e] border border-white/10 shadow-inner">
+                      <ServiIntelOperarioApp />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Info Text */}
+                <div className="space-y-2">
                   <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-sky-400 uppercase tracking-wider">
-                    <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
                     <span>TERMINAL DE CAMPO & MÓVIL</span>
                   </div>
                   <ServiIntelFieldTitle isActive={isActive} />
-                  <p className="text-sm sm:text-[15px] font-semibold text-zinc-200">
+                  <p className="text-sm font-semibold text-zinc-200">
                     Aplicación de Terreno & Geo-Ticketing
                   </p>
-                  <p className="text-xs sm:text-[13px] text-zinc-300 leading-relaxed font-sans max-w-lg">
-                    Aplicación móvil nativa en <span className="text-white font-semibold">Flutter & Dart</span> diseñada para cuadrillas operativas en campo. Integra gestión de tickets en tiempo real, geolocalización GPS de rutas, captura fotográfica de evidencias, firmas de conformidad y sincronización offline-first con <span className="text-sky-300 font-semibold">Cloud Firestore</span>.
+                  <p className="text-xs text-zinc-300 leading-relaxed font-sans">
+                    Aplicación móvil nativa en <span className="text-white font-semibold">Flutter & Dart</span> diseñada para cuadrillas operativas en campo con geolocalización GPS de rutas y sincronización con <span className="text-sky-300 font-semibold">Cloud Firestore</span>.
                   </p>
                 </div>
 
-                {/* 3 Key Features */}
-                <div className="grid grid-cols-3 gap-2.5 pt-2 border-t border-white/10">
-                  <div className="flex items-start gap-2">
-                    <div className="w-6 h-6 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
-                      <MapPin className="w-3 h-3" />
-                    </div>
-                    <div>
-                      <div className="text-xs sm:text-[13px] font-bold text-zinc-100">Operaciones</div>
-                      <div className="text-[10.5px] text-zinc-400 leading-tight">En terreno</div>
-                    </div>
+                {/* 3 Features */}
+                <div className="grid grid-cols-3 gap-2 pt-2 border-t border-white/10">
+                  <div className="p-2 rounded-lg bg-white/3 border border-white/5 flex flex-col items-center text-center space-y-1">
+                    <MapPin className="w-3.5 h-3.5 text-sky-400" />
+                    <span className="text-[10.5px] font-bold text-white">Operaciones</span>
+                    <span className="text-[9px] text-zinc-400">En terreno</span>
                   </div>
-
-                  <div className="flex items-start gap-2">
-                    <div className="w-6 h-6 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
-                      <Navigation className="w-3 h-3" />
-                    </div>
-                    <div>
-                      <div className="text-xs sm:text-[13px] font-bold text-zinc-100">Geo-GPS</div>
-                      <div className="text-[10.5px] text-zinc-400 leading-tight">Ruta en vivo</div>
-                    </div>
+                  <div className="p-2 rounded-lg bg-white/3 border border-white/5 flex flex-col items-center text-center space-y-1">
+                    <Navigation className="w-3.5 h-3.5 text-sky-400" />
+                    <span className="text-[10.5px] font-bold text-white">Geo-GPS</span>
+                    <span className="text-[9px] text-zinc-400">Ruta en vivo</span>
                   </div>
+                  <div className="p-2 rounded-lg bg-white/3 border border-white/5 flex flex-col items-center text-center space-y-1">
+                    <RefreshCw className="w-3.5 h-3.5 text-sky-400" />
+                    <span className="text-[10.5px] font-bold text-white">Offline</span>
+                    <span className="text-[9px] text-zinc-400">Firestore</span>
+                  </div>
+                </div>
 
-                  <div className="flex items-start gap-2">
-                    <div className="w-6 h-6 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
-                      <RefreshCw className="w-3 h-3" />
+                {/* 3 Field Callouts */}
+                <div className="space-y-2 pt-1">
+                  <div className="p-2.5 rounded-xl bg-white/3 border border-white/10 space-y-1">
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-100">
+                      <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
+                      <span>UX Táctil para Operarios</span>
                     </div>
-                    <div>
-                      <div className="text-xs sm:text-[13px] font-bold text-zinc-100">Offline-First</div>
-                      <div className="text-[10.5px] text-zinc-400 leading-tight">Sync Firestore</div>
+                    <p className="text-[11px] text-zinc-300 leading-relaxed pl-3">
+                      Diseñada para operarios con feedback táctil y registro fotográfico en ruta.
+                    </p>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-white/3 border border-white/10 space-y-1">
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-100">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                      <span>Sincronización Reactiva</span>
                     </div>
+                    <p className="text-[11px] text-zinc-300 leading-relaxed pl-3">
+                      Flujo de datos reactivo y conectado con Cloud Firestore en tiempo real.
+                    </p>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-white/3 border border-white/10 space-y-1">
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-100">
+                      <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
+                      <span>Geo-Ticketing & GPS en Ruta</span>
+                    </div>
+                    <p className="text-[11px] text-zinc-300 leading-relaxed pl-3">
+                      Trazabilidad continua de recorridos y geolocalización de órdenes en vivo.
+                    </p>
                   </div>
                 </div>
               </div>
-
-              {/* Center Column: 3 Clean Telemetry Callouts */}
-              <div className="lg:col-span-3 flex flex-col justify-center gap-2 px-0 lg:px-1">
-                <div className="p-2 sm:p-2.5 rounded-xl bg-white/[0.03] border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
-                  <div className="flex items-center gap-1.5 text-xs sm:text-[12.5px] font-bold text-zinc-100">
-                    <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
-                    <span>Interfaz de Terreno Móvil</span>
-                  </div>
-                  <p className="text-[11px] text-zinc-300 leading-relaxed pl-3">
-                    Diseñada para operarios con feedback táctil y visualización clara de órdenes activas.
-                  </p>
-                </div>
-
-                <div className="p-2 sm:p-2.5 rounded-xl bg-white/[0.03] border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
-                  <div className="flex items-center gap-1.5 text-xs sm:text-[12.5px] font-bold text-zinc-100">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                    <span>Sync Continua &lt;38ms</span>
-                  </div>
-                  <p className="text-[11px] text-zinc-300 leading-relaxed pl-3">
-                    Flujo de datos reactivo y bidireccional conectado con Cloud Firestore.
-                  </p>
-                </div>
-
-                <div className="p-2 sm:p-2.5 rounded-xl bg-white/[0.03] border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
-                  <div className="flex items-center gap-1.5 text-xs sm:text-[12.5px] font-bold text-zinc-100">
-                    <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
-                    <span>Telemetría & Geo-Tracking</span>
-                  </div>
-                  <p className="text-[11px] text-zinc-300 leading-relaxed pl-3">
-                    Monitoreo en tiempo real de cuadrillas y actualización instantánea de reportes de campo.
-                  </p>
-                </div>
-              </div>
-
-              {/* Right Column: REALISTIC COMPACT SMARTPHONE MOCKUP */}
-              <div className="lg:col-span-4 flex justify-center lg:justify-start py-0.5">
-                <div 
-                  data-mockup="true"
-                  className="device-mockup relative w-full max-w-[215px] sm:max-w-[230px] lg:max-w-[245px] aspect-[9/11.5] rounded-2xl bg-gradient-to-b from-[#2a2f42] via-[#161822] to-[#0b0d13] p-2 sm:p-2.5 border border-white/20 shadow-[0_20px_45px_rgba(0,0,0,0.85)] group transition-all duration-300"
-                >
-                  {/* Dynamic Island / Top Camera Notch */}
-                  <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-13 h-2.5 rounded-full bg-black border border-white/10 flex items-center justify-between px-1.5 z-30 pointer-events-none">
-                    <div className="w-1 h-1 rounded-full bg-sky-400/80 shadow-[0_0_3px_#38bdf8] animate-pulse" />
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#111] border border-white/20 flex items-center justify-center">
-                      <div className="w-0.5 h-0.5 rounded-full bg-emerald-400/60" />
+            ) : (
+              /* TAB 2: WEB ADMIN CONSOLE */
+              <div className="space-y-4">
+                {/* Laptop Mockup */}
+                <div className="flex justify-center py-1">
+                  <div 
+                    data-mockup="true"
+                    className="device-mockup relative w-full max-w-[310px] flex flex-col items-center"
+                  >
+                    <div className="relative w-full aspect-16/10 rounded-xl bg-linear-to-b from-[#1c1f2c] via-[#141722] to-[#0f1118] p-2 border border-white/20 shadow-2xl overflow-hidden">
+                      <div className="absolute top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-black border border-white/15 flex items-center justify-center z-30 pointer-events-none">
+                        <div className="w-0.5 h-0.5 rounded-full bg-emerald-500/50" />
+                      </div>
+                      <div className="absolute inset-0 bg-linear-to-tr from-transparent via-white/4 to-transparent pointer-events-none z-30" />
+                      <div className="relative w-full h-full rounded-lg overflow-hidden bg-[#07090e] border border-white/10 shadow-inner">
+                        <ServiIntelLaptopApp />
+                      </div>
+                    </div>
+                    <div className="w-[104%] h-2.5 bg-linear-to-b from-[#252838] to-[#12141c] rounded-b-lg border-t border-white/15 shadow-xl relative -mt-0.5 flex justify-center pointer-events-none">
+                      <div className="w-12 h-0.5 bg-black/60 rounded-b-sm mt-0.5" />
                     </div>
                   </div>
-
-                  {/* Specular Glass Sheen */}
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-transparent via-white/[0.04] to-transparent pointer-events-none z-30" />
-
-                  {/* Inner Display Screen */}
-                  <div className="relative w-full h-full rounded-xl overflow-hidden bg-[#07090e] border border-white/10 shadow-inner">
-                    <ServiIntelOperarioApp />
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          {/* ================================================================= */}
-          {/* ANIMATED REALTIME DATA STREAM RIBBON (Ecosystem Connection) */}
-          {/* ================================================================= */}
-          <div className="w-full flex items-center justify-between px-4 py-2 rounded-xl bg-white/[0.03] border border-white/10 custom-stage-anim text-xs font-mono text-zinc-400 shrink-0">
-            <div className="flex items-center gap-1.5 text-zinc-200 font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
-              <span>Flutter Native</span>
-            </div>
-            <div className="flex items-center gap-2 text-sky-400">
-              <span className="w-10 h-px bg-gradient-to-r from-transparent to-sky-500/50 hidden sm:inline" />
-              <div className="flex items-center gap-1.5 text-[11px] font-bold">
-                <Radio className="w-3.5 h-3.5 animate-pulse text-sky-400" />
-                <span>FLIGHT SYNC STREAM // FIRESTORE WEBSOCKETS</span>
-              </div>
-              <span className="w-10 h-px bg-gradient-to-l from-transparent to-sky-500/50 hidden sm:inline" />
-            </div>
-            <div className="flex items-center gap-1.5 text-zinc-200 font-semibold">
-              <span>Vanilla JS Web</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
-            </div>
-          </div>
-
-          {/* ================================================================= */}
-          {/* BOTTOM SECTION: WEB ADMIN CONSOLE (Laptop Left + Callouts Center + Info Right) */}
-          {/* ================================================================= */}
-          <div className="w-full py-1.5 custom-stage-anim">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-center">
-              
-              {/* Left Column: MACBOOK / WEB CONSOLE MOCKUP */}
-              <div className="lg:col-span-4 flex justify-center lg:justify-end py-1">
-                <div 
-                  data-mockup="true"
-                  className="device-mockup relative w-full max-w-[320px] sm:max-w-[350px] lg:max-w-[380px] flex flex-col items-center group transition-all duration-300"
-                >
-                  {/* Display Chassis */}
-                  <div className="relative w-full aspect-16/10 rounded-xl bg-gradient-to-b from-[#1c1f2c] via-[#141722] to-[#0f1118] p-2.5 sm:p-3 border border-white/20 shadow-[0_25px_60px_rgba(0,0,0,0.85)] overflow-hidden">
-                    {/* Camera Notch */}
-                    <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-black border border-white/15 flex items-center justify-center z-30 pointer-events-none">
-                      <div className="w-0.5 h-0.5 rounded-full bg-emerald-500/50" />
-                    </div>
-
-                    {/* Specular Glass Glare */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.04] to-transparent pointer-events-none z-30" />
-
-                    {/* Inner Screen */}
-                    <div className="relative w-full h-full rounded-lg overflow-hidden bg-[#07090e] border border-white/10 shadow-inner">
-                      <ServiIntelLaptopApp />
-                    </div>
-                  </div>
-
-                  {/* Aluminum Laptop Base */}
-                  <div className="w-[104%] h-3 bg-gradient-to-b from-[#252838] to-[#12141c] rounded-b-lg border-t border-white/15 shadow-xl relative -mt-0.5 flex justify-center pointer-events-none">
-                    <div className="w-14 h-0.5 bg-black/60 rounded-b-sm mt-0.5" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Center Column: 2 Enterprise Callouts */}
-              <div className="lg:col-span-3 flex flex-col justify-center gap-2.5 px-0 lg:px-1">
-                <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.03] border border-white/10 space-y-1 hover:border-white/20 transition-all">
-                  <div className="flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-zinc-100">
-                    <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
-                    <span>Rendimiento Puro & Cero Overhead</span>
-                  </div>
-                  <p className="text-[11px] sm:text-xs text-zinc-300 leading-relaxed pl-3">
-                    Sin sobrecarga de librerías pesadas: carga instantánea y manipulación nativa ultra-rápida del DOM.
-                  </p>
                 </div>
 
-                <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.03] border border-white/10 space-y-1 hover:border-white/20 transition-all">
-                  <div className="flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-zinc-100">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                    <span>Monitoreo & Roles RBAC</span>
-                  </div>
-                  <p className="text-[11px] sm:text-xs text-zinc-300 leading-relaxed pl-3">
-                    Despacho de órdenes y supervisión de cuadrillas en tiempo real con seguridad estricta.
-                  </p>
-                </div>
-              </div>
-
-              {/* Right Column: Web Admin Console Info & Features */}
-              <div className="lg:col-span-5 space-y-2.5">
-                <div className="space-y-1.5">
+                {/* Info Text */}
+                <div className="space-y-2">
                   <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-sky-400 uppercase tracking-wider">
-                    <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
                     <span>WEB ADMIN CONSOLE</span>
                   </div>
                   <ServiIntelAdminTitle isActive={isActive} />
-                  <p className="text-sm sm:text-[15px] font-semibold text-zinc-200">
+                  <p className="text-sm font-semibold text-zinc-200">
                     Consola Web de Administración & Despacho
                   </p>
-                  <p className="text-xs sm:text-[13px] text-zinc-300 leading-relaxed font-sans max-w-lg">
-                    Plataforma administrativa de alta velocidad construida con <span className="text-white font-semibold">JavaScript Vanilla</span> puro: 0 KB de sobrecarga de librerías, manipulación nativa del DOM y sincronización sub-38ms mediante <span className="text-sky-300 font-semibold">Cloud Firestore & WebSockets</span> para despacho en caliente y monitoreo con seguridad RBAC.
+                  <p className="text-xs text-zinc-300 leading-relaxed font-sans">
+                    Plataforma administrativa construida en <span className="text-white font-semibold">JavaScript Vanilla</span> puro: cero sobrecarga de librerías, manipulación nativa del DOM y sincronización continua para despacho en caliente.
                   </p>
                 </div>
 
-                {/* 3 Key Features */}
-                <div className="grid grid-cols-3 gap-2.5 pt-2 border-t border-white/10">
-                  <div className="flex items-start gap-2">
-                    <div className="w-6 h-6 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
-                      <Zap className="w-3 h-3" />
-                    </div>
-                    <div>
-                      <div className="text-xs sm:text-[13px] font-bold text-zinc-100">Cero Overhead</div>
-                      <div className="text-[10.5px] text-zinc-400 leading-tight">Ultra rápido</div>
-                    </div>
+                {/* 3 Features */}
+                <div className="grid grid-cols-3 gap-2 pt-2 border-t border-white/10">
+                  <div className="p-2 rounded-lg bg-white/3 border border-white/5 flex flex-col items-center text-center space-y-1">
+                    <Zap className="w-3.5 h-3.5 text-sky-400" />
+                    <span className="text-[10.5px] font-bold text-white">Rendimiento</span>
+                    <span className="text-[9px] text-zinc-400">Cero overhead</span>
                   </div>
-
-                  <div className="flex items-start gap-2">
-                    <div className="w-6 h-6 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
-                      <Monitor className="w-3 h-3" />
-                    </div>
-                    <div>
-                      <div className="text-xs sm:text-[13px] font-bold text-zinc-100">Dashboard</div>
-                      <div className="text-[10.5px] text-zinc-400 leading-tight">En vivo</div>
-                    </div>
+                  <div className="p-2 rounded-lg bg-white/3 border border-white/5 flex flex-col items-center text-center space-y-1">
+                    <Monitor className="w-3.5 h-3.5 text-sky-400" />
+                    <span className="text-[10.5px] font-bold text-white">Dashboard</span>
+                    <span className="text-[9px] text-zinc-400">En vivo</span>
                   </div>
+                  <div className="p-2 rounded-lg bg-white/3 border border-white/5 flex flex-col items-center text-center space-y-1">
+                    <ShieldCheck className="w-3.5 h-3.5 text-sky-400" />
+                    <span className="text-[10.5px] font-bold text-white">Seguridad</span>
+                    <span className="text-[9px] text-zinc-400">RBAC</span>
+                  </div>
+                </div>
 
-                  <div className="flex items-start gap-2">
-                    <div className="w-6 h-6 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
-                      <ShieldCheck className="w-3 h-3" />
+                {/* 3 Web Callouts */}
+                <div className="space-y-2 pt-1">
+                  <div className="p-2.5 rounded-xl bg-white/3 border border-white/10 space-y-1">
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-100">
+                      <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
+                      <span>Rendimiento Puro & 0 KB Overhead</span>
                     </div>
-                    <div>
-                      <div className="text-xs sm:text-[13px] font-bold text-zinc-100">Seguridad</div>
-                      <div className="text-[10.5px] text-zinc-400 leading-tight">RBAC</div>
+                    <p className="text-[11px] text-zinc-300 leading-relaxed pl-3">
+                      Manipulación pura del DOM para tiempos de respuesta ultra-rápidos en operaciones de alta frecuencia.
+                    </p>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-white/3 border border-white/10 space-y-1">
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-100">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                      <span>Monitoreo & Roles RBAC</span>
                     </div>
+                    <p className="text-[11px] text-zinc-300 leading-relaxed pl-3">
+                      Supervisión de cuadrillas, asignación de órdenes y control de estados con permisos estrictos.
+                    </p>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-white/3 border border-white/10 space-y-1">
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-100">
+                      <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
+                      <span>Despacho en Caliente Live</span>
+                    </div>
+                    <p className="text-[11px] text-zinc-300 leading-relaxed pl-3">
+                      Canal WebSockets en vivo para actualización de estados sin recargar pantalla.
+                    </p>
                   </div>
                 </div>
               </div>
-
-            </div>
+            )}
           </div>
 
         </div>

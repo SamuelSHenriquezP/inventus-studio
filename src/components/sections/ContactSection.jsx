@@ -1,7 +1,6 @@
-// src/components/sections/ContactSection.jsx
 import { useEffect, useState, useRef } from 'react';
 import { gsap } from 'gsap';
-import { ArrowUpRight, MessageSquare, Copy, Check, Clock, Sparkles } from 'lucide-react';
+import { ArrowUpRight, Copy, Check, Clock } from 'lucide-react';
 import { personalInfo } from '../../Data/projectsData';
 import { sounds } from '../../utils/soundEngine';
 
@@ -33,13 +32,12 @@ export default function ContactSection({ isActive = true }) {
     if (!el || !isActive) return;
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ delay: 0.05 });
+      const tl = gsap.timeline({ delay: 0.1 });
 
       // Badge & Status
-      tl.fromTo(
+      tl.from(
         el.querySelectorAll('.contact-badge-anim'),
-        { opacity: 0, y: -18, filter: 'blur(6px)' },
-        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.45, ease: 'power3.out' },
+        { opacity: 0, y: -12, duration: 0.4, ease: 'power2.out', clearProps: 'all' },
         0
       );
 
@@ -48,76 +46,55 @@ export default function ContactSection({ isActive = true }) {
       const line2Chars = el.querySelectorAll('.contact-line2-char');
 
       if (line1Chars.length) {
-        tl.fromTo(
+        tl.from(
           line1Chars,
           {
             opacity: 0,
-            y: 40,
-            rotateX: -75,
-            rotateY: 10,
-            transformOrigin: '50% 100% -25px',
-            filter: 'blur(8px)',
-          },
-          {
-            opacity: 1,
-            y: 0,
-            rotateX: 0,
-            rotateY: 0,
-            filter: 'blur(0px)',
-            duration: 0.55,
+            y: 20,
+            duration: 0.45,
             stagger: 0.015,
-            ease: 'back.out(1.5)',
+            ease: 'power2.out',
+            clearProps: 'all',
           },
-          0.05
+          0.04
         );
       }
 
       if (line2Chars.length) {
-        tl.fromTo(
+        tl.from(
           line2Chars,
           {
             opacity: 0,
-            y: 45,
-            rotateX: -85,
-            scale: 0.85,
-            filter: 'blur(8px)',
-          },
-          {
-            opacity: 1,
-            y: 0,
-            rotateX: 0,
-            scale: 1,
-            filter: 'blur(0px)',
-            duration: 0.55,
+            y: 20,
+            scale: 0.92,
+            duration: 0.45,
             stagger: 0.015,
-            ease: 'back.out(1.7)',
+            ease: 'power2.out',
+            clearProps: 'all',
           },
-          0.15
+          0.1
         );
       }
 
       // Paragraph & Details
-      tl.fromTo(
+      tl.from(
         el.querySelectorAll('.contact-text-anim'),
-        { opacity: 0, y: 20, filter: 'blur(4px)' },
-        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.5, ease: 'power3.out' },
-        0.2
+        { opacity: 0, y: 16, duration: 0.45, ease: 'power2.out', clearProps: 'all' },
+        0.15
       );
 
       // CTA Action Buttons
-      tl.fromTo(
+      tl.from(
         el.querySelectorAll('.contact-action-anim'),
-        { opacity: 0, y: 25, scale: 0.9 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.55, stagger: 0.08, ease: 'back.out(1.8)' },
-        0.22
+        { opacity: 0, y: 18, scale: 0.95, duration: 0.45, stagger: 0.06, ease: 'power2.out', clearProps: 'all' },
+        0.18
       );
 
       // Bottom Footer Bar
-      tl.fromTo(
+      tl.from(
         el.querySelectorAll('.contact-footer-bar'),
-        { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' },
-        0.35
+        { opacity: 0, y: 12, duration: 0.4, ease: 'power2.out', clearProps: 'all' },
+        0.25
       );
     }, el);
 
@@ -132,22 +109,22 @@ export default function ContactSection({ isActive = true }) {
     setTimeout(() => setCopiedEmail(false), 2500);
   };
 
-  const line1 = "¿Tienes un proyecto en mente?".split("");
-  const line2 = "Construyámoslo con precisión técnica.".split("");
+  const line1Text = "¿Tienes un proyecto en mente?";
+  const line2Text = "Construyámoslo con precisión técnica.";
 
   return (
-    <footer 
+    <section 
       id="contacto"
       ref={footerRef}
-      className="w-full h-full min-h-screen flex flex-col justify-center px-6 sm:px-10 md:px-16 lg:px-24 pt-24 sm:pt-28 pb-16 relative select-none overflow-hidden"
+      className="w-full h-full min-h-screen flex flex-col justify-center px-6 sm:px-10 md:px-16 lg:px-24 pt-24 pb-16 relative select-none overflow-y-auto"
       style={{
-        background: 'radial-gradient(ellipse 100% 100% at 50% 20%, #061c14 0%, #030e0a 55%, #010403 100%)'
+        background: 'radial-gradient(ellipse 100% 100% at 50% 85%, #05140d 0%, #030a07 55%, #020503 100%)'
       }}
     >
-      {/* Background Ambient Glow */}
-      <div className="absolute bottom-10 left-1/3 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none -z-10" />
+      {/* Subtle Ambient Glow */}
+      <div className="absolute bottom-10 left-1/3 w-125 h-125 bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none -z-10" />
 
-      <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-10 [perspective:1000px]">
+      <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-10 perspective-[1000px]">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 sm:gap-12">
           
           <div className="space-y-4 max-w-2xl">
@@ -160,19 +137,27 @@ export default function ContactSection({ isActive = true }) {
               <span>07 // DISPONIBILIDAD PARA PROYECTOS 2026</span>
             </div>
 
-            {/* Kinetic 3D Split Title */}
-            <h2 ref={titleRef} className="text-3xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight leading-[1.08] [perspective:1000px]">
+            {/* Kinetic 3D Split Title with Non-Breaking Words */}
+            <h2 ref={titleRef} className="text-3xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight leading-[1.08] perspective-[1000px]">
               <span className="block overflow-hidden py-0.5">
-                {line1.map((ch, i) => (
-                  <span key={`l1-${i}`} className="contact-line1-char inline-block will-change-transform text-white">
-                    {ch === ' ' ? '\u00A0' : ch}
+                {line1Text.split(' ').map((word, wIdx) => (
+                  <span key={`w1-${wIdx}`} className="inline-block whitespace-nowrap mr-2.5 sm:mr-3.5">
+                    {word.split('').map((char, cIdx) => (
+                      <span key={`l1-${wIdx}-${cIdx}`} className="contact-line1-char inline-block will-change-transform text-white">
+                        {char}
+                      </span>
+                    ))}
                   </span>
                 ))}
               </span>
               <span className="block overflow-hidden py-0.5 mt-1">
-                {line2.map((ch, i) => (
-                  <span key={`l2-${i}`} className="contact-line2-char inline-block will-change-transform text-emerald-400 drop-shadow-[0_0_18px_rgba(52,211,153,0.55)]">
-                    {ch === ' ' ? '\u00A0' : ch}
+                {line2Text.split(' ').map((word, wIdx) => (
+                  <span key={`w2-${wIdx}`} className="inline-block whitespace-nowrap mr-2.5 sm:mr-3.5">
+                    {word.split('').map((char, cIdx) => (
+                      <span key={`l2-${wIdx}-${cIdx}`} className="contact-line2-char inline-block will-change-transform text-emerald-400 drop-shadow-[0_0_18px_rgba(52,211,153,0.55)]">
+                        {char}
+                      </span>
+                    ))}
                   </span>
                 ))}
               </span>
@@ -224,7 +209,7 @@ export default function ContactSection({ isActive = true }) {
               DISPONIBLE
             </span>
             <span>•</span>
-            <span className="flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/[0.03] border border-white/10">
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/3 border border-white/10">
               <Clock className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
               <span className="font-mono text-emerald-300">CARTAGENA: {localTime || '12:00:00'} (GMT-5)</span>
             </span>
@@ -232,6 +217,6 @@ export default function ContactSection({ isActive = true }) {
         </div>
 
       </div>
-    </footer>
+    </section>
   );
 }

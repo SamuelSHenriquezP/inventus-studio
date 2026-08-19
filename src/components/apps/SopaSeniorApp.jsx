@@ -1,6 +1,5 @@
-// src/components/apps/SopaSeniorApp.jsx
-import { useState, useEffect, useCallback } from 'react';
-import { Star, Volume2, Trophy, RefreshCw } from 'lucide-react';
+import { useState } from 'react';
+import { Trophy, RefreshCw } from 'lucide-react';
 
 const GRID_SIZE = 8;
 const WORDS = ['FLUTTER', 'DART', 'ISAR', 'FIREBASE', 'MVVM'];
@@ -44,7 +43,7 @@ export default function SopaSeniorApp() {
 
   const foundCells = found.flatMap(f => f.cells);
 
-  const handleCellClick = (key, letter) => {
+  const handleCellClick = (key) => {
     if (foundCells.includes(key)) return;
     const next = selected.includes(key) ? selected.filter(k => k !== key) : [...selected, key];
     setSelected(next);
@@ -128,7 +127,7 @@ export default function SopaSeniorApp() {
           </div>
         ) : (
           <div
-            className="grid gap-[2px]"
+            className="grid gap-0.5"
             style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, 1fr)` }}
           >
             {grid.map((row, r) =>
@@ -139,7 +138,7 @@ export default function SopaSeniorApp() {
                 return (
                   <button
                     key={key}
-                    onClick={() => handleCellClick(key, letter)}
+                    onClick={() => handleCellClick(key)}
                     className={`w-7 h-7 rounded text-[10px] font-bold font-mono transition-all cursor-pointer flex items-center justify-center ${
                       isFound
                         ? 'bg-amber-500/30 text-amber-400 border border-amber-500/40'

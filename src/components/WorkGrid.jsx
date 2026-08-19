@@ -1,10 +1,10 @@
-// src/components/WorkGrid.jsx
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { ArrowUpRight, Play } from 'lucide-react';
 import { projectsData } from '../Data/projectsData';
-import ProjectModal from './ProjectModal';
-import FlutterDemoModal from './FlutterDemoModal';
 import HolographicCard from './HolographicCard';
+
+const ProjectModal = lazy(() => import('./ProjectModal'));
+const FlutterDemoModal = lazy(() => import('./FlutterDemoModal'));
 
 export default function WorkGrid() {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -126,17 +126,23 @@ export default function WorkGrid() {
 
       {/* Case Study Lightbox */}
       {selectedProject && (
-        <ProjectModal 
-          project={selectedProject} 
-          onClose={() => setSelectedProject(null)} 
-        />
+        <Suspense fallback={null}>
+          <ProjectModal 
+            project={selectedProject} 
+            onClose={() => setSelectedProject(null)} 
+          />
+        </Suspense>
       )}
 
       {/* Flutter Web Simulator Lightbox */}
-      <FlutterDemoModal 
-        isOpen={flutterModalOpen} 
-        onClose={() => setFlutterModalOpen(false)} 
-      />
+      {flutterModalOpen && (
+        <Suspense fallback={null}>
+          <FlutterDemoModal 
+            isOpen={flutterModalOpen} 
+            onClose={() => setFlutterModalOpen(false)} 
+          />
+        </Suspense>
+      )}
 
     </section>
   );

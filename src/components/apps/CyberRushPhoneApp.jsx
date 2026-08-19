@@ -1,13 +1,11 @@
-// src/components/apps/CyberRushPhoneApp.jsx
-import { useState, useEffect, useRef } from 'react';
-import { Play, RotateCcw, Zap, Sparkles } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Play, RotateCcw, Zap } from 'lucide-react';
 
 export default function CyberRushPhoneApp() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [score, setScore] = useState(0);
   const [combo, setCombo] = useState(1);
   const [playerX, setPlayerX] = useState(50);
-  const [particles, setParticles] = useState([]);
 
   useEffect(() => {
     let interval;

@@ -1,12 +1,7 @@
-// src/components/apps/ServiIntelLaptopApp.jsx
 import { useState } from 'react';
-import { 
-  Radio, CheckCircle2, AlertCircle, RefreshCw, 
-  MapPin, Shield, Users, Search, Filter, ArrowRight 
-} from 'lucide-react';
+import { RefreshCw, Users } from 'lucide-react';
 
 export default function ServiIntelLaptopApp() {
-  const [activeTab, setActiveTab] = useState('tickets');
   const [tickets, setTickets] = useState([
     { id: 'TK-4829', title: 'Mantenimiento Preventivo Fibra Nodo 4', client: 'Telecom Corp', status: 'En Ruta', operario: 'Carlos M.', priority: 'Alta' },
     { id: 'TK-4830', title: 'Revisión Servidor Enclave Rack B', client: 'Banco Regional', status: 'En Progreso', operario: 'Laura G.', priority: 'Crítica' },
@@ -71,7 +66,7 @@ export default function ServiIntelLaptopApp() {
                   className={`p-2 rounded-lg border transition-all cursor-pointer flex items-center justify-between ${
                     selectedTicket.id === t.id 
                       ? 'bg-sky-500/10 border-sky-500/40 text-white' 
-                      : 'bg-white/[0.02] border-white/5 text-zinc-300 hover:bg-white/[0.05]'
+                      : 'bg-white/2 border-white/5 text-zinc-300 hover:bg-white/5'
                   }`}
                 >
                   <div className="space-y-0.5">
@@ -79,7 +74,7 @@ export default function ServiIntelLaptopApp() {
                       <span className="font-mono font-bold text-sky-400 text-[10px]">{t.id}</span>
                       <span className="text-zinc-400 font-mono text-[9px]">• {t.client}</span>
                     </div>
-                    <div className="font-medium text-[10px] truncate max-w-[170px]">{t.title}</div>
+                    <div className="font-medium text-[10px] truncate max-w-42.5">{t.title}</div>
                   </div>
 
                   <span className={`px-2 py-0.5 rounded text-[9px] font-mono font-bold ${

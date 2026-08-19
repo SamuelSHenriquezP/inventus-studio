@@ -1,6 +1,5 @@
-// src/components/apps/NidoPhoneApp.jsx
 import { useState } from 'react';
-import { Plus, TrendingUp, CreditCard, ShoppingBag, Coffee, Home, Zap, ArrowUpRight, Check } from 'lucide-react';
+import { ShoppingBag, Coffee, ArrowUpRight, Zap } from 'lucide-react';
 
 export default function NidoPhoneApp() {
   const [balance, setBalance] = useState(2450.00);
@@ -49,7 +48,7 @@ export default function NidoPhoneApp() {
       </div>
 
       {/* Main Cashflow Card ("Disponible Real") */}
-      <div className="my-2.5 p-3.5 rounded-2xl bg-gradient-to-b from-[#14181c] to-[#0d1013] border border-white/10 shadow-lg space-y-2">
+      <div className="my-2.5 p-3.5 rounded-2xl bg-linear-to-b from-[#14181c] to-[#0d1013] border border-white/10 shadow-lg space-y-2">
         <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400">
           <span>DISPONIBLE REAL</span>
           <span className="text-emerald-400 font-medium">Actualizado</span>
@@ -67,26 +66,26 @@ export default function NidoPhoneApp() {
       <div className="space-y-1.5">
         <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400 px-1">
           <span>REGISTRO RÁPIDO</span>
-          {lastAction && <span className="text-emerald-400 text-[9px] truncate max-w-[140px]">{lastAction}</span>}
+          {lastAction && <span className="text-emerald-400 text-[9px] truncate max-w-35">{lastAction}</span>}
         </div>
         <div className="grid grid-cols-3 gap-1.5 font-mono text-[10px]">
           <button
             onClick={() => addExpense('Almuerzo', 'Comida', 14.50, Coffee)}
-            className="p-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] active:scale-95 border border-white/5 text-zinc-200 transition-all flex flex-col items-center gap-1 cursor-pointer"
+            className="p-2 rounded-xl bg-white/4 hover:bg-white/8 active:scale-95 border border-white/5 text-zinc-200 transition-all flex flex-col items-center gap-1 cursor-pointer"
           >
             <Coffee className="w-3.5 h-3.5 text-amber-400" />
             <span>+ Café $14.5</span>
           </button>
           <button
             onClick={() => addExpense('Supermercado', 'Hogar', 42.00, ShoppingBag)}
-            className="p-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] active:scale-95 border border-white/5 text-zinc-200 transition-all flex flex-col items-center gap-1 cursor-pointer"
+            className="p-2 rounded-xl bg-white/4 hover:bg-white/8 active:scale-95 border border-white/5 text-zinc-200 transition-all flex flex-col items-center gap-1 cursor-pointer"
           >
             <ShoppingBag className="w-3.5 h-3.5 text-emerald-400" />
             <span>+ Súper $42</span>
           </button>
           <button
             onClick={() => addExpense('Servicios', 'Fijos', 25.00, Zap)}
-            className="p-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] active:scale-95 border border-white/5 text-zinc-200 transition-all flex flex-col items-center gap-1 cursor-pointer"
+            className="p-2 rounded-xl bg-white/4 hover:bg-white/8 active:scale-95 border border-white/5 text-zinc-200 transition-all flex flex-col items-center gap-1 cursor-pointer"
           >
             <Zap className="w-3.5 h-3.5 text-sky-400" />
             <span>+ Luz $25</span>
@@ -101,7 +100,7 @@ export default function NidoPhoneApp() {
           {transactions.map(tx => {
             const Icon = tx.icon;
             return (
-              <div key={tx.id} className="p-2 rounded-xl bg-white/[0.02] border border-white/5 flex items-center justify-between text-[10px]">
+              <div key={tx.id} className="p-2 rounded-xl bg-white/2 border border-white/5 flex items-center justify-between text-[10px]">
                 <div className="flex items-center gap-2">
                   <div className="p-1 rounded-lg bg-white/5 text-zinc-300">
                     <Icon className="w-3 h-3" />

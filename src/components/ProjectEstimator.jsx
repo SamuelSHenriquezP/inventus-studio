@@ -172,7 +172,7 @@ export default function ProjectEstimator() {
                     <div className={`w-4 h-4 rounded-md flex items-center justify-center border shrink-0 transition-colors ${
                       isSelected ? 'bg-purple-500 border-purple-400 text-white' : 'border-zinc-700 bg-zinc-950'
                     }`}>
-                      {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
+                      {isSelected && <Check className="w-3 h-3 stroke-3" />}
                     </div>
                     <div className="overflow-hidden">
                       <span className="text-xs text-zinc-200 font-medium block truncate">

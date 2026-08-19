@@ -1,11 +1,11 @@
-// src/App.jsx
-import { useState, useCallback } from 'react';
-import { MessageSquare, Menu, X, Volume2, VolumeX, Sparkles } from 'lucide-react';
+import { useState, useCallback, lazy, Suspense } from 'react';
+import { MessageSquare, Menu, X } from 'lucide-react';
 
 import CustomCursor from './components/CustomCursor';
 import NavigationRail from './components/NavigationRail';
 import FullscreenDeck from './components/FullscreenDeck';
-import InteractiveProjectRunner from './components/InteractiveProjectRunner';
+
+const InteractiveProjectRunner = lazy(() => import('./components/InteractiveProjectRunner'));
 
 import { personalInfo, projectsData } from './Data/projectsData';
 import { sounds } from './utils/soundEngine';
@@ -189,10 +189,12 @@ export default function App() {
       {/* PLAYABLE INTERACTIVE RUNNER MODAL */}
       {/* ========================================================================= */}
       {selectedProject && (
-        <InteractiveProjectRunner
-          project={selectedProject}
-          onClose={() => setSelectedProject(null)}
-        />
+        <Suspense fallback={null}>
+          <InteractiveProjectRunner
+            project={selectedProject}
+            onClose={() => setSelectedProject(null)}
+          />
+        </Suspense>
       )}
 
     </div>
