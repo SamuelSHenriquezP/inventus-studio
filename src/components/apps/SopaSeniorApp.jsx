@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { Trophy, RefreshCw } from 'lucide-react';
+import { Trophy, RefreshCw, Sparkles, ShieldCheck, Check } from 'lucide-react';
+import confetti from 'canvas-confetti';
+import { sounds } from '../../utils/soundEngine';
 
 const GRID_SIZE = 8;
 const WORDS = ['FLUTTER', 'DART', 'ISAR', 'FIREBASE', 'MVVM'];
@@ -40,18 +42,32 @@ export default function SopaSeniorApp() {
   const [score, setScore] = useState(0);
   const [level, setLevel] = useState(1);
   const [showAd, setShowAd] = useState(false);
+  const [hasNoAds, setHasNoAds] = useState(false);
 
   const foundCells = found.flatMap(f => f.cells);
 
   const handleCellClick = (key) => {
     if (foundCells.includes(key)) return;
+    sounds.playClick();
     const next = selected.includes(key) ? selected.filter(k => k !== key) : [...selected, key];
     setSelected(next);
 
     // Check if selection matches a word
     for (const p of placed) {
       if (p.cells.every(c => next.includes(c)) && !found.find(f => f.word === p.word)) {
-        setFound(prev => [...prev, p]);
+        sounds.playSuccess();
+        setFound(prev => {
+          const updated = [...prev, p];
+          if (updated.length === placed.length) {
+            confetti({
+              particleCount: 35,
+              spread: 60,
+              origin: { y: 0.6 },
+              colors: ['#f59e0b', '#fbbf24', '#ffffff']
+            });
+          }
+          return updated;
+        });
         setScore(s => s + p.word.length * 10);
         setSelected([]);
         return;
@@ -59,13 +75,29 @@ export default function SopaSeniorApp() {
     }
   };
 
+  const buyNoAds = () => {
+    sounds.playSuccess();
+    setHasNoAds(true);
+    confetti({
+      particleCount: 40,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ['#10b981', '#34d399', '#ffffff']
+    });
+  };
+
   const nextLevel = () => {
-    setLevel(l => l + 1);
+    sounds.playClick();
+    const newLvl = level + 1;
+    setLevel(newLvl);
     setFound([]);
     setSelected([]);
     setScore(s => s + 50);
     setBoard(generateGrid(WORDS));
-    if (level % 3 === 0) { setShowAd(true); setTimeout(() => setShowAd(false), 2500); }
+    if (newLvl % 3 === 0 && !hasNoAds) { 
+      setShowAd(true); 
+      setTimeout(() => setShowAd(false), 2500); 
+    }
   };
 
   const allFound = found.length === placed.length;
@@ -156,10 +188,21 @@ export default function SopaSeniorApp() {
         )}
       </div>
 
-      {/* Score bar */}
-      <div className="px-3 pb-2 pt-1 font-mono text-[9px] text-zinc-500 flex justify-between shrink-0">
-        <span>{found.length}/{placed.length} palabras encontradas</span>
-        <span className="text-amber-400">Puntos: {score}</span>
+      {/* Bottom status & IAP Simulation */}
+      <div className="px-3 py-1.5 font-mono text-[9px] text-zinc-400 flex items-center justify-between border-t border-white/10 shrink-0 bg-black/50">
+        <span>{found.length}/{placed.length} palabras</span>
+        {hasNoAds ? (
+          <span className="text-emerald-400 font-bold flex items-center gap-1">
+            <ShieldCheck className="w-2.5 h-2.5 text-emerald-400" /> VIP (Sin Anuncios)
+          </span>
+        ) : (
+          <button
+            onClick={buyNoAds}
+            className="text-amber-400 hover:text-amber-300 font-bold cursor-pointer flex items-center gap-1 px-1.5 py-0.5 rounded bg-amber-500/10 border border-amber-500/30"
+          >
+            <Sparkles className="w-2.5 h-2.5" /> Quitar Ads $1.99
+          </button>
+        )}
       </div>
     </div>
   );

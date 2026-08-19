@@ -15,17 +15,256 @@ export const personalInfo = {
 
 export const projectsData = [
   {
-    id: "lovecost-nido",
+    id: "serviintel-ops",
     number: "01",
-    total: "04",
+    total: "06",
+    title: "ServiIntel",
+    subtitle: "Plataforma de Operaciones de Campo & Geo-Ticketing",
+    badge: "01 / ENTERPRISE & FIREBASE CLOUD",
+    category: "Ecosistema Web & Móvil",
+    year: "2026",
+    role: "Full-Stack System Architect",
+    headline: "Sincronización Cloud Firestore sub-38ms, telemetría GPS continua y persistencia offline atómica",
+    description: "Ecosistema de misión crítica que conecta una consola web administrativa en Vanilla JS puro (0 KB overhead) con una app móvil Flutter para técnicos en terreno. Implementa arquitectura Zero-Downtime, geocercas en vivo y cola de reintentos atómicos que garantiza 0% pérdida de datos sin cobertura móvil.",
+    image: "/assets/projects/serviintel.png",
+    tags: ["Flutter Mobile", "Vanilla JS Web", "Firebase Firestore", "Cloud Functions", "Google Play Signed", "GPS Tracking"],
+    demoType: "enterprise",
+    githubUrl: "https://github.com",
+    demoUrl: "#view-serviintel",
+    accent: "#38bdf8",
+    accentGlow: "rgba(56, 189, 248, 0.22)",
+    bgGradient: "radial-gradient(ellipse 80% 80% at 50% -10%, rgba(56, 189, 248, 0.15), rgba(7, 20, 38, 0.95) 60%, #050b14 100%)",
+    ambientColor: "#071426",
+    deviceType: "laptop",
+    themeTag: "ENTERPRISE SAPPHIRE",
+    metrics: [
+      { label: "Latencia Sync Sockets", val: "< 38 ms" },
+      { label: "Tolerancia de Red", val: "Offline Atómico" },
+      { label: "Despliegue Móvil", val: "Google Play Store" },
+      { label: "Seguridad & Roles", val: "RBAC Criptográfico" }
+    ],
+    highlights: [
+      "Consola web ultra-ligera en JavaScript Vanilla: carga instantánea, 0 KB de sobrecarga de frameworks y sincronización en tiempo real.",
+      "Canales reactivos bidireccionales para asignación y cierre de órdenes en caliente con Cloud Firestore.",
+      "Auditoría rigurosa de reglas de seguridad Firestore (Admin, Cliente, Operario) con RBAC.",
+      "Rastreo GPS optimizado con bajo consumo de batería en background para operarios en terreno."
+    ],
+    codeSnippet: {
+      language: "dart",
+      filename: "ticket_dispatch_repository.dart",
+      code: `// lib/repositories/ticket_dispatch_repository.dart
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:geolocator/geolocator.dart';
+
+class TicketDispatchRepository {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  /// Stream reactivo de tickets asignados al operario con telemetría GPS
+  Stream<List<FieldTicket>> watchAssignedTickets(String operatorId) {
+    return _firestore
+        .collection('tickets')
+        .where('assignedTo', isEqualTo: operatorId)
+        .where('status', whereIn: ['pending', 'in_progress'])
+        .orderBy('priority', descending: true)
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map((doc) => FieldTicket.fromDoc(doc)).toList());
+  }
+
+  Future<void> submitResolution({
+    required String ticketId,
+    required Position currentPos,
+    required Map<String, dynamic> evidence,
+  }) async {
+    final batch = _firestore.batch();
+    final docRef = _firestore.collection('tickets').doc(ticketId);
+    batch.update(docRef, {
+      'status': 'completed',
+      'resolvedAt': FieldValue.serverTimestamp(),
+      'geoCoordinates': GeoPoint(currentPos.latitude, currentPos.longitude),
+      'evidencePayload': evidence,
+    });
+    await batch.commit();
+  }
+}`
+    }
+  },
+  {
+    id: "otek-powerapps",
+    number: "02",
+    total: "06",
+    title: "Control Calidad & Laminado",
+    subtitle: "Suite Industrial Power Apps, SharePoint & Power Automate",
+    badge: "02 / CORPORATE PLATFORM @ O-TEK",
+    category: "Power Apps & Cloud Automation",
+    year: "2025 – 2026",
+    role: "Power Platform Developer (Proyecto Interno O-tek)",
+    headline: "Validación matemática de tolerancias ASTM en planta con despacho de informes HTML en < 2 segundos",
+    description: "Digitalización industrial integral para O-tek que sustituyó el 100% de planillas en papel por formularios táctiles en Power Apps. Conectada a SharePoint Lists como base inmutable, evalúa desviaciones de espesor en microsegundos y dispara flujos en Power Automate que compilan y despachan reportes ejecutivos en HTML a supervisión en tiempo real.",
+    image: "/assets/projects/serviintel.png",
+    tags: ["Power Apps Tablet", "SharePoint Lists DB", "Power Automate", "Power BI ETL", "Normas ASTM / ISO", "RBAC Security", "Proyecto Corporativo @ O-tek"],
+    demoType: "powerapps",
+    githubUrl: null, // Proyecto corporativo interno confidencial
+    demoUrl: "#view-otek-powerapps",
+    accent: "#0ea5e9",
+    accentGlow: "rgba(14, 165, 233, 0.25)",
+    bgGradient: "radial-gradient(ellipse 80% 80% at 50% -10%, rgba(14, 165, 233, 0.16), rgba(8, 24, 43, 0.95) 60%, #040c17 100%)",
+    ambientColor: "#08182b",
+    deviceType: "tablet",
+    themeTag: "INDUSTRIAL QUALITY BLUE",
+    metrics: [
+      { label: "Ahorro de Tiempo", val: "-65% de Muestreo" },
+      { label: "Errores de Registro", val: "0% (Validación ASTM)" },
+      { label: "Despacho Reportes", val: "< 2s vía Automate" },
+      { label: "Gobernanza de Datos", val: "SharePoint RBAC" }
+    ],
+    highlights: [
+      "Diseño de interfaz para Tablet en Power Apps optimizado para toma de muestras en planta y laboratorio.",
+      "Conexión bidireccional a SharePoint Lists como base de datos con verificación instantánea de tolerancias mínimas y nominales.",
+      "Flujos de Power Automate que generan y despachan reportes con diseño HTML a supervisores en tiempo real al finalizar cada formulario.",
+      "Eliminación total del papel y planillas desincronizadas, facilitando la extracción directa para análisis y KPIs en Power BI.",
+      "Seguridad y control de acceso RBAC protegiendo fórmulas y tolerancias sensibles de la empresa."
+    ],
+    architectureFlow: [
+      {
+        step: "01",
+        title: "Captura en Planta (Power Apps Tablet)",
+        desc: "El laboratorista/operario ingresa lote, muestra y variables dimensionales en una interfaz táctil ergonómica con validación inmediata contra normas ASTM/ISO."
+      },
+      {
+        step: "02",
+        title: "Base de Datos & Reglas (SharePoint Lists)",
+        desc: "SharePoint actúa como repositorio seguro. Compara automáticamente los valores ingresados contra las tablas maestras de diseño y especificación nominal."
+      },
+      {
+        step: "03",
+        title: "Orquestación & Reporte (Power Automate)",
+        desc: "Al guardar el registro, se dispara un flujo en la nube que compila el reporte en HTML con formato corporativo y lo envía por correo electrónico a supervisores."
+      },
+      {
+        step: "04",
+        title: "Inteligencia de Negocio (Power BI ETL)",
+        desc: "Conexión en tiempo real con dashboards de Power BI para el monitoreo de mermas, variabilidad de espesores y control estadístico de procesos (CEP)."
+      },
+      {
+        step: "05",
+        title: "Gobernanza & Seguridad RBAC",
+        desc: "Permisos granulares que garantizan que solo el personal autorizado pueda visualizar, crear o modificar datos críticos de calidad."
+      }
+    ],
+    codeSnippet: {
+      language: "powerfx",
+      filename: "ValidationAndSubmit.fx",
+      code: `// Power Fx: Validación de Tolerancias y Envío a SharePoint
+With(
+    {
+        currentSpec: LookUp(
+            'Especificaciones Tuberias SharePoint',
+            DN = ddDN.Selected.Value && PN = ddPN.Selected.Value && SN = ddSN.Selected.Value
+        ),
+        espesorVal: Value(txtEspesor.Text),
+        diametroVal: Value(txtDiametroExt.Text)
+    },
+    If(
+        espesorVal < currentSpec.EspesorMin || espesorVal > currentSpec.EspesorMax,
+        Notify("Alerta: Espesor fuera de tolerancia ASTM", NotificationType.Warning),
+        
+        // Registro Atómico en SharePoint
+        Patch(
+            'Control Laminado Calidad SharePoint',
+            Defaults('Control Laminado Calidad SharePoint'),
+            {
+                Title: Concatenate(txtLote.Text, "-", ddMuestra.Selected.Value),
+                FechaMuestreo: dpFecha.SelectedDate,
+                DN_mm: ddDN.Selected.Value,
+                PN_Bar: ddPN.Selected.Value,
+                SN_Nm2: ddSN.Selected.Value,
+                EspesorMedido: espesorVal,
+                DiametroExtMedido: diametroVal,
+                EstadoNorma: "CONFORME",
+                Inspector: User().FullName
+            }
+        );
+        // Disparo de Power Automate Flow
+        'ReporteCalidad-PowerAutomate'.Run(txtLote.Text, User().Email);
+        Notify("✓ Guardado en SharePoint y Reporte HTML enviado", NotificationType.Success)
+    )
+)`
+    }
+  },
+  {
+    id: "sopa-senior",
+    number: "03",
+    total: "06",
+    title: "Sopa Senior",
+    subtitle: "Juego Móvil Educativo & Monetización en Producción",
+    badge: "03 / GOOGLE PLAY STORE & ADMOB",
+    category: "Juego Móvil & Monetización",
+    year: "2025 – 2026",
+    role: "Mobile Game Developer & Publisher",
+    headline: "Motor procedural 2D con +10,000 matrices únicas y monetización matemática en Google Play",
+    description: "Juego móvil publicado en Google Play con firmado Android Release, impulsado por un motor algorítmico procedural 2D que genera matrices de palabras al vuelo a 60 FPS sin patrones repetitivos. Optimiza la retención mediante monetización no invasiva: intercala anuncios de Google AdMob (1 cada 3 niveles exactos) y compras in-app con persistencia local para remoción permanente de publicidad.",
+    image: "/assets/projects/serviintel.png",
+    tags: ["Flutter Nativo", "Google Play Store", "Google AdMob", "In-App Purchases", "Procedural Engine", "Android SDK"],
+    demoType: "store",
+    googlePlayUrl: "https://play.google.com/store/apps/details?id=com.inventus.sopasenior",
+    githubUrl: "https://github.com",
+    demoUrl: "https://play.google.com/store/apps/details?id=com.inventus.sopasenior",
+    accent: "#f59e0b",
+    accentGlow: "rgba(245, 158, 11, 0.25)",
+    bgGradient: "radial-gradient(ellipse 80% 80% at 50% -10%, rgba(245, 158, 11, 0.16), rgba(38, 22, 5, 0.95) 60%, #0d0701 100%)",
+    ambientColor: "#1c1003",
+    deviceType: "phone-vertical",
+    themeTag: "AMBER GOLDEN PLAY",
+    metrics: [
+      { label: "Plataforma Real", val: "Google Play Store" },
+      { label: "Generación 2D", val: "Procedural al Vuelo" },
+      { label: "Frecuencia Ads", val: "1 cada 3 niveles" },
+      { label: "Monetización", val: "AdMob + IAP Vitalicio" }
+    ],
+    highlights: [
+      "Publicación y distribución real en Google Play Store cumpliendo normativas y firmado de release Android.",
+      "Motor algorítmico procedural que genera tableros 2D balanceados con resolución instantánea de cruces.",
+      "Integración de Google AdMob optimizada con cadencia no intrusiva de anuncios para maximizar eCPM y retención.",
+      "Módulo de compras in-app para remoción permanente de publicidad con persistencia offline de compras."
+    ],
+    codeSnippet: {
+      language: "dart",
+      filename: "ad_frequency_controller.dart",
+      code: `// lib/controllers/ad_frequency_controller.dart
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
+class AdFrequencyController {
+  int _levelsSinceLastAd = 0;
+  static const int _adInterval = 3;
+  InterstitialAd? _interstitialAd;
+
+  /// Muestra anuncio cada 3 niveles protegiendo la experiencia del usuario
+  void onLevelCompleted(Function onContinue) {
+    _levelsSinceLastAd++;
+    if (_levelsSinceLastAd >= _adInterval && _interstitialAd != null) {
+      _levelsSinceLastAd = 0;
+      _interstitialAd!.show();
+      _interstitialAd = null;
+      _loadNextInterstitial();
+    } else {
+      onContinue();
+    }
+  }
+}`
+    }
+  },
+  {
+    id: "lovecost-nido",
+    number: "04",
+    total: "06",
     title: "LoveCost / Nido",
     subtitle: "Gestión Financiera Inteligente & 'Disponible Real'",
-    badge: "01 / FINTECH & FLUTTER",
+    badge: "04 / FINTECH & FLUTTER",
     category: "Fintech & App Móvil",
     year: "2026",
     role: "Lead Mobile Architect & UI Engineer",
-    headline: "Control de flujo de caja 'Disponible Real' con categorización cronológica y tema adaptativo",
-    description: "Aplicación financiera offline-first desarrollada en Flutter. Desacopla el disponible real de presupuestos estáticos para representar el cashflow verdadero, incorpora categorización por recencia cronológica y un sistema de tema oscuro de precisión óptica.",
+    headline: "Arquitectura móvil 100% offline-first con motor NoSQL Isar DB (sub-1.2ms) y 'Disponible Real'",
+    description: "Fintech de finanzas personales diseñada para soberanía absoluta de datos: opera sin servidores externos ejecutando consultas de flujo de caja en menos de 1.2 milisegundos sobre Isar DB local. Su algoritmo dinámico descuenta compromisos futuros para calcular el 'Disponible Real' al instante, adaptándose a pantallas OLED con microconsumo de batería.",
     image: "/assets/projects/lovecost.png",
     tags: ["Flutter Nativo", "Dart 3.x", "Isar DB", "NidoTheme Extension", "Offline-First", "State Management"],
     demoType: "app",
@@ -38,10 +277,10 @@ export const projectsData = [
     deviceType: "phone-vertical",
     themeTag: "FINTECH EMERALD",
     metrics: [
-      { label: "Tiempo de Respuesta DB", val: "< 1.2 ms" },
-      { label: "Presupuesto de Cuadro", val: "60 FPS Constante" },
-      { label: "Modo Operativo", val: "100% Offline-First" },
-      { label: "Paleta Adaptativa", val: "NidoTheme Dynamic" }
+      { label: "Latencia Consulta DB", val: "< 1.2 ms (Isar)" },
+      { label: "Cálculo de Flujo", val: "'Disponible Real'" },
+      { label: "Privacidad de Datos", val: "100% Offline (Zero Cloud)" },
+      { label: "Optimización OLED", val: "60 FPS Constante" }
     ],
     highlights: [
       "Cálculo matemático instantáneo de 'Disponible Real' sin dependencias de red.",
@@ -93,91 +332,17 @@ class FinancialCashflowService extends ChangeNotifier {
     }
   },
   {
-    id: "serviintel-ops",
-    number: "02",
-    total: "04",
-    title: "ServiIntel",
-    subtitle: "Plataforma de Operaciones de Campo & Geo-Ticketing",
-    badge: "02 / ENTERPRISE & FIREBASE CLOUD",
-    category: "Ecosistema Web & Móvil",
-    year: "2026",
-    role: "Full-Stack System Architect",
-    headline: "Geolocalización en tiempo real, tickets dinámicos y sincronización Cloud Firestore",
-    description: "Ecosistema integral que conecta una suite administrativa web para monitoreo en vivo de flotas con una aplicación móvil para operarios en terreno. Implementa arquitectura Zero-Downtime, mapas interactivos y Cloud Functions para orquestación de estados.",
-    image: "/assets/projects/serviintel.png",
-    tags: ["Flutter Mobile", "Vanilla JS Web", "Firebase Firestore", "Cloud Functions", "Google Play Signed", "GPS Tracking"],
-    demoType: "enterprise",
-    githubUrl: "https://github.com",
-    demoUrl: "#view-serviintel",
-    accent: "#38bdf8",
-    accentGlow: "rgba(56, 189, 248, 0.22)",
-    bgGradient: "radial-gradient(ellipse 80% 80% at 50% -10%, rgba(56, 189, 248, 0.15), rgba(7, 20, 38, 0.95) 60%, #050b14 100%)",
-    ambientColor: "#071426",
-    deviceType: "laptop",
-    themeTag: "ENTERPRISE SAPPHIRE",
-    metrics: [
-      { label: "Latencia Sync Sockets", val: "< 38 ms" },
-      { label: "SLA Disponibilidad", val: "99.98%" },
-      { label: "Despliegue Móvil", val: "Google Play Store" },
-      { label: "Reglas de Seguridad", val: "Role-Based RBAC" }
-    ],
-    highlights: [
-      "Consola web ultra-ligera en JavaScript Vanilla: carga instantánea, 0 KB de sobrecarga de frameworks y sincronización en tiempo real.",
-      "Canales reactivos bidireccionales para asignación y cierre de órdenes en caliente con Cloud Firestore.",
-      "Auditoría rigurosa de reglas de seguridad Firestore (Admin, Cliente, Operario) con RBAC.",
-      "Rastreo GPS optimizado con bajo consumo de batería en background para operarios en terreno."
-    ],
-    codeSnippet: {
-      language: "dart",
-      filename: "ticket_dispatch_repository.dart",
-      code: `// lib/repositories/ticket_dispatch_repository.dart
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:geolocator/geolocator.dart';
-
-class TicketDispatchRepository {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
-  /// Stream reactivo de tickets asignados al operario con telemetría GPS
-  Stream<List<FieldTicket>> watchAssignedTickets(String operatorId) {
-    return _firestore
-        .collection('tickets')
-        .where('assignedTo', isEqualTo: operatorId)
-        .where('status', whereIn: ['pending', 'in_progress'])
-        .orderBy('priority', descending: true)
-        .snapshots()
-        .map((snapshot) => snapshot.docs.map((doc) => FieldTicket.fromDoc(doc)).toList());
-  }
-
-  Future<void> submitResolution({
-    required String ticketId,
-    required Position currentPos,
-    required Map<String, dynamic> evidence,
-  }) async {
-    final batch = _firestore.batch();
-    final docRef = _firestore.collection('tickets').doc(ticketId);
-    batch.update(docRef, {
-      'status': 'completed',
-      'resolvedAt': FieldValue.serverTimestamp(),
-      'geoCoordinates': GeoPoint(currentPos.latitude, currentPos.longitude),
-      'evidencePayload': evidence,
-    });
-    await batch.commit();
-  }
-}`
-    }
-  },
-  {
     id: "days-focus-flow",
-    number: "03",
-    total: "04",
+    number: "05",
+    total: "06",
     title: "Days: focus.flow",
     subtitle: "Organización de Días & Gamificación Zen",
-    badge: "03 / PRODUCTIVITY & UX",
+    badge: "05 / PRODUCTIVITY & UX",
     category: "App Móvil de Productividad",
     year: "2026",
     role: "Product Designer & Flutter Engineer",
-    headline: "Gestión de tareas sin fricción con swipe interactivo, 3 pestañas y widgets de Home Screen",
-    description: "Aplicación de productividad que reemplaza formularios estáticos por un flujo interactivo tipo swipe para categorizar tareas. Diseñada con una paleta verde salvia (#8B9A86) sobre marfil (#FAF8F5), arquitectura de 3 espacios (El Menú, Los Estantes, Mi Radar) y widgets nativos de Android.",
+    headline: "Productividad física con gestos de inercia, selector estocástico y widget nativo de Android",
+    description: "Aplicación de gestión y enfoque diario que erradica la fricción de formularios mediante interacciones de swipe físico calibradas al píxel. Estructura la jornada en tres espacios (Menú, Estantes y Radar), incorpora un selector estocástico (tómbola) contra la parálisis por decisión y sincroniza tareas críticas con el widget de inicio de Android.",
     image: "/assets/projects/days.png",
     tags: ["Flutter 3.x", "Swipe Gestures", "Android Home Widget", "Sage Palette #8B9A86", "Custom Animations", "Hive DB"],
     demoType: "days",
@@ -185,46 +350,45 @@ class TicketDispatchRepository {
     demoUrl: "#view-days",
     accent: "#8B9A86",
     accentGlow: "rgba(139, 154, 134, 0.25)",
-    bgGradient: "radial-gradient(ellipse 80% 80% at 50% -10%, rgba(139, 154, 134, 0.16), rgba(15, 23, 18, 0.95) 60%, #090e0b 100%)",
-    ambientColor: "#0f1712",
+    bgGradient: "radial-gradient(ellipse 80% 80% at 50% -10%, rgba(139, 154, 134, 0.16), rgba(20, 28, 22, 0.95) 60%, #080c09 100%)",
+    ambientColor: "#141c16",
     deviceType: "phone-vertical",
     themeTag: "ZEN SAGE GREEN",
     metrics: [
-      { label: "Latencia de Gesto", val: "0 ms Fling" },
-      { label: "Espacios de Trabajo", val: "Menú / Estantes / Radar" },
-      { label: "Widgets Nativos", val: "Android AppWidget" },
-      { label: "Paleta Calibrada", val: "Sage & Ivory" }
+      { label: "Entrada de Datos", val: "0 Formularios (Físico)" },
+      { label: "Espacios de Enfoque", val: "Menú / Estantes / Radar" },
+      { label: "Anti-Procrastinación", val: "Tómbola Estocástica" },
+      { label: "Integración SO", val: "Android Widget Nativo" }
     ],
     highlights: [
-      "Mecánica de swipe táctil de alta inercia para clasificación ultrarrápida de tareas.",
-      "Radar diario con filtros dinámicos de energía y disponibilidad de tiempo.",
-      "Widget nativo para pantalla de inicio de Android con sincronización instantánea."
+      "Sistema 'Radar' diario con anclaje de tareas clave para evitar la saturación mental.",
+      "Microinteracciones táctiles y físicas que recompensan la finalización de objetivos.",
+      "Paleta visual relajante #8B9A86 que reduce la fatiga visual en sesiones prolongadas."
     ],
     codeSnippet: {
       language: "dart",
-      filename: "task_swipe_controller.dart",
-      code: `// lib/controllers/task_swipe_controller.dart
+      filename: "daily_radar_controller.dart",
+      code: `// lib/controllers/daily_radar_controller.dart
 import 'package:flutter/material.dart';
 
-enum TaskDestination { menu, estantes, radar }
+class DailyRadarController extends ChangeNotifier {
+  final List<String> _dailyAnchors = [];
+  int _energyLevel = 3; // 1 (bajo) a 5 (óptimo)
 
-class TaskSwipeController extends ChangeNotifier {
-  double _dragOffset = 0.0;
-  
-  double get dragOffset => _dragOffset;
+  List<String> get dailyAnchors => List.unmodifiable(_dailyAnchors);
+  int get energyLevel => _energyLevel;
 
-  void onHorizontalDragUpdate(DragUpdateDetails details) {
-    _dragOffset += details.primaryDelta ?? 0;
+  void toggleAnchor(String taskId) {
+    if (_dailyAnchors.contains(taskId)) {
+      _dailyAnchors.remove(taskId);
+    } else if (_dailyAnchors.length < 3) {
+      _dailyAnchors.add(taskId);
+    }
     notifyListeners();
   }
 
-  void onHorizontalDragEnd(DragEndDetails details, Function(TaskDestination) onClassified) {
-    if (_dragOffset > 120) {
-      onClassified(TaskDestination.menu);
-    } else if (_dragOffset < -120) {
-      onClassified(TaskDestination.radar);
-    }
-    _dragOffset = 0.0;
+  void updateEnergy(int level) {
+    _energyLevel = level.clamp(1, 5);
     notifyListeners();
   }
 }`
@@ -232,16 +396,16 @@ class TaskSwipeController extends ChangeNotifier {
   },
   {
     id: "cyber-rush",
-    number: "04",
-    total: "04",
+    number: "06",
+    total: "06",
     title: "Cyber Rush",
     subtitle: "Videojuego Arcade Vectorial a 60–120 FPS",
-    badge: "04 / GAMING & WASM",
+    badge: "06 / GAMING & WASM",
     category: "Videojuego & WASM Engine",
     year: "2026",
     role: "Lead Gameplay & Engine Engineer",
-    headline: "Físicas vectoriales en tiempo real con renderizado acelerado por GPU y shaders GLSL",
-    description: "Motor de videojuego arcade desarrollado en Flutter y compilado nativamente a WebAssembly mediante CanvasKit e Impeller. Incorpora cálculo analítico de colisiones poligonales, shaders de estela y pipeline de audio de latencia ultra baja.",
+    headline: "Motor gráfico compilado a WebAssembly con shaders GLSL de GPU y latencia de 4.16ms (120 FPS)",
+    description: "Videojuego arcade 3D de alta velocidad ejecutado en el navegador mediante WebAssembly (WASM). Aprovecha la aceleración por hardware con un pipeline de renderizado de 4.16ms por cuadro para alcanzar 120 FPS continuos, integrando shaders GLSL para iluminación de neón volumétrica, partículas de estela y colisiones poligonales analíticas.",
     image: "/assets/projects/cyber_rush.jpg",
     tags: ["Flutter 3.x", "Flame Engine", "WebAssembly", "CanvasKit", "GLSL Shaders", "60-120 FPS"],
     demoType: "game",
@@ -254,15 +418,15 @@ class TaskSwipeController extends ChangeNotifier {
     deviceType: "arcade",
     themeTag: "CYBER NEON ROSE",
     metrics: [
-      { label: "Tasa de Refresco", val: "60–120 FPS" },
-      { label: "Latencia de Entrada", val: "< 4 ms" },
-      { label: "Peso Binario WASM", val: "2.1 MB" },
-      { label: "Físicas Vectoriales", val: "GPU Native" }
+      { label: "Tasa de Refresco", val: "120 FPS (4.16ms/frame)" },
+      { label: "Motor & Binario", val: "WASM + WebGL 2.0" },
+      { label: "Shaders en GPU", val: "GLSL Neon & Bloom" },
+      { label: "Físicas & Colisión", val: "Analítica Vectorial" }
     ],
     highlights: [
-      "Pipeline de renderizado CanvasKit con aceleración directa Skia / Impeller.",
-      "Algoritmo de partículas desacoplado del hilo principal para cero caídas de frames.",
-      "Compatibilidad multiplataforma instantánea (Web, iOS y Android con un solo codebase)."
+      "Renderizado vectorial a 60–120 FPS continuos sobre lienzo WebGL / CanvasKit.",
+      "Sistema determinista de colisiones para evasión milimétrica de obstáculos.",
+      "Shaders GLSL personalizados para efectos de velocidad y partículas lumínicas."
     ],
     codeSnippet: {
       language: "dart",
@@ -373,45 +537,48 @@ export const skillsList = [
 // Secondary / Additional Projects — displayed in the "Más Proyectos" grid
 export const secondaryProjectsData = [
   {
-    id: "sopa-senior",
-    title: "Sopa Senior",
-    subtitle: "Juego educativo de sopa de letras",
-    category: "Juego Móvil & Monetización",
-    year: "2025",
-    accent: "#f59e0b",
+    id: "serviintel-operario",
+    title: "ServiIntel Operarios",
+    subtitle: "App móvil para operarios de campo",
+    category: "App Móvil de Campo & Geolocalización",
+    year: "2026",
+    accent: "#0284c7",
     deviceType: "phone-vertical",
-    description: "Aplicación de sopa de letras con niveles de dificultad progresiva, anuncios integrados y compra in-app para eliminar publicidad. Optimización del ciclo de ads para mostrarlos cada 3 niveles y preservar la experiencia de usuario.",
-    tags: ["Flutter", "Google AdMob", "In-App Purchases", "Flame Engine"],
+    description: "Aplicación móvil en Flutter para operarios en campo con recepción de tickets reactivos, navegación GPS y firmado de órdenes con evidencia fotográfica.",
+    tags: ["Flutter", "Google Maps", "Firestore Sync", "Background GPS"],
     highlights: [
-      "Motor de generación procedural de sopas de letras con validación de cruces.",
-      "Integración de Google AdMob con frecuencia controlada (cada 3 niveles).",
-      "Compra in-app funcional para desactivar anuncios con RevenueCat."
+      "Recepción y actualización de estado de tickets en tiempo real.",
+      "Captura de evidencia fotográfica con almacenamiento en Cloud Storage.",
+      "Modo bajo consumo de batería durante seguimiento satelital."
     ],
     metrics: [
-      { label: "Plataforma", val: "Android" },
-      { label: "Monetización", val: "AdMob + IAP" },
-      { label: "Frecuencia Ads", val: "Cada 3 niveles" },
+      { label: "Plataforma", val: "Android / iOS" },
+      { label: "Sincronización", val: "Firestore Realtime" },
+      { label: "Firmado Release", val: "Google Play Signed" },
       { label: "Estado", val: "Producción" }
     ],
     codeSnippet: {
       language: "dart",
-      filename: "ad_frequency_controller.dart",
-      code: `// lib/controllers/ad_frequency_controller.dart
-class AdFrequencyController {
-  int _levelsSinceLastAd = 0;
-  static const int _adInterval = 3;
+      filename: "operator_ticket_view.dart",
+      code: `// lib/views/operator_ticket_view.dart
+class OperatorTicketView extends StatelessWidget {
+  final String ticketId;
+  const OperatorTicketView({required this.ticketId});
 
-  bool shouldShowAd() {
-    _levelsSinceLastAd++;
-    if (_levelsSinceLastAd >= _adInterval) {
-      _levelsSinceLastAd = 0;
-      return true;
-    }
-    return false;
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<DocumentSnapshot>(
+      stream: FirebaseFirestore.instance.collection('tickets').doc(ticketId).snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return const CircularProgressIndicator();
+        final data = snapshot.data!.data() as Map<String, dynamic>;
+        return TicketStatusCard(data: data);
+      },
+    );
   }
 }`
     },
-    appSimulator: "sopa-senior"
+    appSimulator: "serviintel-operario"
   },
   {
     id: "inventus-web",

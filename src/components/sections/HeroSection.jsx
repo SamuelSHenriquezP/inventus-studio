@@ -25,15 +25,15 @@ export default function HeroSection({ onExploreWorks, onExploreStack, isActive =
         el.querySelectorAll('.hero-char'),
         {
           opacity: 0,
-          y: 30,
-          filter: 'blur(6px)',
+          y: 22,
+          filter: 'blur(5px)',
         },
         {
           opacity: 1,
           y: 0,
           filter: 'blur(0px)',
-          duration: 0.6,
-          stagger: 0.012,
+          duration: 0.72,
+          stagger: 0.013,
           ease: 'power3.out',
         },
         0.05

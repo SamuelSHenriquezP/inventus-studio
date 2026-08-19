@@ -57,6 +57,12 @@ export default function ProjectDetailModal({ project, onClose }) {
   const [screenMode, setScreenMode] = useState('live-app');
 
   useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') handleClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
     const tl = gsap.timeline();
     tl.fromTo(backdropRef.current, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' }, 0);
     tl.fromTo(panelRef.current,
@@ -64,6 +70,11 @@ export default function ProjectDetailModal({ project, onClose }) {
       { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: 'power3.out' },
       0.05
     );
+
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
 
   const handleClose = () => {
@@ -75,17 +86,25 @@ export default function ProjectDetailModal({ project, onClose }) {
   if (!project) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+    <div 
+      data-modal="true"
+      data-prevent-slide="true"
+      onWheel={(e) => e.stopPropagation()}
+      onTouchMove={(e) => e.stopPropagation()}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 modal-container"
+    >
       {/* Backdrop */}
       <div
         ref={backdropRef}
-        className="absolute inset-0 bg-black/80 backdrop-blur-md"
+        className="absolute inset-0 bg-black/80 backdrop-blur-md modal-backdrop"
         onClick={handleClose}
       />
 
       {/* Panel */}
       <div
         ref={panelRef}
+        data-prevent-slide="true"
+        onWheel={(e) => e.stopPropagation()}
         className="relative z-10 w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl bg-[#0d0e14] border border-white/10 shadow-2xl"
         onClick={e => e.stopPropagation()}
       >
