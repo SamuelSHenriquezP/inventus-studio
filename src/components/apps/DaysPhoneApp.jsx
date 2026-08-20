@@ -29,38 +29,38 @@ export default function DaysPhoneApp() {
       {/* Top App Bar */}
       <div className="flex items-center justify-between border-b border-[#8B9A86]/20 pb-2.5 pt-4">
         <div>
-          <div className="text-[11px] font-serif-italic font-bold tracking-tight text-[#FAF8F5]">
+          <div className="text-[12px] font-['Newsreader',serif] font-bold italic tracking-wide text-[#FAF8F5]">
             Days: focus.flow
           </div>
-          <div className="text-[9px] text-[#8B9A86] font-mono">Organización Zen</div>
+          <div className="text-[9px] text-[#8B9A86] font-['JetBrains_Mono',monospace] font-semibold tracking-wider">Organización Zen</div>
         </div>
-        <span className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-[#8B9A86]/20 text-[#FAF8F5] border border-[#8B9A86]/30">
+        <span className="text-[9px] font-['JetBrains_Mono',monospace] font-bold px-2 py-0.5 rounded-full bg-[#8B9A86]/20 text-[#FAF8F5] border border-[#8B9A86]/30">
           🌱 Salvia & Marfil
         </span>
       </div>
 
       {/* 3 Space Tabs */}
-      <div className="grid grid-cols-3 gap-1 my-2 bg-black/40 p-1 rounded-xl border border-white/5 font-mono text-[9px]">
+      <div className="grid grid-cols-3 gap-1 my-2 bg-black/40 p-1 rounded-xl border border-white/5 font-['Plus_Jakarta_Sans',sans-serif] text-[9.5px]">
         <button
           onClick={() => setActiveSpace('menu')}
-          className={`py-1 rounded-lg transition-all cursor-pointer ${
-            activeSpace === 'menu' ? 'bg-[#8B9A86] text-black font-bold' : 'text-zinc-400 hover:text-white'
+          className={`py-1 rounded-lg transition-all cursor-pointer font-extrabold tracking-wide ${
+            activeSpace === 'menu' ? 'bg-[#8B9A86] text-black shadow-xs' : 'text-zinc-400 hover:text-white'
           }`}
         >
           El Menú
         </button>
         <button
           onClick={() => setActiveSpace('estantes')}
-          className={`py-1 rounded-lg transition-all cursor-pointer ${
-            activeSpace === 'estantes' ? 'bg-[#8B9A86] text-black font-bold' : 'text-zinc-400 hover:text-white'
+          className={`py-1 rounded-lg transition-all cursor-pointer font-extrabold tracking-wide ${
+            activeSpace === 'estantes' ? 'bg-[#8B9A86] text-black shadow-xs' : 'text-zinc-400 hover:text-white'
           }`}
         >
           Los Estantes
         </button>
         <button
           onClick={() => setActiveSpace('radar')}
-          className={`py-1 rounded-lg transition-all cursor-pointer ${
-            activeSpace === 'radar' ? 'bg-[#8B9A86] text-black font-bold' : 'text-zinc-400 hover:text-white'
+          className={`py-1 rounded-lg transition-all cursor-pointer font-extrabold tracking-wide ${
+            activeSpace === 'radar' ? 'bg-[#8B9A86] text-black shadow-xs' : 'text-zinc-400 hover:text-white'
           }`}
         >
           Mi Radar

@@ -11,6 +11,7 @@ import CinematicTitle from './CinematicTitle';
 import ServiIntelOperarioApp from './apps/ServiIntelOperarioApp';
 import ServiIntelLaptopApp from './apps/ServiIntelWebApp';
 import OtekArchitectureModal from './OtekArchitectureModal';
+import NidoCoupleStage from './NidoCoupleStage';
 import { personalInfo } from '../Data/projectsData';
 
 function WhatsAppIcon({ className = "w-3.5 h-3.5" }) {
@@ -32,12 +33,19 @@ function ServiIntelFieldTitle({ isActive }) {
       const mainChars = containerRef.current.querySelectorAll('.field-main-char');
       const hlChars = containerRef.current.querySelectorAll('.field-hl-char');
 
-      gsap.from(
+      gsap.fromTo(
         mainChars,
         {
           opacity: 0,
-          y: 24,
-          rotateX: -45,
+          y: 18,
+          rotateX: -30,
+          filter: 'blur(6px)',
+        },
+        {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          filter: 'blur(0px)',
           duration: 0.8,
           stagger: 0.035,
           ease: 'power3.out',
@@ -45,13 +53,19 @@ function ServiIntelFieldTitle({ isActive }) {
         }
       );
 
-      gsap.from(
+      gsap.fromTo(
         hlChars,
         {
           opacity: 0,
-          y: 24,
-          rotateX: -45,
-          scale: 0.92,
+          y: 18,
+          rotateX: -30,
+          filter: 'blur(6px)',
+        },
+        {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          filter: 'blur(0px)',
           duration: 0.8,
           stagger: 0.035,
           ease: 'power3.out',
@@ -64,23 +78,23 @@ function ServiIntelFieldTitle({ isActive }) {
     return () => ctx.revert();
   }, [isActive]);
 
-  const mainChars = "ServiIntel".split("");
-  const highlightChars = "Operarios".split("");
+  const mainChars = "Servi Intel".split("");
+  const highlightChars = "Operario".split("");
 
   return (
     <h2
       ref={containerRef}
       style={{ perspective: '800px' }}
-      className="text-2xl sm:text-3xl lg:text-[34px] font-display font-extrabold tracking-tight leading-tight flex items-center gap-1.5 overflow-hidden py-0.5"
+      className="text-2xl sm:text-3xl lg:text-[34px] font-display font-extrabold tracking-tight leading-tight flex items-center gap-1.5 overflow-visible py-1"
     >
-      <span className="inline-flex">
+      <span className="inline-flex overflow-visible">
         {mainChars.map((ch, i) => (
           <span key={`f-main-${i}`} className="field-main-char inline-block will-change-transform text-white">
-            {ch}
+            {ch === ' ' ? '\u00A0' : ch}
           </span>
         ))}
       </span>
-      <span className="inline-flex ml-2">
+      <span className="inline-flex ml-2 overflow-visible">
         {highlightChars.map((ch, i) => (
           <span key={`f-hl-${i}`} className="field-hl-char inline-block will-change-transform text-sky-400 drop-shadow-[0_0_14px_rgba(56,189,248,0.55)]">
             {ch}
@@ -102,12 +116,19 @@ function ServiIntelAdminTitle({ isActive }) {
       const mainChars = containerRef.current.querySelectorAll('.admin-main-char');
       const hlChars = containerRef.current.querySelectorAll('.admin-hl-char');
 
-      gsap.from(
+      gsap.fromTo(
         mainChars,
         {
           opacity: 0,
-          x: -20,
-          scale: 0.95,
+          x: -16,
+          scale: 0.96,
+          filter: 'blur(6px)',
+        },
+        {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          filter: 'blur(0px)',
           duration: 0.8,
           stagger: 0.035,
           ease: 'power3.out',
@@ -115,12 +136,19 @@ function ServiIntelAdminTitle({ isActive }) {
         }
       );
 
-      gsap.from(
+      gsap.fromTo(
         hlChars,
         {
           opacity: 0,
-          x: -20,
-          scale: 0.95,
+          x: -16,
+          scale: 0.96,
+          filter: 'blur(6px)',
+        },
+        {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          filter: 'blur(0px)',
           duration: 0.8,
           stagger: 0.035,
           ease: 'power3.out',
@@ -133,22 +161,22 @@ function ServiIntelAdminTitle({ isActive }) {
     return () => ctx.revert();
   }, [isActive]);
 
-  const mainChars = "ServiIntel".split("");
+  const mainChars = "Servi Intel".split("");
   const highlightChars = "Admin".split("");
 
   return (
     <h2
       ref={containerRef}
-      className="text-2xl sm:text-3xl lg:text-[34px] font-display font-extrabold tracking-tight leading-tight flex items-center gap-1.5 overflow-hidden py-0.5"
+      className="text-2xl sm:text-3xl lg:text-[34px] font-display font-extrabold tracking-tight leading-tight flex items-center gap-1.5 overflow-visible py-1"
     >
-      <span className="inline-flex">
+      <span className="inline-flex overflow-visible">
         {mainChars.map((ch, i) => (
           <span key={`a-main-${i}`} className="admin-main-char inline-block will-change-transform text-white">
-            {ch}
+            {ch === ' ' ? '\u00A0' : ch}
           </span>
         ))}
       </span>
-      <span className="inline-flex ml-2">
+      <span className="inline-flex ml-2 overflow-visible">
         {highlightChars.map((ch, i) => (
           <span key={`a-hl-${i}`} className="admin-hl-char inline-block will-change-transform text-emerald-400 drop-shadow-[0_0_14px_rgba(52,211,153,0.55)]">
             {ch}
@@ -170,48 +198,66 @@ function OtekQualityTitle({ isActive }) {
       const mainChars = containerRef.current.querySelectorAll('.otek-main-char');
       const hlChars = containerRef.current.querySelectorAll('.otek-hl-char');
 
-      gsap.from(mainChars, {
-        opacity: 0,
-        y: 24,
-        rotateX: -40,
-        duration: 0.85,
-        stagger: 0.035,
-        ease: 'power3.out',
-        clearProps: 'all',
-      });
+      gsap.fromTo(mainChars, 
+        {
+          opacity: 0,
+          y: 18,
+          rotateX: -30,
+          filter: 'blur(6px)',
+        },
+        {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          filter: 'blur(0px)',
+          duration: 0.85,
+          stagger: 0.035,
+          ease: 'power3.out',
+          clearProps: 'all',
+        }
+      );
 
-      gsap.from(hlChars, {
-        opacity: 0,
-        y: 24,
-        rotateX: -40,
-        duration: 0.85,
-        stagger: 0.035,
-        ease: 'power3.out',
-        delay: 0.12,
-        clearProps: 'all',
-      });
+      gsap.fromTo(hlChars,
+        {
+          opacity: 0,
+          y: 18,
+          rotateX: -30,
+          filter: 'blur(6px)',
+        },
+        {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          filter: 'blur(0px)',
+          duration: 0.85,
+          stagger: 0.035,
+          ease: 'power3.out',
+          delay: 0.12,
+          clearProps: 'all',
+        }
+      );
     }, containerRef);
 
     return () => ctx.revert();
   }, [isActive]);
 
-  const mainChars = "Control Calidad &".split("");
-  const highlightChars = "Laminado".split("");
+  const mainChars = "Control Calidad".split("");
+  const highlightChars = "Integrado".split("");
 
   return (
     <h2
       ref={containerRef}
       style={{ perspective: '800px' }}
-      className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight leading-tight flex flex-wrap items-center gap-1.5 overflow-hidden py-0.5"
+      className="text-2xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight leading-tight flex flex-col items-start overflow-visible py-1"
     >
-      <span className="inline-flex">
+      <span className="inline-flex overflow-visible">
         {mainChars.map((ch, i) => (
           <span key={`ot-m-${i}`} className="otek-main-char inline-block will-change-transform text-white">
             {ch === ' ' ? '\u00A0' : ch}
           </span>
         ))}
       </span>
-      <span className="inline-flex ml-1.5">
+      <span className="inline-flex mt-0.5 overflow-visible">
         {highlightChars.map((ch, i) => (
           <span key={`ot-h-${i}`} className="otek-hl-char inline-block will-change-transform text-sky-400 drop-shadow-[0_0_14px_rgba(14,165,233,0.55)]">
             {ch}
@@ -241,26 +287,44 @@ function SopaSeniorTitle({ isActive }) {
       const mainChars = containerRef.current.querySelectorAll('.sopa-main-char');
       const hlChars = containerRef.current.querySelectorAll('.sopa-hl-char');
 
-      gsap.from(mainChars, {
-        opacity: 0,
-        y: 24,
-        rotateX: -40,
-        duration: 0.85,
-        stagger: 0.035,
-        ease: 'power3.out',
-        clearProps: 'all',
-      });
+      gsap.fromTo(mainChars,
+        {
+          opacity: 0,
+          y: 18,
+          rotateX: -30,
+          filter: 'blur(6px)',
+        },
+        {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          filter: 'blur(0px)',
+          duration: 0.85,
+          stagger: 0.035,
+          ease: 'power3.out',
+          clearProps: 'all',
+        }
+      );
 
-      gsap.from(hlChars, {
-        opacity: 0,
-        y: 24,
-        rotateX: -40,
-        duration: 0.85,
-        stagger: 0.035,
-        ease: 'power3.out',
-        delay: 0.12,
-        clearProps: 'all',
-      });
+      gsap.fromTo(hlChars,
+        {
+          opacity: 0,
+          y: 18,
+          rotateX: -30,
+          filter: 'blur(6px)',
+        },
+        {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          filter: 'blur(0px)',
+          duration: 0.85,
+          stagger: 0.035,
+          ease: 'power3.out',
+          delay: 0.12,
+          clearProps: 'all',
+        }
+      );
     }, containerRef);
 
     return () => ctx.revert();
@@ -273,16 +337,16 @@ function SopaSeniorTitle({ isActive }) {
     <h2
       ref={containerRef}
       style={{ perspective: '800px' }}
-      className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight leading-tight flex flex-wrap items-center gap-1.5 overflow-hidden py-0.5"
+      className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight leading-tight flex flex-wrap items-center gap-1.5 overflow-visible py-1"
     >
-      <span className="inline-flex">
+      <span className="inline-flex overflow-visible">
         {mainChars.map((ch, i) => (
           <span key={`sp-m-${i}`} className="sopa-main-char inline-block will-change-transform text-white">
             {ch === ' ' ? '\u00A0' : ch}
           </span>
         ))}
       </span>
-      <span className="inline-flex ml-1.5">
+      <span className="inline-flex ml-1.5 overflow-visible">
         {highlightChars.map((ch, i) => (
           <span key={`sp-h-${i}`} className="sopa-hl-char inline-block will-change-transform text-amber-400 drop-shadow-[0_0_14px_rgba(245,158,11,0.55)]">
             {ch}
@@ -339,7 +403,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
           {/* Header Bar with Strategic Ecosystem Placement & Actions */}
           <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 pb-2.5 sm:pb-3 border-b border-white/10 custom-stage-anim shrink-0">
             <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 font-mono text-xs sm:text-sm text-zinc-400">
-              <span className="font-bold tracking-widest text-zinc-200">01 // SERVIINTEL</span>
+              <span className="font-bold tracking-widest text-zinc-200">01 // SERVI INTEL</span>
               <span className="text-zinc-600 hidden sm:inline">•</span>
               <span className="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] sm:text-xs font-mono text-zinc-200 flex items-center gap-1.5">
                 <ArrowLeftRight className="w-3.5 h-3.5 text-sky-400" />
@@ -871,7 +935,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
           {/* Header Bar */}
           <div className="w-full flex items-center justify-between pb-3 border-b border-sky-500/20 custom-stage-anim shrink-0 font-mono text-xs text-zinc-400">
             <div className="flex items-center gap-3">
-              <span className="font-bold tracking-widest text-zinc-200">02 // CONTROL CALIDAD & LAMINADO</span>
+              <span className="font-bold tracking-widest text-zinc-200">02 // CONTROL CALIDAD INTEGRADO</span>
               <span className="text-zinc-600 hidden sm:inline">•</span>
               <span className="px-2.5 py-0.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400 font-mono text-[11px] flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5" />
@@ -1102,130 +1166,10 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
   }
 
   // =========================================================================
-  // 4. LOVECOST / NIDO — FINTECH & WEALTH (LAYOUT: MOCKUP LEFT, CONTENT RIGHT)
+  // 4. LOVECOST / NIDO — FINTECH & WEALTH (DUAL-PHONE COUPLE STAGE)
   // =========================================================================
   if (project.id === 'lovecost-nido') {
-    return (
-      <div
-        ref={containerRef}
-        className="w-full h-full min-h-screen flex flex-col justify-center px-6 sm:px-10 md:px-16 lg:px-24 pt-24 pb-16 relative select-none overflow-hidden text-zinc-100 font-sans"
-        style={{
-          background: 'radial-gradient(ellipse 100% 100% at 50% 15%, #0e1511 0%, #080c0a 55%, #030504 100%)'
-        }}
-      >
-        <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-6 relative z-10">
-
-          {/* Header Bar */}
-          <div className="w-full flex items-center justify-between pb-3 border-b border-white/10 custom-stage-anim shrink-0 font-mono text-xs text-zinc-400">
-            <div className="flex items-center gap-3">
-              <span className="font-bold tracking-widest text-zinc-200">04 // LOVECOST / NIDO</span>
-              <span className="text-zinc-600 hidden sm:inline">•</span>
-              <span className="text-zinc-400 hidden sm:inline">Arquitectura Móvil Offline-First con Isar DB</span>
-            </div>
-            <div className="flex items-center gap-2 text-zinc-300">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              <span>NidoTheme OLED</span>
-            </div>
-          </div>
-
-          {/* 2-Column Content: Mockup LEFT, Content RIGHT */}
-          <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
-
-            {/* Left: Device Mockup */}
-            <div className="lg:col-span-5 flex flex-col items-center justify-center custom-stage-anim">
-              <RealisticDevice3D
-                type={project.deviceType}
-                image={project.image}
-                accentColor="#10b981"
-                title={project.title}
-                codeSnippet={project.codeSnippet}
-                projectId={project.id}
-              />
-            </div>
-
-            {/* Right: Text Narrative */}
-            <div className="lg:col-span-7 space-y-4 sm:space-y-5 custom-stage-anim">
-              <div className="space-y-2">
-                <span className="text-xs font-mono font-medium text-emerald-400/90 tracking-wider uppercase block">
-                  Fintech & Experiencia de Usuario Móvil
-                </span>
-                <CinematicTitle
-                  text={project.title}
-                  isActive={isActive}
-                  className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-display font-extrabold text-white tracking-tight leading-[1.05]"
-                  accentColor="#10b981"
-                />
-                <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed">
-                  {project.subtitle}
-                </p>
-              </div>
-
-              {/* Attribution Pill */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/25 text-xs text-emerald-300">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span className="font-medium">Arquitectura Móvil Offline-First • Base de Datos Isar DB</span>
-              </div>
-
-              {/* Key Objective Highlight */}
-              <div className="flex items-stretch gap-3.5 px-4 py-3 sm:py-3.5 rounded-xl bg-white/[0.03] border border-white/10 shadow-sm backdrop-blur-md">
-                <div className="w-1.5 rounded-full bg-emerald-400 shrink-0 shadow-[0_0_10px_rgba(52,211,153,0.5)]" />
-                <p className="text-xs sm:text-sm font-sans font-medium text-zinc-200 tracking-[-0.01em] leading-relaxed self-center">
-                  {project.headline}
-                </p>
-              </div>
-
-              <p className="text-xs sm:text-sm text-zinc-400 font-sans leading-relaxed max-w-2xl">
-                {project.description}
-              </p>
-
-              {/* Technical Metrics Strip */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 pt-3 font-mono text-xs border-t border-white/10">
-                {project.metrics.map(m => (
-                  <div key={m.label} className="space-y-1">
-                    <span className="text-[10px] sm:text-[11px] text-zinc-400 uppercase tracking-wider block font-medium">{m.label}</span>
-                    <span className="text-sm sm:text-base font-bold text-emerald-400 block">{m.val}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Actions */}
-              <div className="flex flex-wrap items-center gap-3 pt-2 font-mono text-xs">
-                <button
-                  onClick={() => onPlayDemo(project)}
-                  className="px-6 py-3 rounded-full bg-white hover:bg-zinc-200 text-black font-bold flex items-center gap-2 shadow-lg transition-all cursor-pointer active:scale-95"
-                >
-                  <Eye className="w-3.5 h-3.5" />
-                  <span>Pantalla Completa</span>
-                </button>
-                {project.githubUrl && (
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-5 py-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-300 hover:text-white flex items-center gap-2 transition-all"
-                  >
-                    <Code2 className="w-3.5 h-3.5" />
-                    <span>Ver Código</span>
-                  </a>
-                )}
-                <a
-                  href={`https://wa.me/${personalInfo.whatsapp}?text=Hola%20${encodeURIComponent(personalInfo.name)},%20quiero%20cotizar%20un%20proyecto%20similar%20a%20${encodeURIComponent(project.title)}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  data-cursor="WHATSAPP"
-                  className="px-5 py-3 rounded-full border border-white/15 text-zinc-300 hover:text-white transition-all flex items-center gap-2 hover:border-emerald-500/50"
-                >
-                  <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-400 fill-current" />
-                  <span>Cotizar</span>
-                </a>
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-    );
+    return <NidoCoupleStage project={project} isActive={isActive} onPlayDemo={onPlayDemo} />;
   }
 
   // =========================================================================

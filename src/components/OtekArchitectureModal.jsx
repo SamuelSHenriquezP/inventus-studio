@@ -53,10 +53,10 @@ export default function OtekArchitectureModal({ isOpen, onClose }) {
     {
       num: "01",
       icon: Layers,
-      title: "Captura Táctil en Tablet (Power Apps)",
-      subtitle: "UI Ergonómica para Operarios de Planta",
-      desc: "Formulario responsive adaptado a tablet industrial. Los laboratoristas ingresan número de lote, muestra, DN, PN, SN y lecturas de espesores con teclado numérico optimizado.",
-      techBadge: "Power Apps Canvas / Tablet",
+      title: "Autenticación M365 & Captura Táctil (Power Apps)",
+      subtitle: "Login SSO Empresarial & UI para Operarios",
+      desc: "Formulario responsive adaptado a tablet empresarial. Inicio de sesión con Microsoft 365 SSO y control de acceso por roles (Operario / Admin). Los laboratoristas ingresan Lote, Muestra y parámetros técnicos.",
+      techBadge: "Power Apps Canvas / Login M365",
       color: "border-sky-500/40 text-sky-400 bg-sky-500/10"
     },
     {
@@ -89,10 +89,10 @@ export default function OtekArchitectureModal({ isOpen, onClose }) {
     {
       num: "05",
       icon: ShieldCheck,
-      title: "Gobernanza & Seguridad por Roles (RBAC)",
+      title: "Gobernanza, Login & Permisos Granulares (RBAC)",
       subtitle: "Protección de Fórmulas Confidenciales",
-      desc: "Estructura de permisos de SharePoint que restringe la modificación de tolerancias críticas únicamente a ingenieros de calidad senior, evitando accesos o alteraciones no autorizadas.",
-      techBadge: "SharePoint Role-Based Access Control",
+      desc: "Autenticación SSO Microsoft 365 con matriz de permisos RBAC que restringe la modificación de tolerancias críticas únicamente a ingenieros de calidad senior y administradores.",
+      techBadge: "Microsoft Entra ID / SharePoint RBAC",
       color: "border-emerald-500/40 text-emerald-400 bg-emerald-500/10"
     }
   ];
@@ -128,14 +128,14 @@ export default function OtekArchitectureModal({ isOpen, onClose }) {
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-[10px] font-mono font-bold text-sky-400 tracking-wider uppercase">
-                  ARQUITECTURA & WORKFLOW INDUSTRIAL
+                  ARQUITECTURA & WORKFLOW EMPRESARIAL
                 </span>
                 <span className="px-1.5 py-0.2 rounded-full bg-sky-500/20 text-sky-300 text-[9.5px] font-mono border border-sky-500/30">
                   O-tek Calidad
                 </span>
               </div>
               <h3 className="text-xs sm:text-sm font-bold text-white truncate max-w-[280px] sm:max-w-md">
-                Flujo Integral Power Platform (Apps + SharePoint + Automate + Power BI)
+                Flujo Integral Power Platform (Login SSO + Apps + SharePoint + Automate + Power BI)
               </h3>
             </div>
           </div>
@@ -380,10 +380,10 @@ With(
                 </div>
 
                 <div className="p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/20 space-y-1">
-                  <div className="text-2xl font-bold font-mono text-emerald-400">0% Errores de Transcripción</div>
-                  <div className="text-xs font-bold text-white">Validación Matemática en Vivo</div>
+                  <div className="text-2xl font-bold font-mono text-emerald-400">Reducción de Errores</div>
+                  <div className="text-[10px] text-slate-400 font-mono">Estandarización de Registros</div>
                   <p className="text-[11px] text-zinc-300">
-                    Comparación inmediata de tolerancias de espesor y diámetro que previene el ingreso de valores fuera de los límites de diseño.
+                    Comparación de tolerancias de espesor y diámetro contra normas técnicas para evitar desvíos en el producto final.
                   </p>
                 </div>
 

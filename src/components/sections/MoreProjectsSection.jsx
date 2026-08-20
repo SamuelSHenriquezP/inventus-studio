@@ -109,15 +109,15 @@ export default function MoreProjectsSection({ isActive = true }) {
               </div>
 
               {/* Animated 3D Cinematic Title */}
-              <h2 ref={titleRef} className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight perspective-[1000px] flex items-center gap-2 overflow-hidden py-0.5">
-                <span className="inline-flex">
+              <h2 ref={titleRef} className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight perspective-[1000px] flex items-center gap-2 overflow-visible py-1">
+                <span className="inline-flex overflow-visible">
                   {mainWord.map((ch, i) => (
                     <span key={`mw-${i}`} className="more-title-main-char inline-block will-change-transform text-white">
                       {ch}
                     </span>
                   ))}
                 </span>
-                <span className="inline-flex ml-2">
+                <span className="inline-flex ml-2 overflow-visible">
                   {hlWord.map((ch, i) => (
                     <span key={`hw-${i}`} className="more-title-hl-char inline-block will-change-transform text-violet-400 drop-shadow-[0_0_16px_rgba(167,139,250,0.6)]">
                       {ch}

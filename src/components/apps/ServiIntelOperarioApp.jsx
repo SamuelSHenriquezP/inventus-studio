@@ -284,25 +284,23 @@ export default function ServiIntelOperarioApp() {
   const completedTickets = filteredTickets.filter(t => t.estado === 'completado');
 
   return (
-    <div className="w-full h-full bg-[#F4F7F9] text-[#1E293B] font-sans flex flex-col select-none overflow-hidden relative text-[9px] leading-tight antialiased">
+    <div className="w-full h-full bg-[#F4F7F9] text-[#1E293B] font-['Plus_Jakarta_Sans',sans-serif] flex flex-col select-none overflow-hidden relative text-[9.5px] leading-tight antialiased">
       
-      {/* 1. BRANDED APP BAR (Flutter BrandedAppBar exact styling) */}
-      <header className="bg-white px-2 py-1.5 flex items-center justify-between border-b border-[#E2E8F0] shadow-2xs shrink-0 z-10">
+      {/* 1. APP BAR: OPERARIO */}
+      <header className="bg-white px-2.5 py-1.5 flex items-center justify-between border-b border-[#E2E8F0] shadow-2xs shrink-0 z-10">
         <div className="flex items-center gap-1.5">
-          {/* Logo Brand Mark */}
-          <div className="w-4 h-4 rounded-xs bg-[#14AEE1] flex items-center justify-center text-white font-black text-[8.5px] shadow-2xs">
-            S
+          <div className="w-4 h-4 rounded-md bg-[#14AEE1] flex items-center justify-center text-white shadow-2xs">
+            <HardHat className="w-2.5 h-2.5" />
           </div>
-          <div className="text-[11px] font-black tracking-tight text-[#1E293B] flex items-center">
-            <span>SERVI</span>
-            <span className="text-[#F3E72E] ml-0.5" style={{ textShadow: '0 0.5px 0 #1E293B' }}>INTEL</span>
-          </div>
+          <span className="text-[12px] font-extrabold tracking-wide text-[#0F172A] font-['Plus_Jakarta_Sans',sans-serif]">
+            Operario
+          </span>
         </div>
 
         <div className="flex items-center gap-1">
-          <div className="flex items-center gap-1 bg-[#14AEE1]/10 text-[#0284C7] px-1.5 py-0.2 rounded-full text-[7px] font-black">
+          <div className="flex items-center gap-1 bg-[#14AEE1]/10 text-[#0284C7] px-1.5 py-0.5 rounded-full text-[8px] font-extrabold tracking-wider font-['Plus_Jakarta_Sans',sans-serif]">
             <span className="w-1.5 h-1.5 rounded-full bg-[#14AEE1] animate-pulse" />
-            <span>OPERARIO</span>
+            <span>MÓVIL</span>
           </div>
           <button 
             title="Desconectar" 
@@ -321,7 +319,7 @@ export default function ServiIntelOperarioApp() {
             placeholder="Buscar órdenes o clientes..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg py-1 pl-6 pr-5 text-[8px] text-[#1E293B] placeholder-slate-400 focus:outline-none focus:border-[#14AEE1] focus:bg-white transition-all font-medium"
+            className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg py-1 pl-6 pr-5 text-[9px] text-[#1E293B] placeholder-slate-400 focus:outline-none focus:border-[#14AEE1] focus:bg-white transition-all font-semibold font-['Plus_Jakarta_Sans',sans-serif]"
           />
           <Search className="w-2.5 h-2.5 text-[#14AEE1] absolute left-2 top-1.5" />
           {searchQuery && (
@@ -341,10 +339,10 @@ export default function ServiIntelOperarioApp() {
         {/* SECTION HEADER: TAREAS PENDIENTES */}
         <div>
           <div className="flex items-center justify-between pb-1">
-            <span className="text-[8px] font-black text-[#64748B] tracking-[1px] uppercase">
+            <span className="text-[8.5px] font-extrabold text-[#475569] tracking-wider uppercase font-['Plus_Jakarta_Sans',sans-serif]">
               ÓRDENES ACTIVAS ({activeTickets.length})
             </span>
-            <span className="text-[7px] font-bold text-sky-600 bg-sky-50 px-1 py-0.2 rounded">
+            <span className="text-[7.5px] font-extrabold text-sky-700 bg-sky-100/80 px-1.5 py-0.5 rounded font-['JetBrains_Mono',monospace] tracking-wider">
               GPS LIVE
             </span>
           </div>
@@ -366,11 +364,11 @@ export default function ServiIntelOperarioApp() {
                   >
                     {/* Header Row: Category & Status Badge */}
                     <div className="flex items-center justify-between pb-1 border-b border-[#F1F5F9]">
-                      <span className="font-black text-[9px] text-[#14AEE1] tracking-wide uppercase truncate max-w-[110px]">
+                      <span className="font-extrabold text-[9.5px] text-[#0284C7] tracking-wider uppercase truncate max-w-[120px] font-['Plus_Jakarta_Sans',sans-serif]">
                         {job.categoria || 'SERVICIO'}
                       </span>
                       <span 
-                        className="px-1.5 py-0.2 rounded font-black text-[7px] uppercase tracking-wider"
+                        className="px-2 py-0.5 rounded font-extrabold text-[8px] uppercase tracking-wider font-['JetBrains_Mono',monospace]"
                         style={{ 
                           backgroundColor: `${estadoColor}1A`, 
                           color: estadoColor 
@@ -388,34 +386,34 @@ export default function ServiIntelOperarioApp() {
                       }}
                       className="flex items-center gap-1 cursor-pointer group"
                     >
-                      <UserCheck className="w-3 h-3 text-[#1E293B] shrink-0" />
-                      <h4 className="font-black text-[10.5px] text-[#1E293B] group-hover:text-[#14AEE1] transition-colors leading-tight truncate">
+                      <UserCheck className="w-3.5 h-3.5 text-[#0F172A] shrink-0" />
+                      <h4 className="font-extrabold text-[11.5px] text-[#0F172A] group-hover:text-[#14AEE1] transition-colors leading-tight truncate font-['Plus_Jakarta_Sans',sans-serif]">
                         {job.clienteNombre}
                       </h4>
                     </div>
 
                     {/* Address Banner with Fucsia accent */}
                     {job.direccionText && (
-                      <div className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-[#E71E65]/10 text-[#E71E65] font-bold text-[8px]">
+                      <div className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-[#E71E65]/10 text-[#E71E65] font-bold text-[8.5px] font-['Plus_Jakarta_Sans',sans-serif]">
                         <MapPin className="w-2.5 h-2.5 shrink-0" />
                         <span className="truncate">{job.direccionText}</span>
                       </div>
                     )}
 
                     {/* Service Description Box */}
-                    <div className="p-1.5 rounded-md bg-[#F8FAFC] border border-[#E2E8F0] text-[7.5px] text-slate-600 leading-snug font-medium">
+                    <div className="p-1.5 rounded-md bg-[#F8FAFC] border border-[#E2E8F0] text-[8.5px] text-[#334155] leading-relaxed font-medium font-['Plus_Jakarta_Sans',sans-serif]">
                       {job.descripcion}
                     </div>
 
                     {/* Associated Machine Box */}
                     {job.maquinaModelo && (
                       <div className="p-1.5 rounded-md bg-[#14AEE1]/8 border border-[#14AEE1]/20 flex items-center justify-between gap-1">
-                        <div className="flex items-center gap-1 text-[7.5px] font-black text-[#14AEE1] truncate">
+                        <div className="flex items-center gap-1 text-[8.5px] font-bold text-[#0284C7] truncate font-['Plus_Jakarta_Sans',sans-serif]">
                           <Printer className="w-2.5 h-2.5 shrink-0" />
                           <span className="truncate">{job.maquinaModelo}</span>
                         </div>
                         {job.maquinaIdPropio && (
-                          <span className="font-mono text-[7px] font-bold bg-white px-1 py-0.2 rounded text-slate-700 shrink-0">
+                          <span className="font-['JetBrains_Mono',monospace] text-[8px] font-bold bg-white px-1.5 py-0.5 rounded text-slate-700 border border-slate-200 shrink-0">
                             {job.maquinaIdPropio}
                           </span>
                         )}

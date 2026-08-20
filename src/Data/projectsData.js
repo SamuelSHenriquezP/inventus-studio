@@ -18,7 +18,7 @@ export const projectsData = [
     id: "serviintel-ops",
     number: "01",
     total: "06",
-    title: "ServiIntel",
+    title: "Servi Intel",
     subtitle: "Plataforma de Operaciones de Campo & Geo-Ticketing",
     badge: "01 / ENTERPRISE & FIREBASE CLOUD",
     category: "Ecosistema Web & Móvil",
@@ -92,16 +92,16 @@ class TicketDispatchRepository {
     id: "otek-powerapps",
     number: "02",
     total: "06",
-    title: "Control Calidad & Laminado",
-    subtitle: "Suite Industrial Power Apps, SharePoint & Power Automate",
+    title: "Control Calidad Integrado",
+    subtitle: "Suite Empresarial Power Apps, SharePoint & Power Automate",
     badge: "02 / CORPORATE PLATFORM @ O-TEK",
     category: "Power Apps & Cloud Automation",
     year: "2025 – 2026",
     role: "Power Platform Developer (Proyecto Interno O-tek)",
     headline: "Validación matemática de tolerancias ASTM en planta con despacho de informes HTML en < 2 segundos",
-    description: "Digitalización industrial integral para O-tek que sustituyó el 100% de planillas en papel por formularios táctiles en Power Apps. Conectada a SharePoint Lists como base inmutable, evalúa desviaciones de espesor en microsegundos y dispara flujos en Power Automate que compilan y despachan reportes ejecutivos en HTML a supervisión en tiempo real.",
+    description: "Digitalización empresarial integral para O-tek que sustituyó el 100% de planillas en papel por formularios táctiles en Power Apps con autenticación de inicio de sesión SSO (Microsoft 365 Entra ID) y permisos RBAC por roles (Operario / Admin). Conectada a SharePoint Lists como base inmutable, evalúa desviaciones de espesor y dispara flujos en Power Automate que compilan y despachan reportes ejecutivos en HTML.",
     image: "/assets/projects/serviintel.png",
-    tags: ["Power Apps Tablet", "SharePoint Lists DB", "Power Automate", "Power BI ETL", "Normas ASTM / ISO", "RBAC Security", "Proyecto Corporativo @ O-tek"],
+    tags: ["Power Apps Tablet", "Login M365 SSO", "SharePoint Lists DB", "Power Automate", "Power BI ETL", "Normas ASTM / ISO", "Seguridad RBAC", "Proyecto Corporativo @ O-tek"],
     demoType: "powerapps",
     githubUrl: null, // Proyecto corporativo interno confidencial
     demoUrl: "#view-otek-powerapps",
@@ -110,19 +110,19 @@ class TicketDispatchRepository {
     bgGradient: "radial-gradient(ellipse 80% 80% at 50% -10%, rgba(14, 165, 233, 0.16), rgba(8, 24, 43, 0.95) 60%, #040c17 100%)",
     ambientColor: "#08182b",
     deviceType: "tablet",
-    themeTag: "INDUSTRIAL QUALITY BLUE",
+    themeTag: "CORPORATE QUALITY BLUE",
     metrics: [
       { label: "Ahorro de Tiempo", val: "-65% de Muestreo" },
-      { label: "Errores de Registro", val: "0% (Validación ASTM)" },
+      { label: "Errores de Registro", val: "Reducción de errores (Validación ASTM)" },
       { label: "Despacho Reportes", val: "< 2s vía Automate" },
-      { label: "Gobernanza de Datos", val: "SharePoint RBAC" }
+      { label: "Gobernanza de Datos", val: "Login M365 & RBAC" }
     ],
     highlights: [
-      "Diseño de interfaz para Tablet en Power Apps optimizado para toma de muestras en planta y laboratorio.",
+      "Autenticación segura de usuario mediante inicio de sesión Microsoft 365 (SSO) con control de acceso por roles (Operario / Administrador).",
+      "Diseño de interfaz empresarial para Tablet en Power Apps optimizado para toma de muestras en planta y laboratorio.",
       "Conexión bidireccional a SharePoint Lists como base de datos con verificación instantánea de tolerancias mínimas y nominales.",
-      "Flujos de Power Automate que generan y despachan reportes con diseño HTML a supervisores en tiempo real al finalizar cada formulario.",
-      "Eliminación total del papel y planillas desincronizadas, facilitando la extracción directa para análisis y KPIs en Power BI.",
-      "Seguridad y control de acceso RBAC protegiendo fórmulas y tolerancias sensibles de la empresa."
+      "Flujos de Power Automate que generan y despachan reportes con diseño HTML a supervisores al finalizar cada formulario.",
+      "Eliminación total del papel y planillas desincronizadas, facilitando la extracción directa para análisis y KPIs en Power BI."
     ],
     architectureFlow: [
       {
@@ -538,7 +538,7 @@ export const skillsList = [
 export const secondaryProjectsData = [
   {
     id: "serviintel-operario",
-    title: "ServiIntel Operarios",
+    title: "Servi Intel Operarios",
     subtitle: "App móvil para operarios de campo",
     category: "App Móvil de Campo & Geolocalización",
     year: "2026",

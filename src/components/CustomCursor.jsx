@@ -18,6 +18,17 @@ export default function CustomCursor() {
     const onMouseMove = (e) => {
       target.current.x = e.clientX;
       target.current.y = e.clientY;
+
+      // Hide custom cursor inside mockups, code viewers, and interactive screens to prevent white circle overlay artifact
+      const isInsideMockup = e.target.closest(
+        '.mockup-interactive, .interactive-screen, .code-viewer-container, [data-prevent-slide], pre, code'
+      );
+
+      if (isInsideMockup) {
+        setVisible(false);
+        return;
+      }
+
       setVisible(true);
 
       const targetEl = e.target.closest('[data-cursor]');
@@ -25,9 +36,9 @@ export default function CustomCursor() {
         setCursorText(targetEl.getAttribute('data-cursor') || '');
         setExpanded(true);
       } else {
-        const isClickable = e.target.closest('button, a, input, [role="button"]');
+        const isInteractive = e.target.closest('a, button, input, select, textarea, [role="button"], .cursor-pointer');
         setCursorText('');
-        setExpanded(Boolean(isClickable));
+        setExpanded(!!isInteractive);
       }
     };
 
@@ -61,7 +72,7 @@ export default function CustomCursor() {
   return (
     <div
       ref={cursorRef}
-      className={`fixed top-0 left-0 pointer-events-none z-[9999] flex items-center justify-center transition-[width,height,opacity,background-color] duration-200 ease-out will-change-transform rounded-full ${
+      className={`fixed top-0 left-0 pointer-events-none z-[9999] flex items-center justify-center transition-[width,height,background-color] duration-200 ease-out will-change-transform rounded-full ${
         visible ? 'opacity-100' : 'opacity-0'
       } ${
         expanded

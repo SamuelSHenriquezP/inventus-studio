@@ -34,7 +34,7 @@ export default function NavigationRail({
   // Organic, asymmetrical constellation coordinates with natural celestial scatter
   const constellationData = useMemo(() => [
     { x: 54, yRel: 0.00, baseR: 3.0 }, // 00 - Inicio
-    { x: 30, yRel: 0.11, baseR: 2.5 }, // 01 - ServiIntel
+    { x: 30, yRel: 0.11, baseR: 2.5 }, // 01 - Servi Intel
     { x: 16, yRel: 0.22, baseR: 3.0 }, // 02 - O-tek Power Apps
     { x: 68, yRel: 0.33, baseR: 3.0 }, // 03 - Sopa Senior
     { x: 84, yRel: 0.44, baseR: 2.5 }, // 04 - LoveCost / Nido
