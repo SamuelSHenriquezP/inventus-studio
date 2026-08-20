@@ -48,14 +48,14 @@ export default function CyberRushPhoneApp() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(244,63,94,0.1)_0,transparent_70%)] pointer-events-none" />
 
       {/* Top HUD */}
-      <div className="flex items-center justify-between text-[10px] z-10 border-b border-rose-500/20 pb-1 px-1">
+      <div className="flex items-center justify-between text-[10px] z-10 border-b border-rose-500/20 pb-1 px-1 font-['JetBrains_Mono',monospace]">
         <div className="flex items-center gap-3">
-          <span className="font-bold text-white tracking-wider">CYBER RUSH WASM</span>
-          <span className="text-cyan-300">120 FPS</span>
+          <span className="font-extrabold text-white tracking-widest">CYBER RUSH WASM</span>
+          <span className="text-cyan-300 font-bold">120 FPS</span>
         </div>
         <div className="flex items-center gap-4">
-          <span>SCORE: <strong className="text-white font-bold">{score}</strong></span>
-          <span className="text-rose-400 font-bold">{combo}x COMBO</span>
+          <span>SCORE: <strong className="text-white font-extrabold">{score}</strong></span>
+          <span className="text-rose-400 font-extrabold">{combo}x COMBO</span>
         </div>
       </div>
 

@@ -160,15 +160,15 @@ export default function AboutStackSection({ isActive = true }) {
             </div>
 
             {/* Kinetic 3D Split Title */}
-            <h2 ref={titleRef} className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight perspective-[1000px] flex items-center gap-2 overflow-hidden py-0.5">
-              <span className="inline-flex">
+            <h2 ref={titleRef} className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight perspective-[1000px] flex items-center gap-2 overflow-visible py-1">
+              <span className="inline-flex overflow-visible">
                 {mainChars.map((ch, i) => (
                   <span key={`amc-${i}`} className="about-title-main-char inline-block will-change-transform text-white">
                     {ch === ' ' ? '\u00A0' : ch}
                   </span>
                 ))}
               </span>
-              <span className="inline-flex ml-2">
+              <span className="inline-flex ml-2 overflow-visible">
                 {hlChars.map((ch, i) => (
                   <span key={`ahc-${i}`} className="about-title-hl-char inline-block will-change-transform text-emerald-400 drop-shadow-[0_0_16px_rgba(52,211,153,0.65)]">
                     {ch}

@@ -231,34 +231,33 @@ export default function ServiIntelWebApp() {
   });
 
   return (
-    <div className="w-full h-full bg-[#F4F7F9] text-[#1E293B] font-sans flex overflow-hidden select-none text-[9px] antialiased">
+    <div className="w-full h-full bg-[#F4F7F9] text-[#1E293B] font-['Plus_Jakarta_Sans',sans-serif] flex overflow-hidden select-none text-[9.5px] antialiased">
       
       {/* ========================================================================= */}
       {/* 1. SIDEBAR (web-admin index.html exact sidebar)                           */}
       {/* ========================================================================= */}
-      <aside className="w-22 sm:w-26 bg-white border-r border-[#E2E8F0] flex flex-col shrink-0 z-10 shadow-2xs font-sans">
+      <aside className="w-22 sm:w-26 bg-white border-r border-[#E2E8F0] flex flex-col shrink-0 z-10 shadow-2xs font-['Plus_Jakarta_Sans',sans-serif]">
         
-        {/* Sidebar Brand Header */}
+        {/* Sidebar Header: Admin */}
         <div className="p-1.5 px-2 flex items-center justify-between border-b border-[#E2E8F0]">
-          <div className="flex items-center gap-1 min-w-0">
-            <div className="w-3.5 h-3.5 rounded-xs bg-[#14AEE1] flex items-center justify-center text-white font-black text-[8px] shrink-0 shadow-2xs">
-              S
+          <div className="flex items-center gap-1.5 min-w-0">
+            <div className="w-4 h-4 rounded-md bg-[#14AEE1] flex items-center justify-center text-white shadow-2xs shrink-0">
+              <Activity className="w-2.5 h-2.5" />
             </div>
-            <div className="text-[9px] font-black tracking-tight text-[#1E293B] flex items-center shrink-0">
-              <span>SERVI</span>
-              <span className="text-[#F3E72E] ml-0.5" style={{ textShadow: '0 0.5px 0 #1E293B' }}>INTEL</span>
-            </div>
+            <span className="text-[12px] font-extrabold tracking-wide text-[#0F172A] font-['Plus_Jakarta_Sans',sans-serif] shrink-0">
+              Admin
+            </span>
           </div>
-          <span className="bg-[#F3E72E] text-[#1E293B] text-[6px] font-black px-1 py-0.2 rounded-xs shrink-0 tracking-wider">
-            ADMIN
+          <span className="bg-[#F3E72E]/20 text-[#854D0E] text-[7.5px] font-extrabold px-1.5 py-0.5 rounded-full shrink-0 tracking-wider font-['Plus_Jakarta_Sans',sans-serif]">
+            WEB
           </span>
         </div>
 
         {/* Navigation Links */}
-        <nav className="p-1 space-y-0.5 flex-1">
+        <nav className="p-1 space-y-0.5 flex-1 font-['Plus_Jakarta_Sans',sans-serif]">
           <button
             onClick={() => setActiveTab('trabajos')}
-            className={`w-full flex items-center gap-1.5 px-1.5 py-1.5 rounded-md text-[8px] font-extrabold transition-all text-left cursor-pointer ${
+            className={`w-full flex items-center gap-1.5 px-1.5 py-1.5 rounded-md text-[9px] font-extrabold transition-all text-left cursor-pointer ${
               activeTab === 'trabajos'
                 ? 'bg-[#14AEE1]/10 text-[#0284C7] shadow-2xs border-l-2 border-[#14AEE1]'
                 : 'text-[#64748B] hover:bg-[#F4F7F9] hover:text-[#1E293B]'
@@ -270,7 +269,7 @@ export default function ServiIntelWebApp() {
 
           <button
             onClick={() => setActiveTab('clientes')}
-            className={`w-full flex items-center gap-1.5 px-1.5 py-1.5 rounded-md text-[8px] font-extrabold transition-all text-left cursor-pointer ${
+            className={`w-full flex items-center gap-1.5 px-1.5 py-1.5 rounded-md text-[9px] font-extrabold transition-all text-left cursor-pointer ${
               activeTab === 'clientes'
                 ? 'bg-[#E71E65]/10 text-[#BE185D] shadow-2xs border-l-2 border-[#E71E65]'
                 : 'text-[#64748B] hover:bg-[#F4F7F9] hover:text-[#1E293B]'
@@ -282,7 +281,7 @@ export default function ServiIntelWebApp() {
 
           <button
             onClick={() => setActiveTab('equipo')}
-            className={`w-full flex items-center gap-1.5 px-1.5 py-1.5 rounded-md text-[8px] font-extrabold transition-all text-left cursor-pointer ${
+            className={`w-full flex items-center gap-1.5 px-1.5 py-1.5 rounded-md text-[9px] font-extrabold transition-all text-left cursor-pointer ${
               activeTab === 'equipo'
                 ? 'bg-[#F3E72E]/20 text-[#854D0E] shadow-2xs border-l-2 border-[#F3E72E]'
                 : 'text-[#64748B] hover:bg-[#F4F7F9] hover:text-[#1E293B]'
@@ -295,12 +294,12 @@ export default function ServiIntelWebApp() {
 
         {/* Sidebar Footer */}
         <div className="p-1 border-t border-[#E2E8F0]">
-          <div className="flex items-center justify-between text-[7px] text-slate-400 font-bold px-1">
+          <div className="flex items-center justify-between text-[7.5px] text-slate-500 font-bold px-1">
             <span className="flex items-center gap-0.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               <span>Online</span>
             </span>
-            <span className="font-mono">v2.4</span>
+            <span className="font-['JetBrains_Mono',monospace] font-bold">v2.4</span>
           </div>
         </div>
       </aside>
@@ -313,10 +312,10 @@ export default function ServiIntelWebApp() {
         {/* Topbar */}
         <header className="bg-white px-2 py-1 border-b border-[#E2E8F0] flex items-center justify-between shadow-2xs shrink-0">
           <div className="flex items-center gap-1.5 truncate">
-            <h2 className="font-black text-[10px] text-[#1E293B] tracking-tight truncate">
+            <h2 className="font-extrabold text-[11px] text-[#0F172A] tracking-tight truncate font-['Plus_Jakarta_Sans',sans-serif]">
               Centro de Control
             </h2>
-            <span className="hidden sm:inline px-1.5 py-0.2 rounded bg-sky-50 text-sky-700 text-[6.5px] font-black uppercase">
+            <span className="hidden sm:inline px-1.5 py-0.5 rounded bg-sky-100/80 text-sky-800 text-[7px] font-extrabold uppercase font-['JetBrains_Mono',monospace] tracking-wider">
               Live Dispatch
             </span>
           </div>
@@ -324,7 +323,7 @@ export default function ServiIntelWebApp() {
           <button
             onClick={handleSyncData}
             disabled={isSyncing}
-            className="bg-[#F3E72E] hover:brightness-95 active:scale-95 text-[#1E293B] px-1.5 py-0.5 rounded font-black text-[7.5px] flex items-center gap-1 transition-all shadow-2xs cursor-pointer shrink-0"
+            className="bg-[#F3E72E] hover:brightness-95 active:scale-95 text-[#1E293B] px-2 py-0.5 rounded font-extrabold text-[8px] flex items-center gap-1 transition-all shadow-2xs cursor-pointer shrink-0 font-['Plus_Jakarta_Sans',sans-serif]"
           >
             <RefreshCw className={`w-2.5 h-2.5 ${isSyncing ? 'animate-spin' : ''}`} />
             <span>{isSyncing ? 'Sync...' : 'Sincronizar'}</span>
