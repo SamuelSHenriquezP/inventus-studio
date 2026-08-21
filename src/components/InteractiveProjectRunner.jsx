@@ -32,13 +32,13 @@ export default function InteractiveProjectRunner({ project, onClose }) {
 
   // Days State
   const [taskIndex, setTaskIndex] = useState(0);
-  const [sortedCounts, setSortedCounts] = useState({ menu: 4, estantes: 2, radar: 5 });
+  const [sortedCounts, setSortedCounts] = useState({ baja: 4, media: 5, alta: 3 });
   const tasksToSwipe = [
     { title: "Definir arquitectura Isar DB offline-first", tag: "⚡ Alta Energía", time: "45m" },
-    { title: "Optimizar Shaders GLSL a SPIR-V para Impeller", tag: "🎯 Foco Profundo", time: "1h 30m" },
-    { title: "Configurar canal WebSocket bidireccional", tag: "🚀 Backend", time: "30m" },
-    { title: "Validar reglas de seguridad RBAC Firestore", tag: "🔒 Seguridad", time: "50m" },
-    { title: "Crear widget de Android Home Screen con Glance", tag: "🌿 Zen Flow", time: "40m" }
+    { title: "Optimizar Shaders GLSL a SPIR-V para Impeller", tag: "⚡ Alta Energía", time: "1h 30m" },
+    { title: "Configurar canal WebSocket bidireccional", tag: "🪵 Media Energía", time: "30m" },
+    { title: "Validar reglas de seguridad RBAC Firestore", tag: "⚡ Alta Energía", time: "50m" },
+    { title: "Crear widget de Android Home Screen con Glance", tag: "🌿 Baja Energía", time: "40m" }
   ];
 
   // Cyber Rush State
@@ -357,25 +357,25 @@ export default function InteractiveProjectRunner({ project, onClose }) {
               {/* Buckets Count & Actions */}
               <div className="grid grid-cols-3 gap-2 font-mono text-xs">
                 <button
-                  onClick={() => handleDaysSwipe('radar')}
+                  onClick={() => handleDaysSwipe('baja')}
                   className="p-3 rounded-xl bg-[#233329] hover:bg-[#2e4336] text-[#FAF8F5] font-bold flex flex-col items-center gap-1 cursor-pointer transition-all border border-[#8B9A86]/20 active:scale-95"
                 >
-                  <span className="text-[10px] text-[#8B9A86]">← MI RADAR</span>
-                  <span className="text-sm font-black">{sortedCounts.radar} tareas</span>
+                  <span className="text-[10px] text-[#6E7D6B] font-extrabold">← BAJA ENERGÍA</span>
+                  <span className="text-sm font-black text-[#6E7D6B]">{sortedCounts.baja} tareas</span>
                 </button>
                 <button
-                  onClick={() => handleDaysSwipe('estantes')}
+                  onClick={() => handleDaysSwipe('media')}
                   className="p-3 rounded-xl bg-[#233329] hover:bg-[#2e4336] text-[#FAF8F5] font-bold flex flex-col items-center gap-1 cursor-pointer transition-all border border-[#8B9A86]/20 active:scale-95"
                 >
-                  <span className="text-[10px] text-[#8B9A86]">↑ LOS ESTANTES</span>
-                  <span className="text-sm font-black">{sortedCounts.estantes} tareas</span>
+                  <span className="text-[10px] text-[#917F72] font-extrabold">↑ MEDIA ENERGÍA</span>
+                  <span className="text-sm font-black text-[#917F72]">{sortedCounts.media} tareas</span>
                 </button>
                 <button
-                  onClick={() => handleDaysSwipe('menu')}
+                  onClick={() => handleDaysSwipe('alta')}
                   className="p-3 rounded-xl bg-[#8B9A86] hover:bg-[#9cb097] text-black font-bold flex flex-col items-center gap-1 cursor-pointer transition-all shadow-md active:scale-95"
                 >
-                  <span className="text-[10px] text-zinc-900 font-extrabold">EL MENÚ →</span>
-                  <span className="text-sm font-black">{sortedCounts.menu} tareas</span>
+                  <span className="text-[10px] text-zinc-900 font-extrabold">ALTA ENERGÍA →</span>
+                  <span className="text-sm font-black text-zinc-900">{sortedCounts.alta} tareas</span>
                 </button>
               </div>
             </div>

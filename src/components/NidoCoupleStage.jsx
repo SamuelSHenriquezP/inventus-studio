@@ -71,7 +71,7 @@ class CoupleSyncService {
 export default function NidoCoupleStage({ project, isActive }) {
   // Shared state between both phones
   const [balance, setBalance] = useState(2450.00);
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [screenMode, setScreenMode] = useState('live-app'); // 'live-app' | 'screenshot' | 'code'
   const [activeCoupleUser, setActiveCoupleUser] = useState('samuel'); // 'samuel' | 'rochy' for mobile/tablet
   const [transactions, setTransactions] = useState([
@@ -247,7 +247,7 @@ class FinancialCashflowService extends ChangeNotifier {
             {screenMode === 'code' ? (
               <div 
                 data-prevent-slide="true"
-                className="w-full max-w-62.5 xl:max-w-71.25 2xl:max-w-75 h-92.5 lg:h-100 xl:h-112.5 2xl:h-122.5 rounded-[28px] bg-zinc-950/95 border border-white/15 p-1 shadow-2xl overflow-hidden relative flex flex-col"
+                className="w-full max-w-52 sm:max-w-64 lg:max-w-[250px] xl:max-w-[290px] 2xl:max-w-[330px] h-84 lg:h-[390px] xl:h-[450px] 2xl:h-[500px] rounded-[28px] bg-zinc-950/95 border border-white/15 p-1 shadow-2xl overflow-hidden relative flex flex-col"
               >
                 <FlutterCodeViewer codeSnippet={cashflowCodeSnippet} accentColor="#0D9488" />
               </div>
@@ -257,7 +257,7 @@ class FinancialCashflowService extends ChangeNotifier {
                 data-prevent-slide="true"
                 onWheel={(e) => e.stopPropagation()}
                 onTouchMove={(e) => e.stopPropagation()}
-                className="mockup-interactive relative w-full max-w-62.5 xl:max-w-71.25 2xl:max-w-75 h-92.5 lg:h-100 xl:h-112.5 2xl:h-122.5 rounded-[30px] xl:rounded-[36px] bg-[#14151a] p-1.5 xl:p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.85)] flex flex-col justify-between select-none"
+                className="mockup-interactive relative w-full max-w-52 sm:max-w-64 lg:max-w-[250px] xl:max-w-[290px] 2xl:max-w-[330px] h-84 lg:h-[390px] xl:h-[450px] 2xl:h-[500px] rounded-[30px] xl:rounded-[36px] bg-[#14151a] p-1.5 xl:p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.85)] flex flex-col justify-between select-none overflow-hidden"
               >
                 {/* Centered Camera Lens Dot */}
                 <div className="absolute top-2 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-black border border-white/10 flex items-center justify-center z-30 pointer-events-none shadow-sm">
@@ -265,7 +265,7 @@ class FinancialCashflowService extends ChangeNotifier {
                 </div>
 
                 {/* Inner Screen */}
-                <div className="w-full h-full rounded-[22px] xl:rounded-[26px] overflow-hidden bg-black border border-white/10 shadow-inner relative interactive-screen">
+                <div className="w-full h-full rounded-[22px] xl:rounded-[26px] overflow-hidden bg-black shadow-inner relative interactive-screen">
                   {screenMode === 'screenshot' ? (
                     <div className="w-full h-full flex flex-col justify-between p-4 bg-linear-to-b from-[#0f172a] via-[#090d16] to-[#04060a] text-white">
                       <div className="pt-6 space-y-3">
@@ -423,7 +423,7 @@ class FinancialCashflowService extends ChangeNotifier {
             {screenMode === 'code' ? (
               <div 
                 data-prevent-slide="true"
-                className="w-full max-w-62.5 xl:max-w-71.25 2xl:max-w-75 h-92.5 lg:h-100 xl:h-112.5 2xl:h-122.5 rounded-[28px] bg-zinc-950/95 border border-white/15 p-1 shadow-2xl overflow-hidden relative flex flex-col"
+                className="w-full max-w-52 sm:max-w-64 lg:max-w-[250px] xl:max-w-[290px] 2xl:max-w-[330px] h-84 lg:h-[390px] xl:h-[450px] 2xl:h-[500px] rounded-[28px] bg-zinc-950/95 border border-white/15 p-1 shadow-2xl overflow-hidden relative flex flex-col"
               >
                 <FlutterCodeViewer codeSnippet={p2pSyncCodeSnippet} accentColor="#00897B" />
               </div>
@@ -433,7 +433,7 @@ class FinancialCashflowService extends ChangeNotifier {
                 data-prevent-slide="true"
                 onWheel={(e) => e.stopPropagation()}
                 onTouchMove={(e) => e.stopPropagation()}
-                className="mockup-interactive relative w-full max-w-62.5 xl:max-w-71.25 2xl:max-w-75 h-92.5 lg:h-100 xl:h-112.5 2xl:h-122.5 rounded-[30px] xl:rounded-[36px] bg-[#14151a] p-1.5 xl:p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.85)] flex flex-col justify-between select-none"
+                className="mockup-interactive relative w-full max-w-52 sm:max-w-64 lg:max-w-[250px] xl:max-w-[290px] 2xl:max-w-[330px] h-84 lg:h-[390px] xl:h-[450px] 2xl:h-[500px] rounded-[30px] xl:rounded-[36px] bg-[#14151a] p-1.5 xl:p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.85)] flex flex-col justify-between select-none overflow-hidden"
               >
                 {/* Centered Camera Lens Dot */}
                 <div className="absolute top-2 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-black border border-white/10 flex items-center justify-center z-30 pointer-events-none shadow-sm">
@@ -441,7 +441,7 @@ class FinancialCashflowService extends ChangeNotifier {
                 </div>
 
                 {/* Inner Screen */}
-                <div className="w-full h-full rounded-[22px] xl:rounded-[26px] overflow-hidden bg-black border border-white/10 shadow-inner relative interactive-screen">
+                <div className="w-full h-full rounded-[22px] xl:rounded-[26px] overflow-hidden bg-black shadow-inner relative interactive-screen">
                   {screenMode === 'screenshot' ? (
                     <div className="w-full h-full flex flex-col justify-between p-4 bg-linear-to-b from-[#1e1b4b] via-[#0f0e26] to-[#070614] text-white">
                       <div className="pt-6 space-y-3">
