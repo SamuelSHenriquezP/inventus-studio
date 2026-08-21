@@ -414,7 +414,7 @@ export default function SopaSeniorApp({ isActive = true }) {
 
   return (
     <div 
-      className="w-full h-full min-h-0 font-sans select-none flex flex-col justify-between overflow-hidden relative transition-colors duration-300 p-2 sm:p-2.5"
+      className="w-full h-full min-h-0 font-sans select-none flex flex-col justify-between overflow-hidden relative transition-colors duration-300 p-1.5 sm:p-2 rounded-2xl sm:rounded-[24px]"
       style={{
         backgroundColor: theme.background,
         color: theme.text
@@ -423,7 +423,7 @@ export default function SopaSeniorApp({ isActive = true }) {
       onMouseLeave={handlePointerUp}
     >
       {/* Top Header Controls: Levels & Theme Palette */}
-      <div className="flex items-center justify-between border-b pb-0.5 pt-2.5 font-mono text-[10px] shrink-0" style={{ borderColor: theme.border }}>
+      <div className="flex items-center justify-between border-b pb-0.5 pt-1.5 font-mono text-[9px] shrink-0" style={{ borderColor: theme.border }}>
         {/* Level Switcher (1 to 5) */}
         <div className="flex items-center gap-0.5">
           {CURATED_LEVELS.map((lvl, idx) => {
@@ -434,9 +434,9 @@ export default function SopaSeniorApp({ isActive = true }) {
                 key={lvl.level}
                 disabled={!isUnlocked}
                 onClick={() => { sounds.playClick(); initLevel(idx); }}
-                className={`w-5 h-5 rounded-md font-extrabold text-[9.5px] flex items-center justify-center transition-all cursor-pointer ${
+                className={`w-4.5 h-4.5 rounded-md font-extrabold text-[8.5px] flex items-center justify-center transition-all cursor-pointer ${
                   isActive 
-                    ? 'scale-110 shadow-xs border'
+                    ? 'scale-105 shadow-xs border'
                     : isUnlocked
                     ? 'hover:scale-105 opacity-80'
                     : 'opacity-30 cursor-not-allowed'
@@ -454,13 +454,13 @@ export default function SopaSeniorApp({ isActive = true }) {
         </div>
 
         {/* Theme Selector */}
-        <div className="flex items-center gap-1 p-0.5 rounded-full border bg-black/5" style={{ borderColor: theme.border }}>
+        <div className="flex items-center gap-0.5 p-0.5 rounded-full border bg-black/5" style={{ borderColor: theme.border }}>
           {MY_THEMES.map((t, idx) => (
             <button
               key={t.id}
               onClick={() => { sounds.playClick(); setThemeIdx(idx); }}
               title={`Tema ${t.name}`}
-              className={`w-3.5 h-3.5 rounded-full border transition-all cursor-pointer ${
+              className={`w-3 h-3 rounded-full border transition-all cursor-pointer ${
                 idx === themeIdx ? 'scale-110 shadow-xs ring-1 ring-amber-400' : 'opacity-60 hover:opacity-100'
               }`}
               style={{ backgroundColor: t.background, borderColor: t.primary }}
@@ -470,41 +470,41 @@ export default function SopaSeniorApp({ isActive = true }) {
       </div>
 
       {/* Level Info Bar */}
-      <div className="flex items-center justify-between py-0.5 font-mono text-[10px] shrink-0">
+      <div className="flex items-center justify-between py-0.5 font-mono text-[9px] shrink-0">
         <div>
-          <div className="text-[8.5px] font-bold opacity-70" style={{ color: theme.primary }}>
+          <div className="text-[7.5px] font-bold opacity-70" style={{ color: theme.primary }}>
             NIVEL {currentLevelConfig.level} DE 5
           </div>
-          <div className="text-[10px] font-black truncate max-w-32.5" style={{ color: theme.text }}>
+          <div className="text-[9px] font-black truncate max-w-28" style={{ color: theme.text }}>
             {currentLevelConfig.title}
           </div>
         </div>
 
-        <div className="flex items-center gap-1.5">
-          <div className="flex items-center gap-0.5 text-[9px] font-bold opacity-85">
-            <Clock className="w-3 h-3 text-amber-500" />
+        <div className="flex items-center gap-1">
+          <div className="flex items-center gap-0.5 text-[8.5px] font-bold opacity-85">
+            <Clock className="w-2.5 h-2.5 text-amber-500" />
             <span>{formatTime(secondsElapsed)}</span>
           </div>
 
           <button
             onClick={handleUseHint}
-            className="px-1.5 py-0.5 rounded-md border font-bold text-[9px] flex items-center gap-0.5 shadow-xs active:scale-95 cursor-pointer"
+            className="px-1 py-0.2 rounded border font-bold text-[8px] flex items-center gap-0.5 shadow-xs active:scale-95 cursor-pointer"
             style={{ backgroundColor: `${theme.accent}20`, borderColor: theme.accent, color: theme.text }}
           >
-            <Lightbulb className="w-3 h-3" style={{ color: theme.accent }} />
+            <Lightbulb className="w-2.5 h-2.5" style={{ color: theme.accent }} />
             <span>{hints}</span>
           </button>
         </div>
       </div>
 
       {/* Target Words Bar */}
-      <div className="flex items-center justify-center gap-1 py-0.5 text-[8.5px] font-mono shrink-0 overflow-x-auto">
+      <div className="flex flex-wrap items-center justify-center gap-1 py-0.5 text-[8.5px] font-mono shrink-0 max-w-full px-0.5">
         {currentLevelConfig.words.map((w) => {
           const isFound = foundWords.includes(w);
           return (
             <span
               key={w}
-              className={`px-1.5 py-0.5 rounded-md border text-[8px] font-bold whitespace-nowrap transition-all ${
+              className={`px-1.5 py-0.5 rounded border text-[8.5px] font-bold whitespace-nowrap transition-all ${
                 isFound 
                   ? 'opacity-60 line-through bg-emerald-500/20 text-emerald-600 border-emerald-500/40 scale-95'
                   : 'bg-black/5 border-black/10'
@@ -520,13 +520,13 @@ export default function SopaSeniorApp({ isActive = true }) {
       </div>
 
       {/* 2D Interactive Drag & Select Letter Grid */}
-      <div className="flex-1 min-h-0 flex flex-col items-center justify-center my-auto overflow-hidden w-full px-0.5">
+      <div className="flex-1 min-h-0 flex flex-col items-center justify-center my-auto overflow-hidden w-full px-0.5 py-0.5">
         {boardData && (
           <div 
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
             onTouchCancel={handleTouchEnd}
-            className="w-full max-w-42 sm:max-w-45 aspect-square grid gap-0.5 p-1 rounded-xl border shadow-lg touch-none select-none"
+            className="w-full max-w-[235px] sm:max-w-[265px] max-h-[98%] aspect-square grid gap-0.5 p-1 sm:p-1.5 rounded-xl border shadow-md touch-none select-none mx-auto"
             style={{
               backgroundColor: theme.surface,
               borderColor: theme.border,
@@ -550,7 +550,7 @@ export default function SopaSeniorApp({ isActive = true }) {
                   onPointerDown={() => handlePointerDown(idx)}
                   onPointerEnter={() => handlePointerEnter(idx)}
                   onTouchStart={(e) => handleTouchStart(idx, e)}
-                  className={`w-full h-full aspect-square rounded-[3px] font-mono text-[9px] sm:text-[10px] font-bold flex items-center justify-center transition-all cursor-pointer select-none touch-none ${
+                  className={`w-full h-full aspect-square rounded-[3px] font-mono text-[9.5px] sm:text-[11px] font-black flex items-center justify-center transition-all cursor-pointer select-none touch-none ${
                     isWordFound
                       ? 'bg-emerald-500 text-white border border-emerald-400 font-extrabold shadow-xs scale-102'
                       : isSelectedLine
@@ -572,62 +572,62 @@ export default function SopaSeniorApp({ isActive = true }) {
       </div>
 
       {/* Bottom Quick Action: Colombian Slang Dictionary */}
-      <div className="pt-0.5 pb-1 border-t shrink-0 flex items-center justify-between text-[8.5px] font-mono" style={{ borderColor: theme.border }}>
+      <div className="pt-0.5 pb-0.5 border-t shrink-0 flex items-center justify-between text-[8px] font-mono" style={{ borderColor: theme.border }}>
         <button
           onClick={() => { sounds.playClick(); setShowDictModal(true); }}
           className="flex items-center gap-1 font-bold hover:underline cursor-pointer"
           style={{ color: theme.primary }}
         >
-          <BookOpen className="w-3 h-3" />
+          <BookOpen className="w-2.5 h-2.5" />
           <span>Diccionario ({unlockedDictionary.length}/5)</span>
         </button>
 
-        <span className="text-[7.5px] opacity-60">Arrastra para conectar</span>
+        <span className="text-[7px] opacity-60">Arrastra para conectar</span>
       </div>
 
       {/* WIN MODAL WITH DICTIONARY UNLOCK & NEXT LEVEL */}
       {showWinModal && (
-        <div className="absolute inset-0 z-50 bg-black/80 backdrop-blur-xs flex items-center justify-center p-2.5 animate-in fade-in duration-200">
+        <div className="absolute inset-0 z-50 bg-black/85 flex items-center justify-center p-2 pt-6 rounded-2xl sm:rounded-[24px] overflow-hidden font-mono animate-in fade-in duration-200">
           <div 
-            className="w-full max-h-[92%] p-3 rounded-2xl border shadow-2xl text-center space-y-2 font-mono flex flex-col justify-between overflow-y-auto custom-scroll"
+            className="w-[85%] max-w-[200px] max-h-[88%] p-2.5 rounded-2xl border shadow-2xl text-center space-y-1.5 flex flex-col justify-between overflow-y-auto custom-scroll"
             style={{ backgroundColor: theme.surface, borderColor: theme.border, color: theme.text }}
           >
-            <div className="w-10 h-10 rounded-full bg-amber-400/20 border border-amber-400/50 flex items-center justify-center mx-auto shadow-md">
-              <Trophy className="w-5 h-5 text-amber-500 animate-bounce" />
+            <div className="w-7 h-7 rounded-full bg-amber-400/20 border border-amber-400/50 flex items-center justify-center mx-auto shadow-xs shrink-0">
+              <Trophy className="w-3.5 h-3.5 text-amber-500 animate-bounce" />
             </div>
 
             <div className="space-y-0.5">
-              <div className="text-xs font-extrabold text-amber-500 uppercase tracking-wide">¡NIVEL COMPLETADO!</div>
-              <div className="text-[9.5px] opacity-70">Tiempo: {formatTime(secondsElapsed)}</div>
+              <div className="text-[9.5px] font-extrabold text-amber-500 uppercase tracking-wide">¡NIVEL COMPLETADO!</div>
+              <div className="text-[8px] opacity-70">Tiempo: {formatTime(secondsElapsed)}</div>
             </div>
 
-            <p className="text-[10px] font-bold text-emerald-600 italic px-1">
+            <p className="text-[8px] font-bold text-emerald-600 italic px-0.5 leading-tight">
               "{MOTIVATIONAL_MESSAGES[activeLevelIdx % MOTIVATIONAL_MESSAGES.length]}"
             </p>
 
             {/* Dictionary Term Unlocked */}
             <div 
-              className="p-2 rounded-xl border text-left space-y-0.5 shadow-inner"
+              className="p-1.5 rounded-xl border text-left space-y-0.5 shadow-inner"
               style={{ backgroundColor: 'rgba(0,0,0,0.03)', borderColor: theme.border }}
             >
-              <div className="text-[8px] font-bold text-amber-600 flex items-center gap-1">
-                <BookOpen className="w-2.5 h-2.5" /> ¡NUEVA FRASE DESBLOQUEADA!
+              <div className="text-[7px] font-bold text-amber-600 flex items-center gap-1">
+                <BookOpen className="w-2 h-2" /> ¡FRASE DESBLOQUEADA!
               </div>
-              <div className="text-[11px] font-extrabold" style={{ color: theme.primary }}>
+              <div className="text-[9.5px] font-extrabold leading-tight" style={{ color: theme.primary }}>
                 {currentLevelConfig.dictionaryUnlock.word}
               </div>
-              <div className="text-[8.5px] leading-tight opacity-80">
+              <div className="text-[7.5px] leading-snug opacity-80">
                 {currentLevelConfig.dictionaryUnlock.meaning}
               </div>
-              <div className="text-[7.5px] text-emerald-600 font-bold pt-0.5">
+              <div className="text-[6.5px] text-emerald-600 font-bold pt-0.5">
                 ✓ Guardado en tu Diccionario
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-1.5 pt-0.5 text-[10px] font-bold">
+            <div className="grid grid-cols-2 gap-1 pt-0.5 text-[8.5px] font-bold shrink-0">
               <button
                 onClick={() => setShowWinModal(false)}
-                className="py-1.5 rounded-xl border cursor-pointer"
+                className="py-1 rounded-lg border cursor-pointer hover:opacity-80 active:scale-95 transition-all"
                 style={{ borderColor: theme.border, color: theme.text }}
               >
                 Cerrar
@@ -640,7 +640,7 @@ export default function SopaSeniorApp({ isActive = true }) {
                     setShowWinModal(false);
                   }
                 }}
-                className="py-1.5 rounded-xl bg-emerald-500 text-white font-extrabold cursor-pointer shadow-md active:scale-95"
+                className="py-1 rounded-lg bg-emerald-500 text-white font-extrabold cursor-pointer shadow-sm active:scale-95 transition-all"
               >
                 {activeLevelIdx < CURATED_LEVELS.length - 1 ? 'Siguiente →' : '¡Fin!'}
               </button>
@@ -652,11 +652,11 @@ export default function SopaSeniorApp({ isActive = true }) {
       {/* DICTIONARY VIEW (FULL-SCREEN FLUID APP VIEW) */}
       {showDictModal && (
         <div 
-          className="absolute inset-0 z-50 flex flex-col justify-between p-2.5 sm:p-3 font-mono animate-in fade-in duration-200"
+          className="absolute inset-0 z-50 flex flex-col justify-between p-2.5 sm:p-3 rounded-2xl sm:rounded-[24px] overflow-hidden font-mono animate-in fade-in duration-200"
           style={{ backgroundColor: theme.background, color: theme.text }}
         >
           {/* Header */}
-          <div className="flex items-center justify-between border-b pb-1.5 pt-3.5 text-xs shrink-0" style={{ borderColor: theme.border }}>
+          <div className="flex items-center justify-between border-b pb-1.5 pt-1.5 text-xs shrink-0" style={{ borderColor: theme.border }}>
             <div className="flex items-center gap-1.5">
               <BookOpen className="w-3.5 h-3.5" style={{ color: theme.primary }} />
               <span className="font-extrabold text-[11px]">Diccionario ({unlockedDictionary.length}/5)</span>

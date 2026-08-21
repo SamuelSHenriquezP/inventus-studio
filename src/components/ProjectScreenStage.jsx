@@ -535,7 +535,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                 <div className="col-span-4 flex justify-center py-0.5">
                   <div 
                     data-prevent-slide="true"
-                    className="mockup-interactive relative w-full max-w-36 xl:max-w-44 2xl:max-w-50 aspect-9/11.5 rounded-2xl bg-linear-to-b from-[#2a2f42] via-[#161822] to-[#0b0d13] p-1.5 border border-white/20 shadow-[0_15px_35px_rgba(0,0,0,0.85)] group transition-all duration-300"
+                    className="mockup-interactive relative w-full max-w-36 lg:max-w-44 xl:max-w-50 2xl:max-w-56 aspect-9/12 rounded-2xl bg-linear-to-b from-[#2a2f42] via-[#161822] to-[#0b0d13] p-1.5 border border-white/20 shadow-[0_15px_35px_rgba(0,0,0,0.85)] group transition-all duration-300 overflow-hidden"
                   >
                     {/* Dynamic Island Pill */}
                     <div className="absolute top-1 left-1/2 -translate-x-1/2 w-10 h-1.5 rounded-full bg-black border border-white/10 flex items-center justify-between px-1.5 z-30 pointer-events-none">
@@ -545,9 +545,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                       </div>
                     </div>
 
-                    <div className="absolute inset-0 rounded-2xl bg-linear-to-tr from-transparent via-white/4 to-transparent pointer-events-none z-30" />
-
-                    <div className="relative w-full h-full rounded-xl overflow-hidden bg-[#07090e] border border-white/10 shadow-inner interactive-screen">
+                    <div className="relative w-full h-full rounded-xl overflow-hidden bg-[#07090e] shadow-inner interactive-screen">
                       <ServiIntelOperarioApp />
                     </div>
                   </div>
@@ -578,7 +576,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                 <div className="col-span-4 flex justify-center py-0.5">
                   <div 
                     data-prevent-slide="true"
-                    className="mockup-interactive relative w-full max-w-56 xl:max-w-68 2xl:max-w-76 flex flex-col items-center group transition-all duration-300"
+                    className="mockup-interactive relative w-full max-w-56 lg:max-w-[300px] xl:max-w-[360px] 2xl:max-w-[420px] flex flex-col items-center group transition-all duration-300"
                   >
                     {/* Display Chassis */}
                     <div className="relative w-full aspect-16/10 rounded-xl bg-linear-to-b from-[#1c1f2c] via-[#141722] to-[#0f1118] p-1.5 border border-white/20 shadow-[0_15px_35px_rgba(0,0,0,0.85)] overflow-hidden">
@@ -734,7 +732,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                 <div className="flex justify-center py-0.5">
                   <div 
                     data-prevent-slide="true"
-                    className="mockup-interactive relative w-full max-w-47.5 sm:max-w-52.5 aspect-9/11.5 rounded-2xl bg-linear-to-b from-[#2a2f42] via-[#161822] to-[#0b0d13] p-1.5 border border-white/20 shadow-2xl"
+                    className="mockup-interactive relative w-full max-w-52 sm:max-w-64 aspect-9/13 rounded-2xl bg-linear-to-b from-[#2a2f42] via-[#161822] to-[#0b0d13] p-1.5 border border-white/20 shadow-2xl"
                   >
                     {/* Dynamic Island */}
                     <div className="absolute top-1 left-1/2 -translate-x-1/2 w-10 h-1.5 rounded-full bg-black border border-white/10 flex items-center justify-between px-1.5 z-30 pointer-events-none">
@@ -793,7 +791,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                 <div className="flex justify-center py-0.5">
                   <div 
                     data-prevent-slide="true"
-                    className="mockup-interactive relative w-full max-w-67.5 sm:max-w-75 flex flex-col items-center"
+                    className="mockup-interactive relative w-full max-w-72 sm:max-w-96 flex flex-col items-center"
                   >
                     <div className="relative w-full aspect-16/10 rounded-xl bg-linear-to-b from-[#1c1f2c] via-[#141722] to-[#0f1118] p-1.5 border border-white/20 shadow-2xl overflow-hidden">
                       <div className="absolute top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-black border border-white/15 flex items-center justify-center z-30 pointer-events-none">

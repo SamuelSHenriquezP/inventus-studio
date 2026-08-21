@@ -77,18 +77,15 @@ export default function RealisticDevice3D({
           {isTablet ? (
             <div 
               data-prevent-slide="true"
-              className="mockup-interactive relative w-full max-w-47.5 sm:max-w-67.5 lg:max-w-97.5 xl:max-w-112.5 max-h-[18vh] sm:max-h-[26vh] lg:max-h-[34vh] xl:max-h-[40vh] aspect-16/10 rounded-xl sm:rounded-3xl bg-[#151720] p-1 sm:p-2 xl:p-2.5 border border-sky-500/30 shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col justify-between"
+              className="mockup-interactive relative w-full max-w-48 sm:max-w-64 md:max-w-80 lg:max-w-[360px] xl:max-w-[440px] 2xl:max-w-[500px] max-h-[18vh] sm:max-h-[24vh] lg:max-h-[32vh] xl:max-h-[36vh] 2xl:max-h-[40vh] aspect-16/10 rounded-xl sm:rounded-3xl bg-[#151720] p-1 sm:p-2 xl:p-2.5 border border-sky-500/30 shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col justify-between"
             >
-              {/* Static Specular Glass Glare */}
-              <div className="absolute inset-0 bg-linear-to-tr from-transparent via-white/4 to-transparent pointer-events-none z-30" />
-              
               {/* Front Camera Dot */}
               <div className="absolute top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-black border border-white/10 flex items-center justify-center z-30 pointer-events-none">
                 <div className="w-0.5 h-0.5 rounded-full bg-sky-400/50" />
               </div>
 
               {/* Inner Screen */}
-              <div className="relative w-full h-full rounded-lg sm:rounded-2xl overflow-hidden bg-black border border-white/10 shadow-inner interactive-screen">
+              <div className="relative w-full h-full rounded-lg sm:rounded-2xl overflow-hidden bg-black shadow-inner interactive-screen">
                 {screenMode === 'live-app' ? (
                   <OtekPowerApp isActive={isActive} />
                 ) : (
@@ -106,20 +103,17 @@ export default function RealisticDevice3D({
             /* ========================================================================= */
             <div 
               data-prevent-slide="true"
-              className="mockup-interactive relative w-full max-w-47.5 sm:max-w-67.5 lg:max-w-97.5 xl:max-w-110 flex flex-col items-center"
+              className="mockup-interactive relative w-full max-w-48 sm:max-w-64 md:max-w-80 lg:max-w-[380px] xl:max-w-[460px] 2xl:max-w-[520px] flex flex-col items-center"
             >
               {/* Display Chassis */}
-              <div className="relative w-full max-h-[18vh] sm:max-h-[26vh] lg:max-h-[34vh] xl:max-h-[40vh] aspect-16/10 rounded-xl sm:rounded-2xl bg-[#18191e] p-1 sm:p-2 xl:p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.85)] overflow-hidden">
-                {/* Static Specular Glass Glare */}
-                <div className="absolute inset-0 bg-linear-to-tr from-transparent via-white/4 to-transparent pointer-events-none z-30" />
-                
+              <div className="relative w-full max-h-[18vh] sm:max-h-[24vh] lg:max-h-[32vh] xl:max-h-[36vh] 2xl:max-h-[40vh] aspect-16/10 rounded-xl sm:rounded-2xl bg-[#18191e] p-1 sm:p-2 xl:p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.85)] overflow-hidden">
                 {/* Camera Notch */}
                 <div className="absolute top-1 left-1/2 -translate-x-1/2 w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-black border border-white/10 flex items-center justify-center z-30 pointer-events-none">
                   <div className="w-0.5 h-0.5 rounded-full bg-emerald-500/40" />
                 </div>
 
                 {/* Inner Screen */}
-                <div className="relative w-full h-full rounded-lg sm:rounded-xl overflow-hidden bg-black border border-white/10 shadow-inner interactive-screen">
+                <div className="relative w-full h-full rounded-lg sm:rounded-xl overflow-hidden bg-black shadow-inner interactive-screen">
                   {screenMode === 'live-app' ? (
                     <ServiIntelLaptopApp isActive={isActive} />
                   ) : (
@@ -143,10 +137,9 @@ export default function RealisticDevice3D({
             /* ========================================================================= */
             <div 
               data-prevent-slide="true"
-              className="mockup-interactive relative w-full max-w-48.75 sm:max-w-67.5 lg:max-w-95 xl:max-w-107.5 max-h-[17vh] sm:max-h-[25vh] lg:max-h-[33vh] xl:max-h-[38vh] aspect-18.8/9 rounded-2xl sm:rounded-4xl bg-[#16171d] p-1 sm:p-2 xl:p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.85)]"
+              className="mockup-interactive relative w-full max-w-48 sm:max-w-64 md:max-w-80 lg:max-w-[360px] xl:max-w-[440px] 2xl:max-w-[500px] max-h-[16vh] sm:max-h-[22vh] lg:max-h-[30vh] xl:max-h-[34vh] 2xl:max-h-[38vh] aspect-18.8/9 rounded-2xl sm:rounded-4xl bg-[#16171d] p-1 sm:p-2 xl:p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.85)] overflow-hidden"
             >
-              <div className="absolute inset-0 rounded-xl sm:rounded-[28px] bg-linear-to-tr from-transparent via-white/4 to-transparent pointer-events-none z-30" />
-              <div className="relative w-full h-full rounded-lg sm:rounded-3xl overflow-hidden bg-black border border-white/10 flex flex-col justify-between shadow-inner interactive-screen">
+              <div className="relative w-full h-full rounded-lg sm:rounded-3xl overflow-hidden bg-black flex flex-col justify-between shadow-inner interactive-screen">
                 {screenMode === 'live-app' ? (
                   <CyberRushPhoneApp isActive={isActive} />
                 ) : (
@@ -164,12 +157,9 @@ export default function RealisticDevice3D({
             /* ========================================================================= */
             <div 
               data-prevent-slide="true"
-              className="mockup-interactive relative w-full max-w-35 sm:max-w-46.25 lg:max-w-57.5 xl:max-w-62.5 max-h-[30vh] sm:max-h-[40vh] lg:max-h-[50vh] xl:max-h-[54vh] aspect-9/19 rounded-[22px] sm:rounded-[36px] bg-[#15161c] p-1 sm:p-2 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex flex-col justify-between overflow-hidden"
+              className="mockup-interactive relative w-full max-w-36 sm:max-w-44 md:max-w-52 lg:max-w-[240px] xl:max-w-[280px] 2xl:max-w-[320px] max-h-[28vh] sm:max-h-[36vh] lg:max-h-[44vh] xl:max-h-[48vh] 2xl:max-h-[52vh] aspect-9/19 rounded-[22px] sm:rounded-[36px] bg-[#15161c] p-1 sm:p-2 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex flex-col justify-between overflow-hidden"
             >
-              {/* Static Glass Specular Tone */}
-              <div className="absolute inset-0 rounded-[18px] sm:rounded-4xl bg-linear-to-tr from-transparent via-white/4 to-transparent pointer-events-none z-30" />
-              
-              <div className="relative w-full h-full min-h-0 rounded-2xl sm:rounded-[26px] overflow-hidden bg-black border border-white/10 flex flex-col justify-between shadow-inner interactive-screen">
+              <div className="relative w-full h-full min-h-0 rounded-2xl sm:rounded-[26px] overflow-hidden bg-black flex flex-col justify-between shadow-inner interactive-screen">
                 {/* Dynamic Island */}
                 <div className="absolute top-1 left-1/2 -translate-x-1/2 w-10 sm:w-14 h-1.5 sm:h-2.5 bg-black rounded-full border border-white/10 flex items-center justify-between px-1 z-30 pointer-events-none">
                   <div className="w-0.5 sm:w-1 h-0.5 sm:h-1 rounded-full bg-white/40" />
@@ -177,7 +167,7 @@ export default function RealisticDevice3D({
                 </div>
 
                 {/* Inner Screen */}
-                <div className="w-full h-full min-h-0 overflow-hidden relative flex flex-col">
+                <div className="w-full h-full min-h-0 overflow-hidden relative flex flex-col rounded-2xl sm:rounded-[24px]">
                   {screenMode === 'live-app' ? (
                     projectId === 'days-focus-flow' ? (
                       <DaysPhoneApp isActive={isActive} />
