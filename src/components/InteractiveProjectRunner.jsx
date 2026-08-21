@@ -160,7 +160,7 @@ export default function InteractiveProjectRunner({ project, onClose }) {
       data-prevent-slide="true"
       onWheel={(e) => e.stopPropagation()}
       onTouchMove={(e) => e.stopPropagation()}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 animate-in fade-in duration-200 select-none modal-container"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 md:p-8 animate-in fade-in duration-200 select-none modal-container"
     >
       
       {/* Backdrop */}
@@ -173,11 +173,11 @@ export default function InteractiveProjectRunner({ project, onClose }) {
       <div 
         data-prevent-slide="true"
         onWheel={(e) => e.stopPropagation()}
-        className="relative w-full max-w-3xl bg-[#0f0f13] border border-white/15 rounded-3xl p-6 sm:p-8 z-10 shadow-2xl space-y-6 max-h-[92vh] overflow-y-auto font-sans text-zinc-100"
+        className="relative w-full max-w-3xl bg-[#0f0f13] border border-white/15 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 z-10 shadow-2xl space-y-4 sm:space-y-6 max-h-[90vh] overflow-y-auto custom-scroll font-sans text-zinc-100"
       >
         
         {/* Top Header */}
-        <div className="flex items-center justify-between border-b border-white/10 pb-4">
+        <div className="flex items-center justify-between border-b border-white/10 pb-3 sm:pb-4">
           <div className="flex items-center gap-3">
             <span 
               className="text-xs font-mono font-bold px-3 py-1 rounded-full uppercase tracking-wider"
@@ -304,7 +304,7 @@ export default function InteractiveProjectRunner({ project, onClose }) {
 
           {/* 3. O-TEK QUALITY CONTROL POWER APPS RUNNER */}
           {project.id === 'otek-powerapps' && (
-            <div className="rounded-2xl border border-sky-500/30 overflow-hidden bg-[#071320] shadow-2xl h-[560px] flex flex-col">
+            <div className="rounded-2xl border border-sky-500/30 overflow-hidden bg-[#071320] shadow-2xl h-140 flex flex-col">
               <OtekPowerApp />
             </div>
           )}
@@ -324,7 +324,7 @@ export default function InteractiveProjectRunner({ project, onClose }) {
                   <ArrowRight className="w-3 h-3" />
                 </a>
               </div>
-              <div className="w-[320px] sm:w-[350px] h-[520px] rounded-3xl overflow-hidden shadow-2xl border border-amber-500/30">
+              <div className="w-[320px] sm:w-87.5 h-130 rounded-3xl overflow-hidden shadow-2xl border border-amber-500/30">
                 <SopaSeniorApp />
               </div>
             </div>

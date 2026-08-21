@@ -116,20 +116,20 @@ export default function ContactSection({ isActive = true }) {
     <section 
       id="contacto"
       ref={footerRef}
-      className="w-full h-full min-h-screen flex flex-col justify-center px-6 sm:px-10 md:px-16 lg:px-24 pt-24 pb-16 relative select-none overflow-y-auto"
+      className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-12 sm:pt-20 pb-12 sm:pb-16 relative select-none overflow-y-auto custom-scroll"
       style={{
         background: 'radial-gradient(ellipse 100% 100% at 50% 85%, #05140d 0%, #030a07 55%, #020503 100%)'
       }}
     >
       {/* Subtle Ambient Glow */}
-      <div className="absolute bottom-10 left-1/3 w-125 h-125 bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none -z-10" />
+      <div className="absolute bottom-10 left-1/3 w-96 sm:w-125 h-96 sm:h-125 bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none -z-10" />
 
-      <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-10 perspective-[1000px]">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 sm:gap-12">
+      <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-3 sm:space-y-6 perspective-[1000px]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-10">
           
-          <div className="space-y-4 max-w-2xl">
+          <div className="space-y-3 sm:space-y-4 max-w-2xl">
             {/* Pulsing Availability Badge */}
-            <div className="contact-badge-anim inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs font-mono text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+            <div className="contact-badge-anim inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs font-mono text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
@@ -138,10 +138,10 @@ export default function ContactSection({ isActive = true }) {
             </div>
 
             {/* Kinetic 3D Split Title with Non-Breaking Words */}
-            <h2 ref={titleRef} className="text-3xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight leading-[1.08] perspective-[1000px]">
-              <span className="block overflow-hidden py-0.5">
+            <h2 ref={titleRef} className="text-xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight leading-[1.12] perspective-[1000px]">
+              <span className="flex flex-wrap items-baseline py-0.5">
                 {line1Text.split(' ').map((word, wIdx) => (
-                  <span key={`w1-${wIdx}`} className="inline-block whitespace-nowrap mr-2.5 sm:mr-3.5">
+                  <span key={`w1-${wIdx}`} className="inline-block whitespace-nowrap mr-1.5 sm:mr-3">
                     {word.split('').map((char, cIdx) => (
                       <span key={`l1-${wIdx}-${cIdx}`} className="contact-line1-char inline-block will-change-transform text-white">
                         {char}
@@ -150,9 +150,9 @@ export default function ContactSection({ isActive = true }) {
                   </span>
                 ))}
               </span>
-              <span className="block overflow-hidden py-0.5 mt-1">
+              <span className="flex flex-wrap items-baseline py-0.5 mt-0.5">
                 {line2Text.split(' ').map((word, wIdx) => (
-                  <span key={`w2-${wIdx}`} className="inline-block whitespace-nowrap mr-2.5 sm:mr-3.5">
+                  <span key={`w2-${wIdx}`} className="inline-block whitespace-nowrap mr-1.5 sm:mr-3">
                     {word.split('').map((char, cIdx) => (
                       <span key={`l2-${wIdx}-${cIdx}`} className="contact-line2-char inline-block will-change-transform text-emerald-400 drop-shadow-[0_0_18px_rgba(52,211,153,0.55)]">
                         {char}
@@ -163,19 +163,19 @@ export default function ContactSection({ isActive = true }) {
               </span>
             </h2>
 
-            <p className="contact-text-anim text-sm sm:text-base text-zinc-300 font-sans max-w-lg leading-relaxed">
+            <p className="contact-text-anim text-xs sm:text-sm md:text-base text-zinc-300 font-sans max-w-lg leading-relaxed">
               Disponible para desarrollo de aplicaciones móviles nativas en Flutter, arquitecturas cloud con Firebase y plataformas de software a medida de alto impacto.
             </p>
           </div>
 
           {/* Action CTAs */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 font-mono text-xs">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 font-mono text-xs">
             <a
               href={`https://wa.me/${personalInfo.whatsapp}?text=Hola%20${encodeURIComponent(personalInfo.name)},%20quiero%20conversar%20sobre%20un%20proyecto`}
               target="_blank"
               rel="noreferrer"
               onClick={() => sounds.playClick()}
-              className="contact-action-anim px-8 py-4 rounded-full bg-emerald-400 text-black font-bold flex items-center justify-center gap-2.5 hover:bg-emerald-300 transition-all cursor-pointer shadow-[0_0_25px_rgba(52,211,153,0.4)] active:scale-95 text-xs group hover:shadow-[0_0_35px_rgba(52,211,153,0.6)]"
+              className="contact-action-anim px-6 py-3 sm:px-7 sm:py-3.5 rounded-full bg-emerald-400 text-black font-bold flex items-center justify-center gap-2 hover:bg-emerald-300 transition-all cursor-pointer shadow-[0_0_25px_rgba(52,211,153,0.4)] active:scale-95 text-xs group hover:shadow-[0_0_35px_rgba(52,211,153,0.6)]"
               data-cursor="WHATSAPP"
             >
               <svg viewBox="0 0 24 24" className="w-4 h-4 text-black fill-black transition-transform group-hover:scale-110" fill="currentColor">
@@ -187,7 +187,7 @@ export default function ContactSection({ isActive = true }) {
 
             <button
               onClick={copyEmail}
-              className="contact-action-anim px-7 py-4 rounded-full bg-white/5 border border-white/20 text-white font-medium flex items-center justify-center gap-2 hover:bg-white/10 hover:border-white/40 transition-all cursor-pointer text-xs active:scale-95"
+              className="contact-action-anim px-5 py-3 sm:px-6 sm:py-3.5 rounded-full bg-white/5 border border-white/20 text-white font-medium flex items-center justify-center gap-2 hover:bg-white/10 hover:border-white/40 transition-all cursor-pointer text-xs active:scale-95"
               data-cursor="COPY"
             >
               {copiedEmail ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
@@ -198,18 +198,18 @@ export default function ContactSection({ isActive = true }) {
         </div>
 
         {/* Footer Metadata */}
-        <div className="contact-footer-bar pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-zinc-400">
+        <div className="contact-footer-bar pt-6 sm:pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 font-mono text-[11px] sm:text-xs text-zinc-400">
           <div>
             © {new Date().getFullYear()} {personalInfo.name} — {personalInfo.studio}. Todos los derechos reservados.
           </div>
           
-          <div className="flex items-center gap-4 text-zinc-300">
+          <div className="flex items-center gap-3 sm:gap-4 text-zinc-300">
             <span className="flex items-center gap-1.5 text-white">
               <span className="w-2 h-2 rounded-full bg-emerald-400" />
               DISPONIBLE
             </span>
             <span>•</span>
-            <span className="flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/3 border border-white/10">
+            <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/3 border border-white/10">
               <Clock className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
               <span className="font-mono text-emerald-300">CARTAGENA: {localTime || '12:00:00'} (GMT-5)</span>
             </span>

@@ -50,10 +50,10 @@ export default function CinematicTitle({
   return (
     <h2 
       ref={titleRef} 
-      className={`${className} perspective-[1000px] select-none`}
+      className={`${className} perspective-[1000px] select-none flex flex-wrap items-baseline gap-y-1`}
     >
       {words.map((word, wIdx) => (
-        <span key={wIdx} className="inline-block whitespace-nowrap mr-3 sm:mr-4 overflow-visible">
+        <span key={wIdx} className="inline-block whitespace-nowrap mr-1.5 sm:mr-3 overflow-visible">
           {word.split('').map((char, cIdx) => (
             <span
               key={cIdx}

@@ -50,19 +50,19 @@ export default function App() {
       {/* ========================================================================= */}
       {/* NAVBAR / HEADER */}
       {/* ========================================================================= */}
-      <header className="fixed top-0 left-0 right-0 z-40 py-4 sm:py-5 bg-zinc-950/60 backdrop-blur-xl border-b border-white/10 transition-all duration-500">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 flex items-center justify-between">
+      <header className="fixed top-0 left-0 right-0 z-40 py-2.5 sm:py-4 bg-zinc-950/80 backdrop-blur-xl border-b border-white/10 transition-all duration-500">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 md:px-10 flex items-center justify-between">
           
           {/* Brand Logo */}
           <button 
             onClick={() => handleSelectSection(0)}
-            className="flex items-center gap-2.5 group cursor-pointer text-left" 
+            className="flex items-center gap-2 group cursor-pointer text-left" 
             data-cursor="INICIO"
           >
             <span 
-              className="w-2 h-2 rounded-full transition-all duration-500 bg-white group-hover:scale-125"
+              className="w-2 h-2 rounded-full transition-all duration-500 bg-white group-hover:scale-125 shrink-0"
             />
-            <span className="font-display font-extrabold text-base sm:text-lg tracking-tight text-white">
+            <span className="font-display font-extrabold text-sm sm:text-base md:text-lg tracking-tight text-white whitespace-nowrap">
               {personalInfo.studio}
             </span>
             <span className="text-[12px] font-mono text-zinc-400 hidden sm:inline">
@@ -120,25 +120,25 @@ export default function App() {
           </nav>
 
           {/* Direct WhatsApp CTA */}
-          <div className="flex items-center gap-3 font-mono text-xs">
+          <div className="flex items-center gap-2 sm:gap-3 font-mono text-xs">
             <a
               href={`https://wa.me/${personalInfo.whatsapp}?text=Hola%20${encodeURIComponent(personalInfo.name)},%20vi%20tu%20portafolio%20y%20quiero%20cotizar%20un%20proyecto`}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-white text-black font-bold hover:bg-zinc-200 transition-all shadow-md active:scale-95 text-xs"
+              className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white text-black font-bold hover:bg-zinc-200 transition-all shadow-md active:scale-95 text-xs whitespace-nowrap"
               data-cursor="WHATSAPP"
             >
-              <MessageSquare className="w-3.5 h-3.5 fill-black" />
+              <MessageSquare className="w-3.5 h-3.5 fill-black shrink-0" />
               <span>Conversar</span>
             </a>
 
             {/* Mobile Menu Trigger */}
             <button
               onClick={() => { sounds.playClick(); setMobileMenuOpen(!mobileMenuOpen); }}
-              className="md:hidden p-2 rounded-full bg-zinc-900 border border-white/10 text-zinc-300"
+              className="md:hidden p-1.5 sm:p-2 rounded-full bg-zinc-900 border border-white/10 text-zinc-300 cursor-pointer"
               aria-label="Abrir Menú"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <X className="w-4 h-4 sm:w-5 sm:h-5" /> : <Menu className="w-4 h-4 sm:w-5 sm:h-5" />}
             </button>
           </div>
 

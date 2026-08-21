@@ -73,6 +73,7 @@ export default function NidoCoupleStage({ project, isActive }) {
   const [balance, setBalance] = useState(2450.00);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [screenMode, setScreenMode] = useState('live-app'); // 'live-app' | 'screenshot' | 'code'
+  const [activeCoupleUser, setActiveCoupleUser] = useState('samuel'); // 'samuel' | 'rochy' for mobile/tablet
   const [transactions, setTransactions] = useState([
     { id: 1, title: 'Mercado Semanal', category: 'Hogar', amount: -64.50, author: 'Samuel', time: '10:24 AM' },
     { id: 2, title: 'Café de Especialidad', category: 'Personal', amount: -4.80, author: 'Rochy', time: '8:15 AM' },
@@ -159,30 +160,30 @@ class FinancialCashflowService extends ChangeNotifier {
   };
 
   return (
-    <div id="nido-couple-stage" className="w-full h-full min-h-screen flex flex-col justify-center px-4 sm:px-8 lg:px-12 pt-20 pb-12 relative select-none overflow-hidden text-zinc-100 font-sans">
+    <div id="nido-couple-stage" className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 lg:px-12 pt-12 sm:pt-20 pb-12 sm:pb-16 relative select-none overflow-y-auto custom-scroll text-zinc-100 font-sans">
       
-      {/* VIBRANT AMBIENT BACKGROUND GLOWS RESTORED */}
-      <div className="absolute top-1/4 left-1/12 w-[500px] h-[500px] bg-gradient-to-tr from-[#0D9488]/25 via-emerald-500/15 to-transparent rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/12 w-[500px] h-[500px] bg-gradient-to-bl from-rose-500/20 via-indigo-600/15 to-transparent rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#0D9488]/10 rounded-full blur-3xl pointer-events-none" />
+      {/* VIBRANT AMBIENT BACKGROUND GLOWS */}
+      <div className="absolute top-1/4 left-1/12 w-96 sm:w-125 h-96 sm:h-125 bg-linear-to-tr from-[#0D9488]/25 via-emerald-500/15 to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/12 w-96 sm:w-125 h-96 sm:h-125 bg-linear-to-bl from-rose-500/20 via-indigo-600/15 to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-175 h-87.5 bg-[#0D9488]/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-5 relative z-10">
+      <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-2 sm:space-y-4 relative z-10">
 
         {/* Section Header */}
-        <div className="w-full flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-white/15 shrink-0 font-mono text-xs text-zinc-400">
-          <div className="flex items-center gap-3">
+        <div className="w-full flex flex-wrap items-center justify-between gap-2 pb-2 sm:pb-2.5 border-b border-white/15 shrink-0 font-mono text-xs text-zinc-400">
+          <div className="flex items-center gap-2.5 sm:gap-3">
             <span className="font-bold tracking-widest text-[#0D9488]">04 // LOVECOST / NIDO</span>
             <span className="text-zinc-600 hidden sm:inline">•</span>
-            <span className="text-zinc-300 hidden sm:inline">Aplicación Móvil Financiera en Pareja</span>
+            <span className="text-zinc-300 hidden sm:inline text-[11px] sm:text-xs">Aplicación Móvil Financiera en Pareja</span>
           </div>
 
           {/* Minimalist Segmented Controls Bar (App Interactiva | Captura Real | Código Dart) */}
-          <div className="flex items-center gap-1 p-1 rounded-full bg-zinc-900/90 border border-white/10 backdrop-blur-md shadow-xl z-30 text-[11px]">
+          <div className="flex items-center gap-1 p-1 rounded-full bg-zinc-900/90 border border-white/10 backdrop-blur-md shadow-xl z-30 text-[10px] sm:text-[11px]">
             <button
               type="button"
               data-prevent-slide="true"
               onClick={() => setScreenMode('live-app')}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-full transition-all cursor-pointer ${
+              className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full transition-all cursor-pointer ${
                 screenMode === 'live-app' 
                   ? 'bg-white text-black font-semibold shadow-sm' 
                   : 'text-zinc-400 hover:text-white'
@@ -196,7 +197,7 @@ class FinancialCashflowService extends ChangeNotifier {
               type="button"
               data-prevent-slide="true"
               onClick={() => setScreenMode('screenshot')}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-full transition-all cursor-pointer ${
+              className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full transition-all cursor-pointer ${
                 screenMode === 'screenshot' 
                   ? 'bg-white text-black font-semibold shadow-sm' 
                   : 'text-zinc-400 hover:text-white'
@@ -210,7 +211,7 @@ class FinancialCashflowService extends ChangeNotifier {
               type="button"
               data-prevent-slide="true"
               onClick={() => setScreenMode('code')}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-full transition-all cursor-pointer ${
+              className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full transition-all cursor-pointer ${
                 screenMode === 'code' 
                   ? 'bg-white text-black font-semibold shadow-sm' 
                   : 'text-zinc-400 hover:text-white'
@@ -221,22 +222,24 @@ class FinancialCashflowService extends ChangeNotifier {
             </button>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <button
               onClick={() => setIsDarkMode(!isDarkMode)}
-              className="px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-zinc-200 text-xs font-mono font-bold flex items-center gap-1.5 cursor-pointer transition-all active:scale-95"
+              className="px-2.5 sm:px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-zinc-200 text-[10.5px] sm:text-xs font-mono font-bold flex items-center gap-1.5 cursor-pointer transition-all active:scale-95"
             >
               <span>{isDarkMode ? '☀️ Modo Claro' : '🌙 Modo Oscuro'}</span>
             </button>
           </div>
         </div>
 
-        {/* 3-COLUMN DUAL PHONE LAYOUT: Phone A (LEFT) | Center Tech & Narrative | Phone B (RIGHT) */}
-        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 items-center pt-2">
+        {/* ========================================================================= */}
+        {/* DESKTOP VIEW (lg:grid): BALANCED 3-COLUMN DUAL PHONE LAYOUT */}
+        {/* ========================================================================= */}
+        <div className="hidden lg:grid lg:grid-cols-12 gap-3 xl:gap-5 items-center pt-0.5">
 
           {/* LEFT COLUMN: Phone A - Samuel OR Code Window A */}
-          <div className="lg:col-span-3 flex flex-col items-center justify-center space-y-2.5">
-            <div className="flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/15 text-zinc-300 text-xs font-mono font-bold shadow-lg backdrop-blur-md">
+          <div className="col-span-3 flex flex-col items-center justify-center space-y-1.5">
+            <div className="flex items-center gap-2 px-3 py-0.5 rounded-full bg-white/5 border border-white/15 text-zinc-300 text-xs font-mono font-bold shadow-lg backdrop-blur-md">
               {screenMode === 'code' ? <FileCode2 className="w-3.5 h-3.5 text-[#0D9488]" /> : <Smartphone className="w-3.5 h-3.5 text-[#0D9488]" />}
               <span>{screenMode === 'code' ? '📄 Isar DB & Cashflow (Dart)' : '🦊 Samuel (Él)'}</span>
             </div>
@@ -244,7 +247,7 @@ class FinancialCashflowService extends ChangeNotifier {
             {screenMode === 'code' ? (
               <div 
                 data-prevent-slide="true"
-                className="w-full max-w-[295px] sm:max-w-[315px] h-[510px] rounded-[28px] bg-zinc-950/95 border border-white/15 p-1 shadow-2xl overflow-hidden relative flex flex-col"
+                className="w-full max-w-62.5 xl:max-w-71.25 2xl:max-w-75 h-92.5 lg:h-100 xl:h-112.5 2xl:h-122.5 rounded-[28px] bg-zinc-950/95 border border-white/15 p-1 shadow-2xl overflow-hidden relative flex flex-col"
               >
                 <FlutterCodeViewer codeSnippet={cashflowCodeSnippet} accentColor="#0D9488" />
               </div>
@@ -254,17 +257,17 @@ class FinancialCashflowService extends ChangeNotifier {
                 data-prevent-slide="true"
                 onWheel={(e) => e.stopPropagation()}
                 onTouchMove={(e) => e.stopPropagation()}
-                className="mockup-interactive relative w-full max-w-[295px] sm:max-w-[315px] h-[510px] rounded-[38px] bg-[#14151a] p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.85)] flex flex-col justify-between select-none"
+                className="mockup-interactive relative w-full max-w-62.5 xl:max-w-71.25 2xl:max-w-75 h-92.5 lg:h-100 xl:h-112.5 2xl:h-122.5 rounded-[30px] xl:rounded-[36px] bg-[#14151a] p-1.5 xl:p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.85)] flex flex-col justify-between select-none"
               >
                 {/* Centered Camera Lens Dot */}
-                <div className="absolute top-[22px] left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-black border border-white/10 flex items-center justify-center z-30 pointer-events-none shadow-sm">
+                <div className="absolute top-2 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-black border border-white/10 flex items-center justify-center z-30 pointer-events-none shadow-sm">
                   <div className="w-1 h-1 rounded-full bg-zinc-800" />
                 </div>
 
                 {/* Inner Screen */}
-                <div className="w-full h-full rounded-[28px] overflow-hidden bg-black border border-white/10 shadow-inner relative interactive-screen">
+                <div className="w-full h-full rounded-[22px] xl:rounded-[26px] overflow-hidden bg-black border border-white/10 shadow-inner relative interactive-screen">
                   {screenMode === 'screenshot' ? (
-                    <div className="w-full h-full flex flex-col justify-between p-4 bg-gradient-to-b from-[#0f172a] via-[#090d16] to-[#04060a] text-white">
+                    <div className="w-full h-full flex flex-col justify-between p-4 bg-linear-to-b from-[#0f172a] via-[#090d16] to-[#04060a] text-white">
                       <div className="pt-6 space-y-3">
                         <div className="text-xs font-mono text-[#0D9488] font-bold">Nido Financial Mobile</div>
                         <div className="text-2xl font-extrabold">$2,450.00</div>
@@ -293,104 +296,104 @@ class FinancialCashflowService extends ChangeNotifier {
           </div>
 
           {/* MIDDLE COLUMN: App Info, Features & Tech Stack */}
-          <div className="lg:col-span-6 space-y-4 text-center lg:text-left flex flex-col justify-center px-1">
+          <div className="col-span-6 space-y-3 xl:space-y-4 text-left flex flex-col justify-center px-1">
             
-            <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-[#0D9488]/25 to-rose-500/25 border border-white/15 text-xs font-mono font-bold text-zinc-200">
+            <div className="space-y-1.5">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-linear-to-r from-[#0D9488]/25 to-rose-500/25 border border-white/15 text-[11px] xl:text-xs font-mono font-bold text-zinc-200">
                 <Users className="w-3.5 h-3.5 text-[#0D9488]" />
                 <span>Aplicación Móvil para Parejas (Android)</span>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-4xl xl:text-5xl font-display font-extrabold text-white tracking-tight leading-[1.08]">
-                LoveCost / <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0D9488] via-emerald-400 to-teal-200">Nido</span>
+              <h2 className="text-xl sm:text-3xl xl:text-4xl font-display font-extrabold text-white tracking-tight leading-tight flex flex-wrap items-baseline gap-1.5">
+                <span>LoveCost /</span> <span className="text-transparent bg-clip-text bg-linear-to-r from-[#0D9488] via-emerald-400 to-teal-200">Nido</span>
               </h2>
 
-              <p className="text-xs sm:text-sm text-zinc-300 font-sans leading-relaxed">
+              <p className="text-[11px] xl:text-xs text-zinc-300 font-sans leading-relaxed">
                 Aplicación móvil desarrollada en <strong>Flutter & Dart</strong> enfocada en la gestión de finanzas compartidas para parejas. Elimina las discusiones por dinero coordinando ingresos, compras del hogar y presupuestos con sincronización local y en la nube.
               </p>
             </div>
 
             {/* KEY FEATURES SHOWCASE */}
             <div className="grid grid-cols-2 gap-2 text-xs font-sans text-left">
-              <div className="stage-card p-3 rounded-2xl bg-zinc-900/80 border border-white/10 space-y-1 hover:border-[#0D9488]/50 transition-colors">
-                <div className="font-mono font-bold text-[#0D9488] text-[11px] flex items-center gap-1.5">
+              <div className="p-2.5 rounded-xl bg-zinc-900/80 border border-white/10 space-y-0.5 hover:border-[#0D9488]/50 transition-colors">
+                <div className="font-mono font-bold text-[#0D9488] text-[10.5px] xl:text-[11px] flex items-center gap-1.5">
                   <Activity className="w-3.5 h-3.5" /> Disponible Real
                 </div>
-                <p className="text-[11px] text-zinc-300 leading-snug">
-                  Cálculo de liquidez libre (Ingresos - Gastos fijos/variables proyectados) actualizado dinámicamente.
+                <p className="text-[10px] xl:text-[11px] text-zinc-300 leading-snug">
+                  Cálculo de liquidez libre proyectada en tiempo real.
                 </p>
               </div>
 
-              <div className="stage-card p-3 rounded-2xl bg-zinc-900/80 border border-white/10 space-y-1 hover:border-[#0D9488]/50 transition-colors">
-                <div className="font-mono font-bold text-amber-400 text-[11px] flex items-center gap-1.5">
+              <div className="p-2.5 rounded-xl bg-zinc-900/80 border border-white/10 space-y-0.5 hover:border-[#0D9488]/50 transition-colors">
+                <div className="font-mono font-bold text-amber-400 text-[10.5px] xl:text-[11px] flex items-center gap-1.5">
                   <Heart className="w-3.5 h-3.5" /> Guiños de Amor (Pings)
                 </div>
-                <p className="text-[11px] text-zinc-300 leading-snug">
-                  Envío instantáneo de notificaciones contextuales y avisos cariñosos entre ambos teléfonos.
+                <p className="text-[10px] xl:text-[11px] text-zinc-300 leading-snug">
+                  Envío instantáneo de señales contextuales y cariño.
                 </p>
               </div>
 
-              <div className="stage-card p-3 rounded-2xl bg-zinc-900/80 border border-white/10 space-y-1 hover:border-[#0D9488]/50 transition-colors">
-                <div className="font-mono font-bold text-sky-400 text-[11px] flex items-center gap-1.5">
+              <div className="p-2.5 rounded-xl bg-zinc-900/80 border border-white/10 space-y-0.5 hover:border-[#0D9488]/50 transition-colors">
+                <div className="font-mono font-bold text-sky-400 text-[10.5px] xl:text-[11px] flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5" /> Lista del Nido
                 </div>
-                <p className="text-[11px] text-zinc-300 leading-snug">
-                  Gestión colaborativa de compras del hogar con marcas de ítems completados en tiempo real.
+                <p className="text-[10px] xl:text-[11px] text-zinc-300 leading-snug">
+                  Compras del hogar con marcas reactivas en vivo.
                 </p>
               </div>
 
-              <div className="stage-card p-3 rounded-2xl bg-zinc-900/80 border border-white/10 space-y-1 hover:border-[#0D9488]/50 transition-colors">
-                <div className="font-mono font-bold text-emerald-400 text-[11px] flex items-center gap-1.5">
+              <div className="p-2.5 rounded-xl bg-zinc-900/80 border border-white/10 space-y-0.5 hover:border-[#0D9488]/50 transition-colors">
+                <div className="font-mono font-bold text-emerald-400 text-[10.5px] xl:text-[11px] flex items-center gap-1.5">
                   <RefreshCw className="w-3.5 h-3.5" /> Archivado de Ciclos
                 </div>
-                <p className="text-[11px] text-zinc-300 leading-snug">
-                  Cierre de periodos mensuales guardando el histórico de superávit o déficit presupuestario.
+                <p className="text-[10px] xl:text-[11px] text-zinc-300 leading-snug">
+                  Cierre de periodos guardando histórico de superávit.
                 </p>
               </div>
             </div>
 
             {/* TECH STACK PANEL */}
-            <div className="stage-card p-3 rounded-2xl bg-zinc-950/80 border border-white/10 space-y-2 text-left font-mono">
-              <div className="flex items-center justify-between text-[11px] text-zinc-400">
+            <div className="p-2.5 rounded-xl bg-zinc-950/80 border border-white/10 space-y-1.5 text-left font-mono">
+              <div className="flex items-center justify-between text-[10.5px] text-zinc-400">
                 <span className="font-bold flex items-center gap-1.5 text-[#0D9488]">
                   <Code2 className="w-3.5 h-3.5" /> STACK TECNOLÓGICO MÓVIL
                 </span>
-                <span className="text-[10px] px-2 py-0.5 rounded bg-[#0D9488]/20 text-[#0D9488] font-bold border border-[#0D9488]/40">
+                <span className="text-[9.5px] px-2 py-0.5 rounded bg-[#0D9488]/20 text-[#0D9488] font-bold border border-[#0D9488]/40">
                   DISPONIBLE EN ANDROID
                 </span>
               </div>
 
-              <div className="grid grid-cols-4 gap-2 text-[10px]">
-                <div className="p-2 rounded-xl bg-white/5 border border-white/10 space-y-0.5 text-center">
-                  <div className="text-emerald-400 font-extrabold text-[11px]">Flutter</div>
-                  <div className="text-zinc-400 text-[9px]">UI Android</div>
+              <div className="grid grid-cols-4 gap-1.5 text-[9.5px] xl:text-[10px]">
+                <div className="p-1.5 rounded-lg bg-white/5 border border-white/10 space-y-0.5 text-center">
+                  <div className="text-emerald-400 font-extrabold">Flutter</div>
+                  <div className="text-zinc-400 text-[8.5px]">UI Android</div>
                 </div>
 
-                <div className="p-2 rounded-xl bg-white/5 border border-white/10 space-y-0.5 text-center">
-                  <div className="text-cyan-400 font-extrabold text-[11px]">Dart</div>
-                  <div className="text-zinc-400 text-[9px]">Lenguaje Core</div>
+                <div className="p-1.5 rounded-lg bg-white/5 border border-white/10 space-y-0.5 text-center">
+                  <div className="text-cyan-400 font-extrabold">Dart</div>
+                  <div className="text-zinc-400 text-[8.5px]">Lenguaje Core</div>
                 </div>
 
-                <div className="p-2 rounded-xl bg-white/5 border border-white/10 space-y-0.5 text-center">
-                  <div className="text-[#0D9488] font-extrabold text-[11px]">Isar DB</div>
-                  <div className="text-zinc-400 text-[9px]">Offline DB</div>
+                <div className="p-1.5 rounded-lg bg-white/5 border border-white/10 space-y-0.5 text-center">
+                  <div className="text-[#0D9488] font-extrabold">Isar DB</div>
+                  <div className="text-zinc-400 text-[8.5px]">Offline DB</div>
                 </div>
 
-                <div className="p-2 rounded-xl bg-white/5 border border-white/10 space-y-0.5 text-center">
-                  <div className="text-[#10B981] font-extrabold text-[11px]">Firestore</div>
-                  <div className="text-zinc-400 text-[9px]">Sync P2P</div>
+                <div className="p-1.5 rounded-lg bg-white/5 border border-white/10 space-y-0.5 text-center">
+                  <div className="text-[#10B981] font-extrabold">Firestore</div>
+                  <div className="text-zinc-400 text-[8.5px]">Sync P2P</div>
                 </div>
               </div>
             </div>
 
             {/* ACTION BUTTONS: GitHub, WhatsApp Quote */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 pt-1 font-mono text-xs">
+            <div className="flex flex-wrap items-center justify-start gap-2.5 pt-0.5 font-mono text-xs">
               <a
                 href={project?.githubUrl || "https://github.com"}
                 target="_blank"
                 rel="noreferrer"
                 data-cursor="GITHUB"
-                className="px-3.5 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold flex items-center gap-2 transition-all cursor-pointer text-xs shadow-md active:scale-95"
+                className="px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold flex items-center gap-2 transition-all cursor-pointer text-xs shadow-md active:scale-95"
               >
                 <GitBranch className="w-3.5 h-3.5 text-[#0D9488]" />
                 <span>GitHub</span>
@@ -401,7 +404,7 @@ class FinancialCashflowService extends ChangeNotifier {
                 target="_blank"
                 rel="noreferrer"
                 data-cursor="WHATSAPP"
-                className="px-3.5 py-2 rounded-full border border-white/15 text-zinc-300 hover:text-white transition-all flex items-center gap-2 hover:border-[#0D9488]/50 text-xs shadow-md active:scale-95"
+                className="px-3.5 py-1.5 rounded-full border border-white/15 text-zinc-300 hover:text-white transition-all flex items-center gap-2 hover:border-[#0D9488]/50 text-xs shadow-md active:scale-95"
               >
                 <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-400 fill-current" />
                 <span>Cotizar App</span>
@@ -411,8 +414,8 @@ class FinancialCashflowService extends ChangeNotifier {
           </div>
 
           {/* RIGHT COLUMN: Phone B - Rochy OR Code Window B */}
-          <div className="lg:col-span-3 flex flex-col items-center justify-center space-y-2.5">
-            <div className="flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/15 text-zinc-300 text-xs font-mono font-bold shadow-lg backdrop-blur-md">
+          <div className="col-span-3 flex flex-col items-center justify-center space-y-1.5">
+            <div className="flex items-center gap-2 px-3 py-0.5 rounded-full bg-white/5 border border-white/15 text-zinc-300 text-xs font-mono font-bold shadow-lg backdrop-blur-md">
               {screenMode === 'code' ? <FileCode2 className="w-3.5 h-3.5 text-[#00897B]" /> : <Smartphone className="w-3.5 h-3.5 text-[#00897B]" />}
               <span>{screenMode === 'code' ? '📄 P2P Sync & Signals (Dart)' : '🌸 Rochy (Ella)'}</span>
             </div>
@@ -420,7 +423,7 @@ class FinancialCashflowService extends ChangeNotifier {
             {screenMode === 'code' ? (
               <div 
                 data-prevent-slide="true"
-                className="w-full max-w-[295px] sm:max-w-[315px] h-[510px] rounded-[28px] bg-zinc-950/95 border border-white/15 p-1 shadow-2xl overflow-hidden relative flex flex-col"
+                className="w-full max-w-62.5 xl:max-w-71.25 2xl:max-w-75 h-92.5 lg:h-100 xl:h-112.5 2xl:h-122.5 rounded-[28px] bg-zinc-950/95 border border-white/15 p-1 shadow-2xl overflow-hidden relative flex flex-col"
               >
                 <FlutterCodeViewer codeSnippet={p2pSyncCodeSnippet} accentColor="#00897B" />
               </div>
@@ -430,17 +433,17 @@ class FinancialCashflowService extends ChangeNotifier {
                 data-prevent-slide="true"
                 onWheel={(e) => e.stopPropagation()}
                 onTouchMove={(e) => e.stopPropagation()}
-                className="mockup-interactive relative w-full max-w-[295px] sm:max-w-[315px] h-[510px] rounded-[38px] bg-[#14151a] p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.85)] flex flex-col justify-between select-none"
+                className="mockup-interactive relative w-full max-w-62.5 xl:max-w-71.25 2xl:max-w-75 h-92.5 lg:h-100 xl:h-112.5 2xl:h-122.5 rounded-[30px] xl:rounded-[36px] bg-[#14151a] p-1.5 xl:p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.85)] flex flex-col justify-between select-none"
               >
                 {/* Centered Camera Lens Dot */}
-                <div className="absolute top-[22px] left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-black border border-white/10 flex items-center justify-center z-30 pointer-events-none shadow-sm">
+                <div className="absolute top-2 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-black border border-white/10 flex items-center justify-center z-30 pointer-events-none shadow-sm">
                   <div className="w-1 h-1 rounded-full bg-zinc-800" />
                 </div>
 
                 {/* Inner Screen */}
-                <div className="w-full h-full rounded-[28px] overflow-hidden bg-black border border-white/10 shadow-inner relative interactive-screen">
+                <div className="w-full h-full rounded-[22px] xl:rounded-[26px] overflow-hidden bg-black border border-white/10 shadow-inner relative interactive-screen">
                   {screenMode === 'screenshot' ? (
-                    <div className="w-full h-full flex flex-col justify-between p-4 bg-gradient-to-b from-[#1e1b4b] via-[#0f0e26] to-[#070614] text-white">
+                    <div className="w-full h-full flex flex-col justify-between p-4 bg-linear-to-b from-[#1e1b4b] via-[#0f0e26] to-[#070614] text-white">
                       <div className="pt-6 space-y-3">
                         <div className="text-xs font-mono text-emerald-400 font-bold">Nido Couple Sync</div>
                         <div className="text-2xl font-extrabold">$2,450.00</div>
@@ -466,6 +469,152 @@ class FinancialCashflowService extends ChangeNotifier {
                 </div>
               </div>
             )}
+          </div>
+
+        </div>
+
+        {/* ========================================================================= */}
+        {/* MOBILE / TABLET VIEW (lg:hidden): INTERACTIVE COUPLE SWITCHER */}
+        {/* ========================================================================= */}
+        <div className="flex lg:hidden flex-col space-y-4 pb-12">
+          
+          {/* Info Block */}
+          <div className="space-y-2 text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-linear-to-r from-[#0D9488]/25 to-rose-500/25 border border-white/15 text-xs font-mono font-bold text-zinc-200">
+              <Users className="w-3.5 h-3.5 text-[#0D9488]" />
+              <span>Finanzas Móviles para Parejas</span>
+            </div>
+
+            <h2 className="text-xl sm:text-3xl font-display font-extrabold text-white tracking-tight leading-tight flex flex-wrap items-baseline gap-1.5">
+              <span>LoveCost /</span> <span className="text-transparent bg-clip-text bg-linear-to-r from-[#0D9488] via-emerald-400 to-teal-200">Nido</span>
+            </h2>
+
+            <p className="text-xs text-zinc-300 font-sans leading-relaxed">
+              Gestión de finanzas compartidas en <strong>Flutter & Dart</strong> con sincronización reactiva local y en la nube.
+            </p>
+          </div>
+
+          {/* Interactive Couple Profile Switcher */}
+          <div className="flex items-center p-1 rounded-xl bg-white/5 border border-white/10 font-mono text-xs w-full max-w-sm mx-auto">
+            <button
+              onClick={() => setActiveCoupleUser('samuel')}
+              className={`flex-1 py-1.5 sm:py-2 px-2.5 sm:px-3 rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer font-bold ${
+                activeCoupleUser === 'samuel'
+                  ? 'bg-[#0D9488] text-white shadow-md'
+                  : 'text-zinc-400 hover:text-white'
+              }`}
+            >
+              <span>🦊 Samuel (Él)</span>
+            </button>
+            <button
+              onClick={() => setActiveCoupleUser('rochy')}
+              className={`flex-1 py-1.5 sm:py-2 px-2.5 sm:px-3 rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer font-bold ${
+                activeCoupleUser === 'rochy'
+                  ? 'bg-rose-500 text-white shadow-md'
+                  : 'text-zinc-400 hover:text-white'
+              }`}
+            >
+              <span>🌸 Rochy (Ella)</span>
+            </button>
+          </div>
+
+          {/* Mobile Phone Mockup Displaying Selected User Profile */}
+          <div className="flex justify-center py-1">
+            {screenMode === 'code' ? (
+              <div 
+                data-prevent-slide="true"
+                className="w-full max-w-67.5 sm:max-w-72.5 h-100 sm:h-110 rounded-[28px] bg-zinc-950/95 border border-white/15 p-1 shadow-2xl overflow-hidden relative flex flex-col"
+              >
+                <FlutterCodeViewer 
+                  codeSnippet={activeCoupleUser === 'samuel' ? cashflowCodeSnippet : p2pSyncCodeSnippet} 
+                  accentColor={activeCoupleUser === 'samuel' ? '#0D9488' : '#00897B'} 
+                />
+              </div>
+            ) : (
+              <div 
+                data-prevent-slide="true"
+                onWheel={(e) => e.stopPropagation()}
+                onTouchMove={(e) => e.stopPropagation()}
+                className="mockup-interactive relative w-full max-w-50 sm:max-w-57.5 max-h-[46vh] aspect-9/19 rounded-[28px] sm:rounded-[34px] bg-[#14151a] p-1.5 sm:p-2 border border-white/15 shadow-2xl flex flex-col justify-between select-none"
+              >
+                <div className="absolute top-4.5 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-black border border-white/10 flex items-center justify-center z-30 pointer-events-none shadow-sm">
+                  <div className="w-1 h-1 rounded-full bg-zinc-800" />
+                </div>
+
+                <div className="w-full h-full rounded-3xl overflow-hidden bg-black border border-white/10 shadow-inner relative interactive-screen">
+                  {screenMode === 'screenshot' ? (
+                    <div className="w-full h-full flex flex-col justify-between p-4 bg-linear-to-b from-[#0f172a] via-[#090d16] to-[#04060a] text-white">
+                      <div className="pt-6 space-y-3">
+                        <div className="text-xs font-mono text-[#0D9488] font-bold">Nido Financial Mobile</div>
+                        <div className="text-2xl font-extrabold">$2,450.00</div>
+                        <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-xs">
+                          <div className="text-zinc-400">Perfil: {activeCoupleUser === 'samuel' ? 'Samuel' : 'Rochy'}</div>
+                          <div className="text-emerald-400 font-bold mt-1">Sincronizado vía Isar DB & Firestore</div>
+                        </div>
+                      </div>
+                      <div className="p-3 rounded-xl bg-[#0D9488]/20 border border-[#0D9488]/40 text-center text-xs font-mono text-[#0D9488] font-bold">
+                        Captura Real UI Móvil
+                      </div>
+                    </div>
+                  ) : (
+                    <NidoPhoneApp 
+                      user={activeCoupleUser} 
+                      sharedState={sharedState} 
+                      onAddTransaction={handleAddTransaction} 
+                      onSendPing={handleSendPing}
+                      isDarkMode={isDarkMode}
+                      onToggleTheme={() => setIsDarkMode(!isDarkMode)}
+                    />
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* 4 Feature Badges on Mobile */}
+          <div className="grid grid-cols-2 gap-2 text-xs font-sans text-left">
+            <div className="p-2.5 rounded-xl bg-zinc-900/80 border border-white/10 space-y-0.5">
+              <div className="font-mono font-bold text-[#0D9488] text-[10.5px] flex items-center gap-1">
+                <Activity className="w-3 h-3" /> Disponible Real
+              </div>
+              <p className="text-[10px] text-zinc-300 leading-snug">
+                Liquidez libre proyectada en tiempo real.
+              </p>
+            </div>
+
+            <div className="p-2.5 rounded-xl bg-zinc-900/80 border border-white/10 space-y-0.5">
+              <div className="font-mono font-bold text-amber-400 text-[10.5px] flex items-center gap-1">
+                <Heart className="w-3 h-3" /> Guiños de Amor
+              </div>
+              <p className="text-[10px] text-zinc-300 leading-snug">
+                Notificaciones afectivas instantáneas P2P.
+              </p>
+            </div>
+          </div>
+
+          {/* Action buttons on Mobile */}
+          <div className="flex flex-wrap items-center justify-center gap-2 pt-1 font-mono text-xs">
+            <a
+              href={project?.githubUrl || "https://github.com"}
+              target="_blank"
+              rel="noreferrer"
+              data-cursor="GITHUB"
+              className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold flex items-center gap-1.5 transition-all text-xs"
+            >
+              <GitBranch className="w-3.5 h-3.5 text-[#0D9488]" />
+              <span>GitHub</span>
+            </a>
+
+            <a
+              href={`https://wa.me/${personalInfo.whatsapp}?text=Hola%20${encodeURIComponent(personalInfo.name)},%20quiero%20cotizar%20una%20app%20móvil%20similar%20a%20Nido`}
+              target="_blank"
+              rel="noreferrer"
+              data-cursor="WHATSAPP"
+              className="px-4 py-2 rounded-full border border-white/15 text-zinc-300 hover:text-white transition-all flex items-center gap-1.5 text-xs"
+            >
+              <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-400 fill-current" />
+              <span>Cotizar App</span>
+            </a>
           </div>
 
         </div>

@@ -13,10 +13,7 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.includes('/three/') || id.includes('\\three\\') || id.includes('/@react-three/') || id.includes('\\@react-three\\')) {
-              return 'three-vendor';
-            }
-            if (id.includes('gsap') || id.includes('framer-motion') || id.includes('lenis')) {
+            if (id.includes('gsap') || id.includes('framer-motion') || id.includes('canvas-confetti')) {
               return 'motion-vendor';
             }
             if (id.includes('lucide-react')) {
@@ -29,6 +26,7 @@ export default defineConfig({
         },
       },
     },
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 600,
+    cssCodeSplit: true,
   },
 })

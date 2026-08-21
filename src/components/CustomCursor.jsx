@@ -15,6 +15,34 @@ export default function CustomCursor() {
       return;
     }
 
+    let animationId;
+    let isRunning = false;
+
+    const render = () => {
+      const dx = target.current.x - pos.current.x;
+      const dy = target.current.y - pos.current.y;
+
+      pos.current.x += dx * 0.25;
+      pos.current.y += dy * 0.25;
+
+      if (cursorRef.current) {
+        cursorRef.current.style.transform = `translate3d(${pos.current.x}px, ${pos.current.y}px, 0) translate(-50%, -50%)`;
+      }
+
+      if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
+        animationId = requestAnimationFrame(render);
+      } else {
+        isRunning = false;
+      }
+    };
+
+    const startLoop = () => {
+      if (!isRunning) {
+        isRunning = true;
+        animationId = requestAnimationFrame(render);
+      }
+    };
+
     const onMouseMove = (e) => {
       target.current.x = e.clientX;
       target.current.y = e.clientY;
@@ -30,6 +58,7 @@ export default function CustomCursor() {
       }
 
       setVisible(true);
+      startLoop();
 
       const targetEl = e.target.closest('[data-cursor]');
       if (targetEl) {
@@ -49,17 +78,7 @@ export default function CustomCursor() {
     document.addEventListener('mouseleave', onMouseLeave);
     document.addEventListener('mouseenter', onMouseEnter);
 
-    let animationId;
-    const render = () => {
-      pos.current.x += (target.current.x - pos.current.x) * 0.2;
-      pos.current.y += (target.current.y - pos.current.y) * 0.2;
-
-      if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate3d(${pos.current.x}px, ${pos.current.y}px, 0) translate(-50%, -50%)`;
-      }
-      animationId = requestAnimationFrame(render);
-    };
-    animationId = requestAnimationFrame(render);
+    startLoop();
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
@@ -72,7 +91,7 @@ export default function CustomCursor() {
   return (
     <div
       ref={cursorRef}
-      className={`fixed top-0 left-0 pointer-events-none z-[9999] flex items-center justify-center transition-[width,height,background-color] duration-200 ease-out will-change-transform rounded-full ${
+      className={`fixed top-0 left-0 pointer-events-none z-9999 flex items-center justify-center transition-[width,height,background-color] duration-200 ease-out will-change-transform rounded-full ${
         visible ? 'opacity-100' : 'opacity-0'
       } ${
         expanded

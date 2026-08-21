@@ -62,7 +62,7 @@ export default function NavigationRail({
 
   return (
     <aside 
-      className="fixed right-2 sm:right-5 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col items-end select-none pointer-events-auto"
+      className="fixed right-2 sm:right-5 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col items-end select-none pointer-events-auto origin-right scale-85 2xl:scale-100 transition-transform duration-300"
       onMouseLeave={() => setHoveredIndex(null)}
     >
       <div 

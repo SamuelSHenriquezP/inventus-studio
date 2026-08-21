@@ -2,14 +2,12 @@
 import { useState } from 'react';
 import { Code2, Play, Image as ImageIcon } from 'lucide-react';
 
-import NexusSculpture3D from './NexusSculpture3D';
 import FlutterCodeViewer from './FlutterCodeViewer';
 import NidoPhoneApp from './apps/NidoPhoneApp';
 import ServiIntelLaptopApp from './apps/ServiIntelLaptopApp';
 import DaysPhoneApp from './apps/DaysPhoneApp';
 import CyberRushPhoneApp from './apps/CyberRushPhoneApp';
 import OtekPowerApp from './apps/OtekPowerApp';
-
 import SopaSeniorApp from './apps/SopaSeniorApp';
 
 export default function RealisticDevice3D({ 
@@ -18,67 +16,60 @@ export default function RealisticDevice3D({
   accentColor = '#e4e4e7', 
   title,
   codeSnippet,
-  projectId = 'lovecost-nido'
+  projectId = 'lovecost-nido',
+  isActive = true
 }) {
   const [screenMode, setScreenMode] = useState('live-app'); // 'live-app' | 'screenshot' | 'code'
-
-  if (type === 'sculpture' || projectId === 'nexus-experience') {
-    return (
-      <div className="w-full flex flex-col items-center justify-center">
-        <NexusSculpture3D accentColor={accentColor} />
-      </div>
-    );
-  }
 
   const isLaptop = type === 'laptop' || projectId === 'serviintel-ops';
   const isTablet = type === 'tablet' || projectId === 'otek-powerapps';
   const isHorizontalPhone = projectId === 'cyber-rush';
 
   return (
-    <div className="w-full h-117.5 sm:h-132.5 lg:h-142.5 flex flex-col items-center justify-center relative select-none">
+    <div className="w-full flex flex-col items-center justify-center relative select-none py-1">
       
       {/* Minimalist Controls Bar */}
-      <div className="flex items-center gap-1 p-1 rounded-full bg-zinc-900/90 border border-white/10 backdrop-blur-md shadow-xl mb-3.5 z-30 font-mono text-[11px]">
+      <div className="flex items-center gap-1 p-0.5 sm:p-1 rounded-full bg-zinc-900/90 border border-white/10 backdrop-blur-md shadow-xl mb-2 z-30 font-mono text-[9.5px] sm:text-[10.5px]">
         <button
           onClick={() => setScreenMode('live-app')}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all cursor-pointer ${
+          className={`flex items-center gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full transition-all cursor-pointer ${
             screenMode === 'live-app' 
               ? 'bg-white text-black font-semibold shadow-sm' 
               : 'text-zinc-400 hover:text-white'
           }`}
         >
-          <Play className="w-3 h-3 fill-current" />
+          <Play className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current" />
           <span>App Interactiva</span>
         </button>
 
         <button
           onClick={() => setScreenMode('screenshot')}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all cursor-pointer ${
+          className={`flex items-center gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full transition-all cursor-pointer ${
             screenMode === 'screenshot' 
               ? 'bg-white text-black font-semibold shadow-sm' 
               : 'text-zinc-400 hover:text-white'
           }`}
         >
-          <ImageIcon className="w-3 h-3" />
+          <ImageIcon className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
           <span>Captura Real</span>
         </button>
 
         <button
           onClick={() => setScreenMode('code')}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all cursor-pointer ${
+          className={`flex items-center gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full transition-all cursor-pointer ${
             screenMode === 'code' 
               ? 'bg-white text-black font-semibold shadow-sm' 
               : 'text-zinc-400 hover:text-white'
           }`}
         >
-          <Code2 className="w-3 h-3" />
+          <Code2 className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
           <span>{codeSnippet?.language === 'powerfx' ? 'Power Fx' : 'Código Dart'}</span>
         </button>
       </div>
 
-      {/* Static 3D Realistic Hardware Chassis (No Tilt Movement for Maximum Usability) */}
+      {/* Static 3D Realistic Hardware Chassis (Fluid & Responsive Proportions) */}
       {screenMode !== 'code' ? (
-        <div className="relative">
+        <div className="relative w-full flex justify-center items-center">
           
           {/* ========================================================================= */}
           {/* TABLET INDUSTRIAL / IPAD HARDWARE MOCKUP */}
@@ -86,20 +77,20 @@ export default function RealisticDevice3D({
           {isTablet ? (
             <div 
               data-prevent-slide="true"
-              className="mockup-interactive relative w-85 sm:w-120 lg:w-135 aspect-16/10 rounded-2xl sm:rounded-3xl bg-[#151720] p-2.5 sm:p-3 border border-sky-500/30 shadow-[0_30px_70px_rgba(0,0,0,0.9)] overflow-hidden"
+              className="mockup-interactive relative w-full max-w-47.5 sm:max-w-67.5 lg:max-w-97.5 xl:max-w-112.5 max-h-[18vh] sm:max-h-[26vh] lg:max-h-[34vh] xl:max-h-[40vh] aspect-16/10 rounded-xl sm:rounded-3xl bg-[#151720] p-1 sm:p-2 xl:p-2.5 border border-sky-500/30 shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col justify-between"
             >
               {/* Static Specular Glass Glare */}
               <div className="absolute inset-0 bg-linear-to-tr from-transparent via-white/4 to-transparent pointer-events-none z-30" />
               
               {/* Front Camera Dot */}
-              <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-black border border-white/10 flex items-center justify-center z-30 pointer-events-none">
+              <div className="absolute top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-black border border-white/10 flex items-center justify-center z-30 pointer-events-none">
                 <div className="w-0.5 h-0.5 rounded-full bg-sky-400/50" />
               </div>
 
               {/* Inner Screen */}
-              <div className="relative w-full h-full rounded-xl sm:rounded-2xl overflow-hidden bg-black border border-white/10 shadow-inner interactive-screen">
+              <div className="relative w-full h-full rounded-lg sm:rounded-2xl overflow-hidden bg-black border border-white/10 shadow-inner interactive-screen">
                 {screenMode === 'live-app' ? (
-                  <OtekPowerApp />
+                  <OtekPowerApp isActive={isActive} />
                 ) : (
                   <img 
                     src={image} 
@@ -115,22 +106,22 @@ export default function RealisticDevice3D({
             /* ========================================================================= */
             <div 
               data-prevent-slide="true"
-              className="mockup-interactive relative w-85 sm:w-115 lg:w-125 flex flex-col items-center"
+              className="mockup-interactive relative w-full max-w-47.5 sm:max-w-67.5 lg:max-w-97.5 xl:max-w-110 flex flex-col items-center"
             >
               {/* Display Chassis */}
-              <div className="relative w-full aspect-16/10 rounded-2xl bg-[#18191e] p-3 border border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.85)] overflow-hidden">
+              <div className="relative w-full max-h-[18vh] sm:max-h-[26vh] lg:max-h-[34vh] xl:max-h-[40vh] aspect-16/10 rounded-xl sm:rounded-2xl bg-[#18191e] p-1 sm:p-2 xl:p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.85)] overflow-hidden">
                 {/* Static Specular Glass Glare */}
                 <div className="absolute inset-0 bg-linear-to-tr from-transparent via-white/4 to-transparent pointer-events-none z-30" />
                 
                 {/* Camera Notch */}
-                <div className="absolute top-1 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-black border border-white/10 flex items-center justify-center z-30 pointer-events-none">
-                  <div className="w-1 h-1 rounded-full bg-emerald-500/40" />
+                <div className="absolute top-1 left-1/2 -translate-x-1/2 w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-black border border-white/10 flex items-center justify-center z-30 pointer-events-none">
+                  <div className="w-0.5 h-0.5 rounded-full bg-emerald-500/40" />
                 </div>
 
                 {/* Inner Screen */}
-                <div className="relative w-full h-full rounded-xl overflow-hidden bg-black border border-white/10 shadow-inner interactive-screen">
+                <div className="relative w-full h-full rounded-lg sm:rounded-xl overflow-hidden bg-black border border-white/10 shadow-inner interactive-screen">
                   {screenMode === 'live-app' ? (
-                    <ServiIntelLaptopApp />
+                    <ServiIntelLaptopApp isActive={isActive} />
                   ) : (
                     <img 
                       src={image} 
@@ -142,8 +133,8 @@ export default function RealisticDevice3D({
               </div>
 
               {/* Aluminum Laptop Base */}
-              <div className="w-[104%] h-3.5 bg-linear-to-b from-[#252730] to-[#14151a] rounded-b-xl border-t border-white/15 shadow-2xl relative -mt-0.5 flex justify-center pointer-events-none">
-                <div className="w-16 h-1 bg-black/60 rounded-b-md" />
+              <div className="w-[104%] h-1.5 sm:h-2.5 bg-linear-to-b from-[#252730] to-[#14151a] rounded-b-xl border-t border-white/15 shadow-2xl relative -mt-0.5 flex justify-center pointer-events-none">
+                <div className="w-8 sm:w-14 h-0.5 bg-black/60 rounded-b-md" />
               </div>
             </div>
           ) : isHorizontalPhone ? (
@@ -152,12 +143,12 @@ export default function RealisticDevice3D({
             /* ========================================================================= */
             <div 
               data-prevent-slide="true"
-              className="mockup-interactive relative w-85 sm:w-110 lg:w-120 aspect-18.8/9 rounded-[38px] bg-[#16171d] p-3 border border-white/15 shadow-[0_30px_70px_rgba(0,0,0,0.85)]"
+              className="mockup-interactive relative w-full max-w-48.75 sm:max-w-67.5 lg:max-w-95 xl:max-w-107.5 max-h-[17vh] sm:max-h-[25vh] lg:max-h-[33vh] xl:max-h-[38vh] aspect-18.8/9 rounded-2xl sm:rounded-4xl bg-[#16171d] p-1 sm:p-2 xl:p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.85)]"
             >
-              <div className="absolute inset-0 rounded-[34px] bg-linear-to-tr from-transparent via-white/4 to-transparent pointer-events-none z-30" />
-              <div className="relative w-full h-full rounded-[28px] overflow-hidden bg-black border border-white/10 flex flex-col justify-between shadow-inner interactive-screen">
+              <div className="absolute inset-0 rounded-xl sm:rounded-[28px] bg-linear-to-tr from-transparent via-white/4 to-transparent pointer-events-none z-30" />
+              <div className="relative w-full h-full rounded-lg sm:rounded-3xl overflow-hidden bg-black border border-white/10 flex flex-col justify-between shadow-inner interactive-screen">
                 {screenMode === 'live-app' ? (
-                  <CyberRushPhoneApp />
+                  <CyberRushPhoneApp isActive={isActive} />
                 ) : (
                   <img 
                     src={image} 
@@ -173,27 +164,27 @@ export default function RealisticDevice3D({
             /* ========================================================================= */
             <div 
               data-prevent-slide="true"
-              className="mockup-interactive relative w-64 sm:w-72 lg:w-76 aspect-9/18.8 rounded-[44px] bg-[#15161c] p-3 border border-white/15 shadow-[0_35px_80px_rgba(0,0,0,0.9)]"
+              className="mockup-interactive relative w-full max-w-35 sm:max-w-46.25 lg:max-w-57.5 xl:max-w-62.5 max-h-[30vh] sm:max-h-[40vh] lg:max-h-[50vh] xl:max-h-[54vh] aspect-9/19 rounded-[22px] sm:rounded-[36px] bg-[#15161c] p-1 sm:p-2 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex flex-col justify-between overflow-hidden"
             >
               {/* Static Glass Specular Tone */}
-              <div className="absolute inset-0 rounded-[40px] bg-linear-to-tr from-transparent via-white/4 to-transparent pointer-events-none z-30" />
+              <div className="absolute inset-0 rounded-[18px] sm:rounded-4xl bg-linear-to-tr from-transparent via-white/4 to-transparent pointer-events-none z-30" />
               
-              <div className="relative w-full h-full rounded-[34px] overflow-hidden bg-black border border-white/10 flex flex-col justify-between shadow-inner interactive-screen">
+              <div className="relative w-full h-full min-h-0 rounded-2xl sm:rounded-[26px] overflow-hidden bg-black border border-white/10 flex flex-col justify-between shadow-inner interactive-screen">
                 {/* Dynamic Island */}
-                <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-20 h-4 bg-black rounded-full border border-white/10 flex items-center justify-between px-2 z-30 pointer-events-none">
-                  <div className="w-1 h-1 rounded-full bg-white/40" />
-                  <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+                <div className="absolute top-1 left-1/2 -translate-x-1/2 w-10 sm:w-14 h-1.5 sm:h-2.5 bg-black rounded-full border border-white/10 flex items-center justify-between px-1 z-30 pointer-events-none">
+                  <div className="w-0.5 sm:w-1 h-0.5 sm:h-1 rounded-full bg-white/40" />
+                  <div className="w-0.5 sm:w-1 h-0.5 sm:h-1 rounded-full bg-white/20" />
                 </div>
 
                 {/* Inner Screen */}
-                <div className="w-full h-full">
+                <div className="w-full h-full min-h-0 overflow-hidden relative flex flex-col">
                   {screenMode === 'live-app' ? (
                     projectId === 'days-focus-flow' ? (
-                      <DaysPhoneApp />
+                      <DaysPhoneApp isActive={isActive} />
                     ) : projectId === 'sopa-senior' ? (
-                      <SopaSeniorApp />
+                      <SopaSeniorApp isActive={isActive} />
                     ) : (
-                      <NidoPhoneApp />
+                      <NidoPhoneApp isActive={isActive} />
                     )
                   ) : (
                     <img 
@@ -205,7 +196,7 @@ export default function RealisticDevice3D({
                 </div>
 
                 {/* Home Indicator Bar */}
-                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-20 h-1 bg-white/30 rounded-full z-20 pointer-events-none" />
+                <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-12 sm:w-14 h-0.5 bg-white/30 rounded-full z-20 pointer-events-none" />
               </div>
             </div>
           )}
@@ -214,14 +205,14 @@ export default function RealisticDevice3D({
         /* Architecture & Code Inspector */
         <div 
           data-prevent-slide="true"
-          className="code-viewer-container w-full max-w-md h-84 rounded-2xl bg-zinc-950/95 border border-white/15 p-1 shadow-2xl overflow-hidden animate-fadeIn"
+          className="code-viewer-container w-full max-w-md h-60 sm:h-72 xl:h-80 rounded-2xl bg-zinc-950/95 border border-white/15 p-1 shadow-2xl overflow-hidden animate-fadeIn"
         >
           <FlutterCodeViewer codeSnippet={codeSnippet} accentColor={accentColor} />
         </div>
       )}
 
       {/* Minimalist Hint */}
-      <div className="mt-3 text-[10px] font-mono text-zinc-500 pointer-events-none">
+      <div className="mt-2.5 text-[9.5px] sm:text-[10px] font-mono text-zinc-500 pointer-events-none text-center">
         Interactúa directamente con la aplicación dentro del dispositivo
       </div>
     </div>

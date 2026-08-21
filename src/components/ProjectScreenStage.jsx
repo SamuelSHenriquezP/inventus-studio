@@ -85,7 +85,7 @@ function ServiIntelFieldTitle({ isActive }) {
     <h2
       ref={containerRef}
       style={{ perspective: '800px' }}
-      className="text-2xl sm:text-3xl lg:text-[34px] font-display font-extrabold tracking-tight leading-tight flex items-center gap-1.5 overflow-visible py-1"
+      className="text-xl sm:text-3xl lg:text-[34px] font-display font-extrabold tracking-tight leading-tight flex flex-wrap items-center gap-1 sm:gap-1.5 overflow-visible py-1"
     >
       <span className="inline-flex overflow-visible">
         {mainChars.map((ch, i) => (
@@ -94,7 +94,7 @@ function ServiIntelFieldTitle({ isActive }) {
           </span>
         ))}
       </span>
-      <span className="inline-flex ml-2 overflow-visible">
+      <span className="inline-flex ml-1.5 overflow-visible">
         {highlightChars.map((ch, i) => (
           <span key={`f-hl-${i}`} className="field-hl-char inline-block will-change-transform text-sky-400 drop-shadow-[0_0_14px_rgba(56,189,248,0.55)]">
             {ch}
@@ -167,7 +167,7 @@ function ServiIntelAdminTitle({ isActive }) {
   return (
     <h2
       ref={containerRef}
-      className="text-2xl sm:text-3xl lg:text-[34px] font-display font-extrabold tracking-tight leading-tight flex items-center gap-1.5 overflow-visible py-1"
+      className="text-xl sm:text-3xl lg:text-[34px] font-display font-extrabold tracking-tight leading-tight flex flex-wrap items-center gap-1 sm:gap-1.5 overflow-visible py-1"
     >
       <span className="inline-flex overflow-visible">
         {mainChars.map((ch, i) => (
@@ -248,7 +248,7 @@ function OtekQualityTitle({ isActive }) {
     <h2
       ref={containerRef}
       style={{ perspective: '800px' }}
-      className="text-2xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight leading-tight flex flex-col items-start overflow-visible py-1"
+      className="text-xl sm:text-3xl lg:text-5xl font-display font-extrabold tracking-tight leading-tight flex flex-col items-start overflow-visible py-0.5"
     >
       <span className="inline-flex overflow-visible">
         {mainChars.map((ch, i) => (
@@ -337,7 +337,7 @@ function SopaSeniorTitle({ isActive }) {
     <h2
       ref={containerRef}
       style={{ perspective: '800px' }}
-      className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight leading-tight flex flex-wrap items-center gap-1.5 overflow-visible py-1"
+      className="text-2xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight leading-tight flex flex-wrap items-center gap-1.5 overflow-visible py-0.5"
     >
       <span className="inline-flex overflow-visible">
         {mainChars.map((ch, i) => (
@@ -393,19 +393,19 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
     return (
       <div 
         ref={containerRef}
-        className="w-full h-full min-h-screen flex flex-col justify-center px-6 sm:px-10 md:px-16 lg:px-24 pt-24 pb-16 relative select-none text-zinc-100 font-sans overflow-y-auto lg:overflow-visible"
+        className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-12 sm:pt-20 pb-12 sm:pb-16 relative select-none text-zinc-100 font-sans overflow-y-auto custom-scroll"
         style={{
           background: 'radial-gradient(ellipse 100% 100% at 50% 20%, #0d1017 0%, #080a10 60%, #040508 100%)'
         }}
       >
-        <div className="max-w-7xl w-full mx-auto flex flex-col justify-between my-auto space-y-3 lg:space-y-2 xl:space-y-3">
+        <div className="max-w-7xl w-full mx-auto flex flex-col justify-between my-auto space-y-1.5 lg:space-y-1.5 xl:space-y-2.5">
           
           {/* Header Bar with Strategic Ecosystem Placement & Actions */}
-          <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 pb-2.5 sm:pb-3 border-b border-white/10 custom-stage-anim shrink-0">
-            <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 font-mono text-xs sm:text-sm text-zinc-400">
+          <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-2 sm:pb-2.5 border-b border-white/10 custom-stage-anim shrink-0">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 font-mono text-xs sm:text-sm text-zinc-400">
               <span className="font-bold tracking-widest text-zinc-200">01 // SERVI INTEL</span>
               <span className="text-zinc-600 hidden sm:inline">•</span>
-              <span className="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] sm:text-xs font-mono text-zinc-200 flex items-center gap-1.5">
+              <span className="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-[10.5px] sm:text-xs font-mono text-zinc-200 flex items-center gap-1.5">
                 <ArrowLeftRight className="w-3.5 h-3.5 text-sky-400" />
                 ECOSISTEMA INTEGRADO
               </span>
@@ -414,16 +414,16 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
               </span>
             </div>
 
-            <div className="flex items-center gap-2.5 sm:gap-3 shrink-0 font-mono text-xs">
-              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-950/50 border border-emerald-500/30 text-emerald-400 text-xs font-medium hidden sm:flex">
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0 font-mono text-xs">
+              <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-950/50 border border-emerald-500/30 text-emerald-400 text-[11px] font-medium hidden sm:flex">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 <span>Firestore &lt;38ms</span>
               </div>
               <button
                 onClick={() => onPlayDemo(project)}
-                className="px-3.5 py-1.5 rounded-full bg-white hover:bg-zinc-200 text-black font-bold flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 text-xs sm:text-sm shadow-md"
+                className="px-3.5 py-1.5 rounded-full bg-white hover:bg-zinc-200 text-black font-bold flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 text-xs shadow-md"
               >
-                <Activity className="w-4 h-4" />
+                <Activity className="w-3.5 h-3.5" />
                 <span>Ver Consola</span>
               </button>
               <a
@@ -431,9 +431,9 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                 target="_blank"
                 rel="noreferrer"
                 data-cursor="WHATSAPP"
-                className="px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-300 hover:text-white transition-all flex items-center gap-1.5 text-xs sm:text-sm hover:border-emerald-500/50"
+                className="px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-300 hover:text-white transition-all flex items-center gap-1.5 text-xs hover:border-emerald-500/50"
               >
-                <WhatsAppIcon className="w-4 h-4 text-emerald-400 fill-current" />
+                <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-400 fill-current" />
                 <span>Cotizar</span>
               </a>
             </div>
@@ -442,16 +442,16 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
           {/* ================================================================= */}
           {/* DESKTOP VIEW (lg:flex): BALANCED 4-4-4 COLUMNS & EQUAL CARD SPACING */}
           {/* ================================================================= */}
-          <div className="hidden lg:flex lg:flex-col justify-between flex-1 min-h-0 space-y-2 xl:space-y-3">
+          <div className="hidden lg:flex lg:flex-col justify-between flex-1 min-h-0 space-y-1.5 xl:space-y-2">
             
             {/* TOP SECTION: APP MÓVIL (Info Left 4 + 3 Callouts Center 4 + Smartphone Right 4) */}
             <div className="w-full custom-stage-anim">
-              <div className="grid grid-cols-12 gap-4 xl:gap-6 items-center">
+              <div className="grid grid-cols-12 gap-3 xl:gap-5 items-center">
                 
                 {/* Left Column (4 cols): App Móvil Info & Features */}
-                <div className="col-span-4 space-y-1.5 xl:space-y-2">
-                  <div className="space-y-1">
-                    <div className="inline-flex items-center gap-1.5 text-[11px] xl:text-xs font-mono font-bold text-sky-400 uppercase tracking-wider">
+                <div className="col-span-4 space-y-1">
+                  <div className="space-y-0.5">
+                    <div className="inline-flex items-center gap-1.5 text-[10px] xl:text-[11px] font-mono font-bold text-sky-400 uppercase tracking-wider">
                       <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
                       <span>TERMINAL DE CAMPO & MÓVIL</span>
                     </div>
@@ -459,73 +459,73 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                     <p className="text-xs xl:text-sm font-semibold text-zinc-200">
                       Aplicación de Terreno & Geo-Ticketing
                     </p>
-                    <p className="text-[11px] xl:text-xs text-zinc-300 leading-snug font-sans">
+                    <p className="text-[10px] xl:text-[11px] text-zinc-300 leading-snug font-sans">
                       App nativa en <span className="text-white font-semibold">Flutter & Dart</span> para cuadrillas en campo con órdenes en tiempo real, geolocalización GPS y sincronización con <span className="text-sky-300 font-semibold">Cloud Firestore</span>.
                     </p>
                   </div>
 
                   {/* 3 Key Features */}
-                  <div className="grid grid-cols-3 gap-2 pt-1.5 border-t border-white/10">
-                    <div className="flex items-start gap-1.5">
-                      <div className="w-5 h-5 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
-                        <MapPin className="w-2.5 h-2.5" />
+                  <div className="grid grid-cols-3 gap-1 pt-1 border-t border-white/10">
+                    <div className="flex items-start gap-1">
+                      <div className="w-4 h-4 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                        <MapPin className="w-2 h-2" />
                       </div>
                       <div>
-                        <div className="text-[11px] xl:text-xs font-bold text-zinc-100">Operaciones</div>
-                        <div className="text-[9.5px] text-zinc-400 leading-tight">En terreno</div>
+                        <div className="text-[10px] xl:text-[11px] font-bold text-zinc-100">Operaciones</div>
+                        <div className="text-[8.5px] text-zinc-400 leading-tight">En terreno</div>
                       </div>
                     </div>
 
-                    <div className="flex items-start gap-1.5">
-                      <div className="w-5 h-5 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
-                        <Navigation className="w-2.5 h-2.5" />
+                    <div className="flex items-start gap-1">
+                      <div className="w-4 h-4 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                        <Navigation className="w-2 h-2" />
                       </div>
                       <div>
-                        <div className="text-[11px] xl:text-xs font-bold text-zinc-100">Geo-GPS</div>
-                        <div className="text-[9.5px] text-zinc-400 leading-tight">Ruta en vivo</div>
+                        <div className="text-[10px] xl:text-[11px] font-bold text-zinc-100">Geo-GPS</div>
+                        <div className="text-[8.5px] text-zinc-400 leading-tight">Ruta en vivo</div>
                       </div>
                     </div>
 
-                    <div className="flex items-start gap-1.5">
-                      <div className="w-5 h-5 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
-                        <RefreshCw className="w-2.5 h-2.5" />
+                    <div className="flex items-start gap-1">
+                      <div className="w-4 h-4 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                        <RefreshCw className="w-2 h-2" />
                       </div>
                       <div>
-                        <div className="text-[11px] xl:text-xs font-bold text-zinc-100">Offline</div>
-                        <div className="text-[9.5px] text-zinc-400 leading-tight">Firestore</div>
+                        <div className="text-[10px] xl:text-[11px] font-bold text-zinc-100">Offline</div>
+                        <div className="text-[8.5px] text-zinc-400 leading-tight">Firestore</div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Center Column (4 cols): 3 FIELD APP CARDS (Equal spacing to text & mockup) */}
-                <div className="col-span-4 flex flex-col justify-center gap-1.5 xl:gap-2 px-1">
-                  <div className="p-1.5 xl:p-2 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
-                    <div className="flex items-center gap-1.5 text-[11px] xl:text-xs font-bold text-zinc-100">
+                {/* Center Column (4 cols): 3 FIELD APP CARDS */}
+                <div className="col-span-4 flex flex-col justify-center gap-1 px-1">
+                  <div className="p-1.5 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
+                    <div className="flex items-center gap-1.5 text-[10px] xl:text-[11px] font-bold text-zinc-100">
                       <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
                       <span>UX Táctil para Operarios</span>
                     </div>
-                    <p className="text-[10px] xl:text-[10.5px] text-zinc-300 leading-tight pl-3">
+                    <p className="text-[9px] xl:text-[10px] text-zinc-300 leading-tight pl-3">
                       Interacción táctil de alto contraste y registro de evidencias fotográficas en ruta.
                     </p>
                   </div>
 
-                  <div className="p-1.5 xl:p-2 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
-                    <div className="flex items-center gap-1.5 text-[11px] xl:text-xs font-bold text-zinc-100">
+                  <div className="p-1.5 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
+                    <div className="flex items-center gap-1.5 text-[10px] xl:text-[11px] font-bold text-zinc-100">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                       <span>Sincronización Reactiva</span>
                     </div>
-                    <p className="text-[10px] xl:text-[10.5px] text-zinc-300 leading-tight pl-3">
+                    <p className="text-[9px] xl:text-[10px] text-zinc-300 leading-tight pl-3">
                       Flujo de datos bidireccional instantáneo entre cuadrillas y despacho central.
                     </p>
                   </div>
 
-                  <div className="p-1.5 xl:p-2 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
-                    <div className="flex items-center gap-1.5 text-[11px] xl:text-xs font-bold text-zinc-100">
+                  <div className="p-1.5 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
+                    <div className="flex items-center gap-1.5 text-[10px] xl:text-[11px] font-bold text-zinc-100">
                       <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
                       <span>Geo-Ticketing & GPS en Ruta</span>
                     </div>
-                    <p className="text-[10px] xl:text-[10.5px] text-zinc-300 leading-tight pl-3">
+                    <p className="text-[9px] xl:text-[10px] text-zinc-300 leading-tight pl-3">
                       Trazabilidad continua de recorridos y geolocalización de órdenes en tiempo real.
                     </p>
                   </div>
@@ -535,20 +535,18 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                 <div className="col-span-4 flex justify-center py-0.5">
                   <div 
                     data-prevent-slide="true"
-                    className="mockup-interactive relative w-full max-w-44 xl:max-w-50 2xl:max-w-56 aspect-9/11.5 rounded-2xl bg-linear-to-b from-[#2a2f42] via-[#161822] to-[#0b0d13] p-1.5 xl:p-2 border border-white/20 shadow-[0_20px_45px_rgba(0,0,0,0.85)] group transition-all duration-300"
+                    className="mockup-interactive relative w-full max-w-36 xl:max-w-44 2xl:max-w-50 aspect-9/11.5 rounded-2xl bg-linear-to-b from-[#2a2f42] via-[#161822] to-[#0b0d13] p-1.5 border border-white/20 shadow-[0_15px_35px_rgba(0,0,0,0.85)] group transition-all duration-300"
                   >
                     {/* Dynamic Island Pill */}
-                    <div className="absolute top-1 left-1/2 -translate-x-1/2 w-10 xl:w-12 h-1.5 xl:h-2 rounded-full bg-black border border-white/10 flex items-center justify-between px-1.5 z-30 pointer-events-none">
+                    <div className="absolute top-1 left-1/2 -translate-x-1/2 w-10 h-1.5 rounded-full bg-black border border-white/10 flex items-center justify-between px-1.5 z-30 pointer-events-none">
                       <div className="w-0.5 h-0.5 rounded-full bg-sky-400/80 shadow-[0_0_3px_#38bdf8] animate-pulse" />
                       <div className="w-1 h-1 rounded-full bg-[#111] border border-white/20 flex items-center justify-center">
                         <div className="w-0.5 h-0.5 rounded-full bg-emerald-400/60" />
                       </div>
                     </div>
 
-                    {/* Specular Glare */}
                     <div className="absolute inset-0 rounded-2xl bg-linear-to-tr from-transparent via-white/4 to-transparent pointer-events-none z-30" />
 
-                    {/* Inner App Container */}
                     <div className="relative w-full h-full rounded-xl overflow-hidden bg-[#07090e] border border-white/10 shadow-inner interactive-screen">
                       <ServiIntelOperarioApp />
                     </div>
@@ -559,7 +557,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
             </div>
 
             {/* REAL-TIME ECOSYSTEM SYNC STREAM RIBBON */}
-            <div className="w-full py-1 px-3 rounded-lg bg-sky-500/5 border border-sky-500/15 flex items-center justify-between font-mono text-[10px] xl:text-[11px] text-sky-400/90 custom-stage-anim shrink-0">
+            <div className="w-full py-1 px-3 rounded-lg bg-sky-500/5 border border-sky-500/15 flex items-center justify-between font-mono text-[9.5px] xl:text-[10.5px] text-sky-400/90 custom-stage-anim shrink-0">
               <div className="flex items-center gap-2">
                 <Radio className="w-3 h-3 text-sky-400 animate-pulse" />
                 <span className="font-bold tracking-wider">LIVE DATA BUS // FIRESTORE STREAM</span>
@@ -572,76 +570,74 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
               </div>
             </div>
 
-            {/* BOTTOM SECTION: WEB ADMIN CONSOLE (Laptop Left 4 + 3 Callouts Center 4 + Info Right 4) */}
+            {/* BOTTOM SECTION: WEB ADMIN CONSOLE */}
             <div className="w-full custom-stage-anim">
-              <div className="grid grid-cols-12 gap-4 xl:gap-6 items-center">
+              <div className="grid grid-cols-12 gap-3 xl:gap-5 items-center">
                 
                 {/* Left Column (4 cols): MACBOOK / WEB CONSOLE MOCKUP */}
                 <div className="col-span-4 flex justify-center py-0.5">
                   <div 
                     data-prevent-slide="true"
-                    className="mockup-interactive relative w-full max-w-68 xl:max-w-76 2xl:max-w-84 flex flex-col items-center group transition-all duration-300"
+                    className="mockup-interactive relative w-full max-w-56 xl:max-w-68 2xl:max-w-76 flex flex-col items-center group transition-all duration-300"
                   >
                     {/* Display Chassis */}
-                    <div className="relative w-full aspect-16/10 rounded-xl bg-linear-to-b from-[#1c1f2c] via-[#141722] to-[#0f1118] p-2 xl:p-2.5 border border-white/20 shadow-[0_20px_45px_rgba(0,0,0,0.85)] overflow-hidden">
+                    <div className="relative w-full aspect-16/10 rounded-xl bg-linear-to-b from-[#1c1f2c] via-[#141722] to-[#0f1118] p-1.5 border border-white/20 shadow-[0_15px_35px_rgba(0,0,0,0.85)] overflow-hidden">
                       {/* Camera Notch */}
                       <div className="absolute top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-black border border-white/15 flex items-center justify-center z-30 pointer-events-none">
                         <div className="w-0.5 h-0.5 rounded-full bg-emerald-500/50" />
                       </div>
 
-                      {/* Specular Glass Glare */}
                       <div className="absolute inset-0 bg-linear-to-tr from-transparent via-white/4 to-transparent pointer-events-none z-30" />
 
-                      {/* Inner Screen */}
                       <div className="relative w-full h-full rounded-lg overflow-hidden bg-[#07090e] border border-white/10 shadow-inner interactive-screen">
                         <ServiIntelLaptopApp />
                       </div>
                     </div>
 
                     {/* Aluminum Laptop Base */}
-                    <div className="w-[104%] h-2.5 bg-linear-to-b from-[#252838] to-[#12141c] rounded-b-lg border-t border-white/15 shadow-xl relative -mt-0.5 flex justify-center pointer-events-none">
-                      <div className="w-12 h-0.5 bg-black/60 rounded-b-sm mt-0.5" />
+                    <div className="w-[104%] h-2 bg-linear-to-b from-[#252838] to-[#12141c] rounded-b-lg border-t border-white/15 shadow-xl relative -mt-0.5 flex justify-center pointer-events-none">
+                      <div className="w-10 h-0.5 bg-black/60 rounded-b-sm mt-0.5" />
                     </div>
                   </div>
                 </div>
 
-                {/* Center Column (4 cols): 3 WEB CONSOLE CARDS (Equal spacing to mockup & text) */}
-                <div className="col-span-4 flex flex-col justify-center gap-1.5 xl:gap-2 px-1">
-                  <div className="p-1.5 xl:p-2 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
-                    <div className="flex items-center gap-1.5 text-[11px] xl:text-xs font-bold text-zinc-100">
+                {/* Center Column (4 cols): 3 WEB CONSOLE CARDS */}
+                <div className="col-span-4 flex flex-col justify-center gap-1 px-1">
+                  <div className="p-1.5 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
+                    <div className="flex items-center gap-1.5 text-[10px] xl:text-[11px] font-bold text-zinc-100">
                       <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
                       <span>Rendimiento Puro & 0 KB Overhead</span>
                     </div>
-                    <p className="text-[10px] xl:text-[10.5px] text-zinc-300 leading-tight pl-3">
+                    <p className="text-[9px] xl:text-[10px] text-zinc-300 leading-tight pl-3">
                       Sin sobrecarga de librerías: carga instantánea y manipulación nativa ultra-rápida.
                     </p>
                   </div>
 
-                  <div className="p-1.5 xl:p-2 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
-                    <div className="flex items-center gap-1.5 text-[11px] xl:text-xs font-bold text-zinc-100">
+                  <div className="p-1.5 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
+                    <div className="flex items-center gap-1.5 text-[10px] xl:text-[11px] font-bold text-zinc-100">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                       <span>Monitoreo & Roles RBAC</span>
                     </div>
-                    <p className="text-[10px] xl:text-[10.5px] text-zinc-300 leading-tight pl-3">
+                    <p className="text-[9px] xl:text-[10px] text-zinc-300 leading-tight pl-3">
                       Despacho de órdenes y supervisión de cuadrillas en tiempo real con seguridad.
                     </p>
                   </div>
 
-                  <div className="p-1.5 xl:p-2 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
-                    <div className="flex items-center gap-1.5 text-[11px] xl:text-xs font-bold text-zinc-100">
+                  <div className="p-1.5 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
+                    <div className="flex items-center gap-1.5 text-[10px] xl:text-[11px] font-bold text-zinc-100">
                       <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
                       <span>Despacho en Caliente Live</span>
                     </div>
-                    <p className="text-[10px] xl:text-[10.5px] text-zinc-300 leading-tight pl-3">
+                    <p className="text-[9px] xl:text-[10px] text-zinc-300 leading-tight pl-3">
                       Canal WebSockets en vivo para actualización de estados sin recargar pantalla.
                     </p>
                   </div>
                 </div>
 
-                {/* Right Column (4 cols): Web Admin Console Info & Features */}
-                <div className="col-span-4 space-y-1.5 xl:space-y-2">
-                  <div className="space-y-1">
-                    <div className="inline-flex items-center gap-1.5 text-[11px] xl:text-xs font-mono font-bold text-sky-400 uppercase tracking-wider">
+                {/* Right Column (4 cols): Web Admin Console Info */}
+                <div className="col-span-4 space-y-1">
+                  <div className="space-y-0.5">
+                    <div className="inline-flex items-center gap-1.5 text-[10px] xl:text-[11px] font-mono font-bold text-sky-400 uppercase tracking-wider">
                       <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
                       <span>WEB ADMIN CONSOLE</span>
                     </div>
@@ -649,40 +645,40 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                     <p className="text-xs xl:text-sm font-semibold text-zinc-200">
                       Consola Web de Administración & Despacho
                     </p>
-                    <p className="text-[11px] xl:text-xs text-zinc-300 leading-snug font-sans">
+                    <p className="text-[10px] xl:text-[11px] text-zinc-300 leading-snug font-sans">
                       Consola administrativa en <span className="text-white font-semibold">JavaScript Vanilla</span> puro: 0 KB sobrecarga, manipulación DOM nativa y sync sub-38ms con <span className="text-sky-300 font-semibold">Cloud Firestore & WebSockets</span>.
                     </p>
                   </div>
 
                   {/* 3 Key Features */}
-                  <div className="grid grid-cols-3 gap-2 pt-1.5 border-t border-white/10">
-                    <div className="flex items-start gap-1.5">
-                      <div className="w-5 h-5 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
-                        <Zap className="w-2.5 h-2.5" />
+                  <div className="grid grid-cols-3 gap-1 pt-1 border-t border-white/10">
+                    <div className="flex items-start gap-1">
+                      <div className="w-4 h-4 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                        <Zap className="w-2 h-2" />
                       </div>
                       <div>
-                        <div className="text-[11px] xl:text-xs font-bold text-zinc-100">Cero Overhead</div>
-                        <div className="text-[9.5px] text-zinc-400 leading-tight">Ultra rápido</div>
+                        <div className="text-[10px] xl:text-[11px] font-bold text-zinc-100">Cero Overhead</div>
+                        <div className="text-[8.5px] text-zinc-400 leading-tight">Ultra rápido</div>
                       </div>
                     </div>
 
-                    <div className="flex items-start gap-1.5">
-                      <div className="w-5 h-5 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
-                        <Monitor className="w-2.5 h-2.5" />
+                    <div className="flex items-start gap-1">
+                      <div className="w-4 h-4 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                        <Monitor className="w-2 h-2" />
                       </div>
                       <div>
-                        <div className="text-[11px] xl:text-xs font-bold text-zinc-100">Dashboard</div>
-                        <div className="text-[9.5px] text-zinc-400 leading-tight">En vivo</div>
+                        <div className="text-[10px] xl:text-[11px] font-bold text-zinc-100">Dashboard</div>
+                        <div className="text-[8.5px] text-zinc-400 leading-tight">En vivo</div>
                       </div>
                     </div>
 
-                    <div className="flex items-start gap-1.5">
-                      <div className="w-5 h-5 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
-                        <ShieldCheck className="w-2.5 h-2.5" />
+                    <div className="flex items-start gap-1">
+                      <div className="w-4 h-4 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                        <ShieldCheck className="w-2 h-2" />
                       </div>
                       <div>
-                        <div className="text-[11px] xl:text-xs font-bold text-zinc-100">Seguridad</div>
-                        <div className="text-[9.5px] text-zinc-400 leading-tight">RBAC</div>
+                        <div className="text-[10px] xl:text-[11px] font-bold text-zinc-100">Seguridad</div>
+                        <div className="text-[8.5px] text-zinc-400 leading-tight">RBAC</div>
                       </div>
                     </div>
                   </div>
@@ -693,16 +689,16 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
 
           </div>
 
-          {/* ================================================================= */}
+          {/* ========================================================================= */}
           {/* MOBILE VIEW (lg:hidden): CLEAN SEGMENTED TAB SWITCHER & NATIVE FIT */}
-          {/* ================================================================= */}
-          <div className="flex lg:hidden flex-col space-y-4 pb-20 pt-1 custom-stage-anim">
+          {/* ========================================================================= */}
+          <div className="flex lg:hidden flex-col space-y-3 pb-8 pt-0.5 custom-stage-anim">
             
             {/* Segmented Switcher */}
             <div className="flex items-center p-1 rounded-xl bg-white/5 border border-white/10 font-mono text-xs">
               <button
                 onClick={() => setMobileTab('mobile')}
-                className={`flex-1 py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer font-bold ${
+                className={`flex-1 py-1.5 px-3 rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer font-bold ${
                   mobileTab === 'mobile'
                     ? 'bg-sky-400 text-black shadow-md'
                     : 'text-zinc-400 hover:text-white'
@@ -712,7 +708,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
               </button>
               <button
                 onClick={() => setMobileTab('web')}
-                className={`flex-1 py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer font-bold ${
+                className={`flex-1 py-1.5 px-3 rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer font-bold ${
                   mobileTab === 'web'
                     ? 'bg-sky-400 text-black shadow-md'
                     : 'text-zinc-400 hover:text-white'
@@ -723,7 +719,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
             </div>
 
             {/* Realtime Stream Pill */}
-            <div className="flex items-center justify-between px-3 py-1.5 rounded-lg bg-sky-500/10 border border-sky-500/20 font-mono text-[11px] text-sky-300">
+            <div className="flex items-center justify-between px-3 py-1 rounded-lg bg-sky-500/10 border border-sky-500/20 font-mono text-[10.5px] text-sky-300">
               <div className="flex items-center gap-1.5">
                 <Radio className="w-3 h-3 text-sky-400 animate-pulse" />
                 <span>FLIGHT SYNC STREAM // FIRESTORE</span>
@@ -733,17 +729,17 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
 
             {/* TAB 1: FIELD MOBILE APP */}
             {mobileTab === 'mobile' ? (
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {/* Smartphone Mockup */}
-                <div className="flex justify-center py-1">
+                <div className="flex justify-center py-0.5">
                   <div 
                     data-prevent-slide="true"
-                    className="mockup-interactive relative w-full max-w-[215px] aspect-9/11.5 rounded-2xl bg-linear-to-b from-[#2a2f42] via-[#161822] to-[#0b0d13] p-2 border border-white/20 shadow-2xl"
+                    className="mockup-interactive relative w-full max-w-47.5 sm:max-w-52.5 aspect-9/11.5 rounded-2xl bg-linear-to-b from-[#2a2f42] via-[#161822] to-[#0b0d13] p-1.5 border border-white/20 shadow-2xl"
                   >
                     {/* Dynamic Island */}
-                    <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-12 h-2 rounded-full bg-black border border-white/10 flex items-center justify-between px-1.5 z-30 pointer-events-none">
-                      <div className="w-1 h-1 rounded-full bg-sky-400/80 shadow-[0_0_3px_#38bdf8] animate-pulse" />
-                      <div className="w-1.5 h-1.5 rounded-full bg-[#111] border border-white/20 flex items-center justify-center">
+                    <div className="absolute top-1 left-1/2 -translate-x-1/2 w-10 h-1.5 rounded-full bg-black border border-white/10 flex items-center justify-between px-1.5 z-30 pointer-events-none">
+                      <div className="w-0.5 h-0.5 rounded-full bg-sky-400/80 shadow-[0_0_3px_#38bdf8] animate-pulse" />
+                      <div className="w-1 h-1 rounded-full bg-[#111] border border-white/20 flex items-center justify-center">
                         <div className="w-0.5 h-0.5 rounded-full bg-emerald-400/60" />
                       </div>
                     </div>
@@ -757,80 +753,49 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                 </div>
 
                 {/* Info Text */}
-                <div className="space-y-2">
-                  <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-sky-400 uppercase tracking-wider">
+                <div className="space-y-1.5">
+                  <div className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-sky-400 uppercase tracking-wider">
                     <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
                     <span>TERMINAL DE CAMPO & MÓVIL</span>
                   </div>
                   <ServiIntelFieldTitle isActive={isActive} />
-                  <p className="text-sm font-semibold text-zinc-200">
+                  <p className="text-xs font-semibold text-zinc-200">
                     Aplicación de Terreno & Geo-Ticketing
                   </p>
-                  <p className="text-xs text-zinc-300 leading-relaxed font-sans">
+                  <p className="text-[11px] text-zinc-300 leading-relaxed font-sans">
                     Aplicación móvil nativa en <span className="text-white font-semibold">Flutter & Dart</span> diseñada para cuadrillas operativas en campo con geolocalización GPS de rutas y sincronización con <span className="text-sky-300 font-semibold">Cloud Firestore</span>.
                   </p>
                 </div>
 
                 {/* 3 Features */}
-                <div className="grid grid-cols-3 gap-2 pt-2 border-t border-white/10">
-                  <div className="p-2 rounded-lg bg-white/3 border border-white/5 flex flex-col items-center text-center space-y-1">
-                    <MapPin className="w-3.5 h-3.5 text-sky-400" />
-                    <span className="text-[10.5px] font-bold text-white">Operaciones</span>
-                    <span className="text-[9px] text-zinc-400">En terreno</span>
+                <div className="grid grid-cols-3 gap-1.5 pt-1 border-t border-white/10">
+                  <div className="p-1.5 rounded-lg bg-white/3 border border-white/5 flex flex-col items-center text-center space-y-0.5">
+                    <MapPin className="w-3 h-3 text-sky-400" />
+                    <span className="text-[10px] font-bold text-white">Operaciones</span>
+                    <span className="text-[8.5px] text-zinc-400">En terreno</span>
                   </div>
-                  <div className="p-2 rounded-lg bg-white/3 border border-white/5 flex flex-col items-center text-center space-y-1">
-                    <Navigation className="w-3.5 h-3.5 text-sky-400" />
-                    <span className="text-[10.5px] font-bold text-white">Geo-GPS</span>
-                    <span className="text-[9px] text-zinc-400">Ruta en vivo</span>
+                  <div className="p-1.5 rounded-lg bg-white/3 border border-white/5 flex flex-col items-center text-center space-y-0.5">
+                    <Navigation className="w-3 h-3 text-sky-400" />
+                    <span className="text-[10px] font-bold text-white">Geo-GPS</span>
+                    <span className="text-[8.5px] text-zinc-400">Ruta en vivo</span>
                   </div>
-                  <div className="p-2 rounded-lg bg-white/3 border border-white/5 flex flex-col items-center text-center space-y-1">
-                    <RefreshCw className="w-3.5 h-3.5 text-sky-400" />
-                    <span className="text-[10.5px] font-bold text-white">Offline</span>
-                    <span className="text-[9px] text-zinc-400">Firestore</span>
-                  </div>
-                </div>
-
-                {/* 3 Field Callouts */}
-                <div className="space-y-2 pt-1">
-                  <div className="p-2.5 rounded-xl bg-white/3 border border-white/10 space-y-1">
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-100">
-                      <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
-                      <span>UX Táctil para Operarios</span>
-                    </div>
-                    <p className="text-[11px] text-zinc-300 leading-relaxed pl-3">
-                      Diseñada para operarios con feedback táctil y registro fotográfico en ruta.
-                    </p>
-                  </div>
-                  <div className="p-2.5 rounded-xl bg-white/3 border border-white/10 space-y-1">
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-100">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                      <span>Sincronización Reactiva</span>
-                    </div>
-                    <p className="text-[11px] text-zinc-300 leading-relaxed pl-3">
-                      Flujo de datos reactivo y conectado con Cloud Firestore en tiempo real.
-                    </p>
-                  </div>
-                  <div className="p-2.5 rounded-xl bg-white/3 border border-white/10 space-y-1">
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-100">
-                      <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
-                      <span>Geo-Ticketing & GPS en Ruta</span>
-                    </div>
-                    <p className="text-[11px] text-zinc-300 leading-relaxed pl-3">
-                      Trazabilidad continua de recorridos y geolocalización de órdenes en vivo.
-                    </p>
+                  <div className="p-1.5 rounded-lg bg-white/3 border border-white/5 flex flex-col items-center text-center space-y-0.5">
+                    <RefreshCw className="w-3 h-3 text-sky-400" />
+                    <span className="text-[10px] font-bold text-white">Offline</span>
+                    <span className="text-[8.5px] text-zinc-400">Firestore</span>
                   </div>
                 </div>
               </div>
             ) : (
               /* TAB 2: WEB ADMIN CONSOLE */
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {/* Laptop Mockup */}
-                <div className="flex justify-center py-1">
+                <div className="flex justify-center py-0.5">
                   <div 
                     data-prevent-slide="true"
-                    className="mockup-interactive relative w-full max-w-[310px] flex flex-col items-center"
+                    className="mockup-interactive relative w-full max-w-67.5 sm:max-w-75 flex flex-col items-center"
                   >
-                    <div className="relative w-full aspect-16/10 rounded-xl bg-linear-to-b from-[#1c1f2c] via-[#141722] to-[#0f1118] p-2 border border-white/20 shadow-2xl overflow-hidden">
+                    <div className="relative w-full aspect-16/10 rounded-xl bg-linear-to-b from-[#1c1f2c] via-[#141722] to-[#0f1118] p-1.5 border border-white/20 shadow-2xl overflow-hidden">
                       <div className="absolute top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-black border border-white/15 flex items-center justify-center z-30 pointer-events-none">
                         <div className="w-0.5 h-0.5 rounded-full bg-emerald-500/50" />
                       </div>
@@ -839,74 +804,43 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                         <ServiIntelLaptopApp />
                       </div>
                     </div>
-                    <div className="w-[104%] h-2.5 bg-linear-to-b from-[#252838] to-[#12141c] rounded-b-lg border-t border-white/15 shadow-xl relative -mt-0.5 flex justify-center pointer-events-none">
-                      <div className="w-12 h-0.5 bg-black/60 rounded-b-sm mt-0.5" />
+                    <div className="w-[104%] h-2 bg-linear-to-b from-[#252838] to-[#12141c] rounded-b-lg border-t border-white/15 shadow-xl relative -mt-0.5 flex justify-center pointer-events-none">
+                      <div className="w-10 h-0.5 bg-black/60 rounded-b-sm mt-0.5" />
                     </div>
                   </div>
                 </div>
 
                 {/* Info Text */}
-                <div className="space-y-2">
-                  <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-sky-400 uppercase tracking-wider">
+                <div className="space-y-1.5">
+                  <div className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-sky-400 uppercase tracking-wider">
                     <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
                     <span>WEB ADMIN CONSOLE</span>
                   </div>
                   <ServiIntelAdminTitle isActive={isActive} />
-                  <p className="text-sm font-semibold text-zinc-200">
+                  <p className="text-xs font-semibold text-zinc-200">
                     Consola Web de Administración & Despacho
                   </p>
-                  <p className="text-xs text-zinc-300 leading-relaxed font-sans">
+                  <p className="text-[11px] text-zinc-300 leading-relaxed font-sans">
                     Plataforma administrativa construida en <span className="text-white font-semibold">JavaScript Vanilla</span> puro: cero sobrecarga de librerías, manipulación nativa del DOM y sincronización continua para despacho en caliente.
                   </p>
                 </div>
 
                 {/* 3 Features */}
-                <div className="grid grid-cols-3 gap-2 pt-2 border-t border-white/10">
-                  <div className="p-2 rounded-lg bg-white/3 border border-white/5 flex flex-col items-center text-center space-y-1">
-                    <Zap className="w-3.5 h-3.5 text-sky-400" />
-                    <span className="text-[10.5px] font-bold text-white">Rendimiento</span>
-                    <span className="text-[9px] text-zinc-400">Cero overhead</span>
+                <div className="grid grid-cols-3 gap-1.5 pt-1 border-t border-white/10">
+                  <div className="p-1.5 rounded-lg bg-white/3 border border-white/5 flex flex-col items-center text-center space-y-0.5">
+                    <Zap className="w-3 h-3 text-sky-400" />
+                    <span className="text-[10px] font-bold text-white">Rendimiento</span>
+                    <span className="text-[8.5px] text-zinc-400">Cero overhead</span>
                   </div>
-                  <div className="p-2 rounded-lg bg-white/3 border border-white/5 flex flex-col items-center text-center space-y-1">
-                    <Monitor className="w-3.5 h-3.5 text-sky-400" />
-                    <span className="text-[10.5px] font-bold text-white">Dashboard</span>
-                    <span className="text-[9px] text-zinc-400">En vivo</span>
+                  <div className="p-1.5 rounded-lg bg-white/3 border border-white/5 flex flex-col items-center text-center space-y-0.5">
+                    <Monitor className="w-3 h-3 text-sky-400" />
+                    <span className="text-[10px] font-bold text-white">Dashboard</span>
+                    <span className="text-[8.5px] text-zinc-400">En vivo</span>
                   </div>
-                  <div className="p-2 rounded-lg bg-white/3 border border-white/5 flex flex-col items-center text-center space-y-1">
-                    <ShieldCheck className="w-3.5 h-3.5 text-sky-400" />
-                    <span className="text-[10.5px] font-bold text-white">Seguridad</span>
-                    <span className="text-[9px] text-zinc-400">RBAC</span>
-                  </div>
-                </div>
-
-                {/* 3 Web Callouts */}
-                <div className="space-y-2 pt-1">
-                  <div className="p-2.5 rounded-xl bg-white/3 border border-white/10 space-y-1">
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-100">
-                      <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
-                      <span>Rendimiento Puro & 0 KB Overhead</span>
-                    </div>
-                    <p className="text-[11px] text-zinc-300 leading-relaxed pl-3">
-                      Manipulación pura del DOM para tiempos de respuesta ultra-rápidos en operaciones de alta frecuencia.
-                    </p>
-                  </div>
-                  <div className="p-2.5 rounded-xl bg-white/3 border border-white/10 space-y-1">
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-100">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                      <span>Monitoreo & Roles RBAC</span>
-                    </div>
-                    <p className="text-[11px] text-zinc-300 leading-relaxed pl-3">
-                      Supervisión de cuadrillas, asignación de órdenes y control de estados con permisos estrictos.
-                    </p>
-                  </div>
-                  <div className="p-2.5 rounded-xl bg-white/3 border border-white/10 space-y-1">
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-100">
-                      <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
-                      <span>Despacho en Caliente Live</span>
-                    </div>
-                    <p className="text-[11px] text-zinc-300 leading-relaxed pl-3">
-                      Canal WebSockets en vivo para actualización de estados sin recargar pantalla.
-                    </p>
+                  <div className="p-1.5 rounded-lg bg-white/3 border border-white/5 flex flex-col items-center text-center space-y-0.5">
+                    <ShieldCheck className="w-3 h-3 text-sky-400" />
+                    <span className="text-[10px] font-bold text-white">Seguridad</span>
+                    <span className="text-[8.5px] text-zinc-400">RBAC</span>
                   </div>
                 </div>
               </div>
@@ -925,31 +859,31 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
     return (
       <div
         ref={containerRef}
-        className="w-full h-full min-h-screen flex flex-col justify-center px-6 sm:px-10 md:px-16 lg:px-24 pt-24 pb-16 relative select-none overflow-hidden text-zinc-100 font-sans"
+        className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-12 sm:pt-20 pb-12 sm:pb-16 relative select-none overflow-y-auto custom-scroll text-zinc-100 font-sans"
         style={{
           background: 'radial-gradient(ellipse 100% 100% at 50% 15%, #081626 0%, #050d18 55%, #02050b 100%)'
         }}
       >
-        <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-6 relative z-10">
+        <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-2 sm:space-y-4 relative z-10">
 
           {/* Header Bar */}
-          <div className="w-full flex items-center justify-between pb-3 border-b border-sky-500/20 custom-stage-anim shrink-0 font-mono text-xs text-zinc-400">
-            <div className="flex items-center gap-3">
+          <div className="w-full flex items-center justify-between pb-1.5 sm:pb-2.5 border-b border-sky-500/20 custom-stage-anim shrink-0 font-mono text-xs text-zinc-400">
+            <div className="flex items-center gap-2 sm:gap-3">
               <span className="font-bold tracking-widest text-zinc-200">02 // CONTROL CALIDAD INTEGRADO</span>
               <span className="text-zinc-600 hidden sm:inline">•</span>
-              <span className="px-2.5 py-0.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400 font-mono text-[11px] flex items-center gap-1.5">
+              <span className="px-2.5 py-0.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400 font-mono text-[10px] sm:text-[11px] flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 POWER PLATFORM SUITE @ O-TEK
               </span>
             </div>
             <div className="flex items-center gap-2 text-sky-300 font-mono text-xs">
               <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
-              <span>SharePoint + Power Automate Live</span>
+              <span className="hidden sm:inline">SharePoint + Power Automate Live</span>
             </div>
           </div>
 
           {/* 2-Column Content: Mockup LEFT (Tablet), Content RIGHT */}
-          <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+          <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-8 xl:gap-12 items-center">
 
             {/* Left: Device Mockup (Tablet Industrial) */}
             <div className="lg:col-span-6 flex flex-col items-center justify-center custom-stage-anim">
@@ -960,54 +894,55 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                 title={project.title}
                 codeSnippet={project.codeSnippet}
                 projectId={project.id}
+                isActive={isActive}
               />
             </div>
 
             {/* Right: Text Narrative & Enterprise Engineering */}
-            <div className="lg:col-span-6 space-y-4 sm:space-y-5 custom-stage-anim">
-              <div className="space-y-2">
-                <span className="text-xs font-mono font-medium text-sky-400 tracking-wider uppercase block">
+            <div className="lg:col-span-6 space-y-2 lg:space-y-2.5 custom-stage-anim">
+              <div className="space-y-0.5 sm:space-y-1">
+                <span className="text-[10px] sm:text-xs font-mono font-medium text-sky-400 tracking-wider uppercase block">
                   Digitalización Industrial & Cloud Automation
                 </span>
                 <OtekQualityTitle isActive={isActive} />
-                <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed">
+                <p className="text-xs sm:text-[13px] text-zinc-300 font-normal leading-relaxed">
                   {project.subtitle}
                 </p>
               </div>
 
               {/* Internal Project Attribution Pill */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-sky-500/10 border border-sky-500/25 text-xs text-sky-300">
-                <ShieldCheck className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+              <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-lg bg-sky-500/10 border border-sky-500/25 text-[11px] text-sky-300">
+                <ShieldCheck className="w-3 h-3 text-sky-400 shrink-0" />
                 <span className="font-medium">Proyecto Corporativo Interno @ O-tek (Power Platform)</span>
               </div>
 
-              <p className="text-xs sm:text-sm text-zinc-300 font-sans leading-relaxed">
+              <p className="text-xs sm:text-[13px] text-zinc-300 font-sans leading-relaxed">
                 {project.description}
               </p>
 
               {/* Technical Metrics Strip */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 pt-3 font-mono text-xs border-t border-white/10">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 pt-1.5 font-mono text-xs border-t border-white/10">
                 {project.metrics.map(m => (
-                  <div key={m.label} className="space-y-1">
-                    <span className="text-[10px] sm:text-[11px] text-zinc-400 uppercase tracking-wider block font-medium">{m.label}</span>
-                    <span className="text-sm sm:text-base font-bold text-sky-400 block">{m.val}</span>
+                  <div key={m.label} className="space-y-0.5">
+                    <span className="text-[9px] sm:text-[10px] text-zinc-400 uppercase tracking-wider block font-medium">{m.label}</span>
+                    <span className="text-xs sm:text-sm font-bold text-sky-400 block">{m.val}</span>
                   </div>
                 ))}
               </div>
 
               {/* Actions */}
-              <div className="flex flex-wrap items-center gap-2.5 pt-2 font-mono text-xs">
+              <div className="flex flex-wrap items-center gap-2 pt-0.5 font-mono text-xs">
                 <button
                   onClick={() => setShowOtekModal(true)}
-                  className="px-5 py-2.5 rounded-full bg-sky-500 hover:bg-sky-400 text-black font-bold flex items-center gap-2 shadow-lg shadow-sky-500/20 transition-all cursor-pointer active:scale-95 text-xs sm:text-sm"
+                  className="px-3.5 sm:px-4 py-1.5 rounded-full bg-sky-500 hover:bg-sky-400 text-black font-bold flex items-center gap-1.5 shadow-lg shadow-sky-500/20 transition-all cursor-pointer active:scale-95 text-xs"
                 >
-                  <Workflow className="w-4 h-4" />
+                  <Workflow className="w-3.5 h-3.5" />
                   <span>Ver Flujo & Arquitectura</span>
                 </button>
 
                 <button
                   onClick={() => onPlayDemo(project)}
-                  className="px-4 py-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-zinc-200 hover:text-white flex items-center gap-2 transition-all cursor-pointer"
+                  className="px-3 sm:px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-zinc-200 hover:text-white flex items-center gap-1.5 transition-all cursor-pointer text-xs"
                 >
                   <Eye className="w-3.5 h-3.5" />
                   <span>Probar Formulario</span>
@@ -1018,7 +953,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                   target="_blank"
                   rel="noreferrer"
                   data-cursor="WHATSAPP"
-                  className="px-4 py-2.5 rounded-full border border-white/15 text-zinc-300 hover:text-white transition-all flex items-center gap-2 hover:border-emerald-500/50"
+                  className="px-3 sm:px-3.5 py-1.5 rounded-full border border-white/15 text-zinc-300 hover:text-white transition-all flex items-center gap-1.5 hover:border-emerald-500/50 text-xs"
                 >
                   <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-400 fill-current" />
                   <span>Cotizar</span>
@@ -1046,88 +981,88 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
     return (
       <div
         ref={containerRef}
-        className="w-full h-full min-h-screen flex flex-col justify-center px-6 sm:px-10 md:px-16 lg:px-24 pt-24 pb-16 relative select-none overflow-hidden text-zinc-100 font-sans"
+        className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-12 sm:pt-20 pb-12 sm:pb-16 relative select-none overflow-y-auto custom-scroll text-zinc-100 font-sans"
         style={{
           background: 'radial-gradient(ellipse 100% 100% at 50% 15%, #1c1003 0%, #0d0701 55%, #050300 100%)'
         }}
       >
-        <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-6 relative z-10">
+        <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-2 sm:space-y-4 relative z-10">
 
           {/* Header Bar */}
-          <div className="w-full flex items-center justify-between pb-3 border-b border-amber-500/20 custom-stage-anim shrink-0 font-mono text-xs text-zinc-400">
-            <div className="flex items-center gap-3">
+          <div className="w-full flex items-center justify-between pb-1.5 sm:pb-2.5 border-b border-amber-500/20 custom-stage-anim shrink-0 font-mono text-xs text-zinc-400">
+            <div className="flex items-center gap-2 sm:gap-3">
               <span className="font-bold tracking-widest text-zinc-200">03 // SOPA SENIOR</span>
               <span className="text-zinc-600 hidden sm:inline">•</span>
-              <span className="px-2.5 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 font-mono text-[11px] flex items-center gap-1.5">
+              <span className="px-2.5 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 font-mono text-[10px] sm:text-[11px] flex items-center gap-1.5">
                 <GooglePlayIcon className="w-3.5 h-3.5 fill-current" />
                 PUBLICADO EN GOOGLE PLAY STORE
               </span>
             </div>
             <div className="flex items-center gap-2 text-amber-300 font-mono text-xs">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-              <span>AdMob + IAP Producción</span>
+              <span className="hidden sm:inline">AdMob + IAP Producción</span>
             </div>
           </div>
 
-          {/* 2-Column Content: Content LEFT, Mockup RIGHT (Alternated!) */}
-          <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+          {/* 2-Column Content: Content LEFT, Mockup RIGHT */}
+          <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-8 xl:gap-12 items-center">
 
             {/* Left: Text Narrative */}
-            <div className="lg:col-span-7 space-y-4 sm:space-y-5 custom-stage-anim order-2 lg:order-1">
-              <div className="space-y-2">
-                <span className="text-xs font-mono font-medium text-amber-400/90 tracking-wider uppercase block">
+            <div className="lg:col-span-7 space-y-2 lg:space-y-2.5 custom-stage-anim order-2 lg:order-1">
+              <div className="space-y-0.5 sm:space-y-1">
+                <span className="text-[10px] sm:text-xs font-mono font-medium text-amber-400/90 tracking-wider uppercase block">
                   Juego Móvil Nativo & Monetización en Producción
                 </span>
                 <SopaSeniorTitle isActive={isActive} />
-                <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed">
+                <p className="text-xs sm:text-[13px] text-zinc-300 font-normal leading-relaxed">
                   {project.subtitle}
                 </p>
               </div>
 
               {/* Attribution Pill */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/25 text-xs text-amber-300">
-                <GooglePlayIcon className="w-3.5 h-3.5 fill-current text-amber-400 shrink-0" />
+              <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-lg bg-amber-500/10 border border-amber-500/25 text-[11px] text-amber-300">
+                <GooglePlayIcon className="w-3 h-3 fill-current text-amber-400 shrink-0" />
                 <span className="font-medium">Publicado en Google Play Store • Google Mobile Ads & IAP</span>
               </div>
 
               {/* Key Objective Highlight */}
-              <div className="flex items-stretch gap-3.5 px-4 py-3 sm:py-3.5 rounded-xl bg-white/[0.03] border border-white/10 shadow-sm backdrop-blur-md">
-                <div className="w-1.5 rounded-full bg-amber-400 shrink-0 shadow-[0_0_10px_rgba(245,158,11,0.5)]" />
-                <p className="text-xs sm:text-sm font-sans font-medium text-zinc-200 tracking-[-0.01em] leading-relaxed self-center">
+              <div className="flex items-stretch gap-2.5 px-3 py-1.5 rounded-xl bg-white/3 border border-white/10 shadow-sm backdrop-blur-md">
+                <div className="w-1 rounded-full bg-amber-400 shrink-0 shadow-[0_0_10px_rgba(245,158,11,0.5)]" />
+                <p className="text-xs sm:text-[13px] font-sans font-medium text-zinc-200 tracking-[-0.01em] leading-relaxed self-center">
                   {project.headline}
                 </p>
               </div>
 
-              <p className="text-xs sm:text-sm text-zinc-400 font-sans leading-relaxed max-w-2xl">
+              <p className="text-xs sm:text-[13px] text-zinc-400 font-sans leading-relaxed max-w-2xl">
                 {project.description}
               </p>
 
               {/* Technical Metrics Strip */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 pt-3 font-mono text-xs border-t border-white/10">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 pt-1.5 font-mono text-xs border-t border-white/10">
                 {project.metrics.map(m => (
-                  <div key={m.label} className="space-y-1">
-                    <span className="text-[10px] sm:text-[11px] text-zinc-400 uppercase tracking-wider block font-medium">{m.label}</span>
-                    <span className="text-sm sm:text-base font-bold text-amber-400 block">{m.val}</span>
+                  <div key={m.label} className="space-y-0.5">
+                    <span className="text-[9px] sm:text-[10px] text-zinc-400 uppercase tracking-wider block font-medium">{m.label}</span>
+                    <span className="text-xs sm:text-sm font-bold text-amber-400 block">{m.val}</span>
                   </div>
                 ))}
               </div>
 
               {/* Actions */}
-              <div className="flex flex-wrap items-center gap-2.5 pt-2 font-mono text-xs">
+              <div className="flex flex-wrap items-center gap-2 pt-0.5 font-mono text-xs">
                 <a
                   href={project.googlePlayUrl || "https://play.google.com/store/apps/details?id=com.inventus.sopasenior"}
                   target="_blank"
                   rel="noreferrer"
                   data-cursor="PLAYSTORE"
-                  className="px-5 py-2.5 rounded-full bg-amber-500 hover:bg-amber-400 text-black font-bold flex items-center gap-2 shadow-lg shadow-amber-500/20 transition-all cursor-pointer active:scale-95 text-xs sm:text-sm"
+                  className="px-3.5 sm:px-4 py-1.5 rounded-full bg-amber-500 hover:bg-amber-400 text-black font-bold flex items-center gap-1.5 shadow-lg shadow-amber-500/20 transition-all cursor-pointer active:scale-95 text-xs"
                 >
-                  <GooglePlayIcon className="w-4 h-4 fill-current" />
+                  <GooglePlayIcon className="w-3.5 h-3.5 fill-current" />
                   <span>Probar en Google Play</span>
                 </a>
 
                 <button
                   onClick={() => onPlayDemo(project)}
-                  className="px-4 py-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-zinc-200 hover:text-white flex items-center gap-2 transition-all cursor-pointer"
+                  className="px-3 sm:px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-zinc-200 hover:text-white flex items-center gap-1.5 transition-all cursor-pointer text-xs"
                 >
                   <Eye className="w-3.5 h-3.5" />
                   <span>Probar Simulación</span>
@@ -1138,7 +1073,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                   target="_blank"
                   rel="noreferrer"
                   data-cursor="WHATSAPP"
-                  className="px-4 py-2.5 rounded-full border border-white/15 text-zinc-300 hover:text-white transition-all flex items-center gap-2 hover:border-amber-500/50"
+                  className="px-3 sm:px-3.5 py-1.5 rounded-full border border-white/15 text-zinc-300 hover:text-white transition-all flex items-center gap-1.5 hover:border-amber-500/50 text-xs"
                 >
                   <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-400 fill-current" />
                   <span>Cotizar</span>
@@ -1156,6 +1091,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                 title={project.title}
                 codeSnippet={project.codeSnippet}
                 projectId={project.id}
+                isActive={isActive}
               />
             </div>
 
@@ -1179,78 +1115,78 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
     return (
       <div
         ref={containerRef}
-        className="w-full h-full min-h-screen flex flex-col justify-center px-6 sm:px-10 md:px-16 lg:px-24 pt-24 pb-16 relative select-none overflow-hidden text-[#FAF8F5] font-sans"
+        className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-12 sm:pt-20 pb-12 sm:pb-16 relative select-none overflow-y-auto custom-scroll text-[#FAF8F5] font-sans"
         style={{
           background: 'radial-gradient(ellipse 100% 100% at 50% 15%, #161e18 0%, #0e1410 55%, #050806 100%)'
         }}
       >
-        <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-6 relative z-10">
+        <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-2 sm:space-y-4 relative z-10">
 
           {/* Header Bar */}
-          <div className="w-full flex items-center justify-between pb-3 border-b border-[#8B9A86]/20 custom-stage-anim shrink-0 font-mono text-xs text-[#8B9A86]">
-            <div className="flex items-center gap-3">
+          <div className="w-full flex items-center justify-between pb-1.5 sm:pb-2.5 border-b border-[#8B9A86]/20 custom-stage-anim shrink-0 font-mono text-xs text-[#8B9A86]">
+            <div className="flex items-center gap-2 sm:gap-3">
               <span className="font-bold tracking-widest text-[#FAF8F5]">05 // DAYS: FOCUS.FLOW</span>
               <span className="text-[#8B9A86]/50 hidden sm:inline">•</span>
-              <span className="text-[#FAF8F5]/80 hidden sm:inline font-sans font-normal">Diseño Mindful & Gestos Naturales</span>
+              <span className="text-[#FAF8F5]/80 hidden sm:inline font-sans font-normal text-[10.5px] sm:text-xs">Diseño Mindful & Gestos Naturales</span>
             </div>
-            <div className="flex items-center gap-2 text-[#FAF8F5]">
+            <div className="flex items-center gap-2 text-[#FAF8F5] text-xs">
               <span>🌿 Salvia #8B9A86</span>
             </div>
           </div>
 
-          {/* 2-Column Content: Content LEFT, Mockup RIGHT (Alternated!) */}
-          <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+          {/* 2-Column Content: Content LEFT, Mockup RIGHT */}
+          <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-8 xl:gap-12 items-center">
 
             {/* Left: Text Narrative */}
-            <div className="lg:col-span-7 space-y-4 sm:space-y-5 custom-stage-anim order-2 lg:order-1">
-              <div className="space-y-2">
-                <span className="text-xs font-mono font-medium text-[#8B9A86] tracking-wider uppercase block">
+            <div className="lg:col-span-7 space-y-2 lg:space-y-2.5 custom-stage-anim order-2 lg:order-1">
+              <div className="space-y-0.5 sm:space-y-1">
+                <span className="text-[10px] sm:text-xs font-mono font-medium text-[#8B9A86] tracking-wider uppercase block">
                   Productividad Consciente & UX Orgánica
                 </span>
                 <CinematicTitle
                   text={project.title}
                   isActive={isActive}
-                  className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-display font-extrabold text-[#FAF8F5] tracking-tight leading-[1.05]"
+                  className="text-2xl sm:text-3xl lg:text-3xl xl:text-4xl font-display font-extrabold text-[#FAF8F5] tracking-tight leading-[1.08]"
                   accentColor="#8B9A86"
                 />
-                <p className="text-sm sm:text-base font-sans font-normal text-[#8B9A86] leading-relaxed">
-                  {project.subtitle}
-                </p>
+                <span className="text-[11px] sm:text-xs font-mono text-[#8B9A86] block">
+                  Flutter 3.x • State Pattern • Canvas UI
+                </span>
               </div>
 
               {/* Attribution Pill */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#8B9A86]/15 border border-[#8B9A86]/30 text-xs text-[#FAF8F5]">
-                <Sparkles className="w-3.5 h-3.5 text-[#8B9A86] shrink-0" />
+              <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-lg bg-[#8B9A86]/15 border border-[#8B9A86]/30 text-[11px] text-[#FAF8F5]">
+                <Sparkles className="w-3 h-3 text-[#8B9A86] shrink-0" />
                 <span className="font-medium">Diseño Mindful & Gestos Naturales • Paleta Salvia #8B9A86</span>
               </div>
 
               {/* Key Objective Highlight */}
-              <div className="flex items-stretch gap-3.5 px-4 py-3 sm:py-3.5 rounded-xl bg-white/[0.03] border border-white/10 shadow-sm backdrop-blur-md">
-                <div className="w-1.5 rounded-full bg-[#8B9A86] shrink-0 shadow-[0_0_10px_rgba(139,154,134,0.5)]" />
-                <p className="text-xs sm:text-sm font-sans font-medium text-[#FAF8F5] tracking-[-0.01em] leading-relaxed self-center">
+              <div className="flex items-stretch gap-2.5 px-3 py-1.5 rounded-xl bg-white/3 border border-white/10 shadow-sm backdrop-blur-md">
+                <div className="w-1 rounded-full bg-[#8B9A86] shrink-0 shadow-[0_0_10px_rgba(139,154,134,0.5)]" />
+                <p className="text-xs sm:text-[13px] font-sans font-medium text-[#FAF8F5] tracking-[-0.01em] leading-relaxed self-center">
                   {project.headline}
                 </p>
               </div>
 
-              <p className="text-xs sm:text-sm text-[#FAF8F5]/70 font-sans leading-relaxed max-w-2xl">
+              <p className="text-xs sm:text-[13px] text-[#FAF8F5]/70 font-sans leading-relaxed max-w-2xl">
                 {project.description}
               </p>
 
               {/* Technical Metrics Strip */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 pt-3 font-mono text-xs border-t border-[#8B9A86]/25">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 pt-1.5 font-mono text-xs border-t border-[#8B9A86]/25">
                 {project.metrics.map(m => (
-                  <div key={m.label} className="space-y-1">
-                    <span className="text-[10px] sm:text-[11px] text-[#8B9A86] uppercase tracking-wider block font-medium">{m.label}</span>
-                    <span className="text-sm sm:text-base font-bold text-[#FAF8F5] block">{m.val}</span>
+                  <div key={m.label} className="space-y-0.5">
+                    <span className="text-[9px] sm:text-[10px] text-[#8B9A86] uppercase tracking-wider block font-medium">{m.label}</span>
+                    <span className="text-xs sm:text-sm font-bold text-[#FAF8F5] block">{m.val}</span>
                   </div>
                 ))}
               </div>
 
               {/* Actions */}
-              <div className="flex flex-wrap items-center gap-3 pt-2 font-mono text-xs">
+              <div className="flex flex-wrap items-center gap-2 pt-0.5 font-mono text-xs">
                 <button
                   onClick={() => onPlayDemo(project)}
-                  className="px-6 py-3 rounded-full bg-[#8B9A86] hover:bg-[#9db097] text-[#0f1712] font-bold flex items-center gap-2 shadow-lg transition-all cursor-pointer active:scale-95"
+                  className="px-3.5 sm:px-4 py-1.5 rounded-full bg-[#8B9A86] hover:bg-[#9db097] text-[#0f1712] font-bold flex items-center gap-1.5 shadow-lg transition-all cursor-pointer active:scale-95 text-xs"
                 >
                   <Compass className="w-3.5 h-3.5" />
                   <span>Navegación Zen</span>
@@ -1260,7 +1196,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="px-5 py-3 rounded-full bg-white/5 hover:bg-white/10 border border-[#8B9A86]/30 text-[#FAF8F5] flex items-center gap-2 transition-all"
+                    className="px-3 sm:px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-[#8B9A86]/30 text-[#FAF8F5] flex items-center gap-1.5 transition-all text-xs"
                   >
                     <Code2 className="w-3.5 h-3.5" />
                     <span>Código Gestos</span>
@@ -1271,7 +1207,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                   target="_blank"
                   rel="noreferrer"
                   data-cursor="WHATSAPP"
-                  className="px-5 py-3 rounded-full border border-[#8B9A86]/20 text-[#FAF8F5]/80 hover:text-white transition-all flex items-center gap-2 hover:border-emerald-500/50"
+                  className="px-3 sm:px-3.5 py-1.5 rounded-full border border-[#8B9A86]/20 text-[#FAF8F5]/80 hover:text-white transition-all flex items-center gap-1.5 hover:border-emerald-500/50 text-xs"
                 >
                   <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-400 fill-current" />
                   <span>Cotizar</span>
@@ -1289,6 +1225,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                 title={project.title}
                 codeSnippet={project.codeSnippet}
                 projectId={project.id}
+                isActive={isActive}
               />
             </div>
 
@@ -1304,28 +1241,28 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
   return (
     <div
       ref={containerRef}
-      className="w-full h-full min-h-screen flex flex-col justify-center px-6 sm:px-10 md:px-16 lg:px-24 pt-24 pb-16 relative select-none overflow-hidden text-zinc-100 font-sans"
+      className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-12 sm:pt-20 pb-12 sm:pb-16 relative select-none overflow-y-auto custom-scroll text-zinc-100 font-sans"
       style={{
         background: 'radial-gradient(ellipse 100% 100% at 50% 15%, #1c0e14 0%, #10080c 55%, #050204 100%)'
       }}
     >
-      <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-6 relative z-10">
+      <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-2 sm:space-y-4 relative z-10">
 
         {/* Header Bar */}
-        <div className="w-full flex items-center justify-between pb-3 border-b border-white/10 custom-stage-anim shrink-0 font-mono text-xs text-zinc-400">
-          <div className="flex items-center gap-3">
+        <div className="w-full flex items-center justify-between pb-1.5 sm:pb-2.5 border-b border-white/10 custom-stage-anim shrink-0 font-mono text-xs text-zinc-400">
+          <div className="flex items-center gap-2 sm:gap-3">
             <span className="font-bold tracking-widest text-zinc-200">06 // CYBER RUSH</span>
             <span className="text-zinc-600 hidden sm:inline">•</span>
-            <span className="text-zinc-400 hidden sm:inline">Motor WASM a 120 FPS con Shaders GLSL</span>
+            <span className="text-zinc-400 hidden sm:inline text-[10.5px] sm:text-xs">Motor WASM a 120 FPS con Shaders GLSL</span>
           </div>
-          <div className="flex items-center gap-2 text-rose-400 font-medium">
+          <div className="flex items-center gap-2 text-rose-400 font-medium text-xs">
             <Zap className="w-3.5 h-3.5" />
             <span>4.16ms Impeller</span>
           </div>
         </div>
 
-        {/* 2-Column Content: Mockup LEFT, Content RIGHT (Alternated!) */}
-        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+        {/* 2-Column Content: Mockup LEFT, Content RIGHT */}
+        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-8 xl:gap-12 items-center">
 
           {/* Left: Arcade Mockup */}
           <div className="lg:col-span-6 flex flex-col items-center justify-center custom-stage-anim">
@@ -1336,59 +1273,60 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
               title={project.title}
               codeSnippet={project.codeSnippet}
               projectId={project.id}
+              isActive={isActive}
             />
           </div>
 
           {/* Right: Text Narrative */}
-          <div className="lg:col-span-6 space-y-4 sm:space-y-5 custom-stage-anim">
-            <div className="space-y-2">
-              <span className="text-xs font-mono font-medium text-rose-400/90 tracking-wider uppercase block">
+          <div className="lg:col-span-6 space-y-2 lg:space-y-2.5 custom-stage-anim">
+            <div className="space-y-0.5 sm:space-y-1">
+              <span className="text-[10px] sm:text-xs font-mono font-medium text-rose-400/90 tracking-wider uppercase block">
                 Computación Gráfica & Rendimiento Extremo
               </span>
               <CinematicTitle
                 text={project.title}
                 isActive={isActive}
-                className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-display font-extrabold text-white tracking-tight uppercase leading-[1.05]"
+                className="text-2xl sm:text-3xl lg:text-3xl xl:text-4xl font-display font-extrabold text-white tracking-tight uppercase leading-[1.08]"
                 accentColor="#f43f5e"
               />
-              <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed">
+              <p className="text-xs sm:text-[13px] text-zinc-300 font-normal leading-relaxed">
                 {project.subtitle}
               </p>
             </div>
 
             {/* Attribution Pill */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-rose-500/10 border border-rose-500/25 text-xs text-rose-300">
-              <Zap className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+            <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-lg bg-rose-500/10 border border-rose-500/25 text-[11px] text-rose-300">
+              <Zap className="w-3 h-3 text-rose-400 shrink-0" />
               <span className="font-medium">Motor WebAssembly & WebGL 2.0 • Shaders GLSL a 120 FPS</span>
             </div>
 
             {/* Key Objective Highlight */}
-            <div className="flex items-stretch gap-3.5 px-4 py-3 sm:py-3.5 rounded-xl bg-white/[0.03] border border-white/10 shadow-sm backdrop-blur-md">
-              <div className="w-1.5 rounded-full bg-rose-400 shrink-0 shadow-[0_0_10px_rgba(244,63,94,0.5)]" />
-              <p className="text-xs sm:text-sm font-sans font-medium text-zinc-200 tracking-[-0.01em] leading-relaxed self-center">
+            <div className="flex items-stretch gap-2.5 px-3 py-1.5 rounded-xl bg-white/3 border border-white/10 shadow-sm backdrop-blur-md">
+              <div className="w-1 rounded-full bg-rose-400 shrink-0 shadow-[0_0_10px_rgba(244,63,94,0.5)]" />
+              <p className="text-xs sm:text-[13px] font-sans font-medium text-zinc-200 tracking-[-0.01em] leading-relaxed self-center">
                 {project.headline}
               </p>
             </div>
 
-            <p className="text-xs sm:text-sm text-zinc-400 font-sans leading-relaxed">
+            <p className="text-xs sm:text-[13px] text-zinc-400 font-sans leading-relaxed">
               {project.description}
             </p>
 
             {/* Technical Metrics Strip */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 pt-3 font-mono text-xs border-t border-white/10">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 pt-1.5 font-mono text-xs border-t border-white/10">
               {project.metrics.map(m => (
-                <div key={m.label} className="space-y-1">
-                  <span className="text-[10px] sm:text-[11px] text-zinc-400 uppercase tracking-wider block font-medium">{m.label}</span>
-                  <span className="text-sm sm:text-base font-bold text-rose-400 block">{m.val}</span>
+                <div key={m.label} className="space-y-0.5">
+                  <span className="text-[9px] sm:text-[10px] text-zinc-400 uppercase tracking-wider block font-medium">{m.label}</span>
+                  <span className="text-xs sm:text-sm font-bold text-rose-400 block">{m.val}</span>
                 </div>
               ))}
             </div>
 
             {/* Actions */}
-            <div className="flex flex-wrap items-center gap-3 pt-2 font-mono text-xs">
+            <div className="flex flex-wrap items-center gap-2 pt-0.5 font-mono text-xs">
               <button
                 onClick={() => onPlayDemo(project)}
-                className="px-6 py-3 rounded-full bg-white hover:bg-zinc-200 text-black font-bold flex items-center gap-2 shadow-lg transition-all cursor-pointer active:scale-95"
+                className="px-3.5 sm:px-4 py-1.5 rounded-full bg-white hover:bg-zinc-200 text-black font-bold flex items-center gap-1.5 shadow-lg transition-all cursor-pointer active:scale-95 text-xs"
               >
                 <Activity className="w-3.5 h-3.5" />
                 <span>Jugar en Grande</span>
@@ -1398,7 +1336,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                   href={project.githubUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="px-5 py-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-zinc-300 hover:text-white flex items-center gap-2 transition-all"
+                  className="px-3 sm:px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-zinc-300 hover:text-white flex items-center gap-1.5 transition-all text-xs"
                 >
                   <Code2 className="w-3.5 h-3.5" />
                   <span>Código Shaders</span>
@@ -1409,7 +1347,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                 target="_blank"
                 rel="noreferrer"
                 data-cursor="WHATSAPP"
-                className="px-5 py-3 rounded-full border border-white/15 text-zinc-400 hover:text-white transition-all flex items-center gap-2 hover:border-emerald-500/50"
+                className="px-3 sm:px-3.5 py-1.5 rounded-full border border-white/15 text-zinc-400 hover:text-white transition-all flex items-center gap-1.5 hover:border-emerald-500/50 text-xs"
               >
                 <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-400 fill-current" />
                 <span>Cotizar</span>

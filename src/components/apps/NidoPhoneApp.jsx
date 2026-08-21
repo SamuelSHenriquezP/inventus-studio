@@ -203,7 +203,7 @@ export default function NidoPhoneApp({
       {activeTab === 'inicio' && (
         <>
           {/* Shared Cashflow Card ("Disponible Real de Pareja") - Slate Header */}
-          <div className="my-1 p-2.5 rounded-2xl bg-gradient-to-br from-[#334155] to-[#1E293B] border border-slate-600/50 shadow-lg space-y-1 shrink-0 text-white">
+          <div className="my-1 p-2.5 rounded-2xl bg-linear-to-br from-[#334155] to-[#1E293B] border border-slate-600/50 shadow-lg space-y-1 shrink-0 text-white">
             <div className="flex items-center justify-between text-[9px] font-mono text-slate-300">
               <span className="font-bold tracking-wider text-white flex items-center gap-1">
                 Disponible Real
