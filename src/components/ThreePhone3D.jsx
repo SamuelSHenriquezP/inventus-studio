@@ -140,7 +140,7 @@ export default function ThreePhone3D({
   isHorizontal = false 
 }) {
   return (
-    <div className="w-full h-[420px] sm:h-[480px] lg:h-[530px] relative cursor-grab active:cursor-grabbing select-none">
+    <div className="w-full h-105 sm:h-120 lg:h-132.5 relative cursor-grab active:cursor-grabbing select-none">
       <Suspense fallback={<FallbackPhone texturePath={texturePath} />}>
         <Canvas camera={{ position: [0, 0, 4.3], fov: 42 }} dpr={[1, 1.5]}>
           <ambientLight intensity={1.1} />

@@ -428,14 +428,14 @@ export default function ServiIntelWebApp() {
                             <span className="font-mono text-[7px] text-slate-400 font-bold">{t.id}</span>
                           </div>
 
-                          <span className="font-extrabold text-[7.5px] text-[#14AEE1] truncate max-w-[80px]">
+                          <span className="font-extrabold text-[7.5px] text-[#14AEE1] truncate max-w-20">
                             {t.categoria}
                           </span>
                         </div>
 
                         {/* Row 2: Client name + Technician Info */}
                         <div className="flex items-center justify-between gap-1 text-[8px]">
-                          <div className="font-extrabold text-[#1E293B] truncate max-w-[100px]">
+                          <div className="font-extrabold text-[#1E293B] truncate max-w-25">
                             {t.clienteNombre}
                           </div>
 
@@ -691,7 +691,7 @@ export default function ServiIntelWebApp() {
       {/* ========================================================================= */}
       {assigningJobId && (
         <div className="absolute inset-0 bg-black/60 backdrop-blur-xs z-50 flex items-center justify-center p-2 animate-in fade-in duration-150">
-          <div className="bg-white rounded-xl max-w-[190px] w-full p-2.5 shadow-2xl border border-[#E2E8F0] space-y-1.5 text-center text-[8px]">
+          <div className="bg-white rounded-xl max-w-47.5 w-full p-2.5 shadow-2xl border border-[#E2E8F0] space-y-1.5 text-center text-[8px]">
             <div className="w-5 h-5 rounded-full bg-[#14AEE1]/10 text-[#14AEE1] flex items-center justify-center mx-auto">
               <UserPlus className="w-2.5 h-2.5" />
             </div>

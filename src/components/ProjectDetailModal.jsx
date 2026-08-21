@@ -25,14 +25,14 @@ function AppSimulator({ simulator, deviceType }) {
 
   if (isLaptop) {
     return (
-      <div className="relative w-full max-w-105 flex flex-col items-center mx-auto">
-        <div className="relative w-full aspect-16/10 rounded-xl bg-[#18191e] p-2.5 border border-white/15 shadow-2xl overflow-hidden">
+      <div className="relative w-full max-w-70 sm:max-w-95 flex flex-col items-center mx-auto">
+        <div className="relative w-full aspect-16/10 rounded-xl bg-[#18191e] p-2 sm:p-2.5 border border-white/15 shadow-2xl overflow-hidden">
           <div className="absolute inset-0 bg-linear-to-tr from-transparent via-white/3 to-transparent pointer-events-none z-30" />
           <div className="relative w-full h-full rounded-lg overflow-hidden bg-black border border-white/10 shadow-inner">
             {app}
           </div>
         </div>
-        <div className="w-[104%] h-3 bg-linear-to-b from-[#252730] to-[#14151a] rounded-b-xl border-t border-white/15 shadow-xl relative -mt-0.5 flex justify-center pointer-events-none">
+        <div className="w-[104%] h-2.5 sm:h-3 bg-linear-to-b from-[#252730] to-[#14151a] rounded-b-xl border-t border-white/15 shadow-xl relative -mt-0.5 flex justify-center pointer-events-none">
           <div className="w-12 h-0.5 bg-black/60 rounded-b-md mt-0.5" />
         </div>
       </div>
@@ -40,12 +40,12 @@ function AppSimulator({ simulator, deviceType }) {
   }
 
   return (
-    <div className="relative w-48 sm:w-56 aspect-9/18.8 rounded-[36px] bg-[#15161c] p-2.5 border border-white/15 shadow-2xl mx-auto">
+    <div className="relative w-44 sm:w-52 aspect-9/18.8 rounded-4xl sm:rounded-[36px] bg-[#15161c] p-2 sm:p-2.5 border border-white/15 shadow-2xl mx-auto">
       <div className="absolute inset-0 rounded-4xl bg-linear-to-tr from-transparent via-white/3 to-transparent pointer-events-none z-30" />
-      <div className="relative w-full h-full rounded-[26px] overflow-hidden bg-black border border-white/10 shadow-inner">
-        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-16 h-3 bg-black rounded-full border border-white/10 z-30 pointer-events-none" />
+      <div className="relative w-full h-full rounded-3xl sm:rounded-[26px] overflow-hidden bg-black border border-white/10 shadow-inner">
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-14 sm:w-16 h-2.5 sm:h-3 bg-black rounded-full border border-white/10 z-30 pointer-events-none" />
         {app}
-        <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-14 h-0.5 bg-white/30 rounded-full z-20 pointer-events-none" />
+        <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-12 sm:w-14 h-0.5 bg-white/30 rounded-full z-20 pointer-events-none" />
       </div>
     </div>
   );
@@ -91,7 +91,7 @@ export default function ProjectDetailModal({ project, onClose }) {
       data-prevent-slide="true"
       onWheel={(e) => e.stopPropagation()}
       onTouchMove={(e) => e.stopPropagation()}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 modal-container"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 md:p-6 modal-container"
     >
       {/* Backdrop */}
       <div
@@ -105,21 +105,21 @@ export default function ProjectDetailModal({ project, onClose }) {
         ref={panelRef}
         data-prevent-slide="true"
         onWheel={(e) => e.stopPropagation()}
-        className="relative z-10 w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl bg-[#0d0e14] border border-white/10 shadow-2xl"
+        className="relative z-10 w-full max-w-4xl max-h-[92vh] overflow-y-auto custom-scroll rounded-2xl bg-[#0d0e14] border border-white/10 shadow-2xl"
         onClick={e => e.stopPropagation()}
       >
         {/* Header Bar */}
         <div
-          className="sticky top-0 z-20 flex items-center justify-between px-5 py-3 border-b border-white/10 bg-[#0d0e14]/95 backdrop-blur-xl"
+          className="sticky top-0 z-20 flex items-center justify-between px-4 sm:px-5 py-2.5 sm:py-3 border-b border-white/10 bg-[#0d0e14]/95 backdrop-blur-xl"
         >
-          <div className="flex items-center gap-3 font-mono text-xs">
+          <div className="flex items-center gap-2 sm:gap-3 font-mono text-xs">
             <span
               className="w-2 h-2 rounded-full"
               style={{ backgroundColor: project.accent }}
             />
-            <span className="text-zinc-400">{project.category.toUpperCase()}</span>
+            <span className="text-zinc-400 text-[11px] sm:text-xs">{project.category.toUpperCase()}</span>
             <span className="text-zinc-600">•</span>
-            <span className="font-bold text-white">{project.title}</span>
+            <span className="font-bold text-white text-[11px] sm:text-xs truncate max-w-35 sm:max-w-none">{project.title}</span>
           </div>
           <button
             onClick={handleClose}
@@ -130,7 +130,7 @@ export default function ProjectDetailModal({ project, onClose }) {
         </div>
 
         {/* Content Grid */}
-        <div className="p-5 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+        <div className="p-4 sm:p-5 grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-start">
 
           {/* Left: Simulator */}
           <div className="lg:col-span-5 flex flex-col items-center gap-3">

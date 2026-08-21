@@ -85,21 +85,21 @@ export default function MoreProjectsSection({ isActive = true }) {
   return (
     <>
       <section
-        id="mas-proyectos"
+        id="more-projects-section"
         ref={containerRef}
-        className="w-full h-full min-h-screen flex flex-col justify-center px-6 sm:px-10 md:px-16 lg:px-24 pt-24 pb-16 relative select-none overflow-y-auto"
+        className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-12 sm:pt-20 pb-12 sm:pb-16 relative select-none overflow-y-auto custom-scroll"
         style={{
-          background: 'radial-gradient(ellipse 100% 100% at 50% 15%, #141218 0%, #0c0a10 55%, #070508 100%)'
+          background: 'radial-gradient(ellipse 100% 100% at 50% 15%, #0f111a 0%, #0a0b10 55%, #050508 100%)'
         }}
       >
         {/* Subtle Ambient Glow */}
-        <div className="absolute top-1/4 right-1/4 w-112.5 h-112.5 bg-violet-600/10 rounded-full blur-[130px] pointer-events-none -z-10" />
+        <div className="absolute top-1/4 right-1/4 w-96 sm:w-112.5 h-96 sm:h-112.5 bg-violet-600/10 rounded-full blur-[130px] pointer-events-none -z-10" />
 
-        <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-7 perspective-[1000px]">
+        <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-3 sm:space-y-6 perspective-[1000px]">
 
           {/* Section Header */}
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/10 pb-5">
-            <div className="space-y-1.5">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-white/10 pb-3.5 sm:pb-4">
+            <div className="space-y-1 sm:space-y-1.5">
               <div className="more-header-anim inline-flex items-center gap-2 text-xs font-mono text-violet-400">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75" />
@@ -109,7 +109,7 @@ export default function MoreProjectsSection({ isActive = true }) {
               </div>
 
               {/* Animated 3D Cinematic Title */}
-              <h2 ref={titleRef} className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight perspective-[1000px] flex items-center gap-2 overflow-visible py-1">
+              <h2 ref={titleRef} className="text-xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight perspective-[1000px] flex flex-wrap items-center gap-1.5 sm:gap-2 overflow-visible py-0.5">
                 <span className="inline-flex overflow-visible">
                   {mainWord.map((ch, i) => (
                     <span key={`mw-${i}`} className="more-title-main-char inline-block will-change-transform text-white">
@@ -117,7 +117,7 @@ export default function MoreProjectsSection({ isActive = true }) {
                     </span>
                   ))}
                 </span>
-                <span className="inline-flex ml-2 overflow-visible">
+                <span className="inline-flex ml-1.5 sm:ml-2 overflow-visible">
                   {hlWord.map((ch, i) => (
                     <span key={`hw-${i}`} className="more-title-hl-char inline-block will-change-transform text-violet-400 drop-shadow-[0_0_16px_rgba(167,139,250,0.6)]">
                       {ch}
@@ -138,7 +138,7 @@ export default function MoreProjectsSection({ isActive = true }) {
           </div>
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 pb-6 sm:pb-0">
             {secondaryProjectsData.map((project) => (
               <button
                 key={project.id}
@@ -146,7 +146,7 @@ export default function MoreProjectsSection({ isActive = true }) {
                   sounds.playClick();
                   setSelectedProject(project);
                 }}
-                className="more-card-anim group text-left p-5 rounded-2xl bg-white/2 border border-white/5 hover:bg-white/5 hover:border-white/20 transition-all duration-300 cursor-pointer space-y-4 relative overflow-hidden active:scale-[0.98] hover:shadow-[0_15px_35px_rgba(0,0,0,0.6)]"
+                className="more-card-anim group text-left p-3.5 sm:p-4.5 xl:p-5 rounded-2xl bg-white/2 border border-white/5 hover:bg-white/5 hover:border-white/20 transition-all duration-300 cursor-pointer space-y-2.5 sm:space-y-3.5 relative overflow-hidden active:scale-[0.98] hover:shadow-[0_15px_35px_rgba(0,0,0,0.6)]"
               >
                 {/* Top dynamic accent bar */}
                 <div
@@ -163,20 +163,20 @@ export default function MoreProjectsSection({ isActive = true }) {
                 {/* Title & Subtitle */}
                 <div className="space-y-1">
                   <div className="flex items-start justify-between gap-2">
-                    <h3 className="text-base font-display font-bold text-white tracking-tight leading-tight group-hover:text-violet-200 transition-colors">
+                    <h3 className="text-sm sm:text-base font-display font-bold text-white tracking-tight leading-tight group-hover:text-violet-200 transition-colors">
                       {project.title}
                     </h3>
                     <ExternalLink
-                      className="w-4 h-4 text-zinc-500 group-hover:text-violet-400 group-hover:rotate-12 transition-all shrink-0 mt-0.5"
+                      className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-zinc-500 group-hover:text-violet-400 group-hover:rotate-12 transition-all shrink-0 mt-0.5"
                     />
                   </div>
-                  <p className="text-xs text-zinc-400 font-sans leading-relaxed line-clamp-2">
+                  <p className="text-[11px] sm:text-xs text-zinc-400 font-sans leading-relaxed line-clamp-2">
                     {project.subtitle}
                   </p>
                 </div>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-1.5 font-mono text-[10px]">
+                <div className="flex flex-wrap gap-1 font-mono text-[9.5px] sm:text-[10px]">
                   {project.tags.slice(0, 3).map(t => (
                     <span
                       key={t}
@@ -194,7 +194,7 @@ export default function MoreProjectsSection({ isActive = true }) {
 
                 {/* Bottom CTA hint */}
                 <div
-                  className="flex items-center gap-1.5 font-mono text-[10.5px] font-semibold transition-all duration-300 group-hover:translate-x-1"
+                  className="flex items-center gap-1.5 font-mono text-[10px] sm:text-[10.5px] font-semibold transition-all duration-300 group-hover:translate-x-1"
                   style={{ color: project.accent }}
                 >
                   <span>Probar simulador</span>

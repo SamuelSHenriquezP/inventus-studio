@@ -138,19 +138,19 @@ export default function AboutStackSection({ isActive = true }) {
     <section 
       id="sobre-mi"
       ref={containerRef}
-      className="w-full h-full min-h-screen flex flex-col justify-center px-6 sm:px-10 md:px-16 lg:px-24 pt-24 sm:pt-28 pb-16 relative select-none overflow-y-auto"
+      className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-12 sm:pt-20 pb-12 sm:pb-16 relative select-none overflow-y-auto custom-scroll"
       style={{
         background: 'radial-gradient(ellipse 100% 100% at 50% 20%, #13141a 0%, #0a0b0f 55%, #050508 100%)'
       }}
     >
       {/* Subtle Ambient Glow */}
-      <div className="absolute top-1/3 left-1/4 w-112.5 h-112.5 bg-emerald-600/10 rounded-full blur-[140px] pointer-events-none -z-10" />
+      <div className="absolute top-1/3 left-1/4 w-96 sm:w-112.5 h-96 sm:h-112.5 bg-emerald-600/10 rounded-full blur-[140px] pointer-events-none -z-10" />
 
-      <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-8 perspective-[1000px]">
+      <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-2.5 sm:space-y-4.5 perspective-[1000px]">
         
         {/* Clean Header Bar */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/10 pb-5">
-          <div className="space-y-1.5">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-white/10 pb-3.5 sm:pb-4">
+          <div className="space-y-1 sm:space-y-1.5">
             <div className="about-header-anim inline-flex items-center gap-2 text-xs font-mono text-emerald-400">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -160,7 +160,7 @@ export default function AboutStackSection({ isActive = true }) {
             </div>
 
             {/* Kinetic 3D Split Title */}
-            <h2 ref={titleRef} className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight perspective-[1000px] flex items-center gap-2 overflow-visible py-1">
+            <h2 ref={titleRef} className="text-xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight perspective-[1000px] flex flex-wrap items-center gap-1.5 sm:gap-2 overflow-visible py-0.5">
               <span className="inline-flex overflow-visible">
                 {mainChars.map((ch, i) => (
                   <span key={`amc-${i}`} className="about-title-main-char inline-block will-change-transform text-white">
@@ -168,7 +168,7 @@ export default function AboutStackSection({ isActive = true }) {
                   </span>
                 ))}
               </span>
-              <span className="inline-flex ml-2 overflow-visible">
+              <span className="inline-flex ml-1.5 sm:ml-2 overflow-visible">
                 {hlChars.map((ch, i) => (
                   <span key={`ahc-${i}`} className="about-title-hl-char inline-block will-change-transform text-emerald-400 drop-shadow-[0_0_16px_rgba(52,211,153,0.65)]">
                     {ch}
@@ -178,13 +178,13 @@ export default function AboutStackSection({ isActive = true }) {
             </h2>
           </div>
 
-          <div className="flex items-center gap-3 font-mono text-xs">
+          <div className="flex items-center gap-2.5 sm:gap-3 font-mono text-xs">
             <a
               href={personalInfo.github}
               target="_blank"
               rel="noreferrer"
               onClick={() => sounds.playClick()}
-              className="about-btn-anim px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:border-white/25 transition-all flex items-center gap-2"
+              className="about-btn-anim px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:border-white/25 transition-all flex items-center gap-1.5 text-xs"
             >
               <Code2 className="w-3.5 h-3.5" />
               <span>GitHub</span>
@@ -195,7 +195,7 @@ export default function AboutStackSection({ isActive = true }) {
               target="_blank"
               rel="noreferrer"
               onClick={() => sounds.playClick()}
-              className="about-btn-anim px-5 py-2.5 rounded-full bg-white text-black font-bold hover:bg-zinc-200 transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95 cursor-pointer"
+              className="about-btn-anim px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white text-black font-bold hover:bg-zinc-200 transition-all flex items-center gap-1.5 shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95 cursor-pointer text-xs"
             >
               <MessageSquare className="w-3.5 h-3.5 fill-black" />
               <span>Cotizar</span>
@@ -204,31 +204,31 @@ export default function AboutStackSection({ isActive = true }) {
         </div>
 
         {/* 2-Column Minimalist Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-12 items-start pb-6 sm:pb-0">
           
           {/* Column 1: Tecnologías & Enfoque */}
-          <div className="lg:col-span-5 space-y-4">
+          <div className="lg:col-span-5 space-y-3 sm:space-y-4">
             <div className="about-header-anim font-mono text-xs font-bold uppercase tracking-wider text-zinc-400 border-b border-white/10 pb-2 flex items-center justify-between">
               <span>Tecnologías que Domino</span>
               <span className="text-[10px] text-emerald-400">STACK 2026</span>
             </div>
 
-            <div className="space-y-3 font-sans">
+            <div className="space-y-2 sm:space-y-2.5 font-sans">
               {technologies.map((t) => (
                 <div 
                   key={t.name} 
-                  className="about-tech-item group p-2.5 rounded-xl bg-white/1.5 border border-white/5 hover:bg-white/4 hover:border-white/15 transition-all duration-300 space-y-1"
+                  className="about-tech-item group p-2 sm:p-2.5 rounded-xl bg-white/1.5 border border-white/5 hover:bg-white/4 hover:border-white/15 transition-all duration-300 space-y-0.5"
                 >
-                  <div className="text-sm font-semibold text-white flex items-center justify-between">
-                    <div className="flex items-center gap-2">
+                  <div className="text-xs sm:text-sm font-semibold text-white flex items-center justify-between">
+                    <div className="flex items-center gap-1.5 sm:gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399] group-hover:scale-125 transition-transform" />
                       <span className="group-hover:text-emerald-200 transition-colors">{t.name}</span>
                     </div>
-                    <span className="font-mono text-[9.5px] px-1.5 py-0.5 rounded bg-white/5 text-zinc-400 group-hover:text-emerald-300 group-hover:bg-emerald-500/10 transition-all">
+                    <span className="font-mono text-[9px] sm:text-[9.5px] px-1.5 py-0.5 rounded bg-white/5 text-zinc-400 group-hover:text-emerald-300 group-hover:bg-emerald-500/10 transition-all">
                       {t.tag}
                     </span>
                   </div>
-                  <p className="text-xs text-zinc-400 pl-3.5 leading-relaxed">
+                  <p className="text-[11px] sm:text-xs text-zinc-400 pl-3 leading-relaxed">
                     {t.desc}
                   </p>
                 </div>
@@ -237,29 +237,29 @@ export default function AboutStackSection({ isActive = true }) {
           </div>
 
           {/* Column 2: Lo que puedo ofrecer */}
-          <div className="lg:col-span-7 space-y-4">
+          <div className="lg:col-span-7 space-y-3 sm:space-y-4">
             <div className="about-header-anim font-mono text-xs font-bold uppercase tracking-wider text-zinc-400 border-b border-white/10 pb-2 flex items-center justify-between">
               <span>Servicios de Software</span>
               <span className="text-[10px] text-zinc-500">LLAVE EN MANO</span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {services.map((s) => (
                 <div 
                   key={s.num} 
-                  className="about-service-card group p-4 sm:p-5 rounded-2xl bg-white/2 border border-white/5 hover:bg-white/5 hover:border-emerald-500/30 transition-all duration-300 space-y-2 relative overflow-hidden active:scale-[0.98] hover:shadow-[0_12px_30px_rgba(0,0,0,0.5)]"
+                  className="about-service-card group p-3.5 sm:p-4.5 rounded-xl sm:rounded-2xl bg-white/2 border border-white/5 hover:bg-white/5 hover:border-emerald-500/30 transition-all duration-300 space-y-1.5 sm:space-y-2 relative overflow-hidden active:scale-[0.98] hover:shadow-[0_12px_30px_rgba(0,0,0,0.5)]"
                 >
                   {/* Subtle Top Accent */}
                   <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-emerald-500/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                  <div className="flex items-center justify-between font-mono text-[11px] font-bold">
+                  <div className="flex items-center justify-between font-mono text-[10.5px] sm:text-[11px] font-bold">
                     <span className="text-emerald-400 group-hover:drop-shadow-[0_0_8px_rgba(52,211,153,0.5)]">{s.num} // SERVICIO</span>
                     <Sparkles className="w-3.5 h-3.5 text-zinc-600 group-hover:text-emerald-400 transition-colors" />
                   </div>
-                  <div className="text-sm font-bold text-white font-display group-hover:text-emerald-100 transition-colors">
+                  <div className="text-xs sm:text-sm font-bold text-white font-display group-hover:text-emerald-100 transition-colors">
                     {s.title}
                   </div>
-                  <p className="text-xs text-zinc-400 font-sans leading-relaxed">
+                  <p className="text-[11px] sm:text-xs text-zinc-400 font-sans leading-relaxed">
                     {s.desc}
                   </p>
                 </div>

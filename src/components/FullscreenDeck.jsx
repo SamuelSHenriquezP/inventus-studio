@@ -271,6 +271,21 @@ export default function FullscreenDeck({
         return;
       }
 
+      // 3. If current slide has internal scrollable overflow, allow scrolling inside before changing slide
+      const currentSlideWrapper = slidesRef.current[currentIndexRef.current];
+      const scrollableChild = currentSlideWrapper?.querySelector('.overflow-y-auto, [data-scrollable="true"]') || currentSlideWrapper;
+      if (scrollableChild && scrollableChild.scrollHeight > scrollableChild.clientHeight + 15) {
+        const atBottom = scrollableChild.scrollTop + scrollableChild.clientHeight >= scrollableChild.scrollHeight - 20;
+        const atTop = scrollableChild.scrollTop <= 20;
+
+        if (e.deltaY > 0 && !atBottom) {
+          return; // Allow native scroll down inside slide
+        }
+        if (e.deltaY < 0 && !atTop) {
+          return; // Allow native scroll up inside slide
+        }
+      }
+
       const now = Date.now();
       if (now - lastWheelTime.current < 400) {
         return;
@@ -319,7 +334,22 @@ export default function FullscreenDeck({
       const touchEndY = e.changedTouches[0].clientY;
       const diffY = touchStartY.current - touchEndY;
 
-      if (Math.abs(diffY) > 30) {
+      // Check if current slide has internal scrollable child
+      const currentSlideWrapper = slidesRef.current[currentIndexRef.current];
+      const scrollableChild = currentSlideWrapper?.querySelector('.overflow-y-auto, [data-scrollable="true"]') || currentSlideWrapper;
+      if (scrollableChild && scrollableChild.scrollHeight > scrollableChild.clientHeight + 15) {
+        const atBottom = scrollableChild.scrollTop + scrollableChild.clientHeight >= scrollableChild.scrollHeight - 25;
+        const atTop = scrollableChild.scrollTop <= 25;
+
+        if (diffY > 0 && !atBottom) {
+          return; // Allow native touch scroll down inside slide
+        }
+        if (diffY < 0 && !atTop) {
+          return; // Allow native touch scroll up inside slide
+        }
+      }
+
+      if (Math.abs(diffY) > 50) {
         if (diffY > 0) {
           handleNext();
         } else {
@@ -379,7 +409,7 @@ export default function FullscreenDeck({
             key={sec.id}
             id={sec.id}
             ref={(el) => (slidesRef.current[idx] = el)}
-            className={`absolute inset-0 w-full h-full overflow-y-auto overflow-x-hidden flex flex-col justify-center items-center ${
+            className={`absolute inset-0 w-full h-full overflow-y-auto overflow-x-hidden flex flex-col items-center custom-scroll ${
               isActive ? 'z-10 flex' : 'hidden'
             }`}
             style={{
@@ -422,19 +452,19 @@ export default function FullscreenDeck({
       {/* ========================================================================= */}
       {/* BOTTOM CONTROL DOCK */}
       {/* ========================================================================= */}
-      <div className="fixed bottom-4 sm:bottom-6 left-4 sm:left-8 right-4 sm:right-8 z-30 flex items-center justify-between pointer-events-none">
+      <div className="fixed bottom-2.5 sm:bottom-3.5 left-3 sm:left-6 right-3 sm:right-6 z-30 flex items-center justify-between pointer-events-none">
         
         {/* Active Section Indicator */}
-        <div className="pointer-events-auto flex items-center gap-3 px-4 py-2 rounded-full bg-zinc-950/85 border border-white/10 backdrop-blur-xl shadow-2xl font-mono text-xs text-zinc-300">
+        <div className="pointer-events-auto flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-zinc-950/85 border border-white/10 backdrop-blur-xl shadow-2xl font-mono text-[11px] sm:text-xs text-zinc-300">
           <span 
-            className="w-2 h-2 rounded-full transition-colors duration-500" 
+            className="w-2 h-2 rounded-full transition-colors duration-500 shrink-0" 
             style={{ backgroundColor: currentSection.accent }}
           />
           <span className="font-semibold text-white">
             0{activeSectionIndex + 1} / 0{totalSections}
           </span>
           <span className="text-zinc-600 hidden sm:inline">•</span>
-          <span className="text-zinc-400 hidden sm:inline uppercase tracking-wider text-[11px]">
+          <span className="text-zinc-400 hidden sm:inline uppercase tracking-wider text-[11px] truncate max-w-35 md:max-w-none">
             {currentSection.title}
           </span>
         </div>
@@ -461,25 +491,25 @@ export default function FullscreenDeck({
         </div>
 
         {/* Up / Down Navigation Buttons */}
-        <div className="pointer-events-auto flex items-center gap-2 font-mono text-xs">
+        <div className="pointer-events-auto flex items-center gap-1.5 sm:gap-2 font-mono text-xs">
           <button
             onClick={handlePrev}
             disabled={activeSectionIndex === 0}
-            className="p-2 sm:p-2.5 rounded-full bg-zinc-950/85 border border-white/10 text-zinc-400 hover:text-white disabled:opacity-20 disabled:pointer-events-none transition-all cursor-pointer backdrop-blur-xl shadow-xl active:scale-95"
+            className="p-1.5 sm:p-2.5 rounded-full bg-zinc-950/85 border border-white/10 text-zinc-400 hover:text-white disabled:opacity-20 disabled:pointer-events-none transition-all cursor-pointer backdrop-blur-xl shadow-xl active:scale-95"
             title="Pantalla Anterior [↑]"
             data-cursor="PREV"
           >
-            <ChevronUp className="w-4 h-4" />
+            <ChevronUp className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </button>
 
           <button
             onClick={handleNext}
             disabled={activeSectionIndex === totalSections - 1}
-            className="p-2 sm:p-2.5 rounded-full bg-zinc-950/85 border border-white/10 text-zinc-400 hover:text-white disabled:opacity-20 disabled:pointer-events-none transition-all cursor-pointer backdrop-blur-xl shadow-xl active:scale-95"
+            className="p-1.5 sm:p-2.5 rounded-full bg-zinc-950/85 border border-white/10 text-zinc-400 hover:text-white disabled:opacity-20 disabled:pointer-events-none transition-all cursor-pointer backdrop-blur-xl shadow-xl active:scale-95"
             title="Siguiente Pantalla [↓]"
             data-cursor="NEXT"
           >
-            <ChevronDown className="w-4 h-4" />
+            <ChevronDown className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </button>
         </div>
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Play, RotateCcw, Zap } from 'lucide-react';
 
-export default function CyberRushPhoneApp() {
+export default function CyberRushPhoneApp({ isActive = true }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [score, setScore] = useState(0);
   const [combo, setCombo] = useState(1);
@@ -9,13 +9,13 @@ export default function CyberRushPhoneApp() {
 
   useEffect(() => {
     let interval;
-    if (isPlaying) {
+    if (isPlaying && isActive) {
       interval = setInterval(() => {
         setScore(s => s + 15 * combo);
       }, 100);
     }
     return () => clearInterval(interval);
-  }, [isPlaying, combo]);
+  }, [isPlaying, combo, isActive]);
 
   const handleTap = (e) => {
     e.stopPropagation();

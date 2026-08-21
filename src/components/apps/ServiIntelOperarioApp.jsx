@@ -364,7 +364,7 @@ export default function ServiIntelOperarioApp() {
                   >
                     {/* Header Row: Category & Status Badge */}
                     <div className="flex items-center justify-between pb-1 border-b border-[#F1F5F9]">
-                      <span className="font-extrabold text-[9.5px] text-[#0284C7] tracking-wider uppercase truncate max-w-[120px] font-['Plus_Jakarta_Sans',sans-serif]">
+                      <span className="font-extrabold text-[9.5px] text-[#0284C7] tracking-wider uppercase truncate max-w-30 font-['Plus_Jakarta_Sans',sans-serif]">
                         {job.categoria || 'SERVICIO'}
                       </span>
                       <span 
@@ -424,7 +424,7 @@ export default function ServiIntelOperarioApp() {
                     {job.lat && (
                       <div className="rounded-lg overflow-hidden border border-[#E2E8F0] relative h-13 bg-slate-100 flex flex-col justify-end">
                         {/* Map Grid background */}
-                        <div className="absolute inset-0 bg-[#e5e9f0] opacity-90 bg-[radial-gradient(#94a3b8_1px,transparent_1px)] [background-size:7px_7px]" />
+                        <div className="absolute inset-0 bg-[#e5e9f0] opacity-90 bg-[radial-gradient(#94a3b8_1px,transparent_1px)] bg-size-[7px_7px]" />
                         
                         {/* Route Line Simulator */}
                         <svg className="absolute inset-0 w-full h-full pointer-events-none">
@@ -432,13 +432,13 @@ export default function ServiIntelOperarioApp() {
                         </svg>
 
                         {/* Operario Marker */}
-                        <div className="absolute left-[20px] top-[38px] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+                        <div className="absolute left-5 top-9.5 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
                           <div className="w-2.5 h-2.5 rounded-full bg-[#14AEE1] border-2 border-white shadow-xs animate-ping" />
                           <div className="w-2.5 h-2.5 rounded-full bg-[#14AEE1] border-2 border-white shadow-xs absolute" />
                         </div>
 
                         {/* Destination Marker */}
-                        <div className="absolute left-[135px] top-[20px] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+                        <div className="absolute left-33.75 top-5 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
                           <MapPin className="w-3.5 h-3.5 text-[#E71E65] fill-[#E71E65] drop-shadow-xs" />
                         </div>
 
@@ -580,7 +580,7 @@ export default function ServiIntelOperarioApp() {
                   style={{ borderTop: '2.5px solid #22C55E' }}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-slate-800 text-[9px] truncate max-w-[100px]">{job.clienteNombre}</span>
+                    <span className="font-bold text-slate-800 text-[9px] truncate max-w-25">{job.clienteNombre}</span>
                     <span className="px-1 py-0.2 rounded bg-emerald-50 text-[#22C55E] text-[7px] font-black">
                       FINALIZADO
                     </span>
@@ -601,7 +601,7 @@ export default function ServiIntelOperarioApp() {
       {/* ========================================================================= */}
       {showPinModal && (
         <div className="absolute inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-2 z-50 animate-in fade-in duration-150">
-          <div className="bg-white rounded-xl p-3 w-full max-w-[185px] shadow-2xl border border-slate-200 space-y-2 text-center text-[8px]">
+          <div className="bg-white rounded-xl p-3 w-full max-w-46.25 shadow-2xl border border-slate-200 space-y-2 text-center text-[8px]">
             <div className="w-6 h-6 rounded-full bg-[#14AEE1]/10 text-[#14AEE1] flex items-center justify-center mx-auto">
               <Shield className="w-3.5 h-3.5" />
             </div>
@@ -799,7 +799,7 @@ export default function ServiIntelOperarioApp() {
             <div className="w-8 h-1 rounded-full bg-slate-300 mx-auto" />
 
             <div className="flex items-center justify-between border-b border-slate-100 pb-0.5">
-              <span className="font-black text-[9.5px] text-[#14AEE1] uppercase tracking-wide truncate max-w-[130px]">
+              <span className="font-black text-[9.5px] text-[#14AEE1] uppercase tracking-wide truncate max-w-32.5">
                 {selectedJob.categoria}
               </span>
               <button 
