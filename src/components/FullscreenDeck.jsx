@@ -21,8 +21,8 @@ export default function FullscreenDeck({
   const touchStartY = useRef(0);
   const lastWheelTime = useRef(0);
   const currentIndexRef = useRef(activeSectionIndex);
-  const activeTimelineRef = useRef(null);
   const isTransitioningRef = useRef(false);
+  const isSelfScrollingRef = useRef(false);
 
   const [isMobile, setIsMobile] = useState(() => {
     return typeof window !== 'undefined' && (window.innerWidth <= 768 || ('ontouchstart' in window && window.innerWidth <= 1024));
@@ -118,6 +118,7 @@ export default function FullscreenDeck({
               
               if (debounceTimer) clearTimeout(debounceTimer);
               debounceTimer = setTimeout(() => {
+                isSelfScrollingRef.current = true;
                 setActiveSectionIndex(index);
                 if (onSectionChange) {
                   onSectionChange(sections[index]);
@@ -295,6 +296,11 @@ export default function FullscreenDeck({
       const fromIdx = currentIndexRef.current;
       const toIdx = activeSectionIndex;
       currentIndexRef.current = activeSectionIndex;
+
+      if (isSelfScrollingRef.current) {
+        isSelfScrollingRef.current = false;
+        return;
+      }
 
       if (isMobile) {
         const targetEl = slidesRef.current[toIdx];
