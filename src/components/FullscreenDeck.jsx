@@ -470,8 +470,8 @@ export default function FullscreenDeck({
       {/* Full-Screen Slides Stack / Continuous Vertical Flow */}
       {sections.map((sec, idx) => {
         const isActive = idx === activeSectionIndex;
-        // On mobile, render active section and up to 2 adjacent sections to conserve GPU & DOM RAM while fast scrolling
-        const shouldRenderContent = isActive || Math.abs(idx - activeSectionIndex) <= 2;
+        // Render content persistently across all viewports to guarantee 0 black screen flashes during fast mobile scrolling
+        const shouldRenderContent = true;
 
         return (
           <div

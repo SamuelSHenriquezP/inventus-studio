@@ -179,10 +179,8 @@ html, body, #root {
     touch-action: pan-y;
   }
 
-  /* Content Visibility & Intrinsic Size to prevent offscreen rendering lag & black gaps */
+  /* Solid opaque background containment to eliminate black screen gaps during fast touch scrolling */
   .mobile-section-contain {
-    content-visibility: auto;
-    contain-intrinsic-size: 100vh;
     background-color: #050508 !important;
   }
 

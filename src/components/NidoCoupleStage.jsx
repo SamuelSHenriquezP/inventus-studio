@@ -536,13 +536,18 @@ class FinancialCashflowService extends ChangeNotifier {
                 data-prevent-slide="true"
                 onWheel={(e) => e.stopPropagation()}
                 onTouchMove={(e) => e.stopPropagation()}
-                className="mockup-interactive relative w-full max-w-50 sm:max-w-57.5 max-h-[46vh] aspect-9/19 rounded-[28px] sm:rounded-[34px] bg-[#14151a] p-1.5 sm:p-2 border border-white/15 shadow-2xl flex flex-col justify-between select-none"
+                className="relative w-full max-w-[210px] xs:max-w-[230px] aspect-9/18 rounded-xl bg-[#0c0d12] border border-white/15 overflow-hidden flex flex-col justify-between shadow-md"
               >
-                <div className="absolute top-4.5 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-black border border-white/10 flex items-center justify-center z-30 pointer-events-none shadow-sm">
-                  <div className="w-1 h-1 rounded-full bg-zinc-800" />
+                {/* Flat Top Bar */}
+                <div className="w-full bg-[#14151c] px-2.5 py-1 border-b border-white/10 flex items-center justify-between text-[8.5px] font-mono text-zinc-400 shrink-0 select-none">
+                  <div className="flex items-center gap-1 font-bold text-zinc-300">
+                    <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
+                    <span>{activeCoupleUser === 'samuel' ? '🦊 Samuel (Él)' : '🌸 Rochy (Ella)'}</span>
+                  </div>
+                  <span className="text-[7.5px] text-teal-400 font-semibold">Live P2P</span>
                 </div>
 
-                <div className="w-full h-full rounded-3xl overflow-hidden bg-black border border-white/10 shadow-inner relative interactive-screen">
+                <div className="w-full flex-1 min-h-0 bg-black relative overflow-hidden interactive-screen">
                   {screenMode === 'screenshot' ? (
                     <div className="w-full h-full flex flex-col justify-between p-4 bg-linear-to-b from-[#0f172a] via-[#090d16] to-[#04060a] text-white">
                       <div className="pt-6 space-y-3">

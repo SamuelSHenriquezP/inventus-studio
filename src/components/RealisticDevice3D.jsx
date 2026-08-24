@@ -168,21 +168,25 @@ export default function RealisticDevice3D({
             </div>
           ) : (
             /* ========================================================================= */
-            /* VERTICAL PHONE HARDWARE MOCKUP (TITANIUM SMARTPHONE) */
+            /* VERTICAL PHONE HARDWARE MOCKUP (2D FLAT ON MOBILE, 3D ON DESKTOP) */
             /* ========================================================================= */
-            <div 
-              data-prevent-slide="true"
-              className="mockup-interactive relative w-full max-w-[175px] xs:max-w-[195px] sm:max-w-44 md:max-w-52 lg:max-w-56 xl:max-w-64 2xl:max-w-72 max-h-[38vh] sm:max-h-[36vh] lg:max-h-[48vh] xl:max-h-[52vh] 2xl:max-h-[56vh] aspect-9/19 rounded-[22px] sm:rounded-[36px] bg-[#15161c] p-1 sm:p-2 xl:p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex flex-col justify-between overflow-hidden"
-            >
-              <div className="relative w-full h-full min-h-0 rounded-2xl sm:rounded-[26px] overflow-hidden bg-black flex flex-col justify-between shadow-inner interactive-screen">
-                {/* Dynamic Island */}
-                <div className="absolute top-1 left-1/2 -translate-x-1/2 w-10 sm:w-14 h-1.5 sm:h-2.5 bg-black rounded-full border border-white/10 flex items-center justify-between px-1 z-30 pointer-events-none">
-                  <div className="w-0.5 sm:w-1 h-0.5 sm:h-1 rounded-full bg-white/40" />
-                  <div className="w-0.5 sm:w-1 h-0.5 sm:h-1 rounded-full bg-white/20" />
+            <>
+              {/* 1. MOBILE PHONES (< sm): FLAT 2D MINIMALIST FRAME */}
+              <div 
+                data-prevent-slide="true"
+                className="sm:hidden relative w-full max-w-[210px] xs:max-w-[230px] aspect-9/18 rounded-xl bg-[#0c0d12] border border-white/15 overflow-hidden flex flex-col justify-between shadow-md"
+              >
+                {/* Flat Top Header Bar */}
+                <div className="w-full bg-[#14151c] px-2.5 py-1 border-b border-white/10 flex items-center justify-between text-[8.5px] font-mono text-zinc-400 shrink-0 select-none">
+                  <div className="flex items-center gap-1 font-bold text-zinc-300">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    <span className="truncate max-w-28">{title || 'App Móvil'}</span>
+                  </div>
+                  <span className="text-[7.5px] text-zinc-500 font-semibold uppercase">2D Live App</span>
                 </div>
 
-                {/* Inner Screen */}
-                <div className="w-full h-full min-h-0 overflow-hidden relative flex flex-col rounded-2xl sm:rounded-3xl">
+                {/* Flat Inner Screen */}
+                <div className="w-full flex-1 min-h-0 bg-black relative overflow-hidden interactive-screen">
                   {screenMode === 'live-app' ? (
                     projectId === 'days-focus-flow' ? (
                       <DaysPhoneApp isActive={isActive} />
@@ -203,11 +207,48 @@ export default function RealisticDevice3D({
                     />
                   )}
                 </div>
-
-                {/* Home Indicator Bar */}
-                <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-12 sm:w-14 h-0.5 bg-white/30 rounded-full z-20 pointer-events-none" />
               </div>
-            </div>
+
+              {/* 2. DESKTOP & TABLETS (>= sm): HIGH-FIDELITY 3D CHASSIS */}
+              <div 
+                data-prevent-slide="true"
+                className="hidden sm:flex mockup-interactive relative w-full sm:max-w-44 md:max-w-52 lg:max-w-56 xl:max-w-64 2xl:max-w-72 max-h-[36vh] lg:max-h-[48vh] xl:max-h-[52vh] 2xl:max-h-[56vh] aspect-9/19 rounded-[36px] bg-[#15161c] p-2 xl:p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex-col justify-between overflow-hidden"
+              >
+                <div className="relative w-full h-full min-h-0 rounded-[26px] overflow-hidden bg-black flex flex-col justify-between shadow-inner interactive-screen">
+                  {/* Dynamic Island */}
+                  <div className="absolute top-1 left-1/2 -translate-x-1/2 w-14 h-2.5 bg-black rounded-full border border-white/10 flex items-center justify-between px-1 z-30 pointer-events-none">
+                    <div className="w-1 h-1 rounded-full bg-white/40" />
+                    <div className="w-1 h-1 rounded-full bg-white/20" />
+                  </div>
+
+                  {/* Inner Screen */}
+                  <div className="w-full h-full min-h-0 overflow-hidden relative flex flex-col rounded-3xl">
+                    {screenMode === 'live-app' ? (
+                      projectId === 'days-focus-flow' ? (
+                        <DaysPhoneApp isActive={isActive} />
+                      ) : projectId === 'sopa-senior' ? (
+                        <SopaSeniorApp isActive={isActive} />
+                      ) : projectId === 'paz-hoy' ? (
+                        <PazHoyPhoneApp isActive={isActive} />
+                      ) : (
+                        <NidoPhoneApp isActive={isActive} />
+                      )
+                    ) : (
+                      <img 
+                        src={image} 
+                        alt={title}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover select-none"
+                      />
+                    )}
+                  </div>
+
+                  {/* Home Indicator Bar */}
+                  <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-14 h-0.5 bg-white/30 rounded-full z-20 pointer-events-none" />
+                </div>
+              </div>
+            </>
           )}
         </div>
       ) : (
