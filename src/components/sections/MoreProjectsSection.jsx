@@ -15,14 +15,16 @@ export default function MoreProjectsSection({ isActive = true }) {
     const el = containerRef.current;
     if (!el || !isActive) return;
 
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+    if (isMobile) return;
+
     const ctx = gsap.context(() => {
-      const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
       const tl = gsap.timeline({ delay: 0.1 });
 
       // Badge & Header elements
       tl.from(
         el.querySelectorAll('.more-header-anim'),
-        { opacity: 0, y: -12, duration: isMobile ? 0.25 : 0.4, ease: 'power2.out', stagger: isMobile ? 0.015 : 0.03, clearProps: 'all' },
+        { opacity: 0, y: -12, duration: 0.4, ease: 'power2.out', stagger: 0.03, clearProps: 'all' },
         0
       );
 
@@ -35,9 +37,9 @@ export default function MoreProjectsSection({ isActive = true }) {
           mainChars,
           {
             opacity: 0,
-            y: isMobile ? 12 : 24,
-            duration: isMobile ? 0.4 : 0.85,
-            stagger: isMobile ? 0.015 : 0.035,
+            y: 24,
+            duration: 0.85,
+            stagger: 0.035,
             ease: 'power3.out',
             clearProps: 'all',
           },
@@ -50,10 +52,10 @@ export default function MoreProjectsSection({ isActive = true }) {
           hlChars,
           {
             opacity: 0,
-            y: isMobile ? 12 : 24,
-            scale: isMobile ? 0.98 : 0.92,
-            duration: isMobile ? 0.4 : 0.85,
-            stagger: isMobile ? 0.015 : 0.035,
+            y: 24,
+            scale: 0.92,
+            duration: 0.85,
+            stagger: 0.035,
             ease: 'power3.out',
             clearProps: 'all',
           },
@@ -66,10 +68,10 @@ export default function MoreProjectsSection({ isActive = true }) {
         el.querySelectorAll('.more-card-anim'),
         {
           opacity: 0,
-          y: isMobile ? 14 : 24,
-          scale: isMobile ? 0.98 : 0.95,
-          duration: isMobile ? 0.3 : 0.45,
-          stagger: isMobile ? 0.025 : 0.05,
+          y: 24,
+          scale: 0.95,
+          duration: 0.45,
+          stagger: 0.05,
           ease: 'power2.out',
           clearProps: 'all',
         },
@@ -88,7 +90,7 @@ export default function MoreProjectsSection({ isActive = true }) {
       <section
         id="more-projects-section"
         ref={containerRef}
-        className="w-full min-h-full md:overflow-y-auto flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-3 sm:pt-20 pb-6 sm:pb-16 relative select-none custom-scroll"
+        className="w-full min-h-full md:overflow-y-auto flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-20 sm:pt-20 pb-6 sm:pb-16 relative select-none custom-scroll"
         style={{
           background: 'radial-gradient(ellipse 100% 100% at 50% 15%, #0f111a 0%, #0a0b10 55%, #050508 100%)'
         }}

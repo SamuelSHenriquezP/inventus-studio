@@ -15,6 +15,9 @@ export default function AboutStackSection({ isActive = true }) {
     const el = containerRef.current;
     if (!el || !isActive) return;
 
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+    if (isMobile) return;
+
     const ctx = gsap.context(() => {
       const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
       const tl = gsap.timeline({ delay: 0.1 });
@@ -139,7 +142,7 @@ export default function AboutStackSection({ isActive = true }) {
     <section 
       id="about-stack-section"
       ref={containerRef}
-      className="w-full min-h-full md:overflow-y-auto flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-3 sm:pt-20 pb-6 sm:pb-16 relative select-none custom-scroll"
+      className="w-full min-h-full md:overflow-y-auto flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-20 sm:pt-20 pb-6 sm:pb-16 relative select-none custom-scroll"
       style={{
         background: 'radial-gradient(ellipse 100% 100% at 50% 20%, #13141a 0%, #0a0b0f 55%, #050508 100%)'
       }}

@@ -14,6 +14,9 @@ export default function CinematicTitle({
     const el = titleRef.current;
     if (!el || !isActive) return;
 
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+    if (isMobile) return;
+
     const ctx = gsap.context(() => {
       const chars = el.querySelectorAll('.cinematic-char');
       if (!chars.length) return;

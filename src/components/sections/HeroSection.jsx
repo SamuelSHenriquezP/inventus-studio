@@ -11,14 +11,16 @@ export default function HeroSection({ onExploreWorks, onExploreStack, isActive =
     const el = heroRef.current;
     if (!el || !isActive) return;
 
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+    if (isMobile) return;
+
     const ctx = gsap.context(() => {
-      const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
       const tl = gsap.timeline({ delay: 0.1 });
 
       tl.fromTo(
         el.querySelectorAll('.hero-capsule'),
-        { opacity: 0, y: -15, ...(isMobile ? {} : { filter: 'blur(4px)' }) },
-        { opacity: 1, y: 0, ...(isMobile ? {} : { filter: 'blur(0px)' }), duration: isMobile ? 0.35 : 0.5, ease: 'power3.out' },
+        { opacity: 0, y: -15, filter: 'blur(4px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.5, ease: 'power3.out' },
         0
       );
 
@@ -26,15 +28,15 @@ export default function HeroSection({ onExploreWorks, onExploreStack, isActive =
         el.querySelectorAll('.hero-char'),
         {
           opacity: 0,
-          y: isMobile ? 12 : 22,
-          ...(isMobile ? {} : { filter: 'blur(5px)' }),
+          y: 22,
+          filter: 'blur(5px)',
         },
         {
           opacity: 1,
           y: 0,
-          ...(isMobile ? {} : { filter: 'blur(0px)' }),
-          duration: isMobile ? 0.45 : 0.72,
-          stagger: isMobile ? 0.008 : 0.013,
+          filter: 'blur(0px)',
+          duration: 0.72,
+          stagger: 0.013,
           ease: 'power3.out',
         },
         0.05
@@ -42,15 +44,15 @@ export default function HeroSection({ onExploreWorks, onExploreStack, isActive =
 
       tl.fromTo(
         el.querySelectorAll('.hero-fade'),
-        { opacity: 0, y: 15, ...(isMobile ? {} : { filter: 'blur(4px)' }) },
-        { opacity: 1, y: 0, ...(isMobile ? {} : { filter: 'blur(0px)' }), duration: isMobile ? 0.35 : 0.5, stagger: 0.04, ease: 'power3.out' },
+        { opacity: 0, y: 15, filter: 'blur(4px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.5, stagger: 0.04, ease: 'power3.out' },
         0.2
       );
 
       tl.fromTo(
         el.querySelectorAll('.hero-console'),
-        { opacity: 0, scale: isMobile ? 0.98 : 0.96, ...(isMobile ? {} : { filter: 'blur(8px)' }) },
-        { opacity: 1, scale: 1, ...(isMobile ? {} : { filter: 'blur(0px)' }), duration: isMobile ? 0.45 : 0.7, ease: 'power3.out' },
+        { opacity: 0, scale: 0.96, filter: 'blur(8px)' },
+        { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.7, ease: 'power3.out' },
         0.1
       );
     }, el);
@@ -64,7 +66,7 @@ export default function HeroSection({ onExploreWorks, onExploreStack, isActive =
     <section 
       id="hero"
       ref={heroRef}
-      className="w-full min-h-full md:overflow-y-auto flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-3 sm:pt-20 pb-6 sm:pb-16 relative select-none custom-scroll"
+      className="w-full min-h-full md:overflow-y-auto flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-20 sm:pt-20 pb-6 sm:pb-16 relative select-none custom-scroll"
       style={{
         background: 'radial-gradient(ellipse 100% 100% at 50% 20%, #111218 0%, #0a0b0f 55%, #050508 100%)'
       }}
