@@ -1,101 +1,59 @@
+// src/components/InteractiveProjectRunner.jsx
 import { useState, useEffect, useCallback } from 'react';
 import { 
-  X, Play, QrCode, Zap, 
-  Code2, ArrowRight,
-  Compass, Radio,
-  Plus, Minus, TrendingUp, Sliders, RefreshCw
+  X, QrCode, ArrowRight,
+  Radio, Smartphone, Laptop, Tablet, Maximize2, ShieldCheck, Heart, Sparkles, ChevronRight
 } from 'lucide-react';
-import confetti from 'canvas-confetti';
 import { sounds } from '../utils/soundEngine';
 import { personalInfo } from '../Data/projectsData';
+
 import OtekPowerApp from './apps/OtekPowerApp';
 import SopaSeniorApp from './apps/SopaSeniorApp';
-
-const FLEET_NODES = [
-  { id: 'OP-101', name: 'Carlos Mendoza', status: 'En Ruta', battery: '92%', lat: '4.6097', lng: '-74.0817' },
-  { id: 'OP-102', name: 'Laura Gómez', status: 'En Servicio', battery: '85%', lat: '4.6534', lng: '-74.0543' },
-  { id: 'OP-103', name: 'Andrés Silva', status: 'Disponible', battery: '98%', lat: '4.7110', lng: '-74.0721' }
-];
+import DaysPhoneApp from './apps/DaysPhoneApp';
+import NidoPhoneApp from './apps/NidoPhoneApp';
+import CyberRushPhoneApp from './apps/CyberRushPhoneApp';
+import ServiIntelOperarioApp from './apps/ServiIntelOperarioApp';
+import ServiIntelLaptopApp from './apps/ServiIntelLaptopApp';
 
 export default function InteractiveProjectRunner({ project, onClose }) {
   const [showQR, setShowQR] = useState(false);
-
-  // LoveCost State
-  const income = 3800;
-  const fixedCosts = 1450;
-  const [extraExpenses, setExtraExpenses] = useState(420);
+  const [serviIntelView, setServiIntelView] = useState('operario'); // 'operario' | 'web' | 'dual'
+  const [nidoUser, setNidoUser] = useState('samuel'); // 'samuel' | 'rochy'
   
-  // ServiIntel State
-  const [fleetNodes] = useState(FLEET_NODES);
-  const [activeTicketStatus, setActiveTicketStatus] = useState('En Espera');
-  const [isDispatching, setIsDispatching] = useState(false);
+  // Nido Shared State in Expanded Modal
+  const [nidoBalance, setNidoBalance] = useState(2450.00);
+  const [nidoTransactions, setNidoTransactions] = useState([
+    { id: 1, title: 'Mercado Carulla', category: 'Hogar', amount: -145.50, author: 'Samuel', time: 'Hoy 10:30 AM' },
+    { id: 2, title: 'Cena Aniversario', category: 'Citas', amount: -85.00, author: 'Rochy', time: 'Ayer' },
+    { id: 3, title: 'Nómina Quincena', category: 'Ingreso', amount: 1800.00, author: 'Samuel', time: 'Ayer' }
+  ]);
+  const [nidoSyncNotice, setNidoSyncNotice] = useState('👩‍❤️‍👨 Dispositivos sincronizados en tiempo real');
+  const [nidoLastPing, setNidoLastPing] = useState(null);
 
-  // Days State
-  const [taskIndex, setTaskIndex] = useState(0);
-  const [sortedCounts, setSortedCounts] = useState({ baja: 4, media: 5, alta: 3 });
-  const tasksToSwipe = [
-    { title: "Definir arquitectura Isar DB offline-first", tag: "⚡ Alta Energía", time: "45m" },
-    { title: "Optimizar Shaders GLSL a SPIR-V para Impeller", tag: "⚡ Alta Energía", time: "1h 30m" },
-    { title: "Configurar canal WebSocket bidireccional", tag: "🪵 Media Energía", time: "30m" },
-    { title: "Validar reglas de seguridad RBAC Firestore", tag: "⚡ Alta Energía", time: "50m" },
-    { title: "Crear widget de Android Home Screen con Glance", tag: "🌿 Baja Energía", time: "40m" }
-  ];
+  const handleNidoAddTransaction = (title, category, amount, author) => {
+    const newTx = {
+      id: Date.now(),
+      title,
+      category,
+      amount: -amount,
+      author,
+      time: 'Justo ahora'
+    };
+    const newBal = parseFloat((nidoBalance - amount).toFixed(2));
+    setNidoBalance(newBal);
+    setNidoTransactions(prev => [newTx, ...prev.slice(0, 5)]);
+    setNidoSyncNotice(`✨ ${author} registró: ${title} (-$${amount.toFixed(2)})`);
+  };
 
-  // Cyber Rush State
-  const [isPlayingGame, setIsPlayingGame] = useState(false);
-  const [gameScore, setGameScore] = useState(0);
-  const [gameCombo, setGameCombo] = useState(1);
-  const [playerX, setPlayerX] = useState(50);
+  const handleNidoSendPing = (message, author) => {
+    setNidoLastPing({ message, author, time: Date.now() });
+    setNidoSyncNotice(`💌 ${author} envió guiño: "${message}"`);
+  };
 
-  // Nexus 3D Controls
-  const [noiseDistort, setNoiseDistort] = useState(1.0);
-  const [isWireframe, setIsWireframe] = useState(false);
-  const [glowSpeed, setGlowSpeed] = useState(1.2);
-
-  // Cyber Rush timer loop
-  useEffect(() => {
-    let interval;
-    if (isPlayingGame) {
-      interval = setInterval(() => {
-        setGameScore(s => s + 25 * gameCombo);
-      }, 100);
-    }
-    return () => clearInterval(interval);
-  }, [isPlayingGame, gameCombo]);
-
-  const handleCyberDodge = useCallback(() => {
-    sounds.playClick();
-    if (!isPlayingGame) {
-      setIsPlayingGame(true);
-      setGameScore(0);
-      setGameCombo(1);
-      return;
-    }
-    setGameCombo(c => {
-      const next = Math.min(8, c + 1);
-      if (next >= 3) {
-        confetti({
-          particleCount: 20,
-          spread: 40,
-          origin: { y: 0.6 },
-          colors: [project?.accent || '#f43f5e', '#ffffff', '#00f0ff']
-        });
-      }
-      return next;
-    });
-    setGameScore(s => s + 300);
-    setPlayerX(Math.floor(Math.random() * 70) + 15);
-  }, [isPlayingGame, project?.accent]);
-
-  // Keyboard close & game controls
+  // Keyboard close handler
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') onClose();
-      if (isPlayingGame) {
-        if (e.key === 'ArrowLeft') setPlayerX(p => Math.max(12, p - 8));
-        if (e.key === 'ArrowRight') setPlayerX(p => Math.min(88, p + 8));
-        if (e.key === ' ') handleCyberDodge();
-      }
     };
     window.addEventListener('keydown', handleKeyDown);
     document.body.style.overflow = 'hidden';
@@ -103,56 +61,14 @@ export default function InteractiveProjectRunner({ project, onClose }) {
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = '';
     };
-  }, [isPlayingGame, onClose, handleCyberDodge]);
-
-  const handleDaysSwipe = (bucket) => {
-    sounds.playClick();
-    setSortedCounts(prev => ({ ...prev, [bucket]: prev[bucket] + 1 }));
-    setTaskIndex(prev => (prev + 1) % tasksToSwipe.length);
-    sounds.playSuccess();
-    confetti({
-      particleCount: 15,
-      spread: 30,
-      origin: { y: 0.6 },
-      colors: ['#8B9A86', '#FAF8F5', '#ffffff']
-    });
-  };
-
-  const handleDispatchOrder = () => {
-    if (isDispatching) return;
-    sounds.playClick();
-    setIsDispatching(true);
-    setActiveTicketStatus('Despachando vía WebSocket...');
-    setTimeout(() => {
-      sounds.playSuccess();
-      setIsDispatching(false);
-      setActiveTicketStatus('Asignado a OP-103 (GPS En Ruta)');
-      confetti({
-        particleCount: 25,
-        spread: 45,
-        origin: { y: 0.6 },
-        colors: ['#38bdf8', '#0284c7', '#ffffff']
-      });
-    }, 700);
-  };
-
-  const handleLoveCostAdd = (val) => {
-    sounds.playClick();
-    setExtraExpenses(prev => Math.max(0, prev + val));
-    sounds.playSuccess();
-    if (val < 0) {
-      confetti({
-        particleCount: 20,
-        spread: 35,
-        origin: { y: 0.6 },
-        colors: ['#10b981', '#34d399', '#ffffff']
-      });
-    }
-  };
+  }, [onClose]);
 
   if (!project) return null;
 
-  const loveCostDisponible = income - fixedCosts - extraExpenses;
+  const isPhoneVertical = ['sopa-senior', 'days-focus-flow', 'lovecost-nido'].includes(project.id);
+  const isServiIntel = project.id === 'serviintel-ops';
+  const isLandscapePhone = project.id === 'cyber-rush';
+  const isTablet = project.id === 'otek-powerapps';
 
   return (
     <div 
@@ -160,7 +76,7 @@ export default function InteractiveProjectRunner({ project, onClose }) {
       data-prevent-slide="true"
       onWheel={(e) => e.stopPropagation()}
       onTouchMove={(e) => e.stopPropagation()}
-      className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 md:p-8 animate-in fade-in duration-200 select-none modal-container"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 select-none modal-container"
     >
       
       {/* Backdrop */}
@@ -173,375 +89,330 @@ export default function InteractiveProjectRunner({ project, onClose }) {
       <div 
         data-prevent-slide="true"
         onWheel={(e) => e.stopPropagation()}
-        className="relative w-full max-w-3xl bg-[#0f0f13] border border-white/15 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 z-10 shadow-2xl space-y-4 sm:space-y-6 max-h-[90vh] overflow-y-auto custom-scroll font-sans text-zinc-100"
+        className="relative w-full max-w-4xl max-h-[95vh] bg-[#0c0d12] border border-white/15 rounded-2xl sm:rounded-3xl p-3 sm:p-5 md:p-6 z-10 shadow-[0_25px_80px_rgba(0,0,0,0.95)] flex flex-col justify-between overflow-hidden font-sans text-zinc-100 animate-in fade-in zoom-in-95 duration-200"
       >
         
-        {/* Top Header */}
-        <div className="flex items-center justify-between border-b border-white/10 pb-3 sm:pb-4">
-          <div className="flex items-center gap-3">
+        {/* Top Header Bar */}
+        <div className="flex items-center justify-between gap-2.5 sm:gap-4 border-b border-white/10 pb-2.5 sm:pb-3 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+            {/* Desktop / Tablet Full Badge */}
             <span 
-              className="text-xs font-mono font-bold px-3 py-1 rounded-full uppercase tracking-wider"
+              className="hidden sm:inline-flex text-[10.5px] sm:text-xs font-mono font-bold px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full uppercase tracking-wider shrink-0"
               style={{
-                backgroundColor: `${project.accent}20`,
-                color: project.accent,
-                border: `1px solid ${project.accent}40`
+                backgroundColor: `${project.accent || '#38bdf8'}20`,
+                color: project.accent || '#38bdf8',
+                border: `1px solid ${project.accent || '#38bdf8'}40`
               }}
             >
-              {project.badge}
+              {project.badge || 'DEMO LIVE'}
             </span>
-            <span className="text-xs font-mono text-zinc-400 hidden sm:inline">
-              Simulador Interactivo en Vivo
+
+            {/* Mobile Compact Badge */}
+            <span 
+              className="sm:hidden text-[9px] font-mono font-bold px-2 py-0.5 rounded-full uppercase tracking-wider shrink-0"
+              style={{
+                backgroundColor: `${project.accent || '#38bdf8'}20`,
+                color: project.accent || '#38bdf8',
+                border: `1px solid ${project.accent || '#38bdf8'}40`
+              }}
+            >
+              LIVE DEMO
             </span>
+
+            <div className="min-w-0 flex-1">
+              <h3 className="font-display font-bold text-sm sm:text-base md:text-lg text-white tracking-tight truncate flex items-center gap-1.5 sm:gap-2">
+                <span className="truncate">{project.title}</span>
+                <span className="text-zinc-500 font-normal text-xs font-sans hidden md:inline shrink-0">• Modo Pantalla Grande</span>
+              </h3>
+            </div>
           </div>
 
-          <button
-            onClick={onClose}
-            className="p-2 rounded-full bg-zinc-900 border border-white/10 text-zinc-400 hover:text-white transition-colors cursor-pointer"
-          >
-            <X className="w-4 h-4" />
-          </button>
-        </div>
-
-        {/* Project Info */}
-        <div className="space-y-1">
-          <h3 className="text-2xl sm:text-3xl font-display font-bold text-white tracking-tight">
-            {project.title}
-          </h3>
-          <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-sans">
-            {project.description}
-          </p>
+          <div className="flex items-center gap-2 shrink-0">
+            {/* Quick Exit Button with Key Hint */}
+            <button
+              onClick={() => { sounds.playClick(); onClose(); }}
+              className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-zinc-200 hover:text-white border border-white/15 transition-all text-xs font-mono font-bold flex items-center gap-1.5 cursor-pointer active:scale-95 shadow-sm shrink-0"
+              title="Cerrar modal (Esc)"
+            >
+              <span>✕ Salir</span>
+              <kbd className="hidden sm:inline px-1.5 py-0.2 bg-black/40 border border-white/20 rounded text-[9px] text-zinc-400">Esc</kbd>
+            </button>
+          </div>
         </div>
 
         {/* ========================================================================= */}
-        {/* BESPOKE INTERACTIVE WORKBENCH PER PROJECT */}
+        {/* INTERACTIVE WORKBENCH BODY */}
         {/* ========================================================================= */}
-        <div className="space-y-4">
+        <div className="flex-1 min-h-0 my-2.5 sm:my-3 overflow-y-auto custom-scroll flex flex-col justify-center items-center">
           
-          {/* 1. LOVECOST BUDGET ENGINE */}
-          {project.id === 'lovecost-nido' && (
-            <div className="p-6 rounded-2xl bg-emerald-950/20 border border-emerald-500/30 space-y-5">
-              <div className="flex items-center justify-between border-b border-emerald-500/20 pb-3">
-                <span className="text-xs font-mono text-emerald-400 font-bold flex items-center gap-2">
-                  <TrendingUp className="w-4 h-4" /> MOTOR DE DISPONIBLE REAL
-                </span>
-                <span className="text-xs font-mono text-zinc-400">Offline Isar DB &lt;1.2ms</span>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs text-center">
-                <div className="p-3 rounded-xl bg-zinc-950/80 border border-white/5">
-                  <span className="text-zinc-500 text-[10px] block">INGRESOS DEL MES</span>
-                  <span className="text-base font-bold text-white">${income.toLocaleString()}</span>
-                </div>
-                <div className="p-3 rounded-xl bg-zinc-950/80 border border-white/5">
-                  <span className="text-zinc-500 text-[10px] block">GASTOS FIJOS</span>
-                  <span className="text-base font-bold text-zinc-300">${fixedCosts.toLocaleString()}</span>
-                </div>
-                <div className="p-3 rounded-xl bg-emerald-900/30 border border-emerald-500/40">
-                  <span className="text-emerald-400 text-[10px] block font-bold">DISPONIBLE REAL</span>
-                  <span className="text-xl font-extrabold text-emerald-300">${loveCostDisponible.toLocaleString()}</span>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap items-center justify-center gap-3 pt-2 font-mono text-xs">
-                <button
-                  onClick={() => handleLoveCostAdd(50)}
-                  className="px-4 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-white/10 text-rose-300 font-bold flex items-center gap-1.5 cursor-pointer active:scale-95 transition-all"
-                >
-                  <Plus className="w-3.5 h-3.5" /> Registrar Gasto ($50)
-                </button>
-                <button
-                  onClick={() => handleLoveCostAdd(-200)}
-                  className="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold flex items-center gap-1.5 cursor-pointer active:scale-95 transition-all shadow-md"
-                >
-                  <Minus className="w-3.5 h-3.5" /> Registrar Ingreso Extra ($200)
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* 2. SERVIINTEL DISPATCH WORKSPACE */}
-          {project.id === 'serviintel-ops' && (
-            <div className="p-6 rounded-2xl bg-sky-950/20 border border-sky-500/30 space-y-5">
-              <div className="flex items-center justify-between border-b border-sky-500/20 pb-3">
-                <span className="text-xs font-mono text-sky-400 font-bold flex items-center gap-2">
-                  <Radio className="w-4 h-4 animate-pulse" /> CENTRO DE COMANDO & FLOTA GPS
-                </span>
-                <span className="text-xs font-mono text-emerald-400 font-bold">99.98% SLA Conectado</span>
-              </div>
-
-              <div className="space-y-2">
-                <div className="text-[11px] font-mono text-zinc-400">Operarios en Terreno (Live Telemetry):</div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 font-mono text-xs">
-                  {fleetNodes.map((node) => (
-                    <div key={node.id} className="p-3 rounded-xl bg-zinc-950/80 border border-white/10 space-y-1">
-                      <div className="flex items-center justify-between text-[10px]">
-                        <span className="text-sky-400 font-bold">{node.id}</span>
-                        <span className="text-zinc-500">Bat: {node.battery}</span>
-                      </div>
-                      <div className="font-bold text-white text-xs truncate">{node.name}</div>
-                      <div className="text-[10px] text-emerald-400">● {node.status}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="p-4 rounded-xl bg-zinc-950 border border-sky-500/20 flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-xs">
-                <div>
-                  <span className="text-[10px] text-zinc-500 block">ESTADO DE ORDEN ACTIVA:</span>
-                  <span className="text-white font-bold">{activeTicketStatus}</span>
-                </div>
-                <button
-                  onClick={handleDispatchOrder}
-                  disabled={isDispatching}
-                  className="px-5 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-black font-bold flex items-center gap-2 cursor-pointer active:scale-95 transition-all shadow-md"
-                >
-                  <RefreshCw className={`w-3.5 h-3.5 ${isDispatching ? 'animate-spin' : ''}`} />
-                  <span>{isDispatching ? 'Despachando...' : 'Despachar Orden Urgente'}</span>
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* 3. O-TEK QUALITY CONTROL POWER APPS RUNNER */}
-          {project.id === 'otek-powerapps' && (
-            <div className="rounded-2xl border border-sky-500/30 overflow-hidden bg-[#071320] shadow-2xl h-140 flex flex-col">
-              <OtekPowerApp />
-            </div>
-          )}
-
-          {/* 4. SOPA SENIOR LIVE APP SIMULATION */}
+          {/* 1. SOPA SENIOR EXPANDED HARDWARE FRAME */}
           {project.id === 'sopa-senior' && (
-            <div className="flex flex-col items-center justify-center p-2 rounded-2xl bg-amber-950/20 border border-amber-500/30 space-y-4">
-              <div className="w-full flex items-center justify-between px-3 pt-2 text-xs font-mono text-amber-300 border-b border-amber-500/20 pb-2">
-                <span>SIMULADOR MÓVIL ANDROID // ADMOB + IAP</span>
-                <a
-                  href={project.googlePlayUrl || "https://play.google.com/store/apps/details?id=com.inventus.sopasenior"}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="px-3 py-1 rounded-full bg-amber-500 hover:bg-amber-400 text-black font-bold text-[11px] flex items-center gap-1.5 transition-all"
-                >
-                  <span>Abrir Google Play</span>
-                  <ArrowRight className="w-3 h-3" />
-                </a>
+            <div className="w-full flex flex-col items-center justify-center space-y-2">
+              <div className="w-full max-w-82.5 sm:max-w-92.5 h-130 sm:h-147.5 rounded-4xl sm:rounded-[38px] bg-[#15161c] p-2 sm:p-2.5 border border-amber-500/30 shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex flex-col justify-between overflow-hidden relative">
+                {/* Dynamic Island */}
+                <div className="absolute top-1 left-1/2 -translate-x-1/2 w-12 h-2 bg-black rounded-full border border-white/10 flex items-center justify-between px-1 z-30 pointer-events-none">
+                  <div className="w-0.5 h-0.5 rounded-full bg-white/40" />
+                  <div className="w-0.5 h-0.5 rounded-full bg-white/20" />
+                </div>
+                <div className="relative w-full h-full rounded-3xl sm:rounded-[30px] overflow-hidden bg-black shadow-inner">
+                  <SopaSeniorApp isActive={true} />
+                </div>
               </div>
-              <div className="w-[320px] sm:w-87.5 h-130 rounded-3xl overflow-hidden shadow-2xl border border-amber-500/30">
-                <SopaSeniorApp />
+              <div className="text-[10.5px] font-mono text-amber-300/80 flex items-center gap-1.5">
+                <Sparkles className="w-3 h-3 text-amber-400" />
+                <span>Haz clic y arrastra sobre la cuadrícula para conectar palabras</span>
               </div>
             </div>
           )}
 
-          {/* 3. DAYS ZEN SWIPE ENGINE */}
+          {/* 2. DAYS FOCUS FLOW EXPANDED HARDWARE FRAME */}
           {project.id === 'days-focus-flow' && (
-            <div className="p-6 rounded-2xl bg-[#17221b] border border-[#8B9A86]/40 space-y-5">
-              <div className="flex items-center justify-between border-b border-[#8B9A86]/20 pb-3">
-                <span className="text-xs font-mono text-[#8B9A86] font-bold flex items-center gap-2">
-                  <Compass className="w-4 h-4" /> CLASIFICADOR DE TAREAS ZEN SWIPE
-                </span>
-                <span className="text-xs font-mono text-zinc-400">Sin formularios estáticos</span>
-              </div>
-
-              {/* Active Card */}
-              <div className="p-5 rounded-2xl bg-[#0f1712] border border-[#8B9A86]/30 text-center space-y-2 shadow-inner font-mono">
-                <div className="flex justify-between text-[11px] text-[#8B9A86]">
-                  <span>{tasksToSwipe[taskIndex].tag}</span>
-                  <span>{tasksToSwipe[taskIndex].time}</span>
+            <div className="w-full flex flex-col items-center justify-center space-y-2">
+              <div className="w-full max-w-82.5 sm:max-w-92.5 h-130 sm:h-147.5 rounded-4xl sm:rounded-[38px] bg-[#15161c] p-2 sm:p-2.5 border border-[#8B9A86]/40 shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex flex-col justify-between overflow-hidden relative">
+                {/* Dynamic Island */}
+                <div className="absolute top-1 left-1/2 -translate-x-1/2 w-12 h-2 bg-black rounded-full border border-white/10 flex items-center justify-between px-1 z-30 pointer-events-none">
+                  <div className="w-0.5 h-0.5 rounded-full bg-white/40" />
+                  <div className="w-0.5 h-0.5 rounded-full bg-white/20" />
                 </div>
-                <h4 className="text-base sm:text-lg font-bold text-[#FAF8F5] leading-snug">
-                  "{tasksToSwipe[taskIndex].title}"
-                </h4>
-                <div className="text-[10px] text-zinc-400 pt-1">
-                  Arrastra o selecciona un espacio para clasificar instantáneamente
+                <div className="relative w-full h-full rounded-3xl sm:rounded-[30px] overflow-hidden bg-black shadow-inner">
+                  <DaysPhoneApp isActive={true} />
                 </div>
               </div>
-
-              {/* Buckets Count & Actions */}
-              <div className="grid grid-cols-3 gap-2 font-mono text-xs">
-                <button
-                  onClick={() => handleDaysSwipe('baja')}
-                  className="p-3 rounded-xl bg-[#233329] hover:bg-[#2e4336] text-[#FAF8F5] font-bold flex flex-col items-center gap-1 cursor-pointer transition-all border border-[#8B9A86]/20 active:scale-95"
-                >
-                  <span className="text-[10px] text-[#6E7D6B] font-extrabold">← BAJA ENERGÍA</span>
-                  <span className="text-sm font-black text-[#6E7D6B]">{sortedCounts.baja} tareas</span>
-                </button>
-                <button
-                  onClick={() => handleDaysSwipe('media')}
-                  className="p-3 rounded-xl bg-[#233329] hover:bg-[#2e4336] text-[#FAF8F5] font-bold flex flex-col items-center gap-1 cursor-pointer transition-all border border-[#8B9A86]/20 active:scale-95"
-                >
-                  <span className="text-[10px] text-[#917F72] font-extrabold">↑ MEDIA ENERGÍA</span>
-                  <span className="text-sm font-black text-[#917F72]">{sortedCounts.media} tareas</span>
-                </button>
-                <button
-                  onClick={() => handleDaysSwipe('alta')}
-                  className="p-3 rounded-xl bg-[#8B9A86] hover:bg-[#9cb097] text-black font-bold flex flex-col items-center gap-1 cursor-pointer transition-all shadow-md active:scale-95"
-                >
-                  <span className="text-[10px] text-zinc-900 font-extrabold">ALTA ENERGÍA →</span>
-                  <span className="text-sm font-black text-zinc-900">{sortedCounts.alta} tareas</span>
-                </button>
+              <div className="text-[10.5px] font-mono text-emerald-300/80 flex items-center gap-1.5">
+                <Sparkles className="w-3 h-3 text-emerald-400" />
+                <span>Prueba el temporizador Pomodoro, arrastra tareas o cambia entre estantes</span>
               </div>
             </div>
           )}
 
-          {/* 4. CYBER RUSH ARCADE GAME */}
-          {project.id === 'cyber-rush' && (
-            <div className="p-6 rounded-2xl bg-rose-950/20 border border-rose-500/30 space-y-4">
-              <div className="flex items-center justify-between text-xs font-mono text-rose-300">
-                <div className="flex items-center gap-4">
-                  <span>SCORE: <strong className="text-white font-bold">{gameScore.toLocaleString()}</strong></span>
-                  <span>COMBO: <strong className="text-cyan-400 font-bold">{gameCombo}x</strong></span>
-                </div>
-                <span className="text-emerald-400 font-bold flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" /> WASM CanvasKit 120 FPS
-                </span>
+          {/* 3. NIDO EXPANDED WITH ACTIVE PARTNER SWITCHER */}
+          {project.id === 'lovecost-nido' && (
+            <div className="w-full flex flex-col items-center justify-center space-y-2">
+              {/* Profile Switcher */}
+              <div className="flex items-center p-1 rounded-xl bg-white/5 border border-white/10 font-mono text-xs w-full max-w-xs">
+                <button
+                  onClick={() => setNidoUser('samuel')}
+                  className={`flex-1 py-1 px-2.5 rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer font-bold ${
+                    nidoUser === 'samuel' ? 'bg-[#0D9488] text-white shadow-md' : 'text-zinc-400 hover:text-white'
+                  }`}
+                >
+                  <span>🦊 Samuel (Él)</span>
+                </button>
+                <button
+                  onClick={() => setNidoUser('rochy')}
+                  className={`flex-1 py-1 px-2.5 rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer font-bold ${
+                    nidoUser === 'rochy' ? 'bg-rose-500 text-white shadow-md' : 'text-zinc-400 hover:text-white'
+                  }`}
+                >
+                  <span>🌸 Rochy (Ella)</span>
+                </button>
               </div>
 
-              {/* Interactive Player Canvas */}
-              <div 
-                onClick={handleCyberDodge}
-                className="relative h-64 rounded-2xl bg-black border border-rose-500/30 overflow-hidden cursor-pointer flex flex-col items-center justify-center p-6 group active:scale-99 transition-transform shadow-2xl"
-              >
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:scale-104 transition-transform duration-700" 
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/40 to-black/60 pointer-events-none" />
-
-                {/* Laser Ship */}
-                <div 
-                  className="absolute w-8 h-8 rounded-full bg-rose-500 shadow-[0_0_25px_#f43f5e] flex items-center justify-center transition-all duration-150"
-                  style={{ left: `${playerX}%`, top: '50%' }}
-                >
-                  <Zap className="w-4 h-4 text-white fill-white" />
+              {/* Hardware Phone */}
+              <div className="w-full max-w-82.5 sm:max-w-92.5 h-130 sm:h-147.5 rounded-4xl sm:rounded-[38px] bg-[#15161c] p-2 sm:p-2.5 border border-teal-500/30 shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex flex-col justify-between overflow-hidden relative">
+                <div className="absolute top-1 left-1/2 -translate-x-1/2 w-12 h-2 bg-black rounded-full border border-white/10 flex items-center justify-between px-1 z-30 pointer-events-none">
+                  <div className="w-0.5 h-0.5 rounded-full bg-white/40" />
+                  <div className="w-0.5 h-0.5 rounded-full bg-white/20" />
                 </div>
-
-                {!isPlayingGame ? (
-                  <div className="relative z-10 text-center space-y-3">
-                    <span className="text-xl sm:text-2xl font-display font-extrabold text-white tracking-wider block uppercase">
-                      {project.title}
-                    </span>
-                    <p className="text-xs font-mono text-zinc-300 max-w-sm mx-auto">
-                      Haz clic o pulsa [Espacio] para iniciar el motor arcade a 120 FPS
-                    </p>
-                    <button className="px-6 py-3 bg-white text-black font-mono font-extrabold text-xs rounded-xl shadow-xl flex items-center gap-2 mx-auto hover:bg-zinc-200 transition-colors cursor-pointer">
-                      <Play className="w-4 h-4 fill-black" /> Iniciar Carrera
-                    </button>
-                  </div>
-                ) : (
-                  <div className="relative z-10 text-center space-y-1">
-                    <span className="text-sm font-mono text-white font-bold animate-bounce block">
-                      ¡HAZ CLIC O USA LAS FLECHAS [← →] PARA ESQUIVAR!
-                    </span>
-                    <span className="text-xs font-mono text-rose-300 block">
-                      Combo Multiplier ({gameCombo}x) Activo
-                    </span>
-                  </div>
-                )}
+                <div className="relative w-full h-full rounded-3xl sm:rounded-[30px] overflow-hidden bg-black shadow-inner">
+                  <NidoPhoneApp
+                    user={nidoUser}
+                    sharedState={{
+                      balance: nidoBalance,
+                      transactions: nidoTransactions,
+                      syncNotice: nidoSyncNotice,
+                      lastPing: nidoLastPing
+                    }}
+                    onAddTransaction={handleNidoAddTransaction}
+                    onSendPing={handleNidoSendPing}
+                  />
+                </div>
               </div>
             </div>
           )}
 
-          {/* 5. NEXUS 3D SCULPTURE STUDIO */}
-          {project.id === 'nexus-experience' && (
-            <div className="p-6 rounded-2xl bg-emerald-950/20 border border-emerald-500/30 space-y-5">
-              <div className="flex items-center justify-between border-b border-emerald-500/20 pb-3">
-                <span className="text-xs font-mono text-emerald-400 font-bold flex items-center gap-2">
-                  <Sliders className="w-4 h-4" /> PARÁMETROS DE SHADER PROCEDURAL
-                </span>
-                <span className="text-xs font-mono text-zinc-400">Three.js WebGL 2.0</span>
+          {/* 4. SERVIINTEL FULL COMMAND STATION WITH DUAL OR FOCUSED SWITCHER */}
+          {isServiIntel && (
+            <div className="w-full flex flex-col items-center justify-center space-y-2.5">
+              {/* Segment Switcher */}
+              <div className="flex items-center p-1 rounded-xl bg-white/5 border border-sky-500/20 font-mono text-xs w-full max-w-md">
+                <button
+                  onClick={() => setServiIntelView('operario')}
+                  className={`flex-1 py-1.5 px-3 rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer font-bold ${
+                    serviIntelView === 'operario' ? 'bg-sky-400 text-black shadow-md' : 'text-zinc-400 hover:text-white'
+                  }`}
+                >
+                  <Smartphone className="w-3.5 h-3.5" />
+                  <span>App Móvil Terreno</span>
+                </button>
+                <button
+                  onClick={() => setServiIntelView('web')}
+                  className={`flex-1 py-1.5 px-3 rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer font-bold ${
+                    serviIntelView === 'web' ? 'bg-sky-400 text-black shadow-md' : 'text-zinc-400 hover:text-white'
+                  }`}
+                >
+                  <Laptop className="w-3.5 h-3.5" />
+                  <span>Consola Web Admin</span>
+                </button>
+                <button
+                  onClick={() => setServiIntelView('dual')}
+                  className={`hidden sm:flex flex-1 py-1.5 px-3 rounded-lg items-center justify-center gap-1.5 transition-all cursor-pointer font-bold ${
+                    serviIntelView === 'dual' ? 'bg-sky-400 text-black shadow-md' : 'text-zinc-400 hover:text-white'
+                  }`}
+                >
+                  <Maximize2 className="w-3.5 h-3.5" />
+                  <span>Vista Dual</span>
+                </button>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs">
-                <div className="p-3 rounded-xl bg-zinc-950/80 border border-white/5 space-y-2">
-                  <span className="text-zinc-500 text-[10px] block">DISTORSIÓN GPU: {noiseDistort}x</span>
-                  <input 
-                    type="range" 
-                    min="0.5" 
-                    max="2.5" 
-                    step="0.1"
-                    value={noiseDistort}
-                    onChange={(e) => setNoiseDistort(parseFloat(e.target.value))}
-                    className="w-full accent-emerald-400"
-                  />
+              {/* View Content */}
+              {serviIntelView === 'operario' && (
+                <div className="w-full max-w-82.5 sm:max-w-92.5 h-130 sm:h-147.5 rounded-4xl sm:rounded-[38px] bg-[#15161c] p-2 sm:p-2.5 border border-sky-500/30 shadow-2xl flex flex-col justify-between overflow-hidden relative">
+                  <div className="absolute top-1 left-1/2 -translate-x-1/2 w-12 h-2 bg-black rounded-full border border-white/10 flex items-center justify-between px-1 z-30 pointer-events-none">
+                    <div className="w-0.5 h-0.5 rounded-full bg-sky-400 animate-pulse" />
+                  </div>
+                  <div className="relative w-full h-full rounded-3xl sm:rounded-[30px] overflow-hidden bg-black shadow-inner">
+                    <ServiIntelOperarioApp />
+                  </div>
                 </div>
-                <div className="p-3 rounded-xl bg-zinc-950/80 border border-white/5 space-y-2">
-                  <span className="text-zinc-500 text-[10px] block">VELOCIDAD ROTACIÓN: {glowSpeed}x</span>
-                  <input 
-                    type="range" 
-                    min="0.5" 
-                    max="3.0" 
-                    step="0.2"
-                    value={glowSpeed}
-                    onChange={(e) => setGlowSpeed(parseFloat(e.target.value))}
-                    className="w-full accent-emerald-400"
-                  />
+              )}
+
+              {serviIntelView === 'web' && (
+                <div className="w-full max-w-3xl flex flex-col items-center">
+                  <div className="relative w-full aspect-16/10 rounded-2xl bg-linear-to-b from-[#1c1f2c] via-[#141722] to-[#0f1118] p-2 border border-sky-500/30 shadow-2xl overflow-hidden">
+                    <div className="absolute top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-black border border-white/15 flex items-center justify-center z-30 pointer-events-none">
+                      <div className="w-0.5 h-0.5 rounded-full bg-emerald-500/50" />
+                    </div>
+                    <div className="relative w-full h-full rounded-xl overflow-hidden bg-[#07090e] border border-white/10 shadow-inner">
+                      <ServiIntelLaptopApp />
+                    </div>
+                  </div>
+                  <div className="w-[102%] h-2.5 bg-linear-to-b from-[#252838] to-[#12141c] rounded-b-xl border-t border-white/15 shadow-xl relative -mt-0.5 flex justify-center pointer-events-none">
+                    <div className="w-12 h-0.5 bg-black/60 rounded-b-sm mt-0.5" />
+                  </div>
                 </div>
-                <div className="p-3 rounded-xl bg-zinc-950/80 border border-white/5 flex flex-col justify-between">
-                  <span className="text-zinc-500 text-[10px] block">MODO MALLA:</span>
-                  <button 
-                    onClick={() => { sounds.playClick(); setIsWireframe(!isWireframe); }}
-                    className="py-1.5 px-3 rounded-lg bg-emerald-500 text-black font-bold text-[11px] cursor-pointer"
-                  >
-                    {isWireframe ? 'Malla Sólida' : 'Wireframe 3D'}
-                  </button>
+              )}
+
+              {serviIntelView === 'dual' && (
+                <div className="w-full grid grid-cols-12 gap-4 items-center max-w-4xl">
+                  <div className="col-span-5 flex justify-center">
+                    <div className="w-full max-w-70 h-120 rounded-[30px] bg-[#15161c] p-2 border border-sky-500/30 shadow-xl overflow-hidden">
+                      <div className="w-full h-full rounded-[22px] overflow-hidden bg-black">
+                        <ServiIntelOperarioApp />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-span-7 flex flex-col items-center">
+                    <div className="w-full aspect-16/10 rounded-xl bg-[#141722] p-1.5 border border-sky-500/30 shadow-xl overflow-hidden">
+                      <div className="w-full h-full rounded-lg overflow-hidden bg-black">
+                        <ServiIntelLaptopApp />
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              )}
+
+              <div className="text-[10.5px] font-mono text-sky-400 flex items-center gap-2">
+                <Radio className="w-3.5 h-3.5 animate-pulse" />
+                <span>Sincronización bidireccional reactiva sub-38ms entre App Móvil y Web Admin</span>
+              </div>
+            </div>
+          )}
+
+          {/* 5. CYBER RUSH EXPANDED HANDHELD FRAME */}
+          {isLandscapePhone && (
+            <div className="w-full flex flex-col items-center justify-center space-y-2">
+              <div className="w-full max-w-2xl aspect-18.8/9 max-h-95 rounded-3xl bg-[#16171d] p-2 border border-rose-500/30 shadow-2xl overflow-hidden">
+                <div className="w-full h-full rounded-2xl overflow-hidden bg-black shadow-inner">
+                  <CyberRushPhoneApp isActive={true} />
+                </div>
+              </div>
+              <div className="text-[10.5px] font-mono text-rose-300">
+                Toca o haz clic para esquivar obstáculos a 120 FPS
+              </div>
+            </div>
+          )}
+
+          {/* 6. O-TEK QUALITY CONTROL EXPANDED TABLET/PHONE FRAME */}
+          {isTablet && (
+            <div className="w-full flex flex-col items-center justify-center space-y-2">
+              {/* Mobile Phones: Large Vertical Smartphone Frame (like Sopa de Letras & Days) */}
+              <div className="sm:hidden w-full max-w-82.5 h-130 rounded-4xl bg-[#15161c] p-2 border border-sky-500/30 shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex flex-col justify-between overflow-hidden relative">
+                {/* Dynamic Island */}
+                <div className="absolute top-1 left-1/2 -translate-x-1/2 w-12 h-2 bg-black rounded-full border border-white/10 flex items-center justify-between px-1 z-30 pointer-events-none">
+                  <div className="w-0.5 h-0.5 rounded-full bg-sky-400/80 shadow-[0_0_3px_#38bdf8] animate-pulse" />
+                  <div className="w-1 h-1 rounded-full bg-[#111] border border-white/20 flex items-center justify-center">
+                    <div className="w-0.5 h-0.5 rounded-full bg-sky-400/60" />
+                  </div>
+                </div>
+                <div className="relative w-full h-full rounded-3xl overflow-hidden bg-black shadow-inner">
+                  <OtekPowerApp isActive={true} />
+                </div>
+              </div>
+
+              {/* Tablets & PC: Industrial Horizontal Tablet Frame */}
+              <div className="hidden sm:flex w-full max-w-3xl aspect-16/10 max-h-130 rounded-2xl bg-[#151720] p-2.5 border border-sky-500/30 shadow-2xl overflow-hidden flex-col justify-between">
+                <div className="w-full h-full rounded-xl overflow-hidden bg-black shadow-inner">
+                  <OtekPowerApp isActive={true} />
+                </div>
+              </div>
+
+              <div className="text-[10.5px] font-mono text-sky-300 text-center">
+                Inspección de tuberías y control de calidad industrial con SharePoint & Power Apps
               </div>
             </div>
           )}
 
         </div>
 
-        {/* Tech Stack Chips */}
-        <div className="p-4 rounded-2xl bg-zinc-900 border border-white/5 flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
-          <div className="flex flex-wrap gap-1.5">
-            {project.tags.map((t) => (
-              <span key={t} className="px-2.5 py-1 rounded-lg bg-zinc-950 border border-white/10 text-zinc-300">
-                {t}
-              </span>
-            ))}
+        {/* ========================================================================= */}
+        {/* BOTTOM ACTION BAR */}
+        {/* ========================================================================= */}
+        <div className="pt-2.5 sm:pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-2.5 shrink-0 text-xs font-mono">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => { sounds.playClick(); setShowQR(!showQR); }}
+              className="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-300 hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer text-xs"
+            >
+              <QrCode className="w-3.5 h-3.5" />
+              <span>{showQR ? 'Ocultar QR' : 'Abrir en tu Teléfono'}</span>
+            </button>
+
+            {project.googlePlayUrl && (
+              <a
+                href={project.googlePlayUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="px-3 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 hover:bg-amber-500/25 flex items-center gap-1.5 transition-all text-xs font-bold"
+              >
+                <span>Google Play Store</span>
+                <ChevronRight className="w-3 h-3" />
+              </a>
+            )}
           </div>
 
-          {project.githubUrl && (
+          <div className="flex items-center gap-2">
             <a
-              href={project.githubUrl}
+              href={`https://wa.me/${personalInfo.whatsapp}?text=Hola%20${encodeURIComponent(personalInfo.name)},%20estoy%20probando%20el%20demo%20de%20${encodeURIComponent(project.title)}%20y%20quiero%20cotizar%20un%20proyecto`}
               target="_blank"
               rel="noreferrer"
               onClick={() => sounds.playClick()}
-              className="text-zinc-300 hover:text-white flex items-center gap-1.5 transition-colors"
+              className="px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-white text-black font-bold flex items-center gap-1.5 hover:bg-zinc-200 transition-all shadow-md active:scale-95 text-xs"
             >
-              <Code2 className="w-4 h-4" /> <span>Ver Repositorio</span>
+              <span>Cotizar Proyecto</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </a>
-          )}
+          </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-2 text-xs font-mono">
-          <button
-            onClick={() => { sounds.playClick(); setShowQR(!showQR); }}
-            className="text-zinc-400 hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer"
-          >
-            <QrCode className="w-4 h-4" />
-            <span>{showQR ? 'Ocultar QR' : 'Escanear en Móvil'}</span>
-          </button>
-
-          <a
-            href={`https://wa.me/${personalInfo.whatsapp}?text=Hola%20${encodeURIComponent(personalInfo.name)},%20quiero%20cotizar%20un%20proyecto%20similar%20a%20${encodeURIComponent(project.title)}`}
-            target="_blank"
-            rel="noreferrer"
-            onClick={() => sounds.playClick()}
-            className="px-6 py-3 rounded-full bg-white text-black font-bold flex items-center gap-2 hover:bg-zinc-200 transition-colors shadow-lg active:scale-95"
-          >
-            <span>Conversar por WhatsApp</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </a>
-        </div>
-
+        {/* QR Scanner Drawer */}
         {showQR && (
-          <div className="p-4 rounded-2xl bg-zinc-900 border border-white/10 flex items-center gap-4 animate-in fade-in duration-150">
-            <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center p-1 shrink-0">
-              <QrCode className="w-12 h-12 text-black" />
+          <div className="mt-2 p-3 rounded-xl bg-zinc-900 border border-white/10 flex items-center gap-3 animate-in fade-in duration-150 shrink-0">
+            <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center p-1 shrink-0">
+              <QrCode className="w-10 h-10 text-black" />
             </div>
-            <div className="text-xs font-mono text-zinc-400 leading-relaxed">
-              Apunta la cámara de tu teléfono para probar este demo directamente en tu pantalla móvil a 60 FPS.
+            <div className="text-[11px] font-mono text-zinc-300 leading-tight">
+              Escanea con la cámara de tu smartphone para probar la versión web en vivo y evaluar la fluidez nativa a 60 FPS.
             </div>
           </div>
         )}

@@ -2,11 +2,12 @@
 import { useState } from 'react';
 import { 
   Users, Heart, Sparkles, ShieldCheck, Code2, Play, Image as ImageIcon,
-  RefreshCw, CheckCircle2, Zap, DollarSign, Activity, Smartphone, Database, Layers, Flame, FileCode2, GitBranch
+  RefreshCw, CheckCircle2, Zap, DollarSign, Activity, Smartphone, Database, Layers, Flame, FileCode2, GitBranch, Maximize2
 } from 'lucide-react';
 import NidoPhoneApp from './apps/NidoPhoneApp';
 import FlutterCodeViewer from './FlutterCodeViewer';
 import { personalInfo } from '../Data/projectsData';
+import { sounds } from '../utils/soundEngine';
 
 function WhatsAppIcon({ className = "w-3.5 h-3.5" }) {
   return (
@@ -68,7 +69,7 @@ class CoupleSyncService {
 }`
 };
 
-export default function NidoCoupleStage({ project, isActive }) {
+export default function NidoCoupleStage({ project, isActive, onPlayDemo }) {
   // Shared state between both phones
   const [balance, setBalance] = useState(2450.00);
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -247,7 +248,7 @@ class FinancialCashflowService extends ChangeNotifier {
             {screenMode === 'code' ? (
               <div 
                 data-prevent-slide="true"
-                className="w-full max-w-52 sm:max-w-64 lg:max-w-[250px] xl:max-w-[290px] 2xl:max-w-[330px] h-84 lg:h-[390px] xl:h-[450px] 2xl:h-[500px] rounded-[28px] bg-zinc-950/95 border border-white/15 p-1 shadow-2xl overflow-hidden relative flex flex-col"
+                className="w-full max-w-52 sm:max-w-64 lg:max-w-62.5 xl:max-w-72.5 2xl:max-w-82.5 h-84 lg:h-97.5 xl:h-112.5 2xl:h-125 rounded-[28px] bg-zinc-950/95 border border-white/15 p-1 shadow-2xl overflow-hidden relative flex flex-col"
               >
                 <FlutterCodeViewer codeSnippet={cashflowCodeSnippet} accentColor="#0D9488" />
               </div>
@@ -257,7 +258,7 @@ class FinancialCashflowService extends ChangeNotifier {
                 data-prevent-slide="true"
                 onWheel={(e) => e.stopPropagation()}
                 onTouchMove={(e) => e.stopPropagation()}
-                className="mockup-interactive relative w-full max-w-52 sm:max-w-64 lg:max-w-[250px] xl:max-w-[290px] 2xl:max-w-[330px] h-84 lg:h-[390px] xl:h-[450px] 2xl:h-[500px] rounded-[30px] xl:rounded-[36px] bg-[#14151a] p-1.5 xl:p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.85)] flex flex-col justify-between select-none overflow-hidden"
+                className="mockup-interactive relative w-full max-w-52 sm:max-w-64 lg:max-w-62.5 xl:max-w-72.5 2xl:max-w-82.5 h-84 lg:h-97.5 xl:h-112.5 2xl:h-125 rounded-[30px] xl:rounded-[36px] bg-[#14151a] p-1.5 xl:p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.85)] flex flex-col justify-between select-none overflow-hidden"
               >
                 {/* Centered Camera Lens Dot */}
                 <div className="absolute top-2 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-black border border-white/10 flex items-center justify-center z-30 pointer-events-none shadow-sm">
@@ -423,7 +424,7 @@ class FinancialCashflowService extends ChangeNotifier {
             {screenMode === 'code' ? (
               <div 
                 data-prevent-slide="true"
-                className="w-full max-w-52 sm:max-w-64 lg:max-w-[250px] xl:max-w-[290px] 2xl:max-w-[330px] h-84 lg:h-[390px] xl:h-[450px] 2xl:h-[500px] rounded-[28px] bg-zinc-950/95 border border-white/15 p-1 shadow-2xl overflow-hidden relative flex flex-col"
+                className="w-full max-w-52 sm:max-w-64 lg:max-w-62.5 xl:max-w-72.5 2xl:max-w-82.5 h-84 lg:h-97.5 xl:h-112.5 2xl:h-125 rounded-[28px] bg-zinc-950/95 border border-white/15 p-1 shadow-2xl overflow-hidden relative flex flex-col"
               >
                 <FlutterCodeViewer codeSnippet={p2pSyncCodeSnippet} accentColor="#00897B" />
               </div>
@@ -433,7 +434,7 @@ class FinancialCashflowService extends ChangeNotifier {
                 data-prevent-slide="true"
                 onWheel={(e) => e.stopPropagation()}
                 onTouchMove={(e) => e.stopPropagation()}
-                className="mockup-interactive relative w-full max-w-52 sm:max-w-64 lg:max-w-[250px] xl:max-w-[290px] 2xl:max-w-[330px] h-84 lg:h-[390px] xl:h-[450px] 2xl:h-[500px] rounded-[30px] xl:rounded-[36px] bg-[#14151a] p-1.5 xl:p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.85)] flex flex-col justify-between select-none overflow-hidden"
+                className="mockup-interactive relative w-full max-w-52 sm:max-w-64 lg:max-w-62.5 xl:max-w-72.5 2xl:max-w-82.5 h-84 lg:h-97.5 xl:h-112.5 2xl:h-125 rounded-[30px] xl:rounded-[36px] bg-[#14151a] p-1.5 xl:p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.85)] flex flex-col justify-between select-none overflow-hidden"
               >
                 {/* Centered Camera Lens Dot */}
                 <div className="absolute top-2 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-black border border-white/10 flex items-center justify-center z-30 pointer-events-none shadow-sm">

@@ -5,15 +5,28 @@ export default function CustomCursor() {
   const [visible, setVisible] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [cursorText, setCursorText] = useState('');
+  const [isDesktopMouse, setIsDesktopMouse] = useState(false);
   
   const cursorRef = useRef(null);
   const pos = useRef({ x: -100, y: -100 });
   const target = useRef({ x: -100, y: -100 });
 
   useEffect(() => {
-    if (typeof window === 'undefined' || window.matchMedia('(pointer: coarse)').matches) {
+    if (typeof window === 'undefined') return;
+
+    // Strict detection: Disable on any touch device, mobile phones, or small viewports
+    const isTouch = 
+      'ontouchstart' in window || 
+      navigator.maxTouchPoints > 0 || 
+      window.matchMedia('(pointer: coarse)').matches ||
+      window.innerWidth < 1024;
+
+    if (isTouch) {
+      setIsDesktopMouse(false);
       return;
     }
+
+    setIsDesktopMouse(true);
 
     let animationId;
     let isRunning = false;
@@ -47,12 +60,12 @@ export default function CustomCursor() {
       target.current.x = e.clientX;
       target.current.y = e.clientY;
 
-      // Hide custom cursor inside mockups, code viewers, and interactive screens to prevent white circle overlay artifact
-      const isInsideMockup = e.target.closest(
-        '.mockup-interactive, .interactive-screen, .code-viewer-container, [data-prevent-slide], pre, code'
+      // Hide custom cursor inside mockups, code viewers, modals, and interactive screen tests
+      const isInsideMockupOrModal = e.target.closest(
+        '.mockup-interactive, .interactive-screen, .code-viewer-container, [data-prevent-slide], [data-modal], .modal-container, [role="dialog"], pre, code, iframe'
       );
 
-      if (isInsideMockup) {
+      if (isInsideMockupOrModal) {
         setVisible(false);
         return;
       }
@@ -71,10 +84,16 @@ export default function CustomCursor() {
       }
     };
 
+    const onTouchStart = () => {
+      setVisible(false);
+      setIsDesktopMouse(false);
+    };
+
     const onMouseLeave = () => setVisible(false);
     const onMouseEnter = () => setVisible(true);
 
     window.addEventListener('mousemove', onMouseMove, { passive: true });
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
     document.addEventListener('mouseleave', onMouseLeave);
     document.addEventListener('mouseenter', onMouseEnter);
 
@@ -82,16 +101,19 @@ export default function CustomCursor() {
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('touchstart', onTouchStart);
       document.removeEventListener('mouseleave', onMouseLeave);
       document.removeEventListener('mouseenter', onMouseEnter);
       cancelAnimationFrame(animationId);
     };
   }, []);
 
+  if (!isDesktopMouse) return null;
+
   return (
     <div
       ref={cursorRef}
-      className={`fixed top-0 left-0 pointer-events-none z-9999 flex items-center justify-center transition-[width,height,background-color] duration-200 ease-out will-change-transform rounded-full ${
+      className={`hidden lg:flex fixed top-0 left-0 pointer-events-none z-9999 items-center justify-center transition-[width,height,background-color] duration-200 ease-out will-change-transform rounded-full ${
         visible ? 'opacity-100' : 'opacity-0'
       } ${
         expanded

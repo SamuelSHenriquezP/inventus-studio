@@ -156,3 +156,25 @@
     padding-bottom: 3.75rem;
   }
 }
+
+/* ========================================================================= */
+/* MOBILE LOW-POWER & FAST COMPOSITING OPTIMIZATIONS */
+/* ========================================================================= */
+@media (max-width: 768px) {
+  /* Optimize heavy backdrop blurs on mobile GPUs to conserve battery */
+  .backdrop-blur-2xl,
+  .backdrop-blur-xl,
+  .backdrop-blur-lg {
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
+
+  /* Hardware acceleration for interactive phone chassis */
+  .mockup-interactive,
+  .interactive-screen {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+}

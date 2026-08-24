@@ -570,7 +570,7 @@ export default function DaysPhoneApp() {
           }
         `}} />
         <div className="flex flex-col items-center gap-3.5 animate-boot-logo">
-          <div className="w-[68px] h-[68px] rounded-full bg-[#ECEEE9] border border-[#8B9A86]/30 flex items-center justify-center shadow-xs">
+          <div className="w-17 h-17 rounded-full bg-[#ECEEE9] border border-[#8B9A86]/30 flex items-center justify-center shadow-xs">
             <span className="text-[#8B9A86]">
               <svg className="w-9 h-9" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.314 11.314l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
@@ -873,7 +873,7 @@ export default function DaysPhoneApp() {
             </div>
 
             {/* Tinder Card Deck Container */}
-            <div className="flex-1 flex items-center justify-center relative min-h-[140px] my-1.5 overflow-hidden">
+            <div className="flex-1 flex items-center justify-center relative min-h-35 my-1.5 overflow-hidden">
               {uncategorizedTasks.length > 0 ? (
                 // Draw stack
                 uncategorizedTasks.map((task, idx) => {
@@ -903,7 +903,7 @@ export default function DaysPhoneApp() {
                     <div
                       key={task.id}
                       onPointerDown={(e) => isTop && handlePointerDown(e, task.id)}
-                      className="absolute w-full max-w-[210px] h-[130px] rounded-xl border p-3 flex flex-col justify-between cursor-grab active:cursor-grabbing select-none"
+                      className="absolute w-full max-w-52.5 h-32.5 rounded-xl border p-3 flex flex-col justify-between cursor-grab active:cursor-grabbing select-none"
                       style={{
                         backgroundColor: theme.card,
                         borderColor: isTop ? '#8B9A86' : theme.border,
@@ -1086,7 +1086,7 @@ export default function DaysPhoneApp() {
 
                           <button
                             onClick={() => completeTask(plan.id)}
-                            className="w-[18px] h-[18px] rounded-full border-[1.5px] flex items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95"
+                            className="w-4.5 h-4.5 rounded-full border-[1.5px] flex items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95"
                             style={{ 
                               borderColor: '#8B9A86',
                               backgroundColor: 'transparent'
@@ -1234,7 +1234,7 @@ export default function DaysPhoneApp() {
                 DISTRIBUCIÓN DE ENERGÍA
               </h4>
               
-              <div className="flex justify-around items-end h-[80px] pt-2 pb-0.5">
+              <div className="flex justify-around items-end h-20 pt-2 pb-0.5">
                 {/* Low Bar */}
                 <div className="flex flex-col items-center gap-1 w-10">
                   <span className="text-[8.5px] font-extrabold text-[#6E7D6B] font-mono">
@@ -1322,7 +1322,7 @@ export default function DaysPhoneApp() {
               </button>
 
               {showHistory && (
-                <div className="space-y-1.5 max-h-[120px] overflow-y-auto phone-scroll pr-1 animate-in fade-in duration-200">
+                <div className="space-y-1.5 max-h-30 overflow-y-auto phone-scroll pr-1 animate-in fade-in duration-200">
                   {completedTasks.length > 0 ? (
                     completedTasks.map(plan => (
                       <div 
@@ -1812,7 +1812,7 @@ export default function DaysPhoneApp() {
               : 'bg-transparent text-[#8A8E8C] hover:text-[#8B9A86]'
           }`}
         >
-          <Timer className="w-4.5 h-4.5 stroke-[2]" />
+          <Timer className="w-4.5 h-4.5 stroke-2" />
           {activeTab === 2 && (
             <span className="text-[11px] font-bold tracking-tight font-outfit">
               Foco
@@ -1829,7 +1829,7 @@ export default function DaysPhoneApp() {
               : 'bg-transparent text-[#8A8E8C] hover:text-[#8B9A86]'
           }`}
         >
-          <Sparkles className="w-4.5 h-4.5 stroke-[2]" />
+          <Sparkles className="w-4.5 h-4.5 stroke-2" />
           {activeTab === 3 && (
             <span className="text-[11px] font-bold tracking-tight font-outfit">
               Vibras

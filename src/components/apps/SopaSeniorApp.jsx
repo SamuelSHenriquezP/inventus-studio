@@ -414,7 +414,7 @@ export default function SopaSeniorApp({ isActive = true }) {
 
   return (
     <div 
-      className="w-full h-full min-h-0 font-sans select-none flex flex-col justify-between overflow-hidden relative transition-colors duration-300 p-1.5 sm:p-2 rounded-2xl sm:rounded-[24px]"
+      className="w-full h-full min-h-0 font-sans select-none flex flex-col justify-between overflow-hidden relative transition-colors duration-300 p-1.5 sm:p-2 rounded-2xl sm:rounded-3xl"
       style={{
         backgroundColor: theme.background,
         color: theme.text
@@ -526,7 +526,7 @@ export default function SopaSeniorApp({ isActive = true }) {
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
             onTouchCancel={handleTouchEnd}
-            className="w-full max-w-[235px] sm:max-w-[265px] max-h-[98%] aspect-square grid gap-0.5 p-1 sm:p-1.5 rounded-xl border shadow-md touch-none select-none mx-auto"
+            className="w-full max-w-58.75 sm:max-w-66.25 max-h-[98%] aspect-square grid gap-0.5 p-1 sm:p-1.5 rounded-xl border shadow-md touch-none select-none mx-auto"
             style={{
               backgroundColor: theme.surface,
               borderColor: theme.border,
@@ -587,9 +587,9 @@ export default function SopaSeniorApp({ isActive = true }) {
 
       {/* WIN MODAL WITH DICTIONARY UNLOCK & NEXT LEVEL */}
       {showWinModal && (
-        <div className="absolute inset-0 z-50 bg-black/85 flex items-center justify-center p-2 pt-6 rounded-2xl sm:rounded-[24px] overflow-hidden font-mono animate-in fade-in duration-200">
+        <div className="absolute inset-0 z-50 bg-black/85 flex items-center justify-center p-2 pt-6 rounded-2xl sm:rounded-3xl overflow-hidden font-mono animate-in fade-in duration-200">
           <div 
-            className="w-[85%] max-w-[200px] max-h-[88%] p-2.5 rounded-2xl border shadow-2xl text-center space-y-1.5 flex flex-col justify-between overflow-y-auto custom-scroll"
+            className="w-[85%] max-w-50 max-h-[88%] p-2.5 rounded-2xl border shadow-2xl text-center space-y-1.5 flex flex-col justify-between overflow-y-auto custom-scroll"
             style={{ backgroundColor: theme.surface, borderColor: theme.border, color: theme.text }}
           >
             <div className="w-7 h-7 rounded-full bg-amber-400/20 border border-amber-400/50 flex items-center justify-center mx-auto shadow-xs shrink-0">
@@ -652,7 +652,7 @@ export default function SopaSeniorApp({ isActive = true }) {
       {/* DICTIONARY VIEW (FULL-SCREEN FLUID APP VIEW) */}
       {showDictModal && (
         <div 
-          className="absolute inset-0 z-50 flex flex-col justify-between p-2.5 sm:p-3 rounded-2xl sm:rounded-[24px] overflow-hidden font-mono animate-in fade-in duration-200"
+          className="absolute inset-0 z-50 flex flex-col justify-between p-2.5 sm:p-3 rounded-2xl sm:rounded-3xl overflow-hidden font-mono animate-in fade-in duration-200"
           style={{ backgroundColor: theme.background, color: theme.text }}
         >
           {/* Header */}

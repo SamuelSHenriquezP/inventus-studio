@@ -122,30 +122,30 @@ export default function NidoPhoneApp({
       </div>
 
       {/* App Body Container */}
-      <div className="flex-1 overflow-hidden flex flex-col px-3 py-1.5 gap-1.5 min-h-0">
+      <div className="flex-1 overflow-hidden flex flex-col px-2 sm:px-3 py-1 sm:py-1.5 gap-1 sm:gap-1.5 min-h-0">
 
       {/* Partner Header Card (Profile Banner) */}
-      <div className={`my-1 p-2 rounded-xl border shadow-xs flex items-center justify-between shrink-0 ${surfaceStyle}`}>
-        <div className="flex items-center gap-2">
+      <div className={`my-0.5 sm:my-1 p-1.5 sm:p-2 rounded-xl border shadow-xs flex items-center justify-between gap-1.5 shrink-0 ${surfaceStyle}`}>
+        <div className="flex items-center gap-1.5 sm:gap-2 min-w-0 flex-1">
           {/* Overlapping Avatars */}
-          <div className="flex items-center -space-x-2">
-            <div className="w-6 h-6 rounded-full bg-[#0D9488]/20 border border-[#0D9488] flex items-center justify-center text-[10px]">
+          <div className="flex items-center -space-x-1.5 shrink-0">
+            <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#0D9488]/20 border border-[#0D9488] flex items-center justify-center text-[9px] sm:text-[10px]">
               {userEmoji}
             </div>
-            <div className="w-6 h-6 rounded-full bg-[#00897B]/20 border border-[#00897B] flex items-center justify-center text-[10px]">
+            <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#00897B]/20 border border-[#00897B] flex items-center justify-center text-[9px] sm:text-[10px]">
               {partnerEmoji}
             </div>
           </div>
 
-          <div>
-            <div className={`text-[10px] font-bold flex items-center gap-1 font-mono ${textDark}`}>
-              <span>{userName}</span>
-              <Heart className="w-2.5 h-2.5 text-rose-500 fill-rose-500" />
-              <span>{partnerName}</span>
+          <div className="min-w-0 flex-1">
+            <div className={`text-[9px] sm:text-[10px] font-bold flex items-center gap-1 font-mono truncate ${textDark}`}>
+              <span className="truncate">{userName}</span>
+              <Heart className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-rose-500 fill-rose-500 shrink-0" />
+              <span className="truncate">{partnerName}</span>
             </div>
-            <div className={`text-[8px] flex items-center gap-1 ${textMuted}`}>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
-              <span>Sincronizado en Vivo</span>
+            <div className={`text-[7.5px] sm:text-[8px] flex items-center gap-1 truncate ${textMuted}`}>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] shrink-0" />
+              <span className="truncate">Sincronizado en Vivo</span>
             </div>
           </div>
         </div>
@@ -153,9 +153,9 @@ export default function NidoPhoneApp({
         {/* Send Love Ping Button */}
         <button
           onClick={() => setShowPingMenu(!showPingMenu)}
-          className="px-2 py-1 rounded-lg bg-rose-500/15 border border-rose-500/30 text-rose-500 text-[8.5px] font-mono font-bold flex items-center gap-1 hover:bg-rose-500/25 cursor-pointer active:scale-95 transition-all"
+          className="shrink-0 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg bg-rose-500/15 border border-rose-500/30 text-rose-500 text-[8px] sm:text-[8.5px] font-mono font-bold flex items-center gap-1 hover:bg-rose-500/25 cursor-pointer active:scale-95 transition-all"
         >
-          <Smile className="w-3 h-3 text-rose-500" />
+          <Smile className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-rose-500 shrink-0" />
           <span>Guiño 💕</span>
         </button>
       </div>

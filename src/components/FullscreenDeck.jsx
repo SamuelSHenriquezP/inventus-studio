@@ -401,9 +401,12 @@ export default function FullscreenDeck({
       ref={deckRef}
       className="relative w-screen h-screen overflow-hidden select-none bg-black"
     >
-      {/* Full-Screen Slides Stack */}
+      {/* Full-Screen Slides Stack with Virtual Windowing for Performance */}
       {sections.map((sec, idx) => {
         const isActive = idx === activeSectionIndex;
+        // Mount inner content only if active or adjacent (for smooth transition), freeing ~80% memory & CPU
+        const shouldRenderContent = isActive || Math.abs(idx - activeSectionIndex) <= 1;
+
         return (
           <div
             key={sec.id}
@@ -413,37 +416,41 @@ export default function FullscreenDeck({
               isActive ? 'z-10 flex' : 'hidden'
             }`}
             style={{
-              willChange: 'transform, opacity'
+              willChange: isActive ? 'transform, opacity' : 'auto'
             }}
           >
-            {sec.type === 'hero' && (
-              <HeroSection 
-                isActive={isActive}
-                onExploreWorks={() => goToSection(1)} 
-                onExploreStack={() => goToSection(projects.length + 2)}
-              />
-            )}
+            {shouldRenderContent && (
+              <>
+                {sec.type === 'hero' && (
+                  <HeroSection 
+                    isActive={isActive}
+                    onExploreWorks={() => goToSection(1)} 
+                    onExploreStack={() => goToSection(projects.length + 2)}
+                  />
+                )}
 
-            {sec.type === 'project' && (
-              <ProjectScreenStage 
-                project={sec.project}
-                index={sec.index}
-                total={projects.length}
-                onPlayDemo={onPlayDemo}
-                isActive={isActive}
-              />
-            )}
+                {sec.type === 'project' && (
+                  <ProjectScreenStage 
+                    project={sec.project}
+                    index={sec.index}
+                    total={projects.length}
+                    onPlayDemo={onPlayDemo}
+                    isActive={isActive}
+                  />
+                )}
 
-            {sec.type === 'more' && (
-              <MoreProjectsSection isActive={isActive} />
-            )}
+                {sec.type === 'more' && (
+                  <MoreProjectsSection isActive={isActive} />
+                )}
 
-            {sec.type === 'stack' && (
-              <AboutStackSection isActive={isActive} />
-            )}
+                {sec.type === 'stack' && (
+                  <AboutStackSection isActive={isActive} />
+                )}
 
-            {sec.type === 'contact' && (
-              <ContactSection isActive={isActive} />
+                {sec.type === 'contact' && (
+                  <ContactSection isActive={isActive} />
+                )}
+              </>
             )}
           </div>
         );

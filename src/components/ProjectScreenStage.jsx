@@ -393,19 +393,19 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
     return (
       <div 
         ref={containerRef}
-        className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-12 sm:pt-20 pb-12 sm:pb-16 relative select-none text-zinc-100 font-sans overflow-y-auto custom-scroll"
+        className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-6 md:px-10 lg:px-12 xl:px-16 2xl:px-20 pt-12 sm:pt-16 lg:pt-18 pb-6 sm:pb-8 relative select-none text-zinc-100 font-sans overflow-y-auto custom-scroll"
         style={{
           background: 'radial-gradient(ellipse 100% 100% at 50% 20%, #0d1017 0%, #080a10 60%, #040508 100%)'
         }}
       >
-        <div className="max-w-7xl w-full mx-auto flex flex-col justify-between my-auto space-y-1.5 lg:space-y-1.5 xl:space-y-2.5">
+        <div className="max-w-7xl 2xl:max-w-8xl w-full mx-auto flex flex-col justify-between my-auto space-y-1.5 lg:space-y-2 xl:space-y-3">
           
           {/* Header Bar with Strategic Ecosystem Placement & Actions */}
-          <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-2 sm:pb-2.5 border-b border-white/10 custom-stage-anim shrink-0">
+          <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-1.5 sm:pb-2 border-b border-white/10 custom-stage-anim shrink-0">
             <div className="flex flex-wrap items-center gap-2 sm:gap-3 font-mono text-xs sm:text-sm text-zinc-400">
               <span className="font-bold tracking-widest text-zinc-200">01 // SERVI INTEL</span>
               <span className="text-zinc-600 hidden sm:inline">•</span>
-              <span className="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-[10.5px] sm:text-xs font-mono text-zinc-200 flex items-center gap-1.5">
+              <span className="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-[10px] sm:text-xs font-mono text-zinc-200 flex items-center gap-1.5">
                 <ArrowLeftRight className="w-3.5 h-3.5 text-sky-400" />
                 ECOSISTEMA INTEGRADO
               </span>
@@ -415,13 +415,13 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
             </div>
 
             <div className="flex items-center gap-2 sm:gap-3 shrink-0 font-mono text-xs">
-              <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-950/50 border border-emerald-500/30 text-emerald-400 text-[11px] font-medium hidden sm:flex">
+              <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-950/50 border border-emerald-500/30 text-emerald-400 text-[10.5px] sm:text-[11px] font-medium hidden sm:flex">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 <span>Firestore &lt;38ms</span>
               </div>
               <button
                 onClick={() => onPlayDemo(project)}
-                className="px-3.5 py-1.5 rounded-full bg-white hover:bg-zinc-200 text-black font-bold flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 text-xs shadow-md"
+                className="px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-white hover:bg-zinc-200 text-black font-bold flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 text-xs shadow-md"
               >
                 <Activity className="w-3.5 h-3.5" />
                 <span>Ver Consola</span>
@@ -431,7 +431,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                 target="_blank"
                 rel="noreferrer"
                 data-cursor="WHATSAPP"
-                className="px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-300 hover:text-white transition-all flex items-center gap-1.5 text-xs hover:border-emerald-500/50"
+                className="px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-300 hover:text-white transition-all flex items-center gap-1.5 text-xs hover:border-emerald-500/50"
               >
                 <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-400 fill-current" />
                 <span>Cotizar</span>
@@ -440,18 +440,18 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
           </div>
 
           {/* ================================================================= */}
-          {/* DESKTOP VIEW (lg:flex): BALANCED 4-4-4 COLUMNS & EQUAL CARD SPACING */}
+          {/* DESKTOP VIEW (lg:flex): BALANCED 4-4-4 COLUMNS & FLUID SCALING */}
           {/* ================================================================= */}
-          <div className="hidden lg:flex lg:flex-col justify-between flex-1 min-h-0 space-y-1.5 xl:space-y-2">
+          <div className="hidden lg:flex lg:flex-col justify-between flex-1 min-h-0 space-y-1.5 xl:space-y-2.5">
             
             {/* TOP SECTION: APP MÓVIL (Info Left 4 + 3 Callouts Center 4 + Smartphone Right 4) */}
             <div className="w-full custom-stage-anim">
-              <div className="grid grid-cols-12 gap-3 xl:gap-5 items-center">
+              <div className="grid grid-cols-12 gap-3 xl:gap-5 2xl:gap-6 items-center">
                 
                 {/* Left Column (4 cols): App Móvil Info & Features */}
                 <div className="col-span-4 space-y-1">
                   <div className="space-y-0.5">
-                    <div className="inline-flex items-center gap-1.5 text-[10px] xl:text-[11px] font-mono font-bold text-sky-400 uppercase tracking-wider">
+                    <div className="inline-flex items-center gap-1.5 text-[9.5px] lg:text-[10px] xl:text-[11px] font-mono font-bold text-sky-400 uppercase tracking-wider">
                       <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
                       <span>TERMINAL DE CAMPO & MÓVIL</span>
                     </div>
@@ -459,7 +459,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                     <p className="text-xs xl:text-sm font-semibold text-zinc-200">
                       Aplicación de Terreno & Geo-Ticketing
                     </p>
-                    <p className="text-[10px] xl:text-[11px] text-zinc-300 leading-snug font-sans">
+                    <p className="text-[9.5px] lg:text-[10px] xl:text-[11px] text-zinc-300 leading-snug font-sans">
                       App nativa en <span className="text-white font-semibold">Flutter & Dart</span> para cuadrillas en campo con órdenes en tiempo real, geolocalización GPS y sincronización con <span className="text-sky-300 font-semibold">Cloud Firestore</span>.
                     </p>
                   </div>
@@ -467,32 +467,32 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                   {/* 3 Key Features */}
                   <div className="grid grid-cols-3 gap-1 pt-1 border-t border-white/10">
                     <div className="flex items-start gap-1">
-                      <div className="w-4 h-4 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                      <div className="w-3.5 h-3.5 lg:w-4 lg:h-4 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
                         <MapPin className="w-2 h-2" />
                       </div>
                       <div>
-                        <div className="text-[10px] xl:text-[11px] font-bold text-zinc-100">Operaciones</div>
-                        <div className="text-[8.5px] text-zinc-400 leading-tight">En terreno</div>
+                        <div className="text-[9.5px] xl:text-[11px] font-bold text-zinc-100">Operaciones</div>
+                        <div className="text-[8px] xl:text-[8.5px] text-zinc-400 leading-tight">En terreno</div>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-1">
-                      <div className="w-4 h-4 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                      <div className="w-3.5 h-3.5 lg:w-4 lg:h-4 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
                         <Navigation className="w-2 h-2" />
                       </div>
                       <div>
-                        <div className="text-[10px] xl:text-[11px] font-bold text-zinc-100">Geo-GPS</div>
-                        <div className="text-[8.5px] text-zinc-400 leading-tight">Ruta en vivo</div>
+                        <div className="text-[9.5px] xl:text-[11px] font-bold text-zinc-100">Geo-GPS</div>
+                        <div className="text-[8px] xl:text-[8.5px] text-zinc-400 leading-tight">Ruta en vivo</div>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-1">
-                      <div className="w-4 h-4 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                      <div className="w-3.5 h-3.5 lg:w-4 lg:h-4 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
                         <RefreshCw className="w-2 h-2" />
                       </div>
                       <div>
-                        <div className="text-[10px] xl:text-[11px] font-bold text-zinc-100">Offline</div>
-                        <div className="text-[8.5px] text-zinc-400 leading-tight">Firestore</div>
+                        <div className="text-[9.5px] xl:text-[11px] font-bold text-zinc-100">Offline</div>
+                        <div className="text-[8px] xl:text-[8.5px] text-zinc-400 leading-tight">Firestore</div>
                       </div>
                     </div>
                   </div>
@@ -500,42 +500,42 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
 
                 {/* Center Column (4 cols): 3 FIELD APP CARDS */}
                 <div className="col-span-4 flex flex-col justify-center gap-1 px-1">
-                  <div className="p-1.5 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
-                    <div className="flex items-center gap-1.5 text-[10px] xl:text-[11px] font-bold text-zinc-100">
+                  <div className="p-1 xl:p-1.5 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
+                    <div className="flex items-center gap-1.5 text-[9.5px] lg:text-[10px] xl:text-[11px] font-bold text-zinc-100">
                       <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
                       <span>UX Táctil para Operarios</span>
                     </div>
-                    <p className="text-[9px] xl:text-[10px] text-zinc-300 leading-tight pl-3">
+                    <p className="text-[8.5px] lg:text-[9px] xl:text-[10px] text-zinc-300 leading-tight pl-3">
                       Interacción táctil de alto contraste y registro de evidencias fotográficas en ruta.
                     </p>
                   </div>
 
-                  <div className="p-1.5 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
-                    <div className="flex items-center gap-1.5 text-[10px] xl:text-[11px] font-bold text-zinc-100">
+                  <div className="p-1 xl:p-1.5 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
+                    <div className="flex items-center gap-1.5 text-[9.5px] lg:text-[10px] xl:text-[11px] font-bold text-zinc-100">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                       <span>Sincronización Reactiva</span>
                     </div>
-                    <p className="text-[9px] xl:text-[10px] text-zinc-300 leading-tight pl-3">
+                    <p className="text-[8.5px] lg:text-[9px] xl:text-[10px] text-zinc-300 leading-tight pl-3">
                       Flujo de datos bidireccional instantáneo entre cuadrillas y despacho central.
                     </p>
                   </div>
 
-                  <div className="p-1.5 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
-                    <div className="flex items-center gap-1.5 text-[10px] xl:text-[11px] font-bold text-zinc-100">
+                  <div className="p-1 xl:p-1.5 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
+                    <div className="flex items-center gap-1.5 text-[9.5px] lg:text-[10px] xl:text-[11px] font-bold text-zinc-100">
                       <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
                       <span>Geo-Ticketing & GPS en Ruta</span>
                     </div>
-                    <p className="text-[9px] xl:text-[10px] text-zinc-300 leading-tight pl-3">
+                    <p className="text-[8.5px] lg:text-[9px] xl:text-[10px] text-zinc-300 leading-tight pl-3">
                       Trazabilidad continua de recorridos y geolocalización de órdenes en tiempo real.
                     </p>
                   </div>
                 </div>
 
-                {/* Right Column (4 cols): SMARTPHONE MOCKUP */}
+                {/* Right Column (4 cols): SMARTPHONE MOCKUP (Fluid Scaling) */}
                 <div className="col-span-4 flex justify-center py-0.5">
                   <div 
                     data-prevent-slide="true"
-                    className="mockup-interactive relative w-full max-w-36 lg:max-w-44 xl:max-w-50 2xl:max-w-56 aspect-9/12 rounded-2xl bg-linear-to-b from-[#2a2f42] via-[#161822] to-[#0b0d13] p-1.5 border border-white/20 shadow-[0_15px_35px_rgba(0,0,0,0.85)] group transition-all duration-300 overflow-hidden"
+                    className="mockup-interactive relative w-full max-w-32.5 lg:max-w-36.25 xl:max-w-41.25 2xl:max-w-48.75 max-h-[22vh] lg:max-h-[25vh] xl:max-h-[29vh] 2xl:max-h-[33vh] aspect-9/13 rounded-2xl bg-linear-to-b from-[#2a2f42] via-[#161822] to-[#0b0d13] p-1.5 border border-white/20 shadow-[0_15px_35px_rgba(0,0,0,0.85)] group transition-all duration-300 overflow-hidden flex flex-col justify-between"
                   >
                     {/* Dynamic Island Pill */}
                     <div className="absolute top-1 left-1/2 -translate-x-1/2 w-10 h-1.5 rounded-full bg-black border border-white/10 flex items-center justify-between px-1.5 z-30 pointer-events-none">
@@ -555,7 +555,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
             </div>
 
             {/* REAL-TIME ECOSYSTEM SYNC STREAM RIBBON */}
-            <div className="w-full py-1 px-3 rounded-lg bg-sky-500/5 border border-sky-500/15 flex items-center justify-between font-mono text-[9.5px] xl:text-[10.5px] text-sky-400/90 custom-stage-anim shrink-0">
+            <div className="w-full py-1 px-3 rounded-lg bg-sky-500/5 border border-sky-500/15 flex items-center justify-between font-mono text-[9px] lg:text-[9.5px] xl:text-[10.5px] text-sky-400/90 custom-stage-anim shrink-0">
               <div className="flex items-center gap-2">
                 <Radio className="w-3 h-3 text-sky-400 animate-pulse" />
                 <span className="font-bold tracking-wider">LIVE DATA BUS // FIRESTORE STREAM</span>
@@ -570,13 +570,13 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
 
             {/* BOTTOM SECTION: WEB ADMIN CONSOLE */}
             <div className="w-full custom-stage-anim">
-              <div className="grid grid-cols-12 gap-3 xl:gap-5 items-center">
+              <div className="grid grid-cols-12 gap-3 xl:gap-5 2xl:gap-6 items-center">
                 
-                {/* Left Column (4 cols): MACBOOK / WEB CONSOLE MOCKUP */}
+                {/* Left Column (4 cols): MACBOOK / WEB CONSOLE MOCKUP (Fluid Scaling) */}
                 <div className="col-span-4 flex justify-center py-0.5">
                   <div 
                     data-prevent-slide="true"
-                    className="mockup-interactive relative w-full max-w-56 lg:max-w-[300px] xl:max-w-[360px] 2xl:max-w-[420px] flex flex-col items-center group transition-all duration-300"
+                    className="mockup-interactive relative w-full max-w-52.5 lg:max-w-62.5 xl:max-w-75 2xl:max-w-90 max-h-[22vh] lg:max-h-[25vh] xl:max-h-[29vh] 2xl:max-h-[33vh] flex flex-col items-center group transition-all duration-300"
                   >
                     {/* Display Chassis */}
                     <div className="relative w-full aspect-16/10 rounded-xl bg-linear-to-b from-[#1c1f2c] via-[#141722] to-[#0f1118] p-1.5 border border-white/20 shadow-[0_15px_35px_rgba(0,0,0,0.85)] overflow-hidden">
@@ -601,32 +601,32 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
 
                 {/* Center Column (4 cols): 3 WEB CONSOLE CARDS */}
                 <div className="col-span-4 flex flex-col justify-center gap-1 px-1">
-                  <div className="p-1.5 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
-                    <div className="flex items-center gap-1.5 text-[10px] xl:text-[11px] font-bold text-zinc-100">
+                  <div className="p-1 xl:p-1.5 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
+                    <div className="flex items-center gap-1.5 text-[9.5px] lg:text-[10px] xl:text-[11px] font-bold text-zinc-100">
                       <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
                       <span>Rendimiento Puro & 0 KB Overhead</span>
                     </div>
-                    <p className="text-[9px] xl:text-[10px] text-zinc-300 leading-tight pl-3">
+                    <p className="text-[8.5px] lg:text-[9px] xl:text-[10px] text-zinc-300 leading-tight pl-3">
                       Sin sobrecarga de librerías: carga instantánea y manipulación nativa ultra-rápida.
                     </p>
                   </div>
 
-                  <div className="p-1.5 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
-                    <div className="flex items-center gap-1.5 text-[10px] xl:text-[11px] font-bold text-zinc-100">
+                  <div className="p-1 xl:p-1.5 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
+                    <div className="flex items-center gap-1.5 text-[9.5px] lg:text-[10px] xl:text-[11px] font-bold text-zinc-100">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                       <span>Monitoreo & Roles RBAC</span>
                     </div>
-                    <p className="text-[9px] xl:text-[10px] text-zinc-300 leading-tight pl-3">
+                    <p className="text-[8.5px] lg:text-[9px] xl:text-[10px] text-zinc-300 leading-tight pl-3">
                       Despacho de órdenes y supervisión de cuadrillas en tiempo real con seguridad.
                     </p>
                   </div>
 
-                  <div className="p-1.5 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
-                    <div className="flex items-center gap-1.5 text-[10px] xl:text-[11px] font-bold text-zinc-100">
+                  <div className="p-1 xl:p-1.5 rounded-lg bg-white/3 border border-white/10 space-y-0.5 hover:border-white/20 transition-all">
+                    <div className="flex items-center gap-1.5 text-[9.5px] lg:text-[10px] xl:text-[11px] font-bold text-zinc-100">
                       <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
                       <span>Despacho en Caliente Live</span>
                     </div>
-                    <p className="text-[9px] xl:text-[10px] text-zinc-300 leading-tight pl-3">
+                    <p className="text-[8.5px] lg:text-[9px] xl:text-[10px] text-zinc-300 leading-tight pl-3">
                       Canal WebSockets en vivo para actualización de estados sin recargar pantalla.
                     </p>
                   </div>
@@ -635,7 +635,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                 {/* Right Column (4 cols): Web Admin Console Info */}
                 <div className="col-span-4 space-y-1">
                   <div className="space-y-0.5">
-                    <div className="inline-flex items-center gap-1.5 text-[10px] xl:text-[11px] font-mono font-bold text-sky-400 uppercase tracking-wider">
+                    <div className="inline-flex items-center gap-1.5 text-[9.5px] lg:text-[10px] xl:text-[11px] font-mono font-bold text-sky-400 uppercase tracking-wider">
                       <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
                       <span>WEB ADMIN CONSOLE</span>
                     </div>
@@ -643,7 +643,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                     <p className="text-xs xl:text-sm font-semibold text-zinc-200">
                       Consola Web de Administración & Despacho
                     </p>
-                    <p className="text-[10px] xl:text-[11px] text-zinc-300 leading-snug font-sans">
+                    <p className="text-[9.5px] lg:text-[10px] xl:text-[11px] text-zinc-300 leading-snug font-sans">
                       Consola administrativa en <span className="text-white font-semibold">JavaScript Vanilla</span> puro: 0 KB sobrecarga, manipulación DOM nativa y sync sub-38ms con <span className="text-sky-300 font-semibold">Cloud Firestore & WebSockets</span>.
                     </p>
                   </div>
@@ -651,32 +651,32 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                   {/* 3 Key Features */}
                   <div className="grid grid-cols-3 gap-1 pt-1 border-t border-white/10">
                     <div className="flex items-start gap-1">
-                      <div className="w-4 h-4 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                      <div className="w-3.5 h-3.5 lg:w-4 lg:h-4 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
                         <Zap className="w-2 h-2" />
                       </div>
                       <div>
-                        <div className="text-[10px] xl:text-[11px] font-bold text-zinc-100">Cero Overhead</div>
-                        <div className="text-[8.5px] text-zinc-400 leading-tight">Ultra rápido</div>
+                        <div className="text-[9.5px] xl:text-[11px] font-bold text-zinc-100">Cero Overhead</div>
+                        <div className="text-[8px] xl:text-[8.5px] text-zinc-400 leading-tight">Ultra rápido</div>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-1">
-                      <div className="w-4 h-4 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                      <div className="w-3.5 h-3.5 lg:w-4 lg:h-4 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
                         <Monitor className="w-2 h-2" />
                       </div>
                       <div>
-                        <div className="text-[10px] xl:text-[11px] font-bold text-zinc-100">Dashboard</div>
-                        <div className="text-[8.5px] text-zinc-400 leading-tight">En vivo</div>
+                        <div className="text-[9.5px] xl:text-[11px] font-bold text-zinc-100">Dashboard</div>
+                        <div className="text-[8px] xl:text-[8.5px] text-zinc-400 leading-tight">En vivo</div>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-1">
-                      <div className="w-4 h-4 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                      <div className="w-3.5 h-3.5 lg:w-4 lg:h-4 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
                         <ShieldCheck className="w-2 h-2" />
                       </div>
                       <div>
-                        <div className="text-[10px] xl:text-[11px] font-bold text-zinc-100">Seguridad</div>
-                        <div className="text-[8.5px] text-zinc-400 leading-tight">RBAC</div>
+                        <div className="text-[9.5px] xl:text-[11px] font-bold text-zinc-100">Seguridad</div>
+                        <div className="text-[8px] xl:text-[8.5px] text-zinc-400 leading-tight">RBAC</div>
                       </div>
                     </div>
                   </div>
@@ -1047,12 +1047,21 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
 
               {/* Actions */}
               <div className="flex flex-wrap items-center gap-2 pt-0.5 font-mono text-xs">
+                {/* En teléfonos únicamente: opción de probar en pantalla grande */}
+                <button
+                  onClick={() => onPlayDemo(project)}
+                  className="sm:hidden px-3.5 py-1.5 rounded-full bg-amber-500 hover:bg-amber-400 text-black font-bold flex items-center gap-1.5 shadow-lg transition-all cursor-pointer active:scale-95 text-xs"
+                >
+                  <Eye className="w-3.5 h-3.5" />
+                  <span>Probar en Pantalla Grande</span>
+                </button>
+
                 <a
                   href={project.googlePlayUrl || "https://play.google.com/store/apps/details?id=com.inventus.sopasenior"}
                   target="_blank"
                   rel="noreferrer"
                   data-cursor="PLAYSTORE"
-                  className="px-3.5 sm:px-4 py-1.5 rounded-full bg-amber-500 hover:bg-amber-400 text-black font-bold flex items-center gap-1.5 shadow-lg shadow-amber-500/20 transition-all cursor-pointer active:scale-95 text-xs"
+                  className="px-3.5 sm:px-4 py-1.5 rounded-full bg-amber-500 hover:bg-amber-400 text-black font-bold hidden sm:flex items-center gap-1.5 shadow-lg shadow-amber-500/20 transition-all cursor-pointer active:scale-95 text-xs"
                 >
                   <GooglePlayIcon className="w-3.5 h-3.5 fill-current" />
                   <span>Probar en Google Play</span>
@@ -1060,7 +1069,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
 
                 <button
                   onClick={() => onPlayDemo(project)}
-                  className="px-3 sm:px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-zinc-200 hover:text-white flex items-center gap-1.5 transition-all cursor-pointer text-xs"
+                  className="hidden sm:flex px-3 sm:px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-zinc-200 hover:text-white items-center gap-1.5 transition-all cursor-pointer text-xs"
                 >
                   <Eye className="w-3.5 h-3.5" />
                   <span>Probar Simulación</span>
@@ -1182,9 +1191,18 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
 
               {/* Actions */}
               <div className="flex flex-wrap items-center gap-2 pt-0.5 font-mono text-xs">
+                {/* En teléfonos únicamente: opción de probar en pantalla grande */}
                 <button
                   onClick={() => onPlayDemo(project)}
-                  className="px-3.5 sm:px-4 py-1.5 rounded-full bg-[#8B9A86] hover:bg-[#9db097] text-[#0f1712] font-bold flex items-center gap-1.5 shadow-lg transition-all cursor-pointer active:scale-95 text-xs"
+                  className="sm:hidden px-3.5 py-1.5 rounded-full bg-[#8B9A86] hover:bg-[#9db097] text-[#0f1712] font-bold flex items-center gap-1.5 shadow-lg transition-all cursor-pointer active:scale-95 text-xs"
+                >
+                  <Compass className="w-3.5 h-3.5" />
+                  <span>Probar en Pantalla Grande</span>
+                </button>
+
+                <button
+                  onClick={() => onPlayDemo(project)}
+                  className="hidden sm:flex px-3.5 sm:px-4 py-1.5 rounded-full bg-[#8B9A86] hover:bg-[#9db097] text-[#0f1712] font-bold items-center gap-1.5 shadow-lg transition-all cursor-pointer active:scale-95 text-xs"
                 >
                   <Compass className="w-3.5 h-3.5" />
                   <span>Navegación Zen</span>
