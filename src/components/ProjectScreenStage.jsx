@@ -400,7 +400,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
     return (
       <div 
         ref={containerRef}
-        className="w-full min-h-full md:overflow-y-auto flex flex-col justify-start md:justify-center px-3 sm:px-6 md:px-10 lg:px-12 xl:px-16 2xl:px-20 pt-20 sm:pt-16 lg:pt-18 pb-6 sm:pb-8 relative select-none text-zinc-100 font-sans custom-scroll"
+        className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-6 md:px-10 lg:px-12 xl:px-16 2xl:px-20 pt-20 sm:pt-16 lg:pt-18 pb-6 sm:pb-8 relative select-none text-zinc-100 font-sans custom-scroll"
         style={{
           background: 'radial-gradient(ellipse 100% 100% at 50% 20%, #0d1017 0%, #080a10 60%, #040508 100%)'
         }}

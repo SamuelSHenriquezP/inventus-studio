@@ -349,10 +349,9 @@ export default function FullscreenDeck({
       }
 
       const currentSlideWrapper = slidesRef.current[currentIndexRef.current];
-      const scrollableChild = currentSlideWrapper?.querySelector('.overflow-y-auto, [data-scrollable="true"]') || currentSlideWrapper;
-      if (scrollableChild && scrollableChild.scrollHeight > scrollableChild.clientHeight + 15) {
-        const atBottom = scrollableChild.scrollTop + scrollableChild.clientHeight >= scrollableChild.scrollHeight - 20;
-        const atTop = scrollableChild.scrollTop <= 20;
+      if (currentSlideWrapper && currentSlideWrapper.scrollHeight > currentSlideWrapper.clientHeight + 15) {
+        const atBottom = Math.ceil(currentSlideWrapper.scrollTop + currentSlideWrapper.clientHeight) >= currentSlideWrapper.scrollHeight - 20;
+        const atTop = currentSlideWrapper.scrollTop <= 20;
 
         if (e.deltaY > 0 && !atBottom) {
           return;
