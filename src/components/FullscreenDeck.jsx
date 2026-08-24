@@ -349,31 +349,18 @@ export default function FullscreenDeck({
 
       if (
         e.target.closest(
-          '[data-modal], [data-prevent-slide], [role="dialog"], .fixed.z-50, .modal-container, .modal-backdrop, .mockup-interactive, .scrollable-content, .code-viewer-container, canvas, .interactive-screen, [data-interactive]'
+          '[data-modal], [data-prevent-slide], [role="dialog"], .fixed.z-50, .modal-container, .modal-backdrop, .scrollable-content, .code-viewer-container, canvas, [data-interactive]'
         )
       ) {
         return;
       }
 
-      const currentSlideWrapper = slidesRef.current[currentIndexRef.current];
-      if (currentSlideWrapper && currentSlideWrapper.scrollHeight > currentSlideWrapper.clientHeight + 15) {
-        const atBottom = Math.ceil(currentSlideWrapper.scrollTop + currentSlideWrapper.clientHeight) >= currentSlideWrapper.scrollHeight - 20;
-        const atTop = currentSlideWrapper.scrollTop <= 20;
-
-        if (e.deltaY > 0 && !atBottom) {
-          return;
-        }
-        if (e.deltaY < 0 && !atTop) {
-          return;
-        }
-      }
-
       const now = Date.now();
-      if (now - lastWheelTime.current < 400) {
+      if (now - lastWheelTime.current < 450) {
         return;
       }
 
-      if (Math.abs(e.deltaY) > 15) {
+      if (Math.abs(e.deltaY) > 10) {
         lastWheelTime.current = now;
         if (e.deltaY > 0) {
           handleNext();
@@ -397,7 +384,7 @@ export default function FullscreenDeck({
         document.body.style.overflow === 'hidden' ||
         document.querySelector('[data-modal="true"], [role="dialog"], .modal-backdrop, .modal-container') ||
         e.target.closest(
-          '[data-modal], [data-prevent-slide], [role="dialog"], .fixed.z-50, .modal-container, .modal-backdrop, .mockup-interactive, .scrollable-content, .code-viewer-container, canvas, .interactive-screen, [data-interactive]'
+          '[data-modal], [data-prevent-slide], [role="dialog"], .fixed.z-50, .modal-container, .modal-backdrop, .scrollable-content, .code-viewer-container, canvas, [data-interactive]'
         )
       ) {
         touchStartY.current = null;
@@ -417,20 +404,6 @@ export default function FullscreenDeck({
       }
       const touchEndY = e.changedTouches[0].clientY;
       const diffY = touchStartY.current - touchEndY;
-
-      const currentSlideWrapper = slidesRef.current[currentIndexRef.current];
-      const scrollableChild = currentSlideWrapper?.querySelector('.overflow-y-auto, [data-scrollable="true"]') || currentSlideWrapper;
-      if (scrollableChild && scrollableChild.scrollHeight > scrollableChild.clientHeight + 15) {
-        const atBottom = scrollableChild.scrollTop + scrollableChild.clientHeight >= scrollableChild.scrollHeight - 25;
-        const atTop = scrollableChild.scrollTop <= 25;
-
-        if (diffY > 0 && !atBottom) {
-          return;
-        }
-        if (diffY < 0 && !atTop) {
-          return;
-        }
-      }
 
       if (Math.abs(diffY) > 35) {
         if (diffY > 0) {
@@ -503,7 +476,7 @@ export default function FullscreenDeck({
             className={
               isMobile
                 ? "relative w-full py-8 sm:py-12 flex flex-col items-center border-b border-white/5 bg-[#050508]"
-                : "absolute inset-0 w-full h-full overflow-y-auto overflow-x-hidden flex flex-col items-center custom-scroll"
+                : "absolute inset-0 w-full h-full overflow-hidden flex flex-col items-center custom-scroll"
             }
             style={
               isMobile

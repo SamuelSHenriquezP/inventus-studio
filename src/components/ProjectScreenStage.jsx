@@ -864,7 +864,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
     return (
       <div
         ref={containerRef}
-        className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-2 sm:pt-16 pb-4 sm:pb-12 relative select-none overflow-y-auto custom-scroll text-zinc-100 font-sans"
+        className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-2 sm:pt-16 pb-4 sm:pb-12 relative select-none overflow-hidden custom-scroll text-zinc-100 font-sans"
         style={{
           background: 'radial-gradient(ellipse 100% 100% at 50% 15%, #081626 0%, #050d18 55%, #02050b 100%)'
         }}
@@ -986,7 +986,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
     return (
       <div
         ref={containerRef}
-        className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-2 sm:pt-16 pb-4 sm:pb-12 relative select-none overflow-y-auto custom-scroll text-zinc-100 font-sans"
+        className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-2 sm:pt-16 pb-4 sm:pb-12 relative select-none overflow-hidden custom-scroll text-zinc-100 font-sans"
         style={{
           background: 'radial-gradient(ellipse 100% 100% at 50% 15%, #1c1003 0%, #0d0701 55%, #050300 100%)'
         }}
@@ -1129,7 +1129,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
     return (
       <div
         ref={containerRef}
-        className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-12 sm:pt-20 pb-12 sm:pb-16 relative select-none overflow-y-auto custom-scroll text-[#FAF8F5] font-sans"
+        className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-12 sm:pt-20 pb-12 sm:pb-16 relative select-none overflow-hidden custom-scroll text-[#FAF8F5] font-sans"
         style={{
           background: 'radial-gradient(ellipse 100% 100% at 50% 15%, #161e18 0%, #0e1410 55%, #050806 100%)'
         }}
@@ -1263,7 +1263,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
   return (
     <div
       ref={containerRef}
-      className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-12 sm:pt-20 pb-12 sm:pb-16 relative select-none overflow-y-auto custom-scroll text-zinc-100 font-sans"
+      className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-12 sm:pt-20 pb-12 sm:pb-16 relative select-none overflow-hidden custom-scroll text-zinc-100 font-sans"
       style={{
         background: 'radial-gradient(ellipse 100% 100% at 50% 15%, #140f28 0%, #0c0819 55%, #05030a 100%)'
       }}
