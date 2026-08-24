@@ -35,7 +35,7 @@ export default function App() {
     : null;
 
   return (
-    <div className="relative w-full min-h-screen md:w-screen md:h-screen md:overflow-hidden bg-[#050508] text-[#ededef] selection:bg-white selection:text-black font-sans">
+    <div className="relative w-full bg-[#050508] text-[#ededef] selection:bg-white selection:text-black font-sans md:w-screen md:h-screen md:overflow-hidden min-h-screen">
       
       {/* Tactile Custom Cursor */}
       <CustomCursor />
