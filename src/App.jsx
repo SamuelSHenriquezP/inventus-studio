@@ -5,7 +5,7 @@ import CustomCursor from './components/CustomCursor';
 import NavigationRail from './components/NavigationRail';
 import FullscreenDeck from './components/FullscreenDeck';
 
-const InteractiveProjectRunner = lazy(() => import('./components/InteractiveProjectRunner'));
+import InteractiveProjectRunner from './components/InteractiveProjectRunner';
 
 import { personalInfo, projectsData } from './Data/projectsData';
 import { sounds } from './utils/soundEngine';

@@ -102,9 +102,11 @@ export default function FullscreenDeck({
   const totalSections = sections.length;
   const currentSection = sections[activeSectionIndex] || sections[0];
 
-  // Mobile IntersectionObserver to auto-update activeSectionIndex as the user scrolls naturally
+  // Mobile IntersectionObserver with debounced state updates to prevent re-rendering the whole App while fast scrolling
   useEffect(() => {
     if (!isMobile) return;
+
+    let debounceTimer = null;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -113,17 +115,21 @@ export default function FullscreenDeck({
             const index = Number(entry.target.getAttribute('data-section-index'));
             if (!isNaN(index) && index !== currentIndexRef.current) {
               currentIndexRef.current = index;
-              setActiveSectionIndex(index);
-              if (onSectionChange) {
-                onSectionChange(sections[index]);
-              }
+              
+              if (debounceTimer) clearTimeout(debounceTimer);
+              debounceTimer = setTimeout(() => {
+                setActiveSectionIndex(index);
+                if (onSectionChange) {
+                  onSectionChange(sections[index]);
+                }
+              }, 120);
             }
           }
         });
       },
       {
         root: null,
-        threshold: 0.25
+        threshold: 0.3
       }
     );
 
@@ -131,7 +137,10 @@ export default function FullscreenDeck({
       if (el) observer.observe(el);
     });
 
-    return () => observer.disconnect();
+    return () => {
+      if (debounceTimer) clearTimeout(debounceTimer);
+      observer.disconnect();
+    };
   }, [isMobile, sections, onSectionChange, setActiveSectionIndex]);
 
   // Core Slide Animator (Desktop)
