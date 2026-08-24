@@ -6,7 +6,7 @@ import FlutterCodeViewer from './FlutterCodeViewer';
 import NidoPhoneApp from './apps/NidoPhoneApp';
 import ServiIntelLaptopApp from './apps/ServiIntelLaptopApp';
 import DaysPhoneApp from './apps/DaysPhoneApp';
-import CyberRushPhoneApp from './apps/CyberRushPhoneApp';
+import PazHoyPhoneApp from './apps/PazHoyPhoneApp';
 import OtekPowerApp from './apps/OtekPowerApp';
 import SopaSeniorApp from './apps/SopaSeniorApp';
 
@@ -23,7 +23,6 @@ export default function RealisticDevice3D({
 
   const isLaptop = type === 'laptop' || projectId === 'serviintel-ops';
   const isTablet = type === 'tablet' || projectId === 'otek-powerapps';
-  const isHorizontalPhone = projectId === 'cyber-rush';
 
   return (
     <div className="w-full flex flex-col items-center justify-center relative select-none py-1">
@@ -161,26 +160,6 @@ export default function RealisticDevice3D({
                 <div className="w-8 sm:w-14 h-0.5 bg-black/60 rounded-b-md" />
               </div>
             </div>
-          ) : isHorizontalPhone ? (
-            /* ========================================================================= */
-            /* HORIZONTAL PHONE HARDWARE MOCKUP */
-            /* ========================================================================= */
-            <div 
-              data-prevent-slide="true"
-              className="mockup-interactive relative w-full max-w-48 sm:max-w-64 md:max-w-80 lg:max-w-90 xl:max-w-110 2xl:max-w-125 max-h-[16vh] sm:max-h-[22vh] lg:max-h-[30vh] xl:max-h-[34vh] 2xl:max-h-[38vh] aspect-18.8/9 rounded-2xl sm:rounded-4xl bg-[#16171d] p-1 sm:p-2 xl:p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.85)] overflow-hidden"
-            >
-              <div className="relative w-full h-full rounded-lg sm:rounded-3xl overflow-hidden bg-black flex flex-col justify-between shadow-inner interactive-screen">
-                {screenMode === 'live-app' ? (
-                  <CyberRushPhoneApp isActive={isActive} />
-                ) : (
-                  <img 
-                    src={image} 
-                    alt={title}
-                    className="w-full h-full object-cover select-none"
-                  />
-                )}
-              </div>
-            </div>
           ) : (
             /* ========================================================================= */
             /* VERTICAL PHONE HARDWARE MOCKUP (TITANIUM SMARTPHONE) */
@@ -203,6 +182,8 @@ export default function RealisticDevice3D({
                       <DaysPhoneApp isActive={isActive} />
                     ) : projectId === 'sopa-senior' ? (
                       <SopaSeniorApp isActive={isActive} />
+                    ) : projectId === 'paz-hoy' ? (
+                      <PazHoyPhoneApp isActive={isActive} />
                     ) : (
                       <NidoPhoneApp isActive={isActive} />
                     )

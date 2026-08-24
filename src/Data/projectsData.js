@@ -395,65 +395,67 @@ class DailyRadarController extends ChangeNotifier {
     }
   },
   {
-    id: "cyber-rush",
+    id: "paz-hoy",
     number: "06",
     total: "06",
-    title: "Cyber Rush",
-    subtitle: "Videojuego Arcade Vectorial a 60–120 FPS",
-    badge: "06 / GAMING & WASM",
-    category: "Videojuego & WASM Engine",
+    title: "Paz Hoy",
+    subtitle: "Mindfulness, Frases Diarias & Widgets Nativos de Pantalla de Inicio",
+    badge: "06 / MINDFULNESS & HOME WIDGETS",
+    category: "App Móvil Flutter & Home Widget",
     year: "2026",
-    role: "Lead Gameplay & Engine Engineer",
-    headline: "Motor gráfico compilado a WebAssembly con shaders GLSL de GPU y latencia de 4.16ms (120 FPS)",
-    description: "Videojuego arcade 3D de alta velocidad ejecutado en el navegador mediante WebAssembly (WASM). Aprovecha la aceleración por hardware con un pipeline de renderizado de 4.16ms por cuadro para alcanzar 120 FPS continuos, integrando shaders GLSL para iluminación de neón volumétrica, partículas de estela y colisiones poligonales analíticas.",
-    image: "/assets/projects/cyber_rush.jpg",
-    tags: ["Flutter 3.x", "Flame Engine", "WebAssembly", "CanvasKit", "GLSL Shaders", "60-120 FPS"],
-    demoType: "game",
+    role: "Lead Mobile Engineer & UI/UX Designer",
+    headline: "Sincronización nativa con Home Widgets en Android/iOS, editor tipográfico dinámico con Google Fonts y almacenamiento offline-first",
+    description: "Aplicación móvil nativa en Flutter concebida para la serenidad mental, reflexión diaria y personalización estética profunda. Integra sincronización en tiempo real con Widgets de Pantalla de Inicio (Home Widgets de Android/iOS) usando SharedPreferences y App Groups, un motor de estilizado visual dinámico (Google Fonts, paletas de color, efectos de sombra/stroke) y exportación gráfica de alta resolución.",
+    image: "/assets/projects/paz_hoy.jpg",
+    tags: ["Flutter 3.x", "Home Widget", "Google Fonts", "Provider", "Local Notifications", "Screenshot Engine", "Material 3"],
+    demoType: "lifestyle",
     githubUrl: "https://github.com",
-    demoUrl: "#play-game",
-    accent: "#f43f5e",
-    accentGlow: "rgba(244, 63, 94, 0.22)",
-    bgGradient: "radial-gradient(ellipse 80% 80% at 50% -10%, rgba(244, 63, 94, 0.16), rgba(24, 6, 13, 0.95) 60%, #0d0307 100%)",
-    ambientColor: "#18060d",
-    deviceType: "arcade",
-    themeTag: "CYBER NEON ROSE",
+    demoUrl: "#view-pazhoy",
+    accent: "#818cf8",
+    accentGlow: "rgba(129, 140, 248, 0.22)",
+    bgGradient: "radial-gradient(ellipse 80% 80% at 50% -10%, rgba(129, 140, 248, 0.16), rgba(20, 15, 38, 0.95) 60%, #0a0614 100%)",
+    ambientColor: "#120a22",
+    deviceType: "phone",
+    themeTag: "SERENE INDIGO & MINDFULNESS",
     metrics: [
-      { label: "Tasa de Refresco", val: "120 FPS (4.16ms/frame)" },
-      { label: "Motor & Binario", val: "WASM + WebGL 2.0" },
-      { label: "Shaders en GPU", val: "GLSL Neon & Bloom" },
-      { label: "Físicas & Colisión", val: "Analítica Vectorial" }
+      { label: "Home Widget Sync", val: "Android / iOS App Group" },
+      { label: "Motor Tipográfico", val: "Google Fonts Runtime" },
+      { label: "Gestor de Estado", val: "Provider + SharedPreferences" },
+      { label: "Exportación Gráfica", val: "Screenshot Hi-Res" }
     ],
     highlights: [
-      "Renderizado vectorial a 60–120 FPS continuos sobre lienzo WebGL / CanvasKit.",
-      "Sistema determinista de colisiones para evasión milimétrica de obstáculos.",
-      "Shaders GLSL personalizados para efectos de velocidad y partículas lumínicas."
+      "Sincronización nativa con widgets de pantalla de inicio en Android e iOS mediante el plugin home_widget.",
+      "Editor de estilos dinámico con tipografías Google Fonts, ajustes de interlineado, fondos y efectos de texto.",
+      "Generación de capturas de pantalla en alta resolución para compartir y sistema de frases favoritas offline."
     ],
     codeSnippet: {
       language: "dart",
-      filename: "cyber_rush_engine.dart",
-      code: `// lib/game/cyber_rush_engine.dart
-import 'package:flame/game.dart';
-import 'package:flame/collisions.dart';
-import 'dart:ui' as ui;
+      filename: "style_provider.dart",
+      code: `// lib/src/providers/style_provider.dart
+import 'package:flutter/material.dart';
+import 'package:home_widget/home_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class CyberRushEngine extends FlameGame with HasCollisionDetection {
-  late PlayerShip player;
-  late final ParticleField particleField;
-  late final ui.FragmentProgram neonShader;
+class StyleProvider extends ChangeNotifier {
+  QuoteStyle _style = const QuoteStyle();
+  QuoteStyle get style => _style;
 
-  @override
-  Future<void> onLoad() async {
-    // Shaders GLSL compilados a SPIR-V para Impeller / WASM
-    neonShader = await ui.FragmentProgram.fromAsset('shaders/neon_trail.frag');
-    player = PlayerShip(position: Vector2(size.x / 2, size.y * 0.85));
-    add(player);
-    add(particleField = ParticleField(capacity: 800));
+  Future<void> syncStyleToWidget() async {
+    // Sincronización atómica con el Home Widget nativo
+    await HomeWidget.saveWidgetData<int>('widget_bg_color', _style.backgroundColor.toARGB32());
+    await HomeWidget.saveWidgetData<int>('widget_text_color', _style.textColor.toARGB32());
+    await HomeWidget.saveWidgetData<double>('widget_font_size', _style.fontSize);
+
+    await HomeWidget.updateWidget(
+      name: 'QuoteWidgetProvider',
+      androidName: 'com.example.pazhoy.QuoteWidgetProvider',
+    );
   }
 
-  @override
-  void update(double dt) {
-    super.update(dt);
-    particleField.updateVectors(dt, player.velocity);
+  void setFontFamily(String? font) {
+    _style = _style.copyWith(fontFamily: font);
+    notifyListeners();
+    syncStyleToWidget();
   }
 }`
     }

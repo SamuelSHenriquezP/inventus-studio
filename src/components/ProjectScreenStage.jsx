@@ -1252,58 +1252,48 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
   }
 
   // =========================================================================
-  // 6. CYBER RUSH — WASM GRAPHICS (LAYOUT: MOCKUP LEFT, CONTENT RIGHT)
+  // 6. PAZ HOY — MINDFULNESS & HOME WIDGETS (LAYOUT: CONTENT LEFT, MOCKUP RIGHT)
   // =========================================================================
   return (
     <div
       ref={containerRef}
       className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-12 sm:pt-20 pb-12 sm:pb-16 relative select-none overflow-y-auto custom-scroll text-zinc-100 font-sans"
       style={{
-        background: 'radial-gradient(ellipse 100% 100% at 50% 15%, #1c0e14 0%, #10080c 55%, #050204 100%)'
+        background: 'radial-gradient(ellipse 100% 100% at 50% 15%, #140f28 0%, #0c0819 55%, #05030a 100%)'
       }}
     >
       <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-2 sm:space-y-4 relative z-10">
 
         {/* Header Bar */}
-        <div className="w-full flex items-center justify-between pb-1.5 sm:pb-2.5 border-b border-white/10 custom-stage-anim shrink-0 font-mono text-xs text-zinc-400">
+        <div className="w-full flex items-center justify-between pb-1.5 sm:pb-2.5 border-b border-indigo-500/20 custom-stage-anim shrink-0 font-mono text-xs text-zinc-400">
           <div className="flex items-center gap-2 sm:gap-3">
-            <span className="font-bold tracking-widest text-zinc-200">06 // CYBER RUSH</span>
+            <span className="font-bold tracking-widest text-zinc-200">06 // PAZ HOY</span>
             <span className="text-zinc-600 hidden sm:inline">•</span>
-            <span className="text-zinc-400 hidden sm:inline text-[10.5px] sm:text-xs">Motor WASM a 120 FPS con Shaders GLSL</span>
+            <span className="px-2.5 py-0.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 font-mono text-[10px] sm:text-[11px] flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+              HOME WIDGET SYNC ANDROID & IOS
+            </span>
           </div>
-          <div className="flex items-center gap-2 text-rose-400 font-medium text-xs">
-            <Zap className="w-3.5 h-3.5" />
-            <span>4.16ms Impeller</span>
+          <div className="flex items-center gap-2 text-indigo-300 font-mono text-xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
+            <span className="hidden sm:inline">Google Fonts Runtime + Provider</span>
           </div>
         </div>
 
-        {/* 2-Column Content: Mockup LEFT, Content RIGHT */}
+        {/* 2-Column Content: Content LEFT, Mockup RIGHT */}
         <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-8 xl:gap-12 items-center">
 
-          {/* Left: Arcade Mockup */}
-          <div className="lg:col-span-6 flex flex-col items-center justify-center custom-stage-anim">
-            <RealisticDevice3D
-              type={project.deviceType}
-              image={project.image}
-              accentColor="#f43f5e"
-              title={project.title}
-              codeSnippet={project.codeSnippet}
-              projectId={project.id}
-              isActive={isActive}
-            />
-          </div>
-
-          {/* Right: Text Narrative */}
-          <div className="lg:col-span-6 space-y-2 lg:space-y-2.5 custom-stage-anim">
+          {/* Left: Text Narrative */}
+          <div className="lg:col-span-7 space-y-2 lg:space-y-2.5 custom-stage-anim order-2 lg:order-1">
             <div className="space-y-0.5 sm:space-y-1">
-              <span className="text-[10px] sm:text-xs font-mono font-medium text-rose-400/90 tracking-wider uppercase block">
-                Computación Gráfica & Rendimiento Extremo
+              <span className="text-[10px] sm:text-xs font-mono font-medium text-indigo-400/90 tracking-wider uppercase block">
+                App Móvil Flutter & Ecosistema de Widgets Nativos
               </span>
               <CinematicTitle
                 text={project.title}
                 isActive={isActive}
                 className="text-2xl sm:text-3xl lg:text-3xl xl:text-4xl font-display font-extrabold text-white tracking-tight uppercase leading-[1.08]"
-                accentColor="#f43f5e"
+                accentColor="#818cf8"
               />
               <p className="text-xs sm:text-[13px] text-zinc-300 font-normal leading-relaxed">
                 {project.subtitle}
@@ -1311,14 +1301,14 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
             </div>
 
             {/* Attribution Pill */}
-            <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-lg bg-rose-500/10 border border-rose-500/25 text-[11px] text-rose-300">
-              <Zap className="w-3 h-3 text-rose-400 shrink-0" />
-              <span className="font-medium">Motor WebAssembly & WebGL 2.0 • Shaders GLSL a 120 FPS</span>
+            <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-lg bg-indigo-500/10 border border-indigo-500/25 text-[11px] text-indigo-300">
+              <Sparkles className="w-3 h-3 text-indigo-400 shrink-0" />
+              <span className="font-medium">Widgets Nativos Android / iOS • Google Fonts Runtime • Screenshot Hi-Res</span>
             </div>
 
             {/* Key Objective Highlight */}
             <div className="flex items-stretch gap-2.5 px-3 py-1.5 rounded-xl bg-white/3 border border-white/10 shadow-sm backdrop-blur-md">
-              <div className="w-1 rounded-full bg-rose-400 shrink-0 shadow-[0_0_10px_rgba(244,63,94,0.5)]" />
+              <div className="w-1 rounded-full bg-indigo-400 shrink-0 shadow-[0_0_10px_rgba(129,140,248,0.5)]" />
               <p className="text-xs sm:text-[13px] font-sans font-medium text-zinc-200 tracking-[-0.01em] leading-relaxed self-center">
                 {project.headline}
               </p>
@@ -1333,20 +1323,30 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
               {project.metrics.map(m => (
                 <div key={m.label} className="space-y-0.5">
                   <span className="text-[9px] sm:text-[10px] text-zinc-400 uppercase tracking-wider block font-medium">{m.label}</span>
-                  <span className="text-xs sm:text-sm font-bold text-rose-400 block">{m.val}</span>
+                  <span className="text-xs sm:text-sm font-bold text-indigo-400 block">{m.val}</span>
                 </div>
               ))}
             </div>
 
             {/* Actions */}
             <div className="flex flex-wrap items-center gap-2 pt-0.5 font-mono text-xs">
+              {/* En teléfonos únicamente: opción de probar en pantalla grande */}
               <button
                 onClick={() => onPlayDemo(project)}
-                className="px-3.5 sm:px-4 py-1.5 rounded-full bg-white hover:bg-zinc-200 text-black font-bold flex items-center gap-1.5 shadow-lg transition-all cursor-pointer active:scale-95 text-xs"
+                className="sm:hidden px-3.5 py-1.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold flex items-center gap-1.5 shadow-lg transition-all cursor-pointer active:scale-95 text-xs"
               >
-                <Activity className="w-3.5 h-3.5" />
-                <span>Jugar en Grande</span>
+                <Eye className="w-3.5 h-3.5" />
+                <span>Probar en Pantalla Grande</span>
               </button>
+
+              <button
+                onClick={() => onPlayDemo(project)}
+                className="hidden sm:flex px-3.5 sm:px-4 py-1.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold items-center gap-1.5 shadow-lg transition-all cursor-pointer active:scale-95 text-xs shadow-indigo-500/20"
+              >
+                <Eye className="w-3.5 h-3.5" />
+                <span>Personalizar en Grande</span>
+              </button>
+
               {project.githubUrl && (
                 <a
                   href={project.githubUrl}
@@ -1355,11 +1355,11 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
                   className="px-3 sm:px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-zinc-300 hover:text-white flex items-center gap-1.5 transition-all text-xs"
                 >
                   <Code2 className="w-3.5 h-3.5" />
-                  <span>Código Shaders</span>
+                  <span>Código StyleProvider</span>
                 </a>
               )}
               <a
-                href={`https://wa.me/${personalInfo.whatsapp}?text=Hola%20${encodeURIComponent(personalInfo.name)},%20quiero%20cotizar%20un%20proyecto%20similar%20a%20${encodeURIComponent(project.title)}`}
+                href={`https://wa.me/${personalInfo.whatsapp}?text=Hola%20${encodeURIComponent(personalInfo.name)},%20quiero%20cotizar%20un%20proyecto%20móvil%20similar%20a%20${encodeURIComponent(project.title)}`}
                 target="_blank"
                 rel="noreferrer"
                 data-cursor="WHATSAPP"
@@ -1370,6 +1370,19 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
               </a>
             </div>
 
+          </div>
+
+          {/* Right: Device Mockup (Phone Vertical) */}
+          <div className="lg:col-span-5 flex flex-col items-center justify-center custom-stage-anim order-1 lg:order-2">
+            <RealisticDevice3D
+              type={project.deviceType}
+              image={project.image}
+              accentColor="#818cf8"
+              title={project.title}
+              codeSnippet={project.codeSnippet}
+              projectId={project.id}
+              isActive={isActive}
+            />
           </div>
 
         </div>

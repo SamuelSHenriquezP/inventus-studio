@@ -178,3 +178,28 @@
     -webkit-backface-visibility: hidden;
   }
 }
+
+/* ========================================================================= */
+/* PAZ HOY NATURAL TIKTOK VERTICAL SWIPE KEYFRAMES */
+/* ========================================================================= */
+@keyframes slideFromBottom {
+  0% {
+    transform: translateY(115%) scale(0.92);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideFromTop {
+  0% {
+    transform: translateY(-115%) scale(0.92);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%) scale(1);
+    opacity: 1;
+  }
+}

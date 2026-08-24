@@ -11,7 +11,7 @@ import OtekPowerApp from './apps/OtekPowerApp';
 import SopaSeniorApp from './apps/SopaSeniorApp';
 import DaysPhoneApp from './apps/DaysPhoneApp';
 import NidoPhoneApp from './apps/NidoPhoneApp';
-import CyberRushPhoneApp from './apps/CyberRushPhoneApp';
+import PazHoyPhoneApp from './apps/PazHoyPhoneApp';
 import ServiIntelOperarioApp from './apps/ServiIntelOperarioApp';
 import ServiIntelLaptopApp from './apps/ServiIntelLaptopApp';
 
@@ -65,9 +65,8 @@ export default function InteractiveProjectRunner({ project, onClose }) {
 
   if (!project) return null;
 
-  const isPhoneVertical = ['sopa-senior', 'days-focus-flow', 'lovecost-nido'].includes(project.id);
+  const isPhoneVertical = ['sopa-senior', 'days-focus-flow', 'lovecost-nido', 'paz-hoy'].includes(project.id);
   const isServiIntel = project.id === 'serviintel-ops';
-  const isLandscapePhone = project.id === 'cyber-rush';
   const isTablet = project.id === 'otek-powerapps';
 
   return (
@@ -319,16 +318,22 @@ export default function InteractiveProjectRunner({ project, onClose }) {
             </div>
           )}
 
-          {/* 5. CYBER RUSH EXPANDED HANDHELD FRAME */}
-          {isLandscapePhone && (
+          {/* 5. PAZ HOY EXPANDED HANDHELD FRAME */}
+          {project.id === 'paz-hoy' && (
             <div className="w-full flex flex-col items-center justify-center space-y-2">
-              <div className="w-full max-w-2xl aspect-18.8/9 max-h-95 rounded-3xl bg-[#16171d] p-2 border border-rose-500/30 shadow-2xl overflow-hidden">
-                <div className="w-full h-full rounded-2xl overflow-hidden bg-black shadow-inner">
-                  <CyberRushPhoneApp isActive={true} />
+              <div className="w-full max-w-82.5 sm:max-w-92.5 h-130 sm:h-147.5 rounded-4xl sm:rounded-[38px] bg-[#15161c] p-2 sm:p-2.5 border border-indigo-500/30 shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex flex-col justify-between overflow-hidden relative">
+                {/* Dynamic Island */}
+                <div className="absolute top-1 left-1/2 -translate-x-1/2 w-12 h-2 bg-black rounded-full border border-white/10 flex items-center justify-between px-1 z-30 pointer-events-none">
+                  <div className="w-0.5 h-0.5 rounded-full bg-indigo-400/80 shadow-[0_0_3px_#818cf8] animate-pulse" />
+                  <div className="w-0.5 h-0.5 rounded-full bg-white/20" />
+                </div>
+                <div className="relative w-full h-full rounded-3xl sm:rounded-[30px] overflow-hidden bg-black shadow-inner">
+                  <PazHoyPhoneApp isActive={true} />
                 </div>
               </div>
-              <div className="text-[10.5px] font-mono text-rose-300">
-                Toca o haz clic para esquivar obstáculos a 120 FPS
+              <div className="text-[10.5px] font-mono text-indigo-300/90 flex items-center gap-1.5">
+                <Sparkles className="w-3 h-3 text-indigo-400" />
+                <span>Toca para avanzar frases, abre el editor de fuentes y sincroniza el Home Widget</span>
               </div>
             </div>
           )}
