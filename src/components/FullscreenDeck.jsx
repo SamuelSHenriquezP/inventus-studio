@@ -122,8 +122,8 @@ export default function FullscreenDeck({
         });
       },
       {
-        root: deckRef.current,
-        threshold: 0.35
+        root: null,
+        threshold: 0.25
       }
     );
 
@@ -463,7 +463,7 @@ export default function FullscreenDeck({
       ref={deckRef}
       className={
         isMobile
-          ? "w-screen h-screen overflow-y-auto overflow-x-hidden select-none bg-black custom-scroll scroll-smooth relative"
+          ? "w-full min-h-screen relative bg-black"
           : "relative w-screen h-screen overflow-hidden select-none bg-black"
       }
     >

@@ -172,10 +172,10 @@ html, body, #root {
 }
 
 @media (max-width: 768px) {
-  /* Enforce non-bouncing, natural vertical scroll across all sections */
-  *, html, body, #root, .slide-stage-container, .slide-container {
-    -webkit-overscroll-behavior-y: none !important;
-    overscroll-behavior-y: none !important;
+  /* Enforce natural vertical scroll across all sections */
+  html, body, #root {
+    overscroll-behavior-y: auto;
+    touch-action: pan-y;
   }
 
   /* Optimize heavy backdrop blurs on mobile GPUs to conserve battery */
