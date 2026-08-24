@@ -126,7 +126,37 @@ export default function FullscreenDeck({
 
     activeTimelineRef.current = tl;
 
-    if (transitionType === 'lateral-slide') {
+    const isMobile = typeof window !== 'undefined' && (window.innerWidth <= 768 || ('ontouchstart' in window && window.innerWidth <= 1024));
+
+    if (isMobile) {
+      // Natural, direct TikTok-style vertical slide transition for mobile
+      // NO spring bounce, NO scale scaling down/up, fast 0.35s duration
+      gsap.set(targetSlide, {
+        yPercent: direction > 0 ? 100 : -100,
+        xPercent: 0,
+        opacity: 1,
+        scale: 1,
+      });
+
+      if (currentSlide) {
+        tl.to(currentSlide, {
+          yPercent: direction > 0 ? -100 : 100,
+          opacity: 0,
+          scale: 1,
+          duration: 0.35,
+          ease: 'power2.out'
+        }, 0);
+      }
+
+      tl.to(targetSlide, {
+        yPercent: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.35,
+        ease: 'power2.out'
+      }, 0);
+
+    } else if (transitionType === 'lateral-slide') {
       gsap.set(targetSlide, {
         xPercent: direction > 0 ? 30 : -30,
         yPercent: 0,
@@ -349,7 +379,7 @@ export default function FullscreenDeck({
         }
       }
 
-      if (Math.abs(diffY) > 50) {
+      if (Math.abs(diffY) > 35) {
         if (diffY > 0) {
           handleNext();
         } else {

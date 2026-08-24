@@ -18,24 +18,26 @@ export default function CinematicTitle({
       const chars = el.querySelectorAll('.cinematic-char');
       if (!chars.length) return;
 
+      const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+
       gsap.fromTo(
         chars,
         {
           opacity: 0,
-          y: 40,
-          rotateX: -60,
-          rotateY: 8,
+          y: isMobile ? 20 : 40,
+          rotateX: isMobile ? 0 : -60,
+          rotateY: isMobile ? 0 : 8,
           transformOrigin: '50% 100% -20px',
-          filter: 'blur(8px)',
+          ...(isMobile ? {} : { filter: 'blur(8px)' }),
         },
         {
           opacity: 1,
           y: 0,
           rotateX: 0,
           rotateY: 0,
-          filter: 'blur(0px)',
-          duration: 0.95,
-          stagger: 0.035,
+          ...(isMobile ? {} : { filter: 'blur(0px)' }),
+          duration: isMobile ? 0.6 : 0.95,
+          stagger: isMobile ? 0.02 : 0.035,
           ease: 'power3.out',
           delay: delay,
         }

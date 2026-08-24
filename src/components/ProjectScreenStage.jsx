@@ -30,6 +30,7 @@ function ServiIntelFieldTitle({ isActive }) {
     if (!containerRef.current || !isActive) return;
 
     const ctx = gsap.context(() => {
+      const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
       const mainChars = containerRef.current.querySelectorAll('.field-main-char');
       const hlChars = containerRef.current.querySelectorAll('.field-hl-char');
 
@@ -37,17 +38,17 @@ function ServiIntelFieldTitle({ isActive }) {
         mainChars,
         {
           opacity: 0,
-          y: 18,
-          rotateX: -30,
-          filter: 'blur(6px)',
+          y: isMobile ? 10 : 18,
+          rotateX: isMobile ? 0 : -30,
+          ...(isMobile ? {} : { filter: 'blur(6px)' }),
         },
         {
           opacity: 1,
           y: 0,
           rotateX: 0,
-          filter: 'blur(0px)',
-          duration: 0.8,
-          stagger: 0.035,
+          ...(isMobile ? {} : { filter: 'blur(0px)' }),
+          duration: isMobile ? 0.45 : 0.8,
+          stagger: isMobile ? 0.015 : 0.035,
           ease: 'power3.out',
           clearProps: 'all',
         }
@@ -57,19 +58,19 @@ function ServiIntelFieldTitle({ isActive }) {
         hlChars,
         {
           opacity: 0,
-          y: 18,
-          rotateX: -30,
-          filter: 'blur(6px)',
+          y: isMobile ? 10 : 18,
+          rotateX: isMobile ? 0 : -30,
+          ...(isMobile ? {} : { filter: 'blur(6px)' }),
         },
         {
           opacity: 1,
           y: 0,
           rotateX: 0,
-          filter: 'blur(0px)',
-          duration: 0.8,
-          stagger: 0.035,
+          ...(isMobile ? {} : { filter: 'blur(0px)' }),
+          duration: isMobile ? 0.45 : 0.8,
+          stagger: isMobile ? 0.015 : 0.035,
           ease: 'power3.out',
-          delay: 0.12,
+          delay: 0.08,
           clearProps: 'all',
         }
       );
@@ -113,6 +114,7 @@ function ServiIntelAdminTitle({ isActive }) {
     if (!containerRef.current || !isActive) return;
 
     const ctx = gsap.context(() => {
+      const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
       const mainChars = containerRef.current.querySelectorAll('.admin-main-char');
       const hlChars = containerRef.current.querySelectorAll('.admin-hl-char');
 
@@ -120,17 +122,17 @@ function ServiIntelAdminTitle({ isActive }) {
         mainChars,
         {
           opacity: 0,
-          x: -16,
+          x: isMobile ? -8 : -16,
           scale: 0.96,
-          filter: 'blur(6px)',
+          ...(isMobile ? {} : { filter: 'blur(6px)' }),
         },
         {
           opacity: 1,
           x: 0,
           scale: 1,
-          filter: 'blur(0px)',
-          duration: 0.8,
-          stagger: 0.035,
+          ...(isMobile ? {} : { filter: 'blur(0px)' }),
+          duration: isMobile ? 0.45 : 0.8,
+          stagger: isMobile ? 0.015 : 0.035,
           ease: 'power3.out',
           clearProps: 'all',
         }
@@ -140,19 +142,19 @@ function ServiIntelAdminTitle({ isActive }) {
         hlChars,
         {
           opacity: 0,
-          x: -16,
+          x: isMobile ? -8 : -16,
           scale: 0.96,
-          filter: 'blur(6px)',
+          ...(isMobile ? {} : { filter: 'blur(6px)' }),
         },
         {
           opacity: 1,
           x: 0,
           scale: 1,
-          filter: 'blur(0px)',
-          duration: 0.8,
-          stagger: 0.035,
+          ...(isMobile ? {} : { filter: 'blur(0px)' }),
+          duration: isMobile ? 0.45 : 0.8,
+          stagger: isMobile ? 0.015 : 0.035,
           ease: 'power3.out',
-          delay: 0.12,
+          delay: 0.08,
           clearProps: 'all',
         }
       );
@@ -195,23 +197,24 @@ function OtekQualityTitle({ isActive }) {
     if (!containerRef.current || !isActive) return;
 
     const ctx = gsap.context(() => {
+      const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
       const mainChars = containerRef.current.querySelectorAll('.otek-main-char');
       const hlChars = containerRef.current.querySelectorAll('.otek-hl-char');
 
       gsap.fromTo(mainChars, 
         {
           opacity: 0,
-          y: 18,
-          rotateX: -30,
-          filter: 'blur(6px)',
+          y: isMobile ? 10 : 18,
+          rotateX: isMobile ? 0 : -30,
+          ...(isMobile ? {} : { filter: 'blur(6px)' }),
         },
         {
           opacity: 1,
           y: 0,
           rotateX: 0,
-          filter: 'blur(0px)',
-          duration: 0.85,
-          stagger: 0.035,
+          ...(isMobile ? {} : { filter: 'blur(0px)' }),
+          duration: isMobile ? 0.45 : 0.85,
+          stagger: isMobile ? 0.015 : 0.035,
           ease: 'power3.out',
           clearProps: 'all',
         }
@@ -220,19 +223,19 @@ function OtekQualityTitle({ isActive }) {
       gsap.fromTo(hlChars,
         {
           opacity: 0,
-          y: 18,
-          rotateX: -30,
-          filter: 'blur(6px)',
+          y: isMobile ? 10 : 18,
+          rotateX: isMobile ? 0 : -30,
+          ...(isMobile ? {} : { filter: 'blur(6px)' }),
         },
         {
           opacity: 1,
           y: 0,
           rotateX: 0,
-          filter: 'blur(0px)',
-          duration: 0.85,
-          stagger: 0.035,
+          ...(isMobile ? {} : { filter: 'blur(0px)' }),
+          duration: isMobile ? 0.45 : 0.85,
+          stagger: isMobile ? 0.015 : 0.035,
           ease: 'power3.out',
-          delay: 0.12,
+          delay: 0.08,
           clearProps: 'all',
         }
       );
@@ -284,23 +287,24 @@ function SopaSeniorTitle({ isActive }) {
     if (!containerRef.current || !isActive) return;
 
     const ctx = gsap.context(() => {
+      const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
       const mainChars = containerRef.current.querySelectorAll('.sopa-main-char');
       const hlChars = containerRef.current.querySelectorAll('.sopa-hl-char');
 
       gsap.fromTo(mainChars,
         {
           opacity: 0,
-          y: 18,
-          rotateX: -30,
-          filter: 'blur(6px)',
+          y: isMobile ? 10 : 18,
+          rotateX: isMobile ? 0 : -30,
+          ...(isMobile ? {} : { filter: 'blur(6px)' }),
         },
         {
           opacity: 1,
           y: 0,
           rotateX: 0,
-          filter: 'blur(0px)',
-          duration: 0.85,
-          stagger: 0.035,
+          ...(isMobile ? {} : { filter: 'blur(0px)' }),
+          duration: isMobile ? 0.45 : 0.85,
+          stagger: isMobile ? 0.015 : 0.035,
           ease: 'power3.out',
           clearProps: 'all',
         }
@@ -309,19 +313,19 @@ function SopaSeniorTitle({ isActive }) {
       gsap.fromTo(hlChars,
         {
           opacity: 0,
-          y: 18,
-          rotateX: -30,
-          filter: 'blur(6px)',
+          y: isMobile ? 10 : 18,
+          rotateX: isMobile ? 0 : -30,
+          ...(isMobile ? {} : { filter: 'blur(6px)' }),
         },
         {
           opacity: 1,
           y: 0,
           rotateX: 0,
-          filter: 'blur(0px)',
-          duration: 0.85,
-          stagger: 0.035,
+          ...(isMobile ? {} : { filter: 'blur(0px)' }),
+          duration: isMobile ? 0.45 : 0.85,
+          stagger: isMobile ? 0.015 : 0.035,
           ease: 'power3.out',
-          delay: 0.12,
+          delay: 0.08,
           clearProps: 'all',
         }
       );
