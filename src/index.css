@@ -150,10 +150,17 @@
   }
 }
 
+@media (max-width: 640px) {
+  .slide-stage-container {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.25rem !important;
+  }
+}
+
 @media (max-height: 720px) {
   .slide-stage-container {
-    padding-top: 4.25rem;
-    padding-bottom: 3.75rem;
+    padding-top: 3.25rem !important;
+    padding-bottom: 3rem !important;
   }
 }
 

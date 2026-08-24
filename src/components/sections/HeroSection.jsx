@@ -58,13 +58,13 @@ export default function HeroSection({ onExploreWorks, onExploreStack, isActive =
     return () => ctx.revert();
   }, [isActive]);
 
-  const headlineText = "Desarrollo aplicaciones móviles, backend y plataformas cloud con arquitectura sólida y alto rendimiento.";
+  const headlineText = "Diseño sistemas backend en la nube, plataformas en tiempo real y ecosistemas de software empresariales.";
 
   return (
     <section 
       id="hero"
       ref={heroRef}
-      className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-12 sm:pt-20 pb-12 sm:pb-16 relative select-none overflow-y-auto custom-scroll"
+      className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-3 sm:pt-20 pb-6 sm:pb-16 relative select-none overflow-y-auto custom-scroll"
       style={{
         background: 'radial-gradient(ellipse 100% 100% at 50% 20%, #111218 0%, #0a0b0f 55%, #050508 100%)'
       }}
@@ -80,7 +80,7 @@ export default function HeroSection({ onExploreWorks, onExploreStack, isActive =
           {/* Status Capsule */}
           <div className="hero-capsule inline-flex items-center gap-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-white/5 border border-white/10 text-[10.5px] sm:text-xs font-mono text-zinc-300">
             <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0" />
-            <span>{personalInfo.studio} • {personalInfo.name}</span>
+            <span>{personalInfo.studio} • {personalInfo.name} | SOFTWARE ARCHITECT</span>
           </div>
 
           {/* Main Display Headline (Fluid Typography) */}
@@ -97,23 +97,23 @@ export default function HeroSection({ onExploreWorks, onExploreStack, isActive =
           </h1>
 
           {/* Subtitle & Focus */}
-          <p className="hero-fade text-xs sm:text-sm md:text-base text-zinc-400 font-sans max-w-xl leading-relaxed">
-            {personalInfo.bio}
+          <p className="hero-fade text-xs sm:text-sm md:text-base text-zinc-300 font-sans max-w-xl leading-relaxed">
+            Arquitectura de software escalable, consolas web administrativas de alta velocidad y aplicaciones móviles integradas en tiempo real. Productos digitales rápidos, seguros y listos para operar.
           </p>
 
           {/* Technology Badges */}
           <div className="hero-fade flex flex-wrap items-center gap-1.5 sm:gap-2 font-mono text-[10px] sm:text-[11px] text-zinc-400">
-            <span className="px-2 sm:px-3 py-0.5 sm:py-1 rounded-md bg-white/5 border border-white/10 text-zinc-300">
-              Flutter & Dart
+            <span className="px-2 sm:px-3 py-0.5 sm:py-1 rounded-md bg-white/5 border border-white/10 text-zinc-200">
+              Backend Cloud & Serverless
             </span>
-            <span className="px-2 sm:px-3 py-0.5 sm:py-1 rounded-md bg-white/5 border border-white/10 text-zinc-300">
-              Firebase Firestore
+            <span className="px-2 sm:px-3 py-0.5 sm:py-1 rounded-md bg-white/5 border border-white/10 text-zinc-200">
+              Firebase Realtime DB &lt;38ms
             </span>
-            <span className="px-2 sm:px-3 py-0.5 sm:py-1 rounded-md bg-white/5 border border-white/10 text-zinc-300">
-              Cloud Functions
+            <span className="px-2 sm:px-3 py-0.5 sm:py-1 rounded-md bg-white/5 border border-white/10 text-zinc-200">
+              Consolas Web Administrativas
             </span>
-            <span className="px-2 sm:px-3 py-0.5 sm:py-1 rounded-md bg-white/5 border border-white/10 text-zinc-300">
-              Isar DB Offline
+            <span className="px-2 sm:px-3 py-0.5 sm:py-1 rounded-md bg-white/5 border border-white/10 text-zinc-200">
+              Apps Móviles Flutter Integradas
             </span>
           </div>
 
@@ -122,16 +122,16 @@ export default function HeroSection({ onExploreWorks, onExploreStack, isActive =
             <button 
               onClick={() => { sounds.playClick(); if (onExploreWorks) onExploreWorks(); }}
               className="px-4 sm:px-7 py-2.5 sm:py-3.5 rounded-full bg-white text-black font-bold flex items-center gap-2 hover:bg-zinc-200 transition-all cursor-pointer shadow-lg active:scale-95 text-xs"
-              data-cursor="EXPLORAR"
+              data-cursor="PROYECTOS"
             >
-              <span>Ver Proyectos</span>
+              <span>Explorar Proyectos</span>
               <ChevronDown className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
 
             <button 
               onClick={() => { sounds.playClick(); if (onExploreStack) onExploreStack(); }}
               className="px-4 sm:px-6 py-2.5 sm:py-3.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-300 hover:text-white transition-all cursor-pointer flex items-center gap-2 active:scale-95 text-xs"
-              data-cursor="STACK"
+              data-cursor="SERVICIOS"
             >
               <span>Stack & Servicios</span>
             </button>
@@ -152,7 +152,7 @@ export default function HeroSection({ onExploreWorks, onExploreStack, isActive =
               </div>
               <div className="text-[10px] sm:text-[11px] text-zinc-500 flex items-center gap-1.5">
                 <Terminal className="w-3.5 h-3.5" />
-                <span>inventus-core.config.dart</span>
+                <span>inventus-backend.config.dart</span>
               </div>
             </div>
 
@@ -160,38 +160,38 @@ export default function HeroSection({ onExploreWorks, onExploreStack, isActive =
             <div className="space-y-2.5 sm:space-y-3 text-[10.5px] sm:text-[11px] leading-relaxed text-zinc-400">
               <div className="flex items-start gap-2">
                 <span className="text-emerald-400 font-bold">$</span>
-                <span>system.verifyArchitecture(target: <span className="text-white">MobilePlatform.all</span>)</span>
+                <span>system.verifyBackend(target: <span className="text-white">EnterpriseCloud.all</span>)</span>
               </div>
 
               <div className="p-2.5 sm:p-3 rounded-lg bg-black/50 border border-white/5 space-y-1.5 text-zinc-300">
                 <div className="flex items-center justify-between text-zinc-400 text-[9.5px] sm:text-[10px]">
-                  <span>[ENGINE] Flutter 3.x Native</span>
-                  <span className="text-emerald-400 font-bold">120 FPS READY</span>
+                  <span>[BACKEND] Cloud Functions & APIs</span>
+                  <span className="text-emerald-400 font-bold">SERVERLESS READY</span>
                 </div>
                 <div className="flex items-center justify-between text-zinc-400 text-[9.5px] sm:text-[10px]">
-                  <span>[CLOUD] Firebase Firestore</span>
-                  <span className="text-sky-400 font-bold">REALTIME SYNC &lt;35ms</span>
+                  <span>[DATA] Realtime Cloud Firestore</span>
+                  <span className="text-sky-400 font-bold">SYNC TIEMPO REAL &lt;38ms</span>
                 </div>
                 <div className="flex items-center justify-between text-zinc-400 text-[9.5px] sm:text-[10px]">
-                  <span>[LOCAL] Isar Database</span>
-                  <span className="text-amber-400 font-bold">OFFLINE-FIRST 0.8ms</span>
+                  <span>[WEB CONSOLE] Vanilla JS Dashboard</span>
+                  <span className="text-amber-400 font-bold">0 KB OVERHEAD</span>
                 </div>
                 <div className="flex items-center justify-between text-zinc-400 text-[9.5px] sm:text-[10px]">
-                  <span>[SECURITY] Cloud Security Rules</span>
-                  <span className="text-purple-400 font-bold">RBAC VERIFIED</span>
+                  <span>[MOBILE ENGINE] Flutter Native App</span>
+                  <span className="text-purple-400 font-bold">DESPACHO EN CALIENTE</span>
                 </div>
               </div>
 
               <div className="flex items-center gap-2 text-emerald-400 text-[10.5px] sm:text-[11px] pt-0.5">
                 <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>All software systems verified and active.</span>
+                <span>Arquitectura Cloud: Verificada • Lista para operaciones.</span>
               </div>
             </div>
 
             {/* Terminal Footer */}
             <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[9.5px] sm:text-[10px] text-zinc-500">
-              <span>Samuel Henríquez — Software Dev</span>
-              <span className="text-zinc-400 font-bold">v2.4.0-stable</span>
+              <span>Inventus Studio — Samuel Henríquez</span>
+              <span className="text-emerald-400 font-bold">v2.5-cloud-architect</span>
             </div>
 
           </div>

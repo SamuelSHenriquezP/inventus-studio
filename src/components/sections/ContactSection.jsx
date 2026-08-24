@@ -110,14 +110,14 @@ export default function ContactSection({ isActive = true }) {
     setTimeout(() => setCopiedEmail(false), 2500);
   };
 
-  const line1Text = "¿Tienes un proyecto en mente?";
-  const line2Text = "Construyámoslo con precisión técnica.";
+  const line1Text = "¿Tienes una visión o proyecto estratégico?";
+  const line2Text = "Construyámoslo con arquitectura de clase mundial.";
 
   return (
     <section 
       id="contacto"
       ref={footerRef}
-      className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-12 sm:pt-20 pb-12 sm:pb-16 relative select-none overflow-y-auto custom-scroll"
+      className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-3 sm:pt-20 pb-6 sm:pb-16 relative select-none overflow-y-auto custom-scroll"
       style={{
         background: 'radial-gradient(ellipse 100% 100% at 50% 85%, #05140d 0%, #030a07 55%, #020503 100%)'
       }}
@@ -152,11 +152,11 @@ export default function ContactSection({ isActive = true }) {
             <h2 className="text-2xl xs:text-3xl font-display font-extrabold tracking-tight leading-tight">
               <span className="text-white block">¿Tienes un proyecto en mente?</span>
               <span className="text-emerald-400 drop-shadow-[0_0_20px_rgba(52,211,153,0.55)] block">
-                Construyámoslo con precisión técnica.
+                Construyámoslo con arquitectura de clase mundial.
               </span>
             </h2>
             <p className="text-xs xs:text-sm text-zinc-300 font-sans leading-relaxed pt-0.5">
-              Desarrollo integral de aplicaciones nativas en Flutter, backend cloud reactivo y plataformas digitales a medida de alto impacto.
+              Apps móviles nativas en Flutter, backend cloud reactivo y consolas web a medida. Valoración técnica en 15 minutos sin costo ni compromiso.
             </p>
           </div>
 
@@ -312,7 +312,7 @@ export default function ContactSection({ isActive = true }) {
             </h2>
 
             <p className="contact-text-anim text-xs sm:text-sm md:text-base text-zinc-300 font-sans max-w-lg leading-relaxed">
-              Disponible para desarrollo de aplicaciones móviles nativas en Flutter, arquitecturas cloud con Firebase y plataformas de software a medida de alto impacto.
+              Disponible para arquitectura backend cloud en tiempo real, consolas web de gestión y desarrollo de ecosistemas móviles. Conversación inicial de 15 minutos sin costo ni compromiso.
             </p>
           </div>
 

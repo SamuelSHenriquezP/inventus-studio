@@ -78,7 +78,7 @@ export default function RealisticDevice3D({
               {/* 1. MOBILE PHONES (< sm): SLEEK VERTICAL SMARTPHONE CHASSIS */}
               <div 
                 data-prevent-slide="true"
-                className="sm:hidden mockup-interactive relative w-full max-w-36.25 max-h-[30vh] aspect-9/14 rounded-2xl bg-linear-to-b from-[#1b2234] via-[#121622] to-[#0c0e17] p-1.5 border border-sky-500/30 shadow-[0_15px_35px_rgba(0,0,0,0.85)] overflow-hidden flex flex-col justify-between"
+                className="sm:hidden mockup-interactive relative w-full max-w-[200px] max-h-[34vh] aspect-9/14 rounded-2xl bg-linear-to-b from-[#1b2234] via-[#121622] to-[#0c0e17] p-1.5 border border-sky-500/30 shadow-[0_15px_35px_rgba(0,0,0,0.85)] overflow-hidden flex flex-col justify-between"
               >
                 {/* Dynamic Island Pill */}
                 <div className="absolute top-1 left-1/2 -translate-x-1/2 w-10 h-1.5 rounded-full bg-black border border-white/10 flex items-center justify-between px-1.5 z-30 pointer-events-none">
@@ -96,6 +96,8 @@ export default function RealisticDevice3D({
                     <img 
                       src={image} 
                       alt={title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover select-none"
                     />
                   )}
@@ -120,6 +122,8 @@ export default function RealisticDevice3D({
                     <img 
                       src={image} 
                       alt={title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover select-none"
                     />
                   )}
@@ -132,10 +136,10 @@ export default function RealisticDevice3D({
             /* ========================================================================= */
             <div 
               data-prevent-slide="true"
-              className="mockup-interactive relative w-full max-w-48 sm:max-w-64 md:max-w-80 lg:max-w-95 xl:max-w-115 2xl:max-w-130 flex flex-col items-center"
+              className="mockup-interactive relative w-full max-w-[280px] sm:max-w-64 md:max-w-80 lg:max-w-95 xl:max-w-115 2xl:max-w-130 flex flex-col items-center"
             >
               {/* Display Chassis */}
-              <div className="relative w-full max-h-[18vh] sm:max-h-[24vh] lg:max-h-[32vh] xl:max-h-[36vh] 2xl:max-h-[40vh] aspect-16/10 rounded-xl sm:rounded-2xl bg-[#18191e] p-1 sm:p-2 xl:p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.85)] overflow-hidden">
+              <div className="relative w-full max-h-[22vh] sm:max-h-[24vh] lg:max-h-[32vh] xl:max-h-[36vh] 2xl:max-h-[40vh] aspect-16/10 rounded-xl sm:rounded-2xl bg-[#18191e] p-1 sm:p-2 xl:p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.85)] overflow-hidden">
                 {/* Camera Notch */}
                 <div className="absolute top-1 left-1/2 -translate-x-1/2 w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-black border border-white/10 flex items-center justify-center z-30 pointer-events-none">
                   <div className="w-0.5 h-0.5 rounded-full bg-emerald-500/40" />
@@ -149,6 +153,8 @@ export default function RealisticDevice3D({
                     <img 
                       src={image} 
                       alt={title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover select-none"
                     />
                   )}
@@ -166,7 +172,7 @@ export default function RealisticDevice3D({
             /* ========================================================================= */
             <div 
               data-prevent-slide="true"
-              className="mockup-interactive relative w-full max-w-36 sm:max-w-44 md:max-w-52 lg:max-w-56 xl:max-w-64 2xl:max-w-72 max-h-[28vh] sm:max-h-[36vh] lg:max-h-[48vh] xl:max-h-[52vh] 2xl:max-h-[56vh] aspect-9/19 rounded-[22px] sm:rounded-[36px] bg-[#15161c] p-1 sm:p-2 xl:p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex flex-col justify-between overflow-hidden"
+              className="mockup-interactive relative w-full max-w-[175px] xs:max-w-[195px] sm:max-w-44 md:max-w-52 lg:max-w-56 xl:max-w-64 2xl:max-w-72 max-h-[38vh] sm:max-h-[36vh] lg:max-h-[48vh] xl:max-h-[52vh] 2xl:max-h-[56vh] aspect-9/19 rounded-[22px] sm:rounded-[36px] bg-[#15161c] p-1 sm:p-2 xl:p-2.5 border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex flex-col justify-between overflow-hidden"
             >
               <div className="relative w-full h-full min-h-0 rounded-2xl sm:rounded-[26px] overflow-hidden bg-black flex flex-col justify-between shadow-inner interactive-screen">
                 {/* Dynamic Island */}
@@ -191,6 +197,8 @@ export default function RealisticDevice3D({
                     <img 
                       src={image} 
                       alt={title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover select-none"
                     />
                   )}

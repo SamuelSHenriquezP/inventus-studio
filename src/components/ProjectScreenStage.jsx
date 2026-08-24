@@ -861,7 +861,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
     return (
       <div
         ref={containerRef}
-        className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-12 sm:pt-20 pb-12 sm:pb-16 relative select-none overflow-y-auto custom-scroll text-zinc-100 font-sans"
+        className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-2 sm:pt-16 pb-4 sm:pb-12 relative select-none overflow-y-auto custom-scroll text-zinc-100 font-sans"
         style={{
           background: 'radial-gradient(ellipse 100% 100% at 50% 15%, #081626 0%, #050d18 55%, #02050b 100%)'
         }}
@@ -983,7 +983,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
     return (
       <div
         ref={containerRef}
-        className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-12 sm:pt-20 pb-12 sm:pb-16 relative select-none overflow-y-auto custom-scroll text-zinc-100 font-sans"
+        className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-2 sm:pt-16 pb-4 sm:pb-12 relative select-none overflow-y-auto custom-scroll text-zinc-100 font-sans"
         style={{
           background: 'radial-gradient(ellipse 100% 100% at 50% 15%, #1c1003 0%, #0d0701 55%, #050300 100%)'
         }}
@@ -1010,7 +1010,7 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
           <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-8 xl:gap-12 items-center">
 
             {/* Left: Text Narrative */}
-            <div className="lg:col-span-7 space-y-2 lg:space-y-2.5 custom-stage-anim order-2 lg:order-1">
+            <div className="lg:col-span-7 space-y-2 lg:space-y-2.5 custom-stage-anim order-1 lg:order-1">
               <div className="space-y-0.5 sm:space-y-1">
                 <span className="text-[10px] sm:text-xs font-mono font-medium text-amber-400/90 tracking-wider uppercase block">
                   Juego Móvil Nativo & Monetización en Producción

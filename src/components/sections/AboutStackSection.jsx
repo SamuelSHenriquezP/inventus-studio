@@ -137,9 +137,9 @@ export default function AboutStackSection({ isActive = true }) {
 
   return (
     <section 
-      id="sobre-mi"
+      id="about-stack-section"
       ref={containerRef}
-      className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-12 sm:pt-20 pb-12 sm:pb-16 relative select-none overflow-y-auto custom-scroll"
+      className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-3 sm:pt-20 pb-6 sm:pb-16 relative select-none overflow-y-auto custom-scroll"
       style={{
         background: 'radial-gradient(ellipse 100% 100% at 50% 20%, #13141a 0%, #0a0b0f 55%, #050508 100%)'
       }}
