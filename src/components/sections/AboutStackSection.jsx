@@ -102,33 +102,33 @@ export default function AboutStackSection({ isActive = true }) {
   }, [isActive]);
 
   const technologies = [
-    { name: "Flutter & Dart", desc: "Desarrollo nativo multiplataforma (iOS / Android) a 60–120 FPS.", tag: "NATIVO" },
-    { name: "Firebase Cloud & Firestore", desc: "Bases de datos no relacionales en tiempo real, Auth y reglas RBAC.", tag: "REALTIME" },
-    { name: "Cloud Functions", desc: "Lógica de backend serverless (Node.js/TypeScript) y orquestación.", tag: "SERVERLESS" },
-    { name: "Isar Database & Hive", desc: "Persistencia local de alto rendimiento y arquitecturas Offline-First.", tag: "<1ms" },
-    { name: "State Management & Clean Arch", desc: "Riverpod, Bloc, separación por capas y código testeable.", tag: "PATRONES" }
+    { name: "Firebase Cloud & Firestore", desc: "Sistemas backend serverless en tiempo real, Auth y reglas de seguridad RBAC.", tag: "REALTIME DB" },
+    { name: "Cloud Functions & Node.js", desc: "Lógica de backend serverless, microservicios, APIs REST y WebSockets.", tag: "SERVERLESS" },
+    { name: "Consolas Web & Dashboards", desc: "Paneles administrativos de ultra-alta velocidad (0 KB overhead) en Vanilla JS / React.", tag: "WEB ADMIN" },
+    { name: "Flutter 3.x & Dart 3.x", desc: "Desarrollo de apps móviles nativas multiplataforma (iOS / Android) a 60–120 FPS.", tag: "FLUTTER" },
+    { name: "Power Platform & Enterprise", desc: "Digitalización industrial con Power Apps, SharePoint DB y Power Automate.", tag: "ENTERPRISE" }
   ];
 
   const services = [
     {
       num: "01",
-      title: "Desarrollo de Apps Móviles",
-      desc: "Creación completa de aplicaciones para iOS y Android con Flutter, diseño de interfaces fluidas y publicación en tiendas."
+      title: "Arquitectura Backend & Cloud",
+      desc: "Diseño de infraestructura serverless, bases de datos Firestore reactivas, Cloud Functions y reglas de seguridad RBAC."
     },
     {
       num: "02",
-      title: "Arquitectura Cloud & Firebase",
-      desc: "Modelado de datos en Firestore, sincronización en caliente, funciones en la nube y configuración de seguridad estricta."
+      title: "Consolas Web & Dashboards Operativos",
+      desc: "Creación de plataformas de gestión de operaciones, monitoreo en tiempo real, despacho de tickets y control de flotas."
     },
     {
       num: "03",
-      title: "Sistemas Offline-First",
-      desc: "Desarrollo de aplicaciones preparadas para operar sin internet con sincronización bidireccional inmediata."
+      title: "Desarrollo de Apps Móviles",
+      desc: "Desarrollo completo de aplicaciones nativas en Flutter conectadas sincrónicamente con el backend cloud."
     },
     {
       num: "04",
-      title: "Paneles Web de Gestión",
-      desc: "Consolas administrativas para control de operaciones, monitoreo en tiempo real y despacho de órdenes."
+      title: "Automatización Industrial & Power Apps",
+      desc: "Digitalización de procesos corporativos en planta con validaciones en tiempo real y generación de informes automatizados."
     }
   ];
 

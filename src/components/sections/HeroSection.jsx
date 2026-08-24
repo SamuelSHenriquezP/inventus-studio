@@ -58,7 +58,7 @@ export default function HeroSection({ onExploreWorks, onExploreStack, isActive =
     return () => ctx.revert();
   }, [isActive]);
 
-  const headlineText = "Diseño sistemas backend en la nube, plataformas en tiempo real y ecosistemas de software empresariales.";
+  const headlineText = "Arquitectura cloud en tiempo real, backend serverless y ecosistemas digitales de alto nivel.";
 
   return (
     <section 

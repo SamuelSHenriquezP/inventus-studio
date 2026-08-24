@@ -1,0 +1,15 @@
+{
+  "short_name": "Inventus Tech",
+  "name": "Inventus Tech Studio — Software Architect",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#08080a",
+  "theme_color": "#08080a",
+  "display": "standalone"
+}

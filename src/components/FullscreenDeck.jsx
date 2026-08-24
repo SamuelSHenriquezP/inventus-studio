@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback, useMemo } from 'react';
+import { useRef, useEffect, useCallback, useMemo, useState } from 'react';
 import { gsap } from 'gsap';
 import { ChevronUp, ChevronDown } from 'lucide-react';
 
@@ -23,6 +23,20 @@ export default function FullscreenDeck({
   const currentIndexRef = useRef(activeSectionIndex);
   const activeTimelineRef = useRef(null);
   const isTransitioningRef = useRef(false);
+
+  const [isMobile, setIsMobile] = useState(() => {
+    return typeof window !== 'undefined' && (window.innerWidth <= 768 || ('ontouchstart' in window && window.innerWidth <= 1024));
+  });
+
+  // Track window resize to toggle between Desktop Deck and Mobile Continuous Scroll
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth <= 768 || ('ontouchstart' in window && window.innerWidth <= 1024);
+      setIsMobile(mobile);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Build the list of sections (Hero + Dynamic Projects + More + Stack + Contact)
   const sections = useMemo(() => {
@@ -88,9 +102,41 @@ export default function FullscreenDeck({
   const totalSections = sections.length;
   const currentSection = sections[activeSectionIndex] || sections[0];
 
-  // Core Slide Animator
+  // Mobile IntersectionObserver to auto-update activeSectionIndex as the user scrolls naturally
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Number(entry.target.getAttribute('data-section-index'));
+            if (!isNaN(index) && index !== currentIndexRef.current) {
+              currentIndexRef.current = index;
+              setActiveSectionIndex(index);
+              if (onSectionChange) {
+                onSectionChange(sections[index]);
+              }
+            }
+          }
+        });
+      },
+      {
+        root: deckRef.current,
+        threshold: 0.35
+      }
+    );
+
+    slidesRef.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [isMobile, sections, onSectionChange, setActiveSectionIndex]);
+
+  // Core Slide Animator (Desktop)
   const animateTransition = useCallback((fromIndex, toIndex, direction) => {
-    if (fromIndex === toIndex) return;
+    if (fromIndex === toIndex || isMobile) return;
 
     const currentSlide = slidesRef.current[fromIndex];
     const targetSlide = slidesRef.current[toIndex];
@@ -126,37 +172,7 @@ export default function FullscreenDeck({
 
     activeTimelineRef.current = tl;
 
-    const isMobile = typeof window !== 'undefined' && (window.innerWidth <= 768 || ('ontouchstart' in window && window.innerWidth <= 1024));
-
-    if (isMobile) {
-      // Natural, direct TikTok-style vertical slide transition for mobile
-      // NO spring bounce, NO scale scaling down/up, fast 0.35s duration
-      gsap.set(targetSlide, {
-        yPercent: direction > 0 ? 100 : -100,
-        xPercent: 0,
-        opacity: 1,
-        scale: 1,
-      });
-
-      if (currentSlide) {
-        tl.to(currentSlide, {
-          yPercent: direction > 0 ? -100 : 100,
-          opacity: 0,
-          scale: 1,
-          duration: 0.35,
-          ease: 'power2.out'
-        }, 0);
-      }
-
-      tl.to(targetSlide, {
-        yPercent: 0,
-        opacity: 1,
-        scale: 1,
-        duration: 0.35,
-        ease: 'power2.out'
-      }, 0);
-
-    } else if (transitionType === 'lateral-slide') {
+    if (transitionType === 'lateral-slide') {
       gsap.set(targetSlide, {
         xPercent: direction > 0 ? 30 : -30,
         yPercent: 0,
@@ -233,18 +249,14 @@ export default function FullscreenDeck({
         ease: 'power3.out'
       }, 0.04);
     }
-  }, [sections]);
+  }, [sections, isMobile]);
 
   // Navigate to target section index
   const goToSection = useCallback((targetIndex, directionOverride = null) => {
     const currentIdx = currentIndexRef.current;
-    if (targetIndex < 0 || targetIndex >= totalSections || targetIndex === currentIdx) {
+    if (targetIndex < 0 || targetIndex >= totalSections) {
       return;
     }
-
-    const direction = directionOverride !== null 
-      ? directionOverride 
-      : targetIndex > currentIdx ? 1 : -1;
 
     currentIndexRef.current = targetIndex;
     setActiveSectionIndex(targetIndex);
@@ -253,8 +265,20 @@ export default function FullscreenDeck({
       onSectionChange(sections[targetIndex]);
     }
 
-    animateTransition(currentIdx, targetIndex, direction);
-  }, [totalSections, onSectionChange, setActiveSectionIndex, sections, animateTransition]);
+    if (isMobile) {
+      // Smooth native scroll to section on mobile
+      const targetEl = slidesRef.current[targetIndex];
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      const direction = directionOverride !== null 
+        ? directionOverride 
+        : targetIndex > currentIdx ? 1 : -1;
+
+      animateTransition(currentIdx, targetIndex, direction);
+    }
+  }, [totalSections, onSectionChange, setActiveSectionIndex, sections, animateTransition, isMobile]);
 
   // Listen to external activeSectionIndex changes (e.g. from NavigationRail or Navbar)
   useEffect(() => {
@@ -262,9 +286,17 @@ export default function FullscreenDeck({
       const fromIdx = currentIndexRef.current;
       const toIdx = activeSectionIndex;
       currentIndexRef.current = activeSectionIndex;
-      animateTransition(fromIdx, toIdx, toIdx > fromIdx ? 1 : -1);
+
+      if (isMobile) {
+        const targetEl = slidesRef.current[toIdx];
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      } else {
+        animateTransition(fromIdx, toIdx, toIdx > fromIdx ? 1 : -1);
+      }
     }
-  }, [activeSectionIndex, animateTransition]);
+  }, [activeSectionIndex, animateTransition, isMobile]);
 
   const handleNext = useCallback(() => {
     const currentIdx = currentIndexRef.current;
@@ -280,10 +312,11 @@ export default function FullscreenDeck({
     }
   }, [goToSection]);
 
-  // Wheel Listener
+  // Wheel Listener (Desktop Only)
   useEffect(() => {
+    if (isMobile) return;
+
     const handleWheel = (e) => {
-      // 1. If any modal is active or body scroll is locked, prevent slide transition
       if (
         isModalOpen ||
         document.body.style.overflow === 'hidden' ||
@@ -292,7 +325,6 @@ export default function FullscreenDeck({
         return;
       }
 
-      // 2. Prevent changing page if mouse is inside any modal, 3D canvas, app screen, or interactive area
       if (
         e.target.closest(
           '[data-modal], [data-prevent-slide], [role="dialog"], .fixed.z-50, .modal-container, .modal-backdrop, .mockup-interactive, .scrollable-content, .code-viewer-container, canvas, .interactive-screen, [data-interactive]'
@@ -301,7 +333,6 @@ export default function FullscreenDeck({
         return;
       }
 
-      // 3. If current slide has internal scrollable overflow, allow scrolling inside before changing slide
       const currentSlideWrapper = slidesRef.current[currentIndexRef.current];
       const scrollableChild = currentSlideWrapper?.querySelector('.overflow-y-auto, [data-scrollable="true"]') || currentSlideWrapper;
       if (scrollableChild && scrollableChild.scrollHeight > scrollableChild.clientHeight + 15) {
@@ -309,10 +340,10 @@ export default function FullscreenDeck({
         const atTop = scrollableChild.scrollTop <= 20;
 
         if (e.deltaY > 0 && !atBottom) {
-          return; // Allow native scroll down inside slide
+          return;
         }
         if (e.deltaY < 0 && !atTop) {
-          return; // Allow native scroll up inside slide
+          return;
         }
       }
 
@@ -333,10 +364,12 @@ export default function FullscreenDeck({
 
     window.addEventListener('wheel', handleWheel, { passive: true });
     return () => window.removeEventListener('wheel', handleWheel);
-  }, [handleNext, handlePrev, isModalOpen]);
+  }, [handleNext, handlePrev, isModalOpen, isMobile]);
 
-  // Touch Gesture Listeners
+  // Touch Gesture Listeners (Desktop / Tablet Touch Deck Only — bypassed completely in mobile continuous mode)
   useEffect(() => {
+    if (isMobile) return;
+
     const handleTouchStart = (e) => {
       if (
         isModalOpen ||
@@ -364,7 +397,6 @@ export default function FullscreenDeck({
       const touchEndY = e.changedTouches[0].clientY;
       const diffY = touchStartY.current - touchEndY;
 
-      // Check if current slide has internal scrollable child
       const currentSlideWrapper = slidesRef.current[currentIndexRef.current];
       const scrollableChild = currentSlideWrapper?.querySelector('.overflow-y-auto, [data-scrollable="true"]') || currentSlideWrapper;
       if (scrollableChild && scrollableChild.scrollHeight > scrollableChild.clientHeight + 15) {
@@ -372,10 +404,10 @@ export default function FullscreenDeck({
         const atTop = scrollableChild.scrollTop <= 25;
 
         if (diffY > 0 && !atBottom) {
-          return; // Allow native touch scroll down inside slide
+          return;
         }
         if (diffY < 0 && !atTop) {
-          return; // Allow native touch scroll up inside slide
+          return;
         }
       }
 
@@ -394,7 +426,7 @@ export default function FullscreenDeck({
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [handleNext, handlePrev, isModalOpen]);
+  }, [handleNext, handlePrev, isModalOpen, isMobile]);
 
   // Keyboard Navigation
   useEffect(() => {
@@ -429,31 +461,41 @@ export default function FullscreenDeck({
   return (
     <div 
       ref={deckRef}
-      className="relative w-screen h-screen overflow-hidden select-none bg-black"
+      className={
+        isMobile
+          ? "w-screen h-screen overflow-y-auto overflow-x-hidden select-none bg-black custom-scroll scroll-smooth relative"
+          : "relative w-screen h-screen overflow-hidden select-none bg-black"
+      }
     >
-      {/* Full-Screen Slides Stack with Virtual Windowing for Performance */}
+      {/* Full-Screen Slides Stack / Continuous Vertical Flow */}
       {sections.map((sec, idx) => {
         const isActive = idx === activeSectionIndex;
-        // Mount inner content only if active or adjacent (for smooth transition), freeing ~80% memory & CPU
-        const shouldRenderContent = isActive || Math.abs(idx - activeSectionIndex) <= 1;
+        const shouldRenderContent = isMobile || isActive || Math.abs(idx - activeSectionIndex) <= 1;
 
         return (
           <div
             key={sec.id}
             id={sec.id}
+            data-section-index={idx}
             ref={(el) => (slidesRef.current[idx] = el)}
-            className={`absolute inset-0 w-full h-full overflow-y-auto overflow-x-hidden flex flex-col items-center custom-scroll ${
-              isActive ? 'z-10 flex' : 'hidden'
-            }`}
-            style={{
-              willChange: isActive ? 'transform, opacity' : 'auto'
-            }}
+            className={
+              isMobile
+                ? "relative w-full min-h-screen flex flex-col items-center border-b border-white/5 bg-black"
+                : `absolute inset-0 w-full h-full overflow-y-auto overflow-x-hidden flex flex-col items-center custom-scroll ${
+                    isActive ? 'z-10 flex' : 'hidden'
+                  }`
+            }
+            style={
+              isMobile
+                ? {}
+                : { willChange: isActive ? 'transform, opacity' : 'auto' }
+            }
           >
             {shouldRenderContent && (
               <>
                 {sec.type === 'hero' && (
                   <HeroSection 
-                    isActive={isActive}
+                    isActive={isActive || isMobile}
                     onExploreWorks={() => goToSection(1)} 
                     onExploreStack={() => goToSection(projects.length + 2)}
                   />
@@ -465,20 +507,20 @@ export default function FullscreenDeck({
                     index={sec.index}
                     total={projects.length}
                     onPlayDemo={onPlayDemo}
-                    isActive={isActive}
+                    isActive={isActive || isMobile}
                   />
                 )}
 
                 {sec.type === 'more' && (
-                  <MoreProjectsSection isActive={isActive} />
+                  <MoreProjectsSection isActive={isActive || isMobile} />
                 )}
 
                 {sec.type === 'stack' && (
-                  <AboutStackSection isActive={isActive} />
+                  <AboutStackSection isActive={isActive || isMobile} />
                 )}
 
                 {sec.type === 'contact' && (
-                  <ContactSection isActive={isActive} />
+                  <ContactSection isActive={isActive || isMobile} />
                 )}
               </>
             )}

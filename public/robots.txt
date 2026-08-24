@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Sitemap: https://inventustech.com/sitemap.xml
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
