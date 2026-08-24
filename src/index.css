@@ -184,6 +184,12 @@ html, body, #root {
     background-color: #050508 !important;
   }
 
+  /* CRITICAL GPU VRAM RECOVERY: Disable character-level layer allocation on mobile */
+  .will-change-transform,
+  [class*="-char"] {
+    will-change: auto !important;
+  }
+
   /* Disable heavy 3D perspective layers that force GPU compositor repaints on mobile */
   .perspective-\[1000px\],
   .perspective-\[800px\] {

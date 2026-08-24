@@ -50,6 +50,16 @@ export default function CinematicTitle({
     return () => ctx.revert();
   }, [text, isActive, delay]);
 
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+
+  if (isMobile) {
+    return (
+      <h2 className={`${className} select-none`}>
+        {text}
+      </h2>
+    );
+  }
+
   const words = (text || '').split(' ');
 
   return (
