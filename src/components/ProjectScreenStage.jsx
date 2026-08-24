@@ -1148,11 +1148,24 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
             </div>
           </div>
 
-          {/* 2-Column Content: Content LEFT, Mockup RIGHT */}
+          {/* 2-Column Content: Mockup LEFT, Content RIGHT */}
           <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-8 xl:gap-12 items-center">
 
-            {/* Left: Text Narrative */}
-            <div className="lg:col-span-7 space-y-2 lg:space-y-2.5 custom-stage-anim order-2 lg:order-1">
+            {/* Left: Device Mockup */}
+            <div className="lg:col-span-5 flex flex-col items-center justify-center custom-stage-anim order-1 lg:order-1">
+              <RealisticDevice3D
+                type={project.deviceType}
+                image={project.image}
+                accentColor="#8B9A86"
+                title={project.title}
+                codeSnippet={project.codeSnippet}
+                projectId={project.id}
+                isActive={isActive}
+              />
+            </div>
+
+            {/* Right: Text Narrative */}
+            <div className="lg:col-span-7 space-y-2 lg:space-y-2.5 custom-stage-anim order-2 lg:order-2">
               <div className="space-y-0.5 sm:space-y-1">
                 <span className="text-[10px] sm:text-xs font-mono font-medium text-[#8B9A86] tracking-wider uppercase block">
                   Productividad Consciente & UX Orgánica
@@ -1238,20 +1251,6 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
               </div>
 
             </div>
-
-            {/* Right: Device Mockup */}
-            <div className="lg:col-span-5 flex flex-col items-center justify-center custom-stage-anim order-1 lg:order-2">
-              <RealisticDevice3D
-                type={project.deviceType}
-                image={project.image}
-                accentColor="#8B9A86"
-                title={project.title}
-                codeSnippet={project.codeSnippet}
-                projectId={project.id}
-                isActive={isActive}
-              />
-            </div>
-
           </div>
         </div>
       </div>

@@ -162,15 +162,20 @@ export default function FullscreenDeck({
     gsap.killTweensOf(slidesRef.current);
 
     if (currentSlide) {
+      currentSlide.setAttribute('data-animating', 'true');
       gsap.set(currentSlide, { display: 'flex', zIndex: 10 });
     }
+    targetSlide.setAttribute('data-animating', 'true');
     gsap.set(targetSlide, { display: 'flex', zIndex: 20 });
 
     const tl = gsap.timeline({
       onComplete: () => {
         slidesRef.current.forEach((slide, i) => {
-          if (slide && i !== toIndex) {
-            gsap.set(slide, { display: 'none', transform: 'none', opacity: 0 });
+          if (slide) {
+            slide.removeAttribute('data-animating');
+            if (i !== toIndex) {
+              gsap.set(slide, { display: 'none', transform: 'none', opacity: 0 });
+            }
           }
         });
         if (targetSlide) {
@@ -496,14 +501,16 @@ export default function FullscreenDeck({
             className={
               isMobile
                 ? "relative w-full py-8 sm:py-12 flex flex-col items-center border-b border-white/5 bg-[#050508]"
-                : `absolute inset-0 w-full h-full overflow-y-auto overflow-x-hidden flex flex-col items-center custom-scroll ${
-                    isActive ? 'z-10 flex' : 'hidden'
-                  }`
+                : "absolute inset-0 w-full h-full overflow-y-auto overflow-x-hidden flex flex-col items-center custom-scroll"
             }
             style={
               isMobile
                 ? {}
-                : { willChange: isActive ? 'transform, opacity' : 'auto' }
+                : {
+                    display: isActive || isTransitioningRef.current ? 'flex' : 'none',
+                    zIndex: isActive ? 10 : 1,
+                    willChange: 'transform, opacity'
+                  }
             }
           >
             {shouldRenderContent && (
