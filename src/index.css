@@ -174,19 +174,33 @@ html, body, #root {
 @media (max-width: 768px) {
   /* Enforce natural vertical scroll across all sections */
   html, body, #root {
+    background-color: #050508 !important;
     overscroll-behavior-y: auto;
     touch-action: pan-y;
   }
 
-  /* Optimize heavy backdrop blurs on mobile GPUs to conserve battery */
+  /* Content Visibility & Intrinsic Size to prevent offscreen rendering lag & black gaps */
+  .mobile-section-contain {
+    content-visibility: auto;
+    contain-intrinsic-size: 100vh;
+    background-color: #050508 !important;
+  }
+
+  /* Disable heavy 3D perspective layers that force GPU compositor repaints on mobile */
+  .perspective-\[1000px\],
+  .perspective-\[800px\] {
+    perspective: none !important;
+  }
+
+  /* Disable expensive backdrop blurs on mobile GPUs */
   .backdrop-blur-2xl,
   .backdrop-blur-xl,
   .backdrop-blur-lg,
   .backdrop-blur-md,
   .backdrop-blur-sm,
   .backdrop-blur {
-    backdrop-filter: blur(4px) !important;
-    -webkit-backdrop-filter: blur(4px) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 
   /* Hardware acceleration for interactive phone chassis */
@@ -199,7 +213,10 @@ html, body, #root {
   }
 
   /* Simplify infinite keyframe glow animations on low-power mobile GPUs */
-  .animate-glow-pulse {
+  .animate-glow-pulse,
+  .animate-ping,
+  .animate-bounce,
+  .animate-pulse {
     animation: none !important;
   }
 

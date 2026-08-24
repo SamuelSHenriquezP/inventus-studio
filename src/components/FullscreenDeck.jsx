@@ -470,7 +470,8 @@ export default function FullscreenDeck({
       {/* Full-Screen Slides Stack / Continuous Vertical Flow */}
       {sections.map((sec, idx) => {
         const isActive = idx === activeSectionIndex;
-        const shouldRenderContent = isMobile || isActive || Math.abs(idx - activeSectionIndex) <= 1;
+        // On mobile, render active section and up to 2 adjacent sections to conserve GPU & DOM RAM while fast scrolling
+        const shouldRenderContent = isActive || Math.abs(idx - activeSectionIndex) <= 2;
 
         return (
           <div
@@ -480,7 +481,7 @@ export default function FullscreenDeck({
             ref={(el) => (slidesRef.current[idx] = el)}
             className={
               isMobile
-                ? "relative w-full min-h-screen flex flex-col items-center border-b border-white/5 bg-black"
+                ? "relative w-full min-h-screen flex flex-col items-center border-b border-white/5 bg-[#050508] mobile-section-contain"
                 : `absolute inset-0 w-full h-full overflow-y-auto overflow-x-hidden flex flex-col items-center custom-scroll ${
                     isActive ? 'z-10 flex' : 'hidden'
                   }`
