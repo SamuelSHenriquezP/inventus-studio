@@ -203,13 +203,26 @@ html, body, #root {
     -webkit-backdrop-filter: none !important;
   }
 
-  /* Hardware acceleration for interactive phone chassis */
-  .mockup-interactive,
-  .interactive-screen {
+  /* Hardware acceleration, CSS Containment & lightweight shadow for phone chassis on mobile */
+  .mockup-interactive {
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  .interactive-screen {
+    contain: layout style paint;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .interactive-screen * {
+    text-shadow: none !important;
+    box-shadow: none !important;
   }
 
   /* Simplify infinite keyframe glow animations on low-power mobile GPUs */

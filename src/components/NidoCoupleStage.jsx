@@ -73,7 +73,7 @@ export default function NidoCoupleStage({ project, isActive, onPlayDemo }) {
   // Shared state between both phones
   const [balance, setBalance] = useState(2450.00);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [screenMode, setScreenMode] = useState('live-app'); // 'live-app' | 'screenshot' | 'code'
+  const [screenMode, setScreenMode] = useState('live-app');
   const [activeCoupleUser, setActiveCoupleUser] = useState('samuel'); // 'samuel' | 'rochy' for mobile/tablet
   const [transactions, setTransactions] = useState([
     { id: 1, title: 'Mercado Semanal', category: 'Hogar', amount: -64.50, author: 'Samuel', time: '10:24 AM' },

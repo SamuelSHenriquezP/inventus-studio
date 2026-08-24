@@ -19,7 +19,7 @@ export default function RealisticDevice3D({
   projectId = 'lovecost-nido',
   isActive = true
 }) {
-  const [screenMode, setScreenMode] = useState('live-app'); // 'live-app' | 'screenshot' | 'code'
+  const [screenMode, setScreenMode] = useState('live-app');
 
   const isLaptop = type === 'laptop' || projectId === 'serviintel-ops';
   const isTablet = type === 'tablet' || projectId === 'otek-powerapps';
