@@ -144,6 +144,21 @@ export default function FullscreenDeck({
     };
   }, [isMobile, sections, onSectionChange, setActiveSectionIndex]);
 
+  // Setup initial Desktop slide visibility via GSAP to prevent React inline style conflicts
+  useLayoutEffect(() => {
+    if (isMobile) return;
+
+    slidesRef.current.forEach((slide, i) => {
+      if (slide) {
+        if (i === activeSectionIndex) {
+          gsap.set(slide, { display: 'flex', opacity: 1, xPercent: 0, yPercent: 0, scale: 1, zIndex: 20 });
+        } else {
+          gsap.set(slide, { display: 'none', opacity: 0, zIndex: 1 });
+        }
+      }
+    });
+  }, [isMobile]);
+
   // Core Slide Animator (Desktop)
   const animateTransition = useCallback((fromIndex, toIndex, direction) => {
     if (fromIndex === toIndex || isMobile) return;
@@ -164,7 +179,7 @@ export default function FullscreenDeck({
     // Ocultar estrictamente todas las diapositivas excepto origen y destino
     slidesRef.current.forEach((slide, i) => {
       if (slide && i !== fromIndex && i !== toIndex) {
-        gsap.set(slide, { display: 'none', opacity: 0 });
+        gsap.set(slide, { display: 'none', opacity: 0, zIndex: 1 });
       }
     });
 
@@ -177,11 +192,11 @@ export default function FullscreenDeck({
       onComplete: () => {
         slidesRef.current.forEach((slide, i) => {
           if (slide && i !== toIndex) {
-            gsap.set(slide, { display: 'none', transform: 'none', opacity: 0 });
+            gsap.set(slide, { display: 'none', transform: 'none', opacity: 0, zIndex: 1 });
           }
         });
         if (targetSlide) {
-          gsap.set(targetSlide, { opacity: 1, xPercent: 0, yPercent: 0, scale: 1, display: 'flex' });
+          gsap.set(targetSlide, { opacity: 1, xPercent: 0, yPercent: 0, scale: 1, display: 'flex', zIndex: 20 });
         }
         isTransitioningRef.current = false;
       }
@@ -191,18 +206,18 @@ export default function FullscreenDeck({
 
     if (transitionType === 'lateral-slide') {
       gsap.set(targetSlide, {
-        xPercent: direction > 0 ? 30 : -30,
+        xPercent: direction > 0 ? 100 : -100,
         yPercent: 0,
-        opacity: 0,
+        opacity: 0.6,
         scale: 0.98,
       });
 
       if (currentSlide) {
         tl.to(currentSlide, {
-          xPercent: direction > 0 ? -18 : 18,
+          xPercent: direction > 0 ? -35 : 35,
           opacity: 0,
-          scale: 0.97,
-          duration: 0.65,
+          scale: 0.95,
+          duration: 0.7,
           ease: 'power3.inOut'
         }, 0);
       }
@@ -211,22 +226,22 @@ export default function FullscreenDeck({
         xPercent: 0,
         opacity: 1,
         scale: 1,
-        duration: 0.7,
+        duration: 0.75,
         ease: 'power3.out'
-      }, 0.04);
+      }, 0);
 
     } else if (transitionType === 'fade-scale') {
       gsap.set(targetSlide, {
         xPercent: 0,
         yPercent: 0,
         opacity: 0,
-        scale: 0.96,
+        scale: 0.92,
       });
 
       if (currentSlide) {
         tl.to(currentSlide, {
           opacity: 0,
-          scale: 1.02,
+          scale: 1.05,
           duration: 0.65,
           ease: 'power2.inOut'
         }, 0);
@@ -235,25 +250,25 @@ export default function FullscreenDeck({
       tl.to(targetSlide, {
         opacity: 1,
         scale: 1,
-        duration: 0.7,
+        duration: 0.75,
         ease: 'power3.out'
-      }, 0.04);
+      }, 0.05);
 
     } else {
       // Parallax vertical
       gsap.set(targetSlide, {
-        yPercent: direction > 0 ? 35 : -35,
+        yPercent: direction > 0 ? 100 : -100,
         xPercent: 0,
-        opacity: 0,
+        opacity: 0.6,
         scale: 0.98,
       });
 
       if (currentSlide) {
         tl.to(currentSlide, {
-          yPercent: direction > 0 ? -18 : 18,
+          yPercent: direction > 0 ? -35 : 35,
           opacity: 0,
-          scale: 0.97,
-          duration: 0.65,
+          scale: 0.95,
+          duration: 0.7,
           ease: 'power3.inOut'
         }, 0);
       }
@@ -262,9 +277,9 @@ export default function FullscreenDeck({
         yPercent: 0,
         opacity: 1,
         scale: 1,
-        duration: 0.7,
+        duration: 0.75,
         ease: 'power3.out'
-      }, 0.04);
+      }, 0);
     }
   }, [sections, isMobile]);
 
