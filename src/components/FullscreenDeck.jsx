@@ -161,25 +161,27 @@ export default function FullscreenDeck({
     }
     gsap.killTweensOf(slidesRef.current);
 
+    // Ocultar estrictamente todas las diapositivas excepto origen y destino
+    slidesRef.current.forEach((slide, i) => {
+      if (slide && i !== fromIndex && i !== toIndex) {
+        gsap.set(slide, { display: 'none', opacity: 0 });
+      }
+    });
+
     if (currentSlide) {
-      currentSlide.setAttribute('data-animating', 'true');
       gsap.set(currentSlide, { display: 'flex', zIndex: 10 });
     }
-    targetSlide.setAttribute('data-animating', 'true');
     gsap.set(targetSlide, { display: 'flex', zIndex: 20 });
 
     const tl = gsap.timeline({
       onComplete: () => {
         slidesRef.current.forEach((slide, i) => {
-          if (slide) {
-            slide.removeAttribute('data-animating');
-            if (i !== toIndex) {
-              gsap.set(slide, { display: 'none', transform: 'none', opacity: 0 });
-            }
+          if (slide && i !== toIndex) {
+            gsap.set(slide, { display: 'none', transform: 'none', opacity: 0 });
           }
         });
         if (targetSlide) {
-          gsap.set(targetSlide, { opacity: 1, xPercent: 0, yPercent: 0, scale: 1 });
+          gsap.set(targetSlide, { opacity: 1, xPercent: 0, yPercent: 0, scale: 1, display: 'flex' });
         }
         isTransitioningRef.current = false;
       }
@@ -507,7 +509,7 @@ export default function FullscreenDeck({
               isMobile
                 ? {}
                 : {
-                    display: isActive || isTransitioningRef.current ? 'flex' : 'none',
+                    display: isActive ? 'flex' : 'none',
                     zIndex: isActive ? 10 : 1,
                     willChange: 'transform, opacity'
                   }

@@ -92,12 +92,6 @@
   will-change: transform;
 }
 
-/* Force flex display during GSAP slide transitions to prevent React DOM unmounting glitches */
-[data-animating="true"] {
-  display: flex !important;
-  visibility: visible !important;
-}
-
 @keyframes pulseSubtle {
   0%, 100% {
     opacity: 0.3;

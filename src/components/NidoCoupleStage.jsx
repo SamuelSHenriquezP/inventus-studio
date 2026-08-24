@@ -161,7 +161,13 @@ class FinancialCashflowService extends ChangeNotifier {
   };
 
   return (
-    <div id="nido-couple-stage" className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 lg:px-12 pt-12 sm:pt-20 pb-12 sm:pb-16 relative select-none custom-scroll text-zinc-100 font-sans">
+    <div 
+      id="nido-couple-stage" 
+      className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 lg:px-12 pt-12 sm:pt-20 pb-12 sm:pb-16 relative select-none custom-scroll text-zinc-100 font-sans"
+      style={{
+        background: 'radial-gradient(ellipse 100% 100% at 50% 15%, #071a14 0%, #04100c 55%, #020806 100%)'
+      }}
+    >
       
       {/* VIBRANT AMBIENT BACKGROUND GLOWS */}
       <div className="absolute top-1/4 left-1/12 w-96 sm:w-125 h-96 sm:h-125 bg-linear-to-tr from-[#0D9488]/25 via-emerald-500/15 to-transparent rounded-full blur-3xl pointer-events-none" />
