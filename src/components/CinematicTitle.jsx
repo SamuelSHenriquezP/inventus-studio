@@ -21,28 +21,23 @@ export default function CinematicTitle({
       const chars = el.querySelectorAll('.cinematic-char');
       if (!chars.length) return;
 
-      const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
-
       gsap.fromTo(
         chars,
         {
           opacity: 0,
-          y: isMobile ? 20 : 40,
-          rotateX: isMobile ? 0 : -60,
-          rotateY: isMobile ? 0 : 8,
-          transformOrigin: '50% 100% -20px',
-          ...(isMobile ? {} : { filter: 'blur(8px)' }),
+          y: isMobile ? 15 : 25,
+          rotateX: isMobile ? 0 : -30,
+          transformOrigin: '50% 100%',
         },
         {
           opacity: 1,
           y: 0,
           rotateX: 0,
-          rotateY: 0,
-          ...(isMobile ? {} : { filter: 'blur(0px)' }),
-          duration: isMobile ? 0.6 : 0.95,
-          stagger: isMobile ? 0.02 : 0.035,
-          ease: 'power3.out',
+          duration: isMobile ? 0.45 : 0.65,
+          stagger: isMobile ? 0.015 : 0.025,
+          ease: 'power2.out',
           delay: delay,
+          clearProps: 'all',
         }
       );
     }, el);

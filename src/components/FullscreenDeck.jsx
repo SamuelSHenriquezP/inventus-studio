@@ -22,7 +22,7 @@ export default function FullscreenDeck({
   const lastWheelTime = useRef(0);
   const currentIndexRef = useRef(activeSectionIndex);
   const isTransitioningRef = useRef(false);
-  const isSelfScrollingRef = useRef(false);
+  const activeTimelineRef = useRef(null);
 
   const [isMobile, setIsMobile] = useState(() => {
     return typeof window !== 'undefined' && (window.innerWidth <= 768 || ('ontouchstart' in window && window.innerWidth <= 1024));
@@ -102,7 +102,12 @@ export default function FullscreenDeck({
   const totalSections = sections.length;
   const currentSection = sections[activeSectionIndex] || sections[0];
 
-  // Mobile IntersectionObserver with debounced state updates to prevent re-rendering the whole App while fast scrolling
+  // Keep currentIndexRef synchronized with activeSectionIndex
+  useEffect(() => {
+    currentIndexRef.current = activeSectionIndex;
+  }, [activeSectionIndex]);
+
+  // Mobile IntersectionObserver with debounced state updates
   useEffect(() => {
     if (!isMobile) return;
 
@@ -118,7 +123,6 @@ export default function FullscreenDeck({
               
               if (debounceTimer) clearTimeout(debounceTimer);
               debounceTimer = setTimeout(() => {
-                isSelfScrollingRef.current = true;
                 setActiveSectionIndex(index);
                 if (onSectionChange) {
                   onSectionChange(sections[index]);
@@ -144,21 +148,6 @@ export default function FullscreenDeck({
     };
   }, [isMobile, sections, onSectionChange, setActiveSectionIndex]);
 
-  // Setup initial Desktop slide visibility via GSAP to prevent React inline style conflicts
-  useLayoutEffect(() => {
-    if (isMobile) return;
-
-    slidesRef.current.forEach((slide, i) => {
-      if (slide) {
-        if (i === activeSectionIndex) {
-          gsap.set(slide, { display: 'flex', opacity: 1, xPercent: 0, yPercent: 0, scale: 1, zIndex: 20 });
-        } else {
-          gsap.set(slide, { display: 'none', opacity: 0, zIndex: 1 });
-        }
-      }
-    });
-  }, [isMobile]);
-
   // Core Slide Animator (Desktop)
   const animateTransition = useCallback((fromIndex, toIndex, direction) => {
     if (fromIndex === toIndex || isMobile) return;
@@ -176,7 +165,7 @@ export default function FullscreenDeck({
     }
     gsap.killTweensOf(slidesRef.current);
 
-    // Ocultar estrictamente todas las diapositivas excepto origen y destino
+    // Ocultar otras diapositivas excepto origen y destino
     slidesRef.current.forEach((slide, i) => {
       if (slide && i !== fromIndex && i !== toIndex) {
         gsap.set(slide, { display: 'none', opacity: 0, zIndex: 1 });
@@ -186,7 +175,37 @@ export default function FullscreenDeck({
     if (currentSlide) {
       gsap.set(currentSlide, { display: 'flex', zIndex: 10 });
     }
-    gsap.set(targetSlide, { display: 'flex', zIndex: 20 });
+
+    // Configurar estado inicial de la diapositiva destino directamente en el DOM
+    if (transitionType === 'lateral-slide') {
+      gsap.set(targetSlide, {
+        xPercent: direction > 0 ? 30 : -30,
+        yPercent: 0,
+        opacity: 0,
+        scale: 0.98,
+        display: 'flex',
+        zIndex: 20
+      });
+    } else if (transitionType === 'fade-scale') {
+      gsap.set(targetSlide, {
+        xPercent: 0,
+        yPercent: 0,
+        opacity: 0,
+        scale: 0.96,
+        display: 'flex',
+        zIndex: 20
+      });
+    } else {
+      // Parallax vertical
+      gsap.set(targetSlide, {
+        yPercent: direction > 0 ? 35 : -35,
+        xPercent: 0,
+        opacity: 0,
+        scale: 0.98,
+        display: 'flex',
+        zIndex: 20
+      });
+    }
 
     const tl = gsap.timeline({
       onComplete: () => {
@@ -199,26 +218,24 @@ export default function FullscreenDeck({
           gsap.set(targetSlide, { opacity: 1, xPercent: 0, yPercent: 0, scale: 1, display: 'flex', zIndex: 20 });
         }
         isTransitioningRef.current = false;
+        currentIndexRef.current = toIndex;
+        setActiveSectionIndex(toIndex);
+        if (onSectionChange) {
+          onSectionChange(sections[toIndex]);
+        }
       }
     });
 
     activeTimelineRef.current = tl;
 
     if (transitionType === 'lateral-slide') {
-      gsap.set(targetSlide, {
-        xPercent: direction > 0 ? 100 : -100,
-        yPercent: 0,
-        opacity: 0.6,
-        scale: 0.98,
-      });
-
       if (currentSlide) {
         tl.to(currentSlide, {
-          xPercent: direction > 0 ? -35 : 35,
+          xPercent: direction > 0 ? -18 : 18,
           opacity: 0,
-          scale: 0.95,
-          duration: 0.7,
-          ease: 'power3.inOut'
+          scale: 0.97,
+          duration: 0.55,
+          ease: 'power2.inOut'
         }, 0);
       }
 
@@ -226,23 +243,16 @@ export default function FullscreenDeck({
         xPercent: 0,
         opacity: 1,
         scale: 1,
-        duration: 0.75,
-        ease: 'power3.out'
+        duration: 0.55,
+        ease: 'power2.out'
       }, 0);
 
     } else if (transitionType === 'fade-scale') {
-      gsap.set(targetSlide, {
-        xPercent: 0,
-        yPercent: 0,
-        opacity: 0,
-        scale: 0.92,
-      });
-
       if (currentSlide) {
         tl.to(currentSlide, {
           opacity: 0,
-          scale: 1.05,
-          duration: 0.65,
+          scale: 1.02,
+          duration: 0.5,
           ease: 'power2.inOut'
         }, 0);
       }
@@ -250,26 +260,19 @@ export default function FullscreenDeck({
       tl.to(targetSlide, {
         opacity: 1,
         scale: 1,
-        duration: 0.75,
-        ease: 'power3.out'
-      }, 0.05);
+        duration: 0.55,
+        ease: 'power2.out'
+      }, 0);
 
     } else {
       // Parallax vertical
-      gsap.set(targetSlide, {
-        yPercent: direction > 0 ? 100 : -100,
-        xPercent: 0,
-        opacity: 0.6,
-        scale: 0.98,
-      });
-
       if (currentSlide) {
         tl.to(currentSlide, {
-          yPercent: direction > 0 ? -35 : 35,
+          yPercent: direction > 0 ? -18 : 18,
           opacity: 0,
-          scale: 0.95,
-          duration: 0.7,
-          ease: 'power3.inOut'
+          scale: 0.97,
+          duration: 0.55,
+          ease: 'power2.inOut'
         }, 0);
       }
 
@@ -277,28 +280,25 @@ export default function FullscreenDeck({
         yPercent: 0,
         opacity: 1,
         scale: 1,
-        duration: 0.75,
-        ease: 'power3.out'
+        duration: 0.55,
+        ease: 'power2.out'
       }, 0);
     }
-  }, [sections, isMobile]);
+  }, [sections, isMobile, onSectionChange, setActiveSectionIndex]);
 
   // Navigate to target section index
   const goToSection = useCallback((targetIndex, directionOverride = null) => {
     const currentIdx = currentIndexRef.current;
-    if (targetIndex < 0 || targetIndex >= totalSections) {
+    if (targetIndex < 0 || targetIndex >= totalSections || isTransitioningRef.current) {
       return;
     }
 
-    currentIndexRef.current = targetIndex;
-    setActiveSectionIndex(targetIndex);
-
-    if (onSectionChange) {
-      onSectionChange(sections[targetIndex]);
-    }
-
     if (isMobile) {
-      // Smooth native scroll to section on mobile
+      currentIndexRef.current = targetIndex;
+      setActiveSectionIndex(targetIndex);
+      if (onSectionChange) {
+        onSectionChange(sections[targetIndex]);
+      }
       const targetEl = slidesRef.current[targetIndex];
       if (targetEl) {
         targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -314,24 +314,14 @@ export default function FullscreenDeck({
 
   // Listen to external activeSectionIndex changes (e.g. from NavigationRail or Navbar)
   useEffect(() => {
-    if (activeSectionIndex !== currentIndexRef.current) {
+    if (isMobile) return;
+
+    if (activeSectionIndex !== currentIndexRef.current && !isTransitioningRef.current) {
       const fromIdx = currentIndexRef.current;
       const toIdx = activeSectionIndex;
       currentIndexRef.current = activeSectionIndex;
 
-      if (isSelfScrollingRef.current) {
-        isSelfScrollingRef.current = false;
-        return;
-      }
-
-      if (isMobile) {
-        const targetEl = slidesRef.current[toIdx];
-        if (targetEl) {
-          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      } else {
-        animateTransition(fromIdx, toIdx, toIdx > fromIdx ? 1 : -1);
-      }
+      animateTransition(fromIdx, toIdx, toIdx > fromIdx ? 1 : -1);
     }
   }, [activeSectionIndex, animateTransition, isMobile]);
 
@@ -389,27 +379,15 @@ export default function FullscreenDeck({
     return () => window.removeEventListener('wheel', handleWheel);
   }, [handleNext, handlePrev, isModalOpen, isMobile]);
 
-  // Touch Gesture Listeners (Desktop / Tablet Touch Deck Only — bypassed completely in mobile continuous mode)
+  // Touch Navigation (Desktop / Tablet fallback)
   useEffect(() => {
     if (isMobile) return;
 
     const handleTouchStart = (e) => {
-      if (
-        isModalOpen ||
-        document.body.style.overflow === 'hidden' ||
-        document.querySelector('[data-modal="true"], [role="dialog"], .modal-backdrop, .modal-container') ||
-        e.target.closest(
-          '[data-modal], [data-prevent-slide], [role="dialog"], .fixed.z-50, .modal-container, .modal-backdrop, .scrollable-content, .code-viewer-container, canvas, [data-interactive]'
-        )
-      ) {
-        touchStartY.current = null;
-        return;
-      }
       touchStartY.current = e.touches[0].clientY;
     };
 
     const handleTouchEnd = (e) => {
-      if (touchStartY.current === null) return;
       if (
         isModalOpen ||
         document.body.style.overflow === 'hidden' ||
@@ -479,7 +457,6 @@ export default function FullscreenDeck({
       {/* Full-Screen Slides Stack / Continuous Vertical Flow */}
       {sections.map((sec, idx) => {
         const isActive = idx === activeSectionIndex;
-        // Render content persistently across all viewports to guarantee 0 black screen flashes during fast mobile scrolling
         const shouldRenderContent = true;
 
         return (
@@ -498,7 +475,7 @@ export default function FullscreenDeck({
                 ? {}
                 : {
                     display: isActive ? 'flex' : 'none',
-                    zIndex: isActive ? 10 : 1,
+                    zIndex: isActive ? 20 : 1,
                     willChange: 'transform, opacity'
                   }
             }
