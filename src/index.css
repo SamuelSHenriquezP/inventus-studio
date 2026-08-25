@@ -207,20 +207,20 @@ html, body, #root {
     -webkit-backdrop-filter: none !important;
   }
 
-  /* Hardware acceleration, CSS Containment & lightweight shadow for phone chassis on mobile */
+  /* Disable hardware acceleration on nested layers for mobile to prevent GPU VRAM exhaustion & black screens */
   .mockup-interactive {
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
+    transform: none !important;
+    -webkit-transform: none !important;
+    backface-visibility: visible !important;
+    -webkit-backface-visibility: visible !important;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5) !important;
   }
 
   .interactive-screen {
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
+    transform: none !important;
+    -webkit-transform: none !important;
+    backface-visibility: visible !important;
+    -webkit-backface-visibility: visible !important;
   }
 
   .interactive-screen * {
