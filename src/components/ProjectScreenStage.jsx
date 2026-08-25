@@ -357,7 +357,9 @@ function SopaSeniorTitle({ isActive }) {
   );
 }
 
-export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
+import { memo } from 'react';
+
+const ProjectScreenStage = memo(function ProjectScreenStage({ project, onPlayDemo, isActive }) {
   const containerRef = useRef(null);
   const [mobileTab, setMobileTab] = useState('mobile');
   const [showOtekModal, setShowOtekModal] = useState(false);
@@ -1391,4 +1393,6 @@ export default function ProjectScreenStage({ project, onPlayDemo, isActive }) {
       </div>
     </div>
   );
-}
+});
+
+export default ProjectScreenStage;

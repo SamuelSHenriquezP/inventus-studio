@@ -60,6 +60,15 @@
   background: rgba(13, 148, 136, 0.7);
 }
 
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior-x: contain;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 .custom-scroll {
   scrollbar-width: thin;
   scrollbar-color: rgba(13, 148, 136, 0.4) transparent;
