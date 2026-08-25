@@ -167,15 +167,22 @@ export default function FullscreenDeck({
 
     if (!targetSlide) return;
 
+    // Immediately sync state so UI indicators (dots, navbar) respond with 0ms latency
     isTransitioningRef.current = true;
-    setVisualActiveIndex(toIndex); // Trigger inner component animations instantly
+    currentIndexRef.current = toIndex;
+    setVisualActiveIndex(toIndex);
+    setActiveSectionIndex(toIndex);
+    if (onSectionChange) {
+      onSectionChange(sections[toIndex]);
+    }
 
+    // Kill any ongoing GSAP timeline and reset slide states cleanly to avoid black-screen lockouts
     if (activeTimelineRef.current) {
       activeTimelineRef.current.kill();
     }
     gsap.killTweensOf(slidesRef.current);
 
-    // Ocultar otras diapositivas excepto origen y destino
+    // Ocultar todas las diapositivas excepto origen y destino
     slidesRef.current.forEach((slide, i) => {
       if (slide && i !== fromIndex && i !== toIndex) {
         gsap.set(slide, { display: 'none', opacity: 0, zIndex: 1 });
@@ -228,11 +235,6 @@ export default function FullscreenDeck({
           gsap.set(targetSlide, { opacity: 1, xPercent: 0, yPercent: 0, scale: 1, display: 'flex', zIndex: 20 });
         }
         isTransitioningRef.current = false;
-        currentIndexRef.current = toIndex;
-        setActiveSectionIndex(toIndex);
-        if (onSectionChange) {
-          onSectionChange(sections[toIndex]);
-        }
       }
     });
 
@@ -244,7 +246,7 @@ export default function FullscreenDeck({
           xPercent: direction > 0 ? -18 : 18,
           opacity: 0,
           scale: 0.97,
-          duration: 0.6,
+          duration: 0.5,
           ease: 'power3.inOut'
         }, 0);
       }
@@ -253,7 +255,7 @@ export default function FullscreenDeck({
         xPercent: 0,
         opacity: 1,
         scale: 1,
-        duration: 0.6,
+        duration: 0.5,
         ease: 'power3.inOut'
       }, 0);
 
@@ -262,7 +264,7 @@ export default function FullscreenDeck({
         tl.to(currentSlide, {
           opacity: 0,
           scale: 1.02,
-          duration: 0.6,
+          duration: 0.5,
           ease: 'power3.inOut'
         }, 0);
       }
@@ -270,7 +272,7 @@ export default function FullscreenDeck({
       tl.to(targetSlide, {
         opacity: 1,
         scale: 1,
-        duration: 0.6,
+        duration: 0.5,
         ease: 'power3.inOut'
       }, 0);
 
@@ -281,7 +283,7 @@ export default function FullscreenDeck({
           yPercent: direction > 0 ? -25 : 25,
           opacity: 0,
           scale: 0.97,
-          duration: 0.6,
+          duration: 0.5,
           ease: 'power3.inOut'
         }, 0);
       }
@@ -290,7 +292,7 @@ export default function FullscreenDeck({
         yPercent: 0,
         opacity: 1,
         scale: 1,
-        duration: 0.6,
+        duration: 0.5,
         ease: 'power3.inOut'
       }, 0);
     }
@@ -299,7 +301,7 @@ export default function FullscreenDeck({
   // Navigate to target section index
   const goToSection = useCallback((targetIndex, directionOverride = null) => {
     const currentIdx = currentIndexRef.current;
-    if (targetIndex < 0 || targetIndex >= totalSections || isTransitioningRef.current) {
+    if (targetIndex < 0 || targetIndex >= totalSections) {
       return;
     }
 
@@ -326,10 +328,9 @@ export default function FullscreenDeck({
   useEffect(() => {
     if (isMobile) return;
 
-    if (activeSectionIndex !== currentIndexRef.current && !isTransitioningRef.current) {
+    if (activeSectionIndex !== currentIndexRef.current) {
       const fromIdx = currentIndexRef.current;
       const toIdx = activeSectionIndex;
-      currentIndexRef.current = activeSectionIndex;
 
       animateTransition(fromIdx, toIdx, toIdx > fromIdx ? 1 : -1);
     }
