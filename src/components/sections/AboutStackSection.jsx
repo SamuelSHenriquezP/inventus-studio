@@ -16,7 +16,7 @@ export default function AboutStackSection({ isActive = true }) {
     if (!el || !isActive) return;
 
     const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
-
+    if (isMobile) return;
 
     const ctx = gsap.context(() => {
       const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;

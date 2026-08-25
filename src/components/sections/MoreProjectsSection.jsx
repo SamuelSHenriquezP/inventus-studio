@@ -16,7 +16,7 @@ export default React.memo(function MoreProjectsSection({ isActive = true }) {
     if (!el || !isActive) return;
 
     const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
-
+    if (isMobile) return;
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 0.1 });
@@ -37,9 +37,9 @@ export default React.memo(function MoreProjectsSection({ isActive = true }) {
           mainChars,
           {
             opacity: 0,
-            y: isMobile ? 12 : 24,
-            duration: isMobile ? 0.35 : 0.85,
-            stagger: isMobile ? 0.012 : 0.035,
+            y: 24,
+            duration: 0.85,
+            stagger: 0.035,
             ease: 'power3.out',
             clearProps: 'all',
           },

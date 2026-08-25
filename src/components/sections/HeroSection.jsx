@@ -12,15 +12,15 @@ const HeroSection = React.memo(function HeroSection({ onExploreWorks, onExploreS
     if (!el || !isActive) return;
 
     const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
-
+    if (isMobile) return;
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ delay: isMobile ? 0.05 : 0.1 });
+      const tl = gsap.timeline({ delay: 0.1 });
 
       tl.fromTo(
         el.querySelectorAll('.hero-capsule'),
         { opacity: 0, y: -15, filter: 'blur(4px)' },
-        { opacity: 1, y: 0, filter: 'none', duration: isMobile ? 0.35 : 0.5, ease: 'power3.out', clearProps: 'all' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.5, ease: 'power3.out' },
         0
       );
 
@@ -35,9 +35,8 @@ const HeroSection = React.memo(function HeroSection({ onExploreWorks, onExploreS
           opacity: 1,
           y: 0,
           filter: 'blur(0px)',
-          duration: isMobile ? 0.4 : 0.72,
-          stagger: isMobile ? 0.008 : 0.013,
-          clearProps: 'all',
+          duration: 0.72,
+          stagger: 0.013,
           ease: 'power3.out',
         },
         0.05
@@ -46,14 +45,14 @@ const HeroSection = React.memo(function HeroSection({ onExploreWorks, onExploreS
       tl.fromTo(
         el.querySelectorAll('.hero-fade'),
         { opacity: 0, y: 15, filter: 'blur(4px)' },
-        { opacity: 1, y: 0, filter: 'none', duration: isMobile ? 0.35 : 0.5, stagger: isMobile ? 0.02 : 0.04, ease: 'power3.out', clearProps: 'all' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.5, stagger: 0.04, ease: 'power3.out' },
         0.2
       );
 
       tl.fromTo(
         el.querySelectorAll('.hero-console'),
         { opacity: 0, scale: 0.96, filter: 'blur(8px)' },
-        { opacity: 1, scale: 1, filter: 'none', duration: isMobile ? 0.4 : 0.7, ease: 'power3.out', clearProps: 'all' },
+        { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.7, ease: 'power3.out' },
         0.1
       );
     }, el);
