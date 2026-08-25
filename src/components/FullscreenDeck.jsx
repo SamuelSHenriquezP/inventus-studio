@@ -246,7 +246,7 @@ export default function FullscreenDeck({
           xPercent: direction > 0 ? -18 : 18,
           opacity: 0,
           scale: 0.97,
-          duration: 0.5,
+          duration: 0.85,
           ease: 'power3.inOut'
         }, 0);
       }
@@ -255,7 +255,7 @@ export default function FullscreenDeck({
         xPercent: 0,
         opacity: 1,
         scale: 1,
-        duration: 0.5,
+        duration: 0.85,
         ease: 'power3.inOut'
       }, 0);
 
@@ -264,7 +264,7 @@ export default function FullscreenDeck({
         tl.to(currentSlide, {
           opacity: 0,
           scale: 1.02,
-          duration: 0.5,
+          duration: 0.85,
           ease: 'power3.inOut'
         }, 0);
       }
@@ -272,7 +272,7 @@ export default function FullscreenDeck({
       tl.to(targetSlide, {
         opacity: 1,
         scale: 1,
-        duration: 0.5,
+        duration: 0.85,
         ease: 'power3.inOut'
       }, 0);
 
@@ -283,7 +283,7 @@ export default function FullscreenDeck({
           yPercent: direction > 0 ? -25 : 25,
           opacity: 0,
           scale: 0.97,
-          duration: 0.5,
+          duration: 0.85,
           ease: 'power3.inOut'
         }, 0);
       }
@@ -292,7 +292,7 @@ export default function FullscreenDeck({
         yPercent: 0,
         opacity: 1,
         scale: 1,
-        duration: 0.5,
+        duration: 0.85,
         ease: 'power3.inOut'
       }, 0);
     }

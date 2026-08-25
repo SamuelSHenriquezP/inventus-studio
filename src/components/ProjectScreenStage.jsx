@@ -368,7 +368,7 @@ const ProjectScreenStage = memo(function ProjectScreenStage({ project, onPlayDem
     if (!containerRef.current) return;
 
     const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
-    if (isMobile) return;
+
 
     const ctx = gsap.context(() => {
       if (isActive) {
