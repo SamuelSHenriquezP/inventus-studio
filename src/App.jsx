@@ -29,13 +29,17 @@ export default function App() {
     setActiveSectionIndex(index);
   }, []);
 
+  const handlePlayDemo = useCallback((p) => {
+    setSelectedProject(p);
+  }, []);
+
   // Determine current active project or section theme
   const currentProject = activeSectionIndex >= 1 && activeSectionIndex <= projectsData.length
     ? projectsData[activeSectionIndex - 1]
     : null;
 
   return (
-    <div className="relative w-full bg-[#050508] text-[#ededef] selection:bg-white selection:text-black font-sans md:w-screen md:h-screen md:overflow-hidden min-h-screen">
+    <div className="relative w-full max-w-full overflow-x-hidden bg-[#050508] text-[#ededef] selection:bg-white selection:text-black font-sans md:w-screen md:h-screen md:overflow-hidden min-h-screen">
       
       {/* Tactile Custom Cursor */}
       <CustomCursor />
@@ -195,7 +199,7 @@ export default function App() {
         projects={projectsData}
         activeSectionIndex={activeSectionIndex}
         setActiveSectionIndex={setActiveSectionIndex}
-        onPlayDemo={(p) => setSelectedProject(p)}
+        onPlayDemo={handlePlayDemo}
         soundEnabled={soundEnabled}
         onToggleSound={toggleSound}
         isModalOpen={!!selectedProject}

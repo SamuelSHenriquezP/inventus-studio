@@ -1,10 +1,10 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ChevronDown, Terminal, CheckCircle2 } from 'lucide-react';
 import { personalInfo } from '../../Data/projectsData';
 import { sounds } from '../../utils/soundEngine';
 
-export default function HeroSection({ onExploreWorks, onExploreStack, isActive = true }) {
+const HeroSection = React.memo(function HeroSection({ onExploreWorks, onExploreStack, isActive = true }) {
   const heroRef = useRef(null);
 
   useEffect(() => {
@@ -202,4 +202,6 @@ export default function HeroSection({ onExploreWorks, onExploreStack, isActive =
       </div>
     </section>
   );
-}
+});
+
+export default HeroSection;

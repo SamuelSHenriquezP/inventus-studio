@@ -460,7 +460,7 @@ export default function FullscreenDeck({
       ref={deckRef}
       className={
         isMobile
-          ? "w-full relative bg-[#050508]"
+          ? "w-full max-w-full overflow-x-hidden relative bg-[#050508]"
           : "relative w-screen h-screen overflow-hidden select-none bg-black"
       }
     >

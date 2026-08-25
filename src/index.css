@@ -7,12 +7,19 @@
   html {
     scroll-behavior: smooth;
     background-color: #050508;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+    position: relative;
   }
-  body {
+  body, #root {
     background-color: #050508;
     color: #ededef;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+    position: relative;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

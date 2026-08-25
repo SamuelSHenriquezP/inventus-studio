@@ -1,12 +1,12 @@
 // src/components/sections/MoreProjectsSection.jsx
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ArrowUpRight, ExternalLink, Sparkles } from 'lucide-react';
 import { secondaryProjectsData } from '../../Data/projectsData';
 import ProjectDetailModal from '../ProjectDetailModal';
 import { sounds } from '../../utils/soundEngine';
 
-export default function MoreProjectsSection({ isActive = true }) {
+export default React.memo(function MoreProjectsSection({ isActive = true }) {
   const containerRef = useRef(null);
   const titleRef = useRef(null);
   const [selectedProject, setSelectedProject] = useState(null);
@@ -219,4 +219,4 @@ export default function MoreProjectsSection({ isActive = true }) {
       )}
     </>
   );
-}
+});
