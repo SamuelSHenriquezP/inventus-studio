@@ -217,7 +217,6 @@ html, body, #root {
   }
 
   .interactive-screen {
-    contain: layout style paint;
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
     backface-visibility: hidden;

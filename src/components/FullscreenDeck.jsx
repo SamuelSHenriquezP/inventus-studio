@@ -24,6 +24,15 @@ export default function FullscreenDeck({
   const isTransitioningRef = useRef(false);
   const activeTimelineRef = useRef(null);
 
+  const [visualActiveIndex, setVisualActiveIndex] = useState(activeSectionIndex);
+
+  // Sync visualActiveIndex when parent changes activeSectionIndex without transition
+  useEffect(() => {
+    if (!isTransitioningRef.current) {
+      setVisualActiveIndex(activeSectionIndex);
+    }
+  }, [activeSectionIndex]);
+
   const [isMobile, setIsMobile] = useState(() => {
     return typeof window !== 'undefined' && (window.innerWidth <= 768 || ('ontouchstart' in window && window.innerWidth <= 1024));
   });
@@ -159,6 +168,7 @@ export default function FullscreenDeck({
     if (!targetSlide) return;
 
     isTransitioningRef.current = true;
+    setVisualActiveIndex(toIndex); // Trigger inner component animations instantly
 
     if (activeTimelineRef.current) {
       activeTimelineRef.current.kill();
@@ -234,8 +244,8 @@ export default function FullscreenDeck({
           xPercent: direction > 0 ? -18 : 18,
           opacity: 0,
           scale: 0.97,
-          duration: 0.55,
-          ease: 'power2.inOut'
+          duration: 0.6,
+          ease: 'power3.inOut'
         }, 0);
       }
 
@@ -243,8 +253,8 @@ export default function FullscreenDeck({
         xPercent: 0,
         opacity: 1,
         scale: 1,
-        duration: 0.55,
-        ease: 'power2.out'
+        duration: 0.6,
+        ease: 'power3.inOut'
       }, 0);
 
     } else if (transitionType === 'fade-scale') {
@@ -252,27 +262,27 @@ export default function FullscreenDeck({
         tl.to(currentSlide, {
           opacity: 0,
           scale: 1.02,
-          duration: 0.5,
-          ease: 'power2.inOut'
+          duration: 0.6,
+          ease: 'power3.inOut'
         }, 0);
       }
 
       tl.to(targetSlide, {
         opacity: 1,
         scale: 1,
-        duration: 0.55,
-        ease: 'power2.out'
+        duration: 0.6,
+        ease: 'power3.inOut'
       }, 0);
 
     } else {
       // Parallax vertical
       if (currentSlide) {
         tl.to(currentSlide, {
-          yPercent: direction > 0 ? -18 : 18,
+          yPercent: direction > 0 ? -25 : 25,
           opacity: 0,
           scale: 0.97,
-          duration: 0.55,
-          ease: 'power2.inOut'
+          duration: 0.6,
+          ease: 'power3.inOut'
         }, 0);
       }
 
@@ -280,8 +290,8 @@ export default function FullscreenDeck({
         yPercent: 0,
         opacity: 1,
         scale: 1,
-        duration: 0.55,
-        ease: 'power2.out'
+        duration: 0.6,
+        ease: 'power3.inOut'
       }, 0);
     }
   }, [sections, isMobile, onSectionChange, setActiveSectionIndex]);
@@ -456,7 +466,10 @@ export default function FullscreenDeck({
     >
       {/* Full-Screen Slides Stack / Continuous Vertical Flow */}
       {sections.map((sec, idx) => {
-        const isActive = idx === activeSectionIndex;
+        // activeSectionIndex determines the current slide DOM state, 
+        // visualActiveIndex triggers internal animations immediately when transition starts
+        const isDomActive = idx === activeSectionIndex || idx === visualActiveIndex;
+        const isVisualActive = idx === visualActiveIndex;
         const shouldRenderContent = true;
 
         return (
@@ -474,8 +487,8 @@ export default function FullscreenDeck({
               isMobile
                 ? {}
                 : {
-                    display: isActive ? 'flex' : 'none',
-                    zIndex: isActive ? 20 : 1,
+                    display: isDomActive ? 'flex' : 'none',
+                    zIndex: isDomActive ? (isVisualActive ? 20 : 10) : 1,
                     willChange: 'transform, opacity'
                   }
             }
@@ -484,7 +497,7 @@ export default function FullscreenDeck({
               <>
                 {sec.type === 'hero' && (
                   <HeroSection 
-                    isActive={isActive || isMobile}
+                    isActive={isVisualActive || isMobile}
                     onExploreWorks={() => goToSection(1)} 
                     onExploreStack={() => goToSection(projects.length + 2)}
                   />
@@ -496,20 +509,20 @@ export default function FullscreenDeck({
                     index={sec.index}
                     total={projects.length}
                     onPlayDemo={onPlayDemo}
-                    isActive={isActive || isMobile}
+                    isActive={isVisualActive || isMobile}
                   />
                 )}
 
                 {sec.type === 'more' && (
-                  <MoreProjectsSection isActive={isActive || isMobile} />
+                  <MoreProjectsSection isActive={isVisualActive || isMobile} />
                 )}
 
                 {sec.type === 'stack' && (
-                  <AboutStackSection isActive={isActive || isMobile} />
+                  <AboutStackSection isActive={isVisualActive || isMobile} />
                 )}
 
                 {sec.type === 'contact' && (
-                  <ContactSection isActive={isActive || isMobile} />
+                  <ContactSection isActive={isVisualActive || isMobile} />
                 )}
               </>
             )}
