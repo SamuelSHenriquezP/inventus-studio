@@ -143,7 +143,7 @@ export default function FullscreenDeck({
       },
       {
         root: null,
-        threshold: 0.3
+        threshold: 0.15
       }
     );
 
@@ -157,6 +157,17 @@ export default function FullscreenDeck({
     };
   }, [isMobile, sections, onSectionChange, setActiveSectionIndex]);
 
+  // Track active slide indices that must stay mounted/visible in DOM during transitions
+  const [visibleSlideIndices, setVisibleSlideIndices] = useState([activeSectionIndex]);
+
+  // Sync visualActiveIndex and visibleSlideIndices when parent changes activeSectionIndex without transition
+  useEffect(() => {
+    if (!isTransitioningRef.current) {
+      setVisualActiveIndex(activeSectionIndex);
+      setVisibleSlideIndices([activeSectionIndex]);
+    }
+  }, [activeSectionIndex]);
+
   // Core Slide Animator (Desktop)
   const animateTransition = useCallback((fromIndex, toIndex, direction) => {
     if (fromIndex === toIndex || isMobile) return;
@@ -167,16 +178,17 @@ export default function FullscreenDeck({
 
     if (!targetSlide) return;
 
-    // Immediately sync state so UI indicators (dots, navbar) respond with 0ms latency
+    // Immediately update visual UI (dots, navbar) and keep BOTH slides visible in DOM during transition
     isTransitioningRef.current = true;
     currentIndexRef.current = toIndex;
     setVisualActiveIndex(toIndex);
-    setActiveSectionIndex(toIndex);
+    setVisibleSlideIndices([fromIndex, toIndex]);
+
     if (onSectionChange) {
       onSectionChange(sections[toIndex]);
     }
 
-    // Kill any ongoing GSAP timeline and reset slide states cleanly to avoid black-screen lockouts
+    // Kill any ongoing GSAP timeline
     if (activeTimelineRef.current) {
       activeTimelineRef.current.kill();
     }
@@ -234,6 +246,8 @@ export default function FullscreenDeck({
         if (targetSlide) {
           gsap.set(targetSlide, { opacity: 1, xPercent: 0, yPercent: 0, scale: 1, display: 'flex', zIndex: 20 });
         }
+        setVisibleSlideIndices([toIndex]);
+        setActiveSectionIndex(toIndex);
         isTransitioningRef.current = false;
       }
     });
@@ -246,8 +260,8 @@ export default function FullscreenDeck({
           xPercent: direction > 0 ? -18 : 18,
           opacity: 0,
           scale: 0.97,
-          duration: 0.5,
-          ease: 'power3.inOut'
+          duration: 0.68,
+          ease: 'power2.inOut'
         }, 0);
       }
 
@@ -255,8 +269,8 @@ export default function FullscreenDeck({
         xPercent: 0,
         opacity: 1,
         scale: 1,
-        duration: 0.5,
-        ease: 'power3.inOut'
+        duration: 0.68,
+        ease: 'power2.inOut'
       }, 0);
 
     } else if (transitionType === 'fade-scale') {
@@ -264,16 +278,16 @@ export default function FullscreenDeck({
         tl.to(currentSlide, {
           opacity: 0,
           scale: 1.02,
-          duration: 0.5,
-          ease: 'power3.inOut'
+          duration: 0.68,
+          ease: 'power2.inOut'
         }, 0);
       }
 
       tl.to(targetSlide, {
         opacity: 1,
         scale: 1,
-        duration: 0.5,
-        ease: 'power3.inOut'
+        duration: 0.68,
+        ease: 'power2.inOut'
       }, 0);
 
     } else {
@@ -283,8 +297,8 @@ export default function FullscreenDeck({
           yPercent: direction > 0 ? -25 : 25,
           opacity: 0,
           scale: 0.97,
-          duration: 0.5,
-          ease: 'power3.inOut'
+          duration: 0.68,
+          ease: 'power2.inOut'
         }, 0);
       }
 
@@ -292,8 +306,8 @@ export default function FullscreenDeck({
         yPercent: 0,
         opacity: 1,
         scale: 1,
-        duration: 0.5,
-        ease: 'power3.inOut'
+        duration: 0.68,
+        ease: 'power2.inOut'
       }, 0);
     }
   }, [sections, isMobile, onSectionChange, setActiveSectionIndex]);
@@ -467,9 +481,7 @@ export default function FullscreenDeck({
     >
       {/* Full-Screen Slides Stack / Continuous Vertical Flow */}
       {sections.map((sec, idx) => {
-        // activeSectionIndex determines the current slide DOM state, 
-        // visualActiveIndex triggers internal animations immediately when transition starts
-        const isDomActive = idx === activeSectionIndex || idx === visualActiveIndex;
+        const isDomActive = visibleSlideIndices.includes(idx);
         const isVisualActive = idx === visualActiveIndex;
         const shouldRenderContent = true;
 
@@ -481,7 +493,7 @@ export default function FullscreenDeck({
             ref={(el) => (slidesRef.current[idx] = el)}
             className={
               isMobile
-                ? "relative w-full py-8 sm:py-12 flex flex-col items-center border-b border-white/5 bg-[#050508]"
+                ? "relative w-full pt-16 pb-24 sm:pt-20 sm:pb-28 flex flex-col items-center border-b border-white/5 bg-[#050508]"
                 : "absolute inset-0 w-full h-full overflow-hidden flex flex-col items-center custom-scroll"
             }
             style={
@@ -498,7 +510,7 @@ export default function FullscreenDeck({
               <>
                 {sec.type === 'hero' && (
                   <HeroSection 
-                    isActive={isVisualActive || isMobile}
+                    isActive={isVisualActive}
                     onExploreWorks={() => goToSection(1)} 
                     onExploreStack={() => goToSection(projects.length + 2)}
                   />
@@ -510,20 +522,20 @@ export default function FullscreenDeck({
                     index={sec.index}
                     total={projects.length}
                     onPlayDemo={onPlayDemo}
-                    isActive={isVisualActive || isMobile}
+                    isActive={isVisualActive}
                   />
                 )}
 
                 {sec.type === 'more' && (
-                  <MoreProjectsSection isActive={isVisualActive || isMobile} />
+                  <MoreProjectsSection isActive={isVisualActive} />
                 )}
 
                 {sec.type === 'stack' && (
-                  <AboutStackSection isActive={isVisualActive || isMobile} />
+                  <AboutStackSection isActive={isVisualActive} />
                 )}
 
                 {sec.type === 'contact' && (
-                  <ContactSection isActive={isVisualActive || isMobile} />
+                  <ContactSection isActive={isVisualActive} />
                 )}
               </>
             )}
