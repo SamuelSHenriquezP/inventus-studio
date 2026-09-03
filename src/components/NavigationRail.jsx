@@ -35,7 +35,7 @@ export default function NavigationRail({
   const constellationData = useMemo(() => [
     { x: 54, yRel: 0.00, baseR: 3.0 }, // 00 - Inicio
     { x: 30, yRel: 0.11, baseR: 2.5 }, // 01 - Servi Intel
-    { x: 16, yRel: 0.22, baseR: 3.0 }, // 02 - O-tek Power Apps
+    { x: 16, yRel: 0.22, baseR: 3.0 }, // 02 - Control Calidad Integrado (Power Apps)
     { x: 68, yRel: 0.33, baseR: 3.0 }, // 03 - Sopa Senior
     { x: 84, yRel: 0.44, baseR: 2.5 }, // 04 - LoveCost / Nido
     { x: 42, yRel: 0.55, baseR: 3.5 }, // 05 - Days: focus.flow
@@ -139,12 +139,17 @@ export default function NavigationRail({
                 className="cursor-pointer group"
                 data-cursor={item.number}
               >
-                {/* Hit area (generous clickable area) */}
+                {/* Hit area (generous 22px clickable area) */}
                 <circle
                   cx={pt.x}
                   cy={pt.y}
-                  r="16"
-                  fill="transparent"
+                  r="22"
+                  fill="rgba(0,0,0,0)"
+                  pointerEvents="all"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleClick(idx);
+                  }}
                 />
 
                 {/* Active Pulsing Ripple Aura */}

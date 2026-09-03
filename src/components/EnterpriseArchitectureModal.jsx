@@ -1,13 +1,13 @@
-// src/components/OtekArchitectureModal.jsx
+// src/components/EnterpriseArchitectureModal.jsx
 import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { 
   X, Workflow, Database, Mail, BarChart3, 
-  ShieldCheck, CheckCircle2, Lock, FileCode,
-  Layers, ArrowRight, Sparkles, Terminal
+  ShieldCheck, FileCode,
+  Layers, Sparkles, Terminal
 } from 'lucide-react';
 
-export default function OtekArchitectureModal({ isOpen, onClose }) {
+export default function EnterpriseArchitectureModal({ isOpen, onClose }) {
   const [activeTab, setActiveTab] = useState('pipeline'); // 'pipeline' | 'powerfx' | 'email' | 'impact'
   const backdropRef = useRef(null);
   const modalRef = useRef(null);
@@ -131,7 +131,7 @@ export default function OtekArchitectureModal({ isOpen, onClose }) {
                   ARQUITECTURA & WORKFLOW EMPRESARIAL
                 </span>
                 <span className="px-1.5 py-0.2 rounded-full bg-sky-500/20 text-sky-300 text-[9.5px] font-mono border border-sky-500/30">
-                  O-tek Calidad
+                  Control Calidad Integrado
                 </span>
               </div>
               <h3 className="text-xs sm:text-sm font-bold text-white truncate max-w-[280px] sm:max-w-md">
@@ -206,11 +206,11 @@ export default function OtekArchitectureModal({ isOpen, onClose }) {
           {activeTab === 'pipeline' && (
             <div className="space-y-3">
               <div className="p-3 rounded-xl bg-sky-500/5 border border-sky-500/20 text-[11.5px] text-zinc-300 leading-relaxed font-sans">
-                <span className="font-semibold text-white">Transición Digital Completa:</span> Este flujo reemplazó cuadernos físicos de campo y planillas dispersas de Excel por un pipeline automatizado, garantizando trazabilidad total de tolerancias ASTM / ISO para la producción de tuberías en <span className="text-sky-400 font-medium">O-tek</span>.
+                <span className="font-semibold text-white">Transición Digital Completa:</span> Este flujo reemplazó cuadernos físicos de campo y planillas dispersas de Excel por un pipeline automatizado, garantizando trazabilidad total de tolerancias ASTM / ISO para la producción de tuberías e insumos industriales.
               </div>
 
               <div className="grid grid-cols-1 gap-2.5 font-sans">
-                {PIPELINE_STEPS.map((step, idx) => {
+                {PIPELINE_STEPS.map((step) => {
                   const Icon = step.icon;
                   return (
                     <div 
@@ -316,13 +316,13 @@ With(
           {activeTab === 'email' && (
             <div className="space-y-3 font-sans">
               <div className="p-3 rounded-lg bg-sky-500/10 border border-sky-500/20 text-xs text-zinc-300">
-                <span className="font-semibold text-white">Plantilla HTML Generada por Power Automate:</span> Formato automático despachado a los supervisores de producción de O-tek inmediatamente después de cada prueba.
+                <span className="font-semibold text-white">Plantilla HTML Generada por Power Automate:</span> Formato automático despachado a los supervisores de producción inmediatamente después de cada prueba.
               </div>
 
               {/* Simulated Email Client */}
               <div className="rounded-xl bg-[#0e1626] border border-white/15 p-4 space-y-3 font-sans text-xs">
                 <div className="border-b border-white/10 pb-2 space-y-1 font-mono text-[11px]">
-                  <div className="text-zinc-400"><span className="text-zinc-500">De:</span> Power Automate Cloud Flow &lt;no-reply@o-tek.com&gt;</div>
+                  <div className="text-zinc-400"><span className="text-zinc-500">De:</span> Power Automate Cloud Flow &lt;no-reply@enterprise-qa.com&gt;</div>
                   <div className="text-zinc-400"><span className="text-zinc-500">Para:</span> Supervisor de Planta; Jefe de Aseguramiento Calidad</div>
                   <div className="text-zinc-400"><span className="text-zinc-500">Asunto:</span> <span className="text-sky-300 font-semibold">[REPORTE CALIDAD] Muestra Lote #2026-L402 — Ensayo de Laminado Conforme</span></div>
                 </div>
@@ -399,7 +399,7 @@ With(
                   <div className="text-2xl font-bold font-mono text-purple-400">Seguridad RBAC</div>
                   <div className="text-xs font-bold text-white">Protección de Datos Confidenciales</div>
                   <p className="text-[11px] text-zinc-300">
-                    Gobernanza mediante listas de SharePoint con permisos granulares para salvaguardar fórmulas de resina y parámetros industriales.
+                    Gobernanza mediante listas de SharePoint con permisos granulares para salvaguardar fórmulas y parámetros industriales.
                   </p>
                 </div>
               </div>
@@ -412,7 +412,7 @@ With(
         <div className="px-5 py-3 border-t border-white/10 bg-[#0a0f19] flex items-center justify-between font-mono text-xs text-zinc-400">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-sky-400" />
-            <span>Power Platform Enterprise Architecture • O-tek Quality Assurance</span>
+            <span>Power Platform Enterprise Architecture • Quality Assurance</span>
           </div>
           <button
             onClick={handleClose}

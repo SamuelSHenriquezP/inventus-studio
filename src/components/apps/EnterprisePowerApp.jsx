@@ -1,13 +1,13 @@
-// src/components/apps/OtekPowerApp.jsx
-import { useState, useId } from 'react';
+// src/components/apps/EnterprisePowerApp.jsx
+import { useState } from 'react';
 import { 
-  RotateCcw, Save, ChevronLeft, CheckCircle2, 
+  RotateCcw, Save, CheckCircle2, 
   Layers, Shield, Gauge, Settings, Send, 
-  Database, Mail, BarChart3, Lock, AlertTriangle, Sparkles
+  Database, Mail, BarChart3, Lock
 } from 'lucide-react';
 import { sounds } from '../../utils/soundEngine';
 
-export default function OtekPowerApp() {
+export default function EnterprisePowerApp() {
   const [activeTab, setActiveTab] = useState('form'); // 'form' | 'flow' | 'powerbi' | 'rbac'
   
   // Form State
@@ -28,7 +28,7 @@ export default function OtekPowerApp() {
 
   // Mechanical Test
   const [fuerza, setFuerza] = useState('4850');
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [, setIsSubmitted] = useState(false);
   const [showToast, setShowToast] = useState(false);
 
   // Specifications based on DN/PN/SN
@@ -82,7 +82,7 @@ export default function OtekPowerApp() {
           </div>
           <div className="min-w-0">
             <div className="text-[9px] font-['JetBrains_Mono',monospace] font-extrabold text-sky-400 leading-none truncate">
-              O-TEK // CONTROL CALIDAD INTEGRADO
+              ENTERPRISE // CONTROL CALIDAD INTEGRADO
             </div>
             <div className="text-[7.5px] text-slate-400 font-['Plus_Jakarta_Sans',sans-serif] leading-none mt-0.5 truncate">
               Módulo Tubería & Laminado
@@ -178,7 +178,7 @@ export default function OtekPowerApp() {
       {/* ========================================================================= */}
       {/* 3. MAIN BODY TAB VIEWS */}
       {/* ========================================================================= */}
-      <div className="flex-1 p-2 overflow-y-auto space-y-2">
+      <div className="flex-1 p-2 overflow-y-auto space-y-2 custom-scroll overscroll-contain" data-prevent-slide="true">
         
         {/* --- VIEW 1: THE RECREATED CORPORATE FORM --- */}
         {activeTab === 'form' && (
@@ -470,7 +470,7 @@ export default function OtekPowerApp() {
 
             </div>
 
-            {/* --- NEW CORPORATE SECTION: SHAREPOINT RECENT LOGS & DIGITAL CERTIFICATION (Fills space cleanly) --- */}
+            {/* --- SHAREPOINT RECENT LOGS & DIGITAL CERTIFICATION --- */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-2 pt-0.5">
               
               {/* Left 7 cols: Historial de Registro de Muestras del Lote en SharePoint DB */}
@@ -548,7 +548,7 @@ export default function OtekPowerApp() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-400">Planta / Sección:</span>
-                    <span className="text-slate-200">O-tek Laminados</span>
+                    <span className="text-slate-200">Planta Industrial</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-400">Turno Operativo:</span>
@@ -589,14 +589,14 @@ export default function OtekPowerApp() {
             {/* Mock Corporate Email Preview */}
             <div className="p-3 rounded-lg bg-slate-950 border border-white/10 space-y-2 text-slate-200">
               <div className="flex items-center justify-between text-[9px] text-slate-400 border-b border-white/5 pb-1">
-                <span>Para: <span className="text-slate-200">supervisores_planta@o-tek.com; calidad@o-tek.com</span></span>
+                <span>Para: <span className="text-slate-200">supervisores_planta@enterprise.com; calidad@enterprise.com</span></span>
                 <span>Asunto: <span className="text-amber-300 font-bold">[CALIDAD APROBADA] Lote {lote} - {muestra}</span></span>
               </div>
 
               {/* Styled HTML Body Render */}
               <div className="p-3 rounded bg-[#0a1220] border border-sky-500/30 space-y-2">
                 <div className="flex items-center justify-between border-b border-sky-500/20 pb-1.5">
-                  <span className="font-bold text-white text-xs">O-TEK QUALITY ASSURANCE REPORT</span>
+                  <span className="font-bold text-white text-xs">ENTERPRISE QUALITY ASSURANCE REPORT</span>
                   <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[9px] font-bold">ESTADO: CONFORME</span>
                 </div>
                 <div className="grid grid-cols-2 gap-2 text-[9.5px]">
@@ -665,7 +665,7 @@ export default function OtekPowerApp() {
                 <div>
                   <div className="font-bold text-white flex items-center gap-1.5">
                     <span>Rol: Operario / Laboratorista</span>
-                    <span className="text-[8px] text-sky-400 font-mono"> (samuel.h@o-tek.com)</span>
+                    <span className="text-[8px] text-sky-400 font-mono"> (samuel.h@enterprise-qa.com)</span>
                   </div>
                   <div className="text-[8.5px] text-slate-400">Autenticado vía SSO Microsoft 365. Permiso exclusivo de creación de muestras; sin acceso de modificación a tolerancias ASTM maestras.</div>
                 </div>
@@ -676,7 +676,7 @@ export default function OtekPowerApp() {
                 <div>
                   <div className="font-bold text-white flex items-center gap-1.5">
                     <span>Rol: Administrador / Jefe de Calidad</span>
-                    <span className="text-[8px] text-amber-400 font-mono"> (admin.calidad@o-tek.com)</span>
+                    <span className="text-[8px] text-amber-400 font-mono"> (admin.calidad@enterprise-qa.com)</span>
                   </div>
                   <div className="text-[8.5px] text-slate-400">Acceso total a configuración de tolerancias mínimas/máximas, aprobación de reportes en Power Automate y dashboards de Power BI.</div>
                 </div>
@@ -711,7 +711,7 @@ export default function OtekPowerApp() {
           <span className="text-sky-400">SHAREPOINT LISTS DB</span>
         </div>
         <div className="flex items-center gap-1.5 text-slate-300">
-          <span>Samuel Henríquez — Proyecto Corporativo O-tek</span>
+          <span>Samuel Henríquez — Proyecto Corporativo Enterprise</span>
         </div>
       </div>
 

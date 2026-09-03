@@ -7,7 +7,7 @@ import NidoPhoneApp from './apps/NidoPhoneApp';
 import ServiIntelLaptopApp from './apps/ServiIntelLaptopApp';
 import DaysPhoneApp from './apps/DaysPhoneApp';
 import PazHoyPhoneApp from './apps/PazHoyPhoneApp';
-import OtekPowerApp from './apps/OtekPowerApp';
+import EnterprisePowerApp from './apps/EnterprisePowerApp';
 import SopaSeniorApp from './apps/SopaSeniorApp';
 
 export default function RealisticDevice3D({ 
@@ -22,7 +22,7 @@ export default function RealisticDevice3D({
   const [screenMode, setScreenMode] = useState('live-app');
 
   const isLaptop = type === 'laptop' || projectId === 'serviintel-ops';
-  const isTablet = type === 'tablet' || projectId === 'otek-powerapps';
+  const isTablet = type === 'tablet' || projectId === 'enterprise-powerapps' || projectId === 'otek-powerapps';
 
   return (
     <div className="w-full flex flex-col items-center justify-center relative select-none py-1">
@@ -91,7 +91,7 @@ export default function RealisticDevice3D({
                 {/* Inner Screen */}
                 <div className="relative w-full h-full rounded-xl overflow-hidden bg-black shadow-inner interactive-screen">
                   {screenMode === 'live-app' ? (
-                    <OtekPowerApp isActive={isActive} />
+                    <EnterprisePowerApp isActive={isActive} />
                   ) : (
                     <img 
                       src={image} 
@@ -117,7 +117,7 @@ export default function RealisticDevice3D({
                 {/* Inner Screen */}
                 <div className="relative w-full h-full rounded-lg sm:rounded-2xl overflow-hidden bg-black shadow-inner interactive-screen">
                   {screenMode === 'live-app' ? (
-                    <OtekPowerApp isActive={isActive} />
+                    <EnterprisePowerApp isActive={isActive} />
                   ) : (
                     <img 
                       src={image} 

@@ -7,7 +7,7 @@ import {
 import { sounds } from '../utils/soundEngine';
 import { personalInfo } from '../Data/projectsData';
 
-import OtekPowerApp from './apps/OtekPowerApp';
+import EnterprisePowerApp from './apps/EnterprisePowerApp';
 import SopaSeniorApp from './apps/SopaSeniorApp';
 import DaysPhoneApp from './apps/DaysPhoneApp';
 import NidoPhoneApp from './apps/NidoPhoneApp';
@@ -67,7 +67,7 @@ export default function InteractiveProjectRunner({ project, onClose }) {
 
   const isPhoneVertical = ['sopa-senior', 'days-focus-flow', 'lovecost-nido', 'paz-hoy'].includes(project.id);
   const isServiIntel = project.id === 'serviintel-ops';
-  const isTablet = project.id === 'otek-powerapps';
+  const isTablet = project.id === 'enterprise-powerapps' || project.id === 'otek-powerapps';
 
   return (
     <div 
@@ -351,14 +351,14 @@ export default function InteractiveProjectRunner({ project, onClose }) {
                   </div>
                 </div>
                 <div className="relative w-full h-full rounded-3xl overflow-hidden bg-black shadow-inner">
-                  <OtekPowerApp isActive={true} />
+                  <EnterprisePowerApp isActive={true} />
                 </div>
               </div>
 
               {/* Tablets & PC: Industrial Horizontal Tablet Frame */}
               <div className="hidden sm:flex w-full max-w-3xl aspect-16/10 max-h-130 rounded-2xl bg-[#151720] p-2.5 border border-sky-500/30 shadow-2xl overflow-hidden flex-col justify-between">
                 <div className="w-full h-full rounded-xl overflow-hidden bg-black shadow-inner">
-                  <OtekPowerApp isActive={true} />
+                  <EnterprisePowerApp isActive={true} />
                 </div>
               </div>
 

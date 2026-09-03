@@ -111,11 +111,6 @@ export default function FullscreenDeck({
   const totalSections = sections.length;
   const currentSection = sections[activeSectionIndex] || sections[0];
 
-  // Keep currentIndexRef synchronized with activeSectionIndex
-  useEffect(() => {
-    currentIndexRef.current = activeSectionIndex;
-  }, [activeSectionIndex]);
-
   // Mobile IntersectionObserver with debounced state updates
   useEffect(() => {
     if (!isMobile) return;
@@ -159,14 +154,6 @@ export default function FullscreenDeck({
 
   // Track active slide indices that must stay mounted/visible in DOM during transitions
   const [visibleSlideIndices, setVisibleSlideIndices] = useState([activeSectionIndex]);
-
-  // Sync visualActiveIndex and visibleSlideIndices when parent changes activeSectionIndex without transition
-  useEffect(() => {
-    if (!isTransitioningRef.current) {
-      setVisualActiveIndex(activeSectionIndex);
-      setVisibleSlideIndices([activeSectionIndex]);
-    }
-  }, [activeSectionIndex]);
 
   // Core Slide Animator (Desktop)
   const animateTransition = useCallback((fromIndex, toIndex, direction) => {

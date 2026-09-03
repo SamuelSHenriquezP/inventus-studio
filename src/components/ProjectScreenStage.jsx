@@ -10,7 +10,7 @@ import RealisticDevice3D from './RealisticDevice3D';
 import CinematicTitle from './CinematicTitle';
 import ServiIntelOperarioApp from './apps/ServiIntelOperarioApp';
 import ServiIntelLaptopApp from './apps/ServiIntelWebApp';
-import OtekArchitectureModal from './OtekArchitectureModal';
+import EnterpriseArchitectureModal from './EnterpriseArchitectureModal';
 import NidoCoupleStage from './NidoCoupleStage';
 import { personalInfo } from '../Data/projectsData';
 
@@ -185,8 +185,8 @@ function ServiIntelAdminTitle({ isActive }) {
   );
 }
 
-// 3. O-TEK QUALITY TITLE: Industrial Precision Wave (White + Sky Colored Accent)
-function OtekQualityTitle({ isActive }) {
+// 3. ENTERPRISE QUALITY TITLE: Industrial Precision Wave (White + Sky Colored Accent)
+function EnterpriseQualityTitle({ isActive }) {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -194,8 +194,8 @@ function OtekQualityTitle({ isActive }) {
 
     const ctx = gsap.context(() => {
       const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
-      const mainChars = containerRef.current.querySelectorAll('.otek-main-char');
-      const hlChars = containerRef.current.querySelectorAll('.otek-hl-char');
+      const mainChars = containerRef.current.querySelectorAll('.quality-main-char');
+      const hlChars = containerRef.current.querySelectorAll('.quality-hl-char');
 
       gsap.fromTo(mainChars, 
         {
@@ -251,14 +251,14 @@ function OtekQualityTitle({ isActive }) {
     >
       <span className="inline-flex overflow-visible">
         {mainChars.map((ch, i) => (
-          <span key={`ot-m-${i}`} className="otek-main-char inline-block will-change-transform text-white">
+          <span key={`ot-m-${i}`} className="quality-main-char inline-block will-change-transform text-white">
             {ch === ' ' ? '\u00A0' : ch}
           </span>
         ))}
       </span>
       <span className="inline-flex mt-0.5 overflow-visible">
         {highlightChars.map((ch, i) => (
-          <span key={`ot-h-${i}`} className="otek-hl-char inline-block will-change-transform text-sky-400 drop-shadow-[0_0_14px_rgba(14,165,233,0.55)]">
+          <span key={`ot-h-${i}`} className="quality-hl-char inline-block will-change-transform text-sky-400 drop-shadow-[0_0_14px_rgba(14,165,233,0.55)]">
             {ch}
           </span>
         ))}
@@ -362,7 +362,7 @@ import { memo } from 'react';
 const ProjectScreenStage = memo(function ProjectScreenStage({ project, onPlayDemo, isActive }) {
   const containerRef = useRef(null);
   const [mobileTab, setMobileTab] = useState('mobile');
-  const [showOtekModal, setShowOtekModal] = useState(false);
+  const [showEnterpriseModal, setShowEnterpriseModal] = useState(false);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -856,9 +856,9 @@ const ProjectScreenStage = memo(function ProjectScreenStage({ project, onPlayDem
   }
 
   // =========================================================================
-  // 2. O-TEK QUALITY CONTROL — INDUSTRIAL POWER PLATFORM (MOCKUP LEFT, NARRATIVE RIGHT)
+  // 2. ENTERPRISE QUALITY CONTROL — INDUSTRIAL POWER PLATFORM (MOCKUP LEFT, NARRATIVE RIGHT)
   // =========================================================================
-  if (project.id === 'otek-powerapps') {
+  if (project.id === 'enterprise-powerapps') {
     return (
       <div
         ref={containerRef}
@@ -876,7 +876,7 @@ const ProjectScreenStage = memo(function ProjectScreenStage({ project, onPlayDem
               <span className="text-zinc-600 hidden sm:inline">•</span>
               <span className="px-2.5 py-0.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400 font-mono text-[10px] sm:text-[11px] flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                POWER PLATFORM SUITE @ O-TEK
+                POWER PLATFORM SUITE // CORPORATE
               </span>
             </div>
             <div className="flex items-center gap-2 text-sky-300 font-mono text-xs">
@@ -907,7 +907,7 @@ const ProjectScreenStage = memo(function ProjectScreenStage({ project, onPlayDem
                 <span className="text-[10px] sm:text-xs font-mono font-medium text-sky-400 tracking-wider uppercase block">
                   Digitalización Industrial & Cloud Automation
                 </span>
-                <OtekQualityTitle isActive={isActive} />
+                <EnterpriseQualityTitle isActive={isActive} />
                 <p className="text-xs sm:text-[13px] text-zinc-300 font-normal leading-relaxed">
                   {project.subtitle}
                 </p>
@@ -916,7 +916,7 @@ const ProjectScreenStage = memo(function ProjectScreenStage({ project, onPlayDem
               {/* Internal Project Attribution Pill */}
               <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-lg bg-sky-500/10 border border-sky-500/25 text-[11px] text-sky-300">
                 <ShieldCheck className="w-3 h-3 text-sky-400 shrink-0" />
-                <span className="font-medium">Proyecto Corporativo Interno @ O-tek (Power Platform)</span>
+                <span className="font-medium">Proyecto Corporativo Enterprise (Power Platform)</span>
               </div>
 
               <p className="text-xs sm:text-[13px] text-zinc-300 font-sans leading-relaxed">
@@ -936,7 +936,7 @@ const ProjectScreenStage = memo(function ProjectScreenStage({ project, onPlayDem
               {/* Actions */}
               <div className="flex flex-wrap items-center gap-2 pt-0.5 font-mono text-xs">
                 <button
-                  onClick={() => setShowOtekModal(true)}
+                  onClick={() => setShowEnterpriseModal(true)}
                   className="px-3.5 sm:px-4 py-1.5 rounded-full bg-sky-500 hover:bg-sky-400 text-black font-bold flex items-center gap-1.5 shadow-lg shadow-sky-500/20 transition-all cursor-pointer active:scale-95 text-xs"
                 >
                   <Workflow className="w-3.5 h-3.5" />
@@ -969,9 +969,9 @@ const ProjectScreenStage = memo(function ProjectScreenStage({ project, onPlayDem
         </div>
 
         {/* Architecture Modal */}
-        <OtekArchitectureModal
-          isOpen={showOtekModal}
-          onClose={() => setShowOtekModal(false)}
+        <EnterpriseArchitectureModal
+          isOpen={showEnterpriseModal}
+          onClose={() => setShowEnterpriseModal(false)}
         />
       </div>
     );
