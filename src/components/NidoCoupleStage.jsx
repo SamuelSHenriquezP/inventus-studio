@@ -396,7 +396,7 @@ class FinancialCashflowService extends ChangeNotifier {
             {/* ACTION BUTTONS: GitHub, WhatsApp Quote */}
             <div className="flex flex-wrap items-center justify-start gap-2.5 pt-0.5 font-mono text-xs">
               <a
-                href={project?.githubUrl || "https://github.com"}
+                href={project?.githubUrl || "https://github.com/SamuelSHenriquezP"}
                 target="_blank"
                 rel="noreferrer"
                 data-cursor="GITHUB"
@@ -607,7 +607,7 @@ class FinancialCashflowService extends ChangeNotifier {
           {/* Action buttons on Mobile */}
           <div className="flex flex-wrap items-center justify-center gap-2 pt-1 font-mono text-xs">
             <a
-              href={project?.githubUrl || "https://github.com"}
+              href={project?.githubUrl || "https://github.com/SamuelSHenriquezP"}
               target="_blank"
               rel="noreferrer"
               data-cursor="GITHUB"

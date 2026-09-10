@@ -128,7 +128,7 @@ export default function FlutterLabSimulator() {
         {/* Acciones de Descarga / QR */}
         <div className="pt-4 border-t border-white/10 flex flex-wrap items-center gap-4">
           <a
-            href="https://github.com" 
+            href="https://github.com/SamuelSHenriquezP" 
             target="_blank" 
             rel="noreferrer"
             onClick={() => sounds.playClick()}

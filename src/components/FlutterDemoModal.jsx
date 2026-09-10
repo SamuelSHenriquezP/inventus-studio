@@ -182,7 +182,7 @@ export default function FlutterDemoModal({ isOpen, onClose }) {
           </button>
 
           <a
-            href="https://github.com" 
+            href="https://github.com/SamuelSHenriquezP" 
             target="_blank" 
             rel="noreferrer"
             className="px-4 py-2 rounded-xl bg-white text-black font-bold flex items-center gap-1.5 hover:bg-zinc-200 transition-colors"
