@@ -1,7 +1,7 @@
 // src/components/NidoCoupleStage.jsx
 import { useState } from 'react';
 import { 
-  Users, Heart, Sparkles, ShieldCheck, Code2, Play, Image as ImageIcon,
+  Users, Heart, Sparkles, ShieldCheck, Code2, Play,
   RefreshCw, CheckCircle2, Zap, DollarSign, Activity, Smartphone, Database, Layers, Flame, FileCode2, GitBranch, Maximize2
 } from 'lucide-react';
 import NidoPhoneApp from './apps/NidoPhoneApp';
@@ -184,7 +184,7 @@ class FinancialCashflowService extends ChangeNotifier {
             <span className="text-zinc-300 hidden sm:inline text-[11px] sm:text-xs">Aplicación Móvil Financiera en Pareja</span>
           </div>
 
-          {/* Minimalist Segmented Controls Bar (App Interactiva | Captura Real | Código Dart) */}
+          {/* Minimalist Segmented Controls Bar (App Interactiva | Código Dart) */}
           <div className="flex items-center gap-1 p-1 rounded-full bg-zinc-900/90 border border-white/10 backdrop-blur-md shadow-xl z-30 text-[10px] sm:text-[11px]">
             <button
               type="button"
@@ -198,20 +198,6 @@ class FinancialCashflowService extends ChangeNotifier {
             >
               <Play className="w-3 h-3 fill-current" />
               <span>App Interactiva</span>
-            </button>
-
-            <button
-              type="button"
-              data-prevent-slide="true"
-              onClick={() => setScreenMode('screenshot')}
-              className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full transition-all cursor-pointer ${
-                screenMode === 'screenshot' 
-                  ? 'bg-white text-black font-semibold shadow-sm' 
-                  : 'text-zinc-400 hover:text-white'
-              }`}
-            >
-              <ImageIcon className="w-3 h-3" />
-              <span>Captura Real</span>
             </button>
 
             <button
@@ -273,30 +259,14 @@ class FinancialCashflowService extends ChangeNotifier {
 
                 {/* Inner Screen */}
                 <div className="w-full h-full rounded-[22px] xl:rounded-[26px] overflow-hidden bg-black shadow-inner relative interactive-screen">
-                  {screenMode === 'screenshot' ? (
-                    <div className="w-full h-full flex flex-col justify-between p-4 bg-linear-to-b from-[#0f172a] via-[#090d16] to-[#04060a] text-white">
-                      <div className="pt-6 space-y-3">
-                        <div className="text-xs font-mono text-[#0D9488] font-bold">Nido Financial Mobile</div>
-                        <div className="text-2xl font-extrabold">$2,450.00</div>
-                        <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-xs">
-                          <div className="text-zinc-400">Disponible Real Samuel</div>
-                          <div className="text-emerald-400 font-bold mt-1">Sincronizado vía Isar DB</div>
-                        </div>
-                      </div>
-                      <div className="p-3 rounded-xl bg-[#0D9488]/20 border border-[#0D9488]/40 text-center text-xs font-mono text-[#0D9488] font-bold">
-                        Captura Real UI Móvil
-                      </div>
-                    </div>
-                  ) : (
-                    <NidoPhoneApp 
-                      user="samuel" 
-                      sharedState={sharedState} 
-                      onAddTransaction={handleAddTransaction} 
-                      onSendPing={handleSendPing}
-                      isDarkMode={isDarkMode}
-                      onToggleTheme={() => setIsDarkMode(!isDarkMode)}
-                    />
-                  )}
+                  <NidoPhoneApp 
+                    user="samuel" 
+                    sharedState={sharedState} 
+                    onAddTransaction={handleAddTransaction} 
+                    onSendPing={handleSendPing}
+                    isDarkMode={isDarkMode}
+                    onToggleTheme={() => setIsDarkMode(!isDarkMode)}
+                  />
                 </div>
               </div>
             )}
@@ -449,30 +419,14 @@ class FinancialCashflowService extends ChangeNotifier {
 
                 {/* Inner Screen */}
                 <div className="w-full h-full rounded-[22px] xl:rounded-[26px] overflow-hidden bg-black shadow-inner relative interactive-screen">
-                  {screenMode === 'screenshot' ? (
-                    <div className="w-full h-full flex flex-col justify-between p-4 bg-linear-to-b from-[#1e1b4b] via-[#0f0e26] to-[#070614] text-white">
-                      <div className="pt-6 space-y-3">
-                        <div className="text-xs font-mono text-emerald-400 font-bold">Nido Couple Sync</div>
-                        <div className="text-2xl font-extrabold">$2,450.00</div>
-                        <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-xs">
-                          <div className="text-zinc-400">Disponible Real Rochy</div>
-                          <div className="text-rose-400 font-bold mt-1">Guiños en tiempo real</div>
-                        </div>
-                      </div>
-                      <div className="p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-center text-xs font-mono text-emerald-400 font-bold">
-                        Captura Real UI Móvil
-                      </div>
-                    </div>
-                  ) : (
-                    <NidoPhoneApp 
-                      user="rochy" 
-                      sharedState={sharedState} 
-                      onAddTransaction={handleAddTransaction} 
-                      onSendPing={handleSendPing}
-                      isDarkMode={isDarkMode}
-                      onToggleTheme={() => setIsDarkMode(!isDarkMode)}
-                    />
-                  )}
+                  <NidoPhoneApp 
+                    user="rochy" 
+                    sharedState={sharedState} 
+                    onAddTransaction={handleAddTransaction} 
+                    onSendPing={handleSendPing}
+                    isDarkMode={isDarkMode}
+                    onToggleTheme={() => setIsDarkMode(!isDarkMode)}
+                  />
                 </div>
               </div>
             )}
@@ -554,30 +508,14 @@ class FinancialCashflowService extends ChangeNotifier {
                 </div>
 
                 <div className="w-full flex-1 min-h-0 bg-black relative overflow-hidden interactive-screen">
-                  {screenMode === 'screenshot' ? (
-                    <div className="w-full h-full flex flex-col justify-between p-4 bg-linear-to-b from-[#0f172a] via-[#090d16] to-[#04060a] text-white">
-                      <div className="pt-6 space-y-3">
-                        <div className="text-xs font-mono text-[#0D9488] font-bold">Nido Financial Mobile</div>
-                        <div className="text-2xl font-extrabold">$2,450.00</div>
-                        <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-xs">
-                          <div className="text-zinc-400">Perfil: {activeCoupleUser === 'samuel' ? 'Samuel' : 'Rochy'}</div>
-                          <div className="text-emerald-400 font-bold mt-1">Sincronizado vía Isar DB & Firestore</div>
-                        </div>
-                      </div>
-                      <div className="p-3 rounded-xl bg-[#0D9488]/20 border border-[#0D9488]/40 text-center text-xs font-mono text-[#0D9488] font-bold">
-                        Captura Real UI Móvil
-                      </div>
-                    </div>
-                  ) : (
-                    <NidoPhoneApp 
-                      user={activeCoupleUser} 
-                      sharedState={sharedState} 
-                      onAddTransaction={handleAddTransaction} 
-                      onSendPing={handleSendPing}
-                      isDarkMode={isDarkMode}
-                      onToggleTheme={() => setIsDarkMode(!isDarkMode)}
-                    />
-                  )}
+                  <NidoPhoneApp 
+                    user={activeCoupleUser} 
+                    sharedState={sharedState} 
+                    onAddTransaction={handleAddTransaction} 
+                    onSendPing={handleSendPing}
+                    isDarkMode={isDarkMode}
+                    onToggleTheme={() => setIsDarkMode(!isDarkMode)}
+                  />
                 </div>
               </div>
             )}

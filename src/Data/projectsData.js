@@ -29,7 +29,7 @@ export const projectsData = [
     image: "/assets/projects/serviintel.png",
     tags: ["Flutter Mobile", "Vanilla JS Web", "Firebase Firestore", "Cloud Functions", "Google Play Signed", "GPS Tracking"],
     demoType: "enterprise",
-    githubUrl: "https://github.com/SamuelSHenriquezP/servintel_operarios",
+    githubUrl: null, // Proyecto corporativo confidencial
     demoUrl: "#view-serviintel",
     accent: "#38bdf8",
     accentGlow: "rgba(56, 189, 248, 0.22)",

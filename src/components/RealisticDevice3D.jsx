@@ -1,6 +1,6 @@
 // src/components/RealisticDevice3D.jsx
 import { useState } from 'react';
-import { Code2, Play, Image as ImageIcon } from 'lucide-react';
+import { Code2, Play } from 'lucide-react';
 
 import FlutterCodeViewer from './FlutterCodeViewer';
 import NidoPhoneApp from './apps/NidoPhoneApp';
@@ -24,6 +24,13 @@ export default function RealisticDevice3D({
   const isLaptop = type === 'laptop' || projectId === 'serviintel-ops';
   const isTablet = type === 'tablet' || projectId === 'enterprise-powerapps' || projectId === 'otek-powerapps';
 
+  const renderInteractiveScreen = () => {
+    if (projectId === 'days-focus-flow') return <DaysPhoneApp isActive={isActive} />;
+    if (projectId === 'sopa-senior') return <SopaSeniorApp isActive={isActive} />;
+    if (projectId === 'paz-hoy') return <PazHoyPhoneApp isActive={isActive} />;
+    return <NidoPhoneApp isActive={isActive} />;
+  };
+
   return (
     <div className="w-full flex flex-col items-center justify-center relative select-none py-1">
       
@@ -39,18 +46,6 @@ export default function RealisticDevice3D({
         >
           <Play className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current" />
           <span>App Interactiva</span>
-        </button>
-
-        <button
-          onClick={() => setScreenMode('screenshot')}
-          className={`flex items-center gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full transition-all cursor-pointer ${
-            screenMode === 'screenshot' 
-              ? 'bg-white text-black font-semibold shadow-sm' 
-              : 'text-zinc-400 hover:text-white'
-          }`}
-        >
-          <ImageIcon className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
-          <span>Captura Real</span>
         </button>
 
         <button
@@ -90,17 +85,7 @@ export default function RealisticDevice3D({
 
                 {/* Inner Screen */}
                 <div className="relative w-full h-full rounded-xl overflow-hidden bg-black shadow-inner interactive-screen">
-                  {screenMode === 'live-app' ? (
-                    <EnterprisePowerApp isActive={isActive} />
-                  ) : (
-                    <img 
-                      src={image} 
-                      alt={title}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-cover select-none"
-                    />
-                  )}
+                  <EnterprisePowerApp isActive={isActive} />
                 </div>
               </div>
 
@@ -116,17 +101,7 @@ export default function RealisticDevice3D({
 
                 {/* Inner Screen */}
                 <div className="relative w-full h-full rounded-lg sm:rounded-2xl overflow-hidden bg-black shadow-inner interactive-screen">
-                  {screenMode === 'live-app' ? (
-                    <EnterprisePowerApp isActive={isActive} />
-                  ) : (
-                    <img 
-                      src={image} 
-                      alt={title}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-cover select-none"
-                    />
-                  )}
+                  <EnterprisePowerApp isActive={isActive} />
                 </div>
               </div>
             </>
@@ -147,17 +122,7 @@ export default function RealisticDevice3D({
 
                 {/* Inner Screen */}
                 <div className="relative w-full h-full rounded-lg sm:rounded-xl overflow-hidden bg-black shadow-inner interactive-screen">
-                  {screenMode === 'live-app' ? (
-                    <ServiIntelLaptopApp isActive={isActive} />
-                  ) : (
-                    <img 
-                      src={image} 
-                      alt={title}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-cover select-none"
-                    />
-                  )}
+                  <ServiIntelLaptopApp isActive={isActive} />
                 </div>
               </div>
 
@@ -187,25 +152,7 @@ export default function RealisticDevice3D({
 
                 {/* Flat Inner Screen */}
                 <div className="w-full flex-1 min-h-0 bg-black relative overflow-hidden interactive-screen">
-                  {screenMode === 'live-app' ? (
-                    projectId === 'days-focus-flow' ? (
-                      <DaysPhoneApp isActive={isActive} />
-                    ) : projectId === 'sopa-senior' ? (
-                      <SopaSeniorApp isActive={isActive} />
-                    ) : projectId === 'paz-hoy' ? (
-                      <PazHoyPhoneApp isActive={isActive} />
-                    ) : (
-                      <NidoPhoneApp isActive={isActive} />
-                    )
-                  ) : (
-                    <img 
-                      src={image} 
-                      alt={title}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-cover select-none"
-                    />
-                  )}
+                  {renderInteractiveScreen()}
                 </div>
               </div>
 
@@ -223,25 +170,7 @@ export default function RealisticDevice3D({
 
                   {/* Inner Screen */}
                   <div className="w-full h-full min-h-0 overflow-hidden relative flex flex-col rounded-3xl">
-                    {screenMode === 'live-app' ? (
-                      projectId === 'days-focus-flow' ? (
-                        <DaysPhoneApp isActive={isActive} />
-                      ) : projectId === 'sopa-senior' ? (
-                        <SopaSeniorApp isActive={isActive} />
-                      ) : projectId === 'paz-hoy' ? (
-                        <PazHoyPhoneApp isActive={isActive} />
-                      ) : (
-                        <NidoPhoneApp isActive={isActive} />
-                      )
-                    ) : (
-                      <img 
-                        src={image} 
-                        alt={title}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-cover select-none"
-                      />
-                    )}
+                    {renderInteractiveScreen()}
                   </div>
 
                   {/* Home Indicator Bar */}
