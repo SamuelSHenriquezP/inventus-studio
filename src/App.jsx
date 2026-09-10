@@ -1,4 +1,4 @@
-import { useState, useCallback, lazy, Suspense } from 'react';
+import { useState, useCallback, useMemo, lazy, Suspense } from 'react';
 import { MessageSquare, Menu, X } from 'lucide-react';
 
 import CustomCursor from './components/CustomCursor';
@@ -38,6 +38,18 @@ export default function App() {
     ? projectsData[activeSectionIndex - 1]
     : null;
 
+  // Dynamic accent color according to current active tab/section
+  const activeAccentColor = useMemo(() => {
+    if (activeSectionIndex === 0) return '#ffffff'; // Inicio (Clean Silver/White)
+    if (activeSectionIndex >= 1 && activeSectionIndex <= projectsData.length) {
+      return projectsData[activeSectionIndex - 1]?.accent || '#38bdf8';
+    }
+    if (activeSectionIndex === projectsData.length + 1) return '#a78bfa'; // Más Proyectos (Violet)
+    if (activeSectionIndex === projectsData.length + 2) return '#34d399'; // Stack & Servicios (Emerald/Mint)
+    if (activeSectionIndex === projectsData.length + 3) return '#10b981'; // Contacto (Green)
+    return '#ffffff';
+  }, [activeSectionIndex]);
+
   return (
     <div className="relative w-full max-w-full overflow-x-hidden bg-[#050508] text-[#ededef] selection:bg-white selection:text-black font-sans md:w-screen md:h-screen md:overflow-hidden min-h-screen">
       
@@ -64,22 +76,51 @@ export default function App() {
             data-cursor="INICIO"
           >
             <span 
-              className="w-2 h-2 rounded-full transition-all duration-500 bg-white group-hover:scale-125 shrink-0"
+              className="w-2 h-2 rounded-full transition-all duration-500 shrink-0 group-hover:scale-125"
+              style={{
+                backgroundColor: activeAccentColor,
+                boxShadow: `0 0 10px ${activeAccentColor}90`
+              }}
             />
-            <span className="font-display font-extrabold text-sm sm:text-base md:text-lg tracking-tight text-white whitespace-nowrap">
-              {personalInfo.studio}
+            <span className="font-display font-extrabold text-xs sm:text-base md:text-lg tracking-tight text-white whitespace-nowrap">
+              <span className="xs:hidden">Inventus</span>
+              <span className="hidden xs:inline">{personalInfo.studio}</span>
             </span>
-            <span className="text-[12px] font-mono text-zinc-400 hidden sm:inline">
-              / {personalInfo.name}
+            <span className="text-[11px] sm:text-[12px] font-mono transition-all duration-500 whitespace-nowrap flex items-center gap-1">
+              <span className="text-zinc-500">/</span>
+              <span 
+                className="font-bold transition-colors duration-500 tracking-wide"
+                style={{
+                  color: activeAccentColor,
+                  textShadow: `0 0 14px ${activeAccentColor}70`
+                }}
+              >
+                <span className="xs:hidden">Samuel</span>
+                <span className="hidden xs:inline">{personalInfo.name}</span>
+              </span>
             </span>
           </button>
 
           {/* Dynamic Active Section Pill in Navbar */}
           {currentProject && (
-            <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono">
-              <span className="w-1.5 h-1.5 rounded-full bg-white/60" />
+            <div 
+              className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono transition-all duration-500"
+              style={{ borderColor: `${activeAccentColor}35` }}
+            >
+              <span 
+                className="w-1.5 h-1.5 rounded-full transition-colors duration-500" 
+                style={{ 
+                  backgroundColor: activeAccentColor, 
+                  boxShadow: `0 0 8px ${activeAccentColor}` 
+                }}
+              />
               <span className="text-zinc-400">PROYECTO:</span>
-              <span className="font-bold text-zinc-200">{currentProject.title}</span>
+              <span 
+                className="font-bold transition-colors duration-500"
+                style={{ color: activeAccentColor }}
+              >
+                {currentProject.title}
+              </span>
             </div>
           )}
 
@@ -88,8 +129,13 @@ export default function App() {
             <button
               onClick={() => handleSelectSection(1)}
               className={`hover:text-white transition-colors cursor-pointer ${
-                activeSectionIndex >= 1 && activeSectionIndex <= projectsData.length ? 'text-white font-bold' : ''
+                activeSectionIndex >= 1 && activeSectionIndex <= projectsData.length ? 'font-bold' : ''
               }`}
+              style={
+                activeSectionIndex >= 1 && activeSectionIndex <= projectsData.length 
+                  ? { color: activeAccentColor } 
+                  : undefined
+              }
               data-cursor="PROYECTOS"
             >
               Proyectos
@@ -97,8 +143,13 @@ export default function App() {
             <button
               onClick={() => handleSelectSection(projectsData.length + 1)}
               className={`hover:text-white transition-colors cursor-pointer ${
-                activeSectionIndex === projectsData.length + 1 ? 'text-white font-bold' : ''
+                activeSectionIndex === projectsData.length + 1 ? 'font-bold' : ''
               }`}
+              style={
+                activeSectionIndex === projectsData.length + 1 
+                  ? { color: activeAccentColor } 
+                  : undefined
+              }
               data-cursor="MÁS"
             >
               Más Proyectos
@@ -106,8 +157,13 @@ export default function App() {
             <button
               onClick={() => handleSelectSection(projectsData.length + 2)}
               className={`hover:text-white transition-colors cursor-pointer ${
-                activeSectionIndex === projectsData.length + 2 ? 'text-white font-bold' : ''
+                activeSectionIndex === projectsData.length + 2 ? 'font-bold' : ''
               }`}
+              style={
+                activeSectionIndex === projectsData.length + 2 
+                  ? { color: activeAccentColor } 
+                  : undefined
+              }
               data-cursor="STACK"
             >
               Stack & Servicios
@@ -115,8 +171,13 @@ export default function App() {
             <button
               onClick={() => handleSelectSection(projectsData.length + 3)}
               className={`hover:text-white transition-colors cursor-pointer ${
-                activeSectionIndex === projectsData.length + 3 ? 'text-white font-bold' : ''
+                activeSectionIndex === projectsData.length + 3 ? 'font-bold' : ''
               }`}
+              style={
+                activeSectionIndex === projectsData.length + 3 
+                  ? { color: activeAccentColor } 
+                  : undefined
+              }
               data-cursor="CONTACTO"
             >
               Contacto
@@ -153,37 +214,55 @@ export default function App() {
           <div className="md:hidden px-6 py-6 bg-zinc-950/98 border-b border-white/10 backdrop-blur-2xl flex flex-col gap-4 font-mono text-sm animate-in slide-in-from-top-4 duration-200">
             <button
               onClick={() => handleSelectSection(0)}
-              className="text-left text-zinc-300 hover:text-white py-1 flex items-center justify-between"
+              className={`text-left py-1 flex items-center justify-between ${
+                activeSectionIndex === 0 ? 'font-bold' : 'text-zinc-300 hover:text-white'
+              }`}
+              style={activeSectionIndex === 0 ? { color: activeAccentColor } : undefined}
             >
               <span>00. Inicio</span>
             </button>
             <div className="space-y-1.5 pl-2 border-l border-white/10">
-              {projectsData.map((p, idx) => (
-                <button
-                  key={p.id}
-                  onClick={() => handleSelectSection(idx + 1)}
-                  className="text-left text-xs text-zinc-400 hover:text-white block py-1"
-                >
-                  0{idx + 1}. {p.title}
-                </button>
-              ))}
+              {projectsData.map((p, idx) => {
+                const isActive = activeSectionIndex === idx + 1;
+                return (
+                  <button
+                    key={p.id}
+                    onClick={() => handleSelectSection(idx + 1)}
+                    className={`text-left text-xs block py-1 transition-colors ${
+                      isActive ? 'font-bold' : 'text-zinc-400 hover:text-white'
+                    }`}
+                    style={isActive ? { color: p.accent || activeAccentColor } : undefined}
+                  >
+                    0{idx + 1}. {p.title}
+                  </button>
+                );
+              })}
             </div>
             <div className="pt-2 border-t border-white/10 flex flex-col gap-3">
               <button
                 onClick={() => handleSelectSection(projectsData.length + 1)}
-                className="text-left text-zinc-300 hover:text-white py-1"
+                className={`text-left py-1 transition-colors ${
+                  activeSectionIndex === projectsData.length + 1 ? 'font-bold' : 'text-zinc-300 hover:text-white'
+                }`}
+                style={activeSectionIndex === projectsData.length + 1 ? { color: activeAccentColor } : undefined}
               >
                 Más Proyectos
               </button>
               <button
                 onClick={() => handleSelectSection(projectsData.length + 2)}
-                className="text-left text-zinc-300 hover:text-white py-1"
+                className={`text-left py-1 transition-colors ${
+                  activeSectionIndex === projectsData.length + 2 ? 'font-bold' : 'text-zinc-300 hover:text-white'
+                }`}
+                style={activeSectionIndex === projectsData.length + 2 ? { color: activeAccentColor } : undefined}
               >
                 Stack & Servicios
               </button>
               <button
                 onClick={() => handleSelectSection(projectsData.length + 3)}
-                className="text-left text-zinc-300 hover:text-white py-1"
+                className={`text-left py-1 transition-colors ${
+                  activeSectionIndex === projectsData.length + 3 ? 'font-bold' : 'text-zinc-300 hover:text-white'
+                }`}
+                style={activeSectionIndex === projectsData.length + 3 ? { color: activeAccentColor } : undefined}
               >
                 Contacto Directo
               </button>
