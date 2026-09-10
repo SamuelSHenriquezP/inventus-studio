@@ -33,11 +33,6 @@ export default function App() {
     setSelectedProject(p);
   }, []);
 
-  // Determine current active project or section theme
-  const currentProject = activeSectionIndex >= 1 && activeSectionIndex <= projectsData.length
-    ? projectsData[activeSectionIndex - 1]
-    : null;
-
   // Dynamic accent color according to current active tab/section
   const activeAccentColor = useMemo(() => {
     if (activeSectionIndex === 0) return '#ffffff'; // Inicio (Clean Silver/White)
@@ -82,11 +77,10 @@ export default function App() {
                 boxShadow: `0 0 10px ${activeAccentColor}90`
               }}
             />
-            <span className="font-display font-extrabold text-xs sm:text-base md:text-lg tracking-tight text-white whitespace-nowrap">
-              <span className="xs:hidden">Inventus</span>
-              <span className="hidden xs:inline">{personalInfo.studio}</span>
+            <span className="font-display font-extrabold text-sm sm:text-base md:text-lg tracking-tight text-white whitespace-nowrap">
+              {personalInfo.studio}
             </span>
-            <span className="text-[11px] sm:text-[12px] font-mono transition-all duration-500 whitespace-nowrap flex items-center gap-1">
+            <span className="text-[12px] sm:text-[13px] font-mono transition-all duration-500 whitespace-nowrap flex items-center gap-1.5">
               <span className="text-zinc-500">/</span>
               <span 
                 className="font-bold transition-colors duration-500 tracking-wide"
@@ -95,34 +89,10 @@ export default function App() {
                   textShadow: `0 0 14px ${activeAccentColor}70`
                 }}
               >
-                <span className="xs:hidden">Samuel</span>
-                <span className="hidden xs:inline">{personalInfo.name}</span>
+                {personalInfo.name}
               </span>
             </span>
           </button>
-
-          {/* Dynamic Active Section Pill in Navbar */}
-          {currentProject && (
-            <div 
-              className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono transition-all duration-500"
-              style={{ borderColor: `${activeAccentColor}35` }}
-            >
-              <span 
-                className="w-1.5 h-1.5 rounded-full transition-colors duration-500" 
-                style={{ 
-                  backgroundColor: activeAccentColor, 
-                  boxShadow: `0 0 8px ${activeAccentColor}` 
-                }}
-              />
-              <span className="text-zinc-400">PROYECTO:</span>
-              <span 
-                className="font-bold transition-colors duration-500"
-                style={{ color: activeAccentColor }}
-              >
-                {currentProject.title}
-              </span>
-            </div>
-          )}
 
           {/* Desktop Nav Links */}
           <nav className="hidden md:flex items-center gap-6 text-xs font-mono text-zinc-400">
