@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { sounds } from '../utils/soundEngine';
+import { personalInfo } from '../Data/projectsData';
 
 export default function PlayableDemoModal({ project, onClose }) {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -243,7 +244,7 @@ export default function PlayableDemoModal({ project, onClose }) {
           </button>
 
           <a
-            href={`https://wa.me/573000000000?text=Hola%20Samuel,%20quiero%20conversar%20sobre%20un%20proyecto%20similar%20a%20${encodeURIComponent(project.title)}`}
+            href={`https://wa.me/${personalInfo.whatsapp}?text=Hola%20${encodeURIComponent(personalInfo.name)},%20quiero%20conversar%20sobre%20un%20proyecto%20similar%20a%20${encodeURIComponent(project.title)}`}
             target="_blank"
             rel="noreferrer"
             className="px-6 py-3 rounded-full bg-white text-black font-bold flex items-center gap-1.5 hover:bg-zinc-200 transition-colors shadow-lg"

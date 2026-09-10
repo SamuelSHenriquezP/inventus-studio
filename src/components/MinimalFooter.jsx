@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { MessageSquare, Copy, Check, ArrowUpRight } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { personalInfo } from '../Data/projectsData';
 
 export default function MinimalFooter({ localTime }) {
   const [copied, setCopied] = useState(false);
@@ -13,8 +14,8 @@ export default function MinimalFooter({ localTime }) {
       origin: { y: 0.8 },
       colors: ['#ffffff', '#a1a1aa', '#52525b']
     });
-    const msg = "¡Hola Inventus Studio! Me gustaría conversar sobre el desarrollo de un proyecto de software para mi empresa.";
-    window.open(`https://wa.me/573000000000?text=${encodeURIComponent(msg)}`, '_blank');
+    const msg = `¡Hola ${personalInfo.name}! Me gustaría conversar sobre el desarrollo de un proyecto de software para mi empresa.`;
+    window.open(`https://wa.me/${personalInfo.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
   const copyEmail = () => {

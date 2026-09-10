@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Terminal as TerminalIcon, CornerDownLeft, Copy, Check, Star, GitFork } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { sounds } from '../utils/soundEngine';
+import { personalInfo } from '../Data/projectsData';
 
 export default function InteractiveTerminal() {
   const [input, setInput] = useState('');
@@ -50,7 +51,7 @@ export default function InteractiveTerminal() {
           githubRepos.map(r => `★ ${r.name} (${r.stars} Stars, ${r.forks} Forks) - [${r.lang}]\n  ↳ ${r.desc}`).join('\n\n');
         break;
       case 'stack':
-        res = '• Mobile: Flutter 3.x, Dart, Riverpod, Isar/Hive DB, Rust FFI\n• Frontend: React 19, Three.js, Tailwind v4, Lenis, WebGL, Framer Motion\n• Backend & Cloud: Node.js, WebSockets, PostgreSQL, Docker, Redis, Cloudflare Workers';
+        res = '• Enterprise Backend: Java, Spring Boot, Microservicios RESTful, Maven\n• Async APIs & Backend: Python, FastAPI, Pydantic, Node.js\n• Bases de Datos: SQL en general (PostgreSQL, MySQL, SQLite) & NoSQL (MongoDB, Firebase Firestore)\n• Versionamiento & DevOps: Git, GitHub, GitFlow, CI/CD Pipelines, Docker\n• Mobile: Flutter 3.x, Dart 3.x, Riverpod, Clean Architecture\n• Web & Frontend: React 19, JavaScript Vanilla (0 KB overhead), Tailwind CSS';
         break;
       case 'flutter':
         res = '✓ Flutter WebAssembly Activo\n✓ CanvasKit & Skia Renderer a 60-120 FPS\n✓ Arquitectura Limpia & Despliegue Multiplataforma (iOS, Android, Web, macOS/Windows)';
@@ -69,7 +70,7 @@ export default function InteractiveTerminal() {
           colors: ['#00F0FF', '#A855F7', '#10B981']
         });
         setTimeout(() => {
-          window.open('https://wa.me/573000000000?text=Hola%20Inventus%20Studio,%20quiero%20contratar%20su%20desarrollo%20de%20software', '_blank');
+          window.open(`https://wa.me/${personalInfo.whatsapp}?text=Hola%20${encodeURIComponent(personalInfo.name)},%20quiero%20contratar%20tu%20desarrollo%20de%20software`, '_blank');
         }, 1000);
         break;
       case 'clear':

@@ -4,11 +4,12 @@ export const personalInfo = {
   name: "Samuel Henríquez",
   studio: "Inventus Tech Studio",
   role: "Full-Stack Software Architect & Cloud Engineer",
-  specialization: "Arquitectura Backend, Sistemas Cloud & Ecosistemas Móviles/Web",
-  bio: "Diseño y construyo sistemas backend escalables en la nube, plataformas en tiempo real y consolas web administrativas conectadas con aplicaciones móviles nativas. Creador de ecosistemas digitales de misión crítica como Servi Intel.",
+  specialization: "Backend Empresarial (Java & Spring Boot, Python & FastAPI), SQL & NoSQL, Git & GitHub, Flutter & Web",
+  bio: "Diseño y construyo arquitecturas backend escalables (Java, Spring Boot, Python, FastAPI), gestión avanzada de bases de datos relacionales SQL y NoSQL (MongoDB), junto a aplicaciones móviles nativas en Flutter y consolas web de alto rendimiento.",
   location: "Cartagena, Colombia (GMT-5)",
   email: "contacto@inventustech.com",
-  whatsapp: "573000000000",
+  phone: "+57 305 220 5525",
+  whatsapp: "573052205525",
   github: "https://github.com/SamuelSHenriquezP",
   availability: "Disponible para Arquitectura Backend, Sistemas Cloud & Desarrollo de Ecosistemas"
 };
@@ -463,74 +464,74 @@ class StyleProvider extends ChangeNotifier {
 
 export const technologiesStudy = [
   {
-    category: "Arquitectura Cloud & Backend",
-    summary: "Sistemas serverless en tiempo real, bases de datos no relacionales, autenticación segura y gobernanza de datos estricta.",
-    skills: ["Firebase Firestore (Realtime DB)", "Cloud Functions (Node.js/TS)", "APIs REST & WebSockets", "Firestore Security Rules (RBAC)", "Orquestación & Microservicios Cloud"]
+    category: "Backend Empresarial & APIs",
+    summary: "Arquitectura de microservicios robustos, APIs asíncronas de alto rendimiento y lógica de servidor escalable.",
+    skills: ["Java & Spring Boot (Microservicios)", "Python & FastAPI (Async APIs)", "Node.js & Express", "Cloud Functions Serverless", "Arquitectura Hexagonal & Limpia"]
   },
   {
-    category: "Consolas Web & Ecosistemas Digitales",
-    summary: "Desarrollo de paneles administrativos de ultra-alta velocidad (0 KB overhead), consolas operativas y dashboards ejecutivos.",
-    skills: ["JavaScript Vanilla & React 19", "Consolas Web de Misión Crítica", "Tailwind CSS v4", "Power Apps & Power Automate", "Inteligencia de Negocio & ETL"]
+    category: "Bases de Datos (SQL & NoSQL)",
+    summary: "Modelado relacional y NoSQL de alta integridad, consultas optimizadas, transaccionalidad y sincronización.",
+    skills: ["SQL en General (PostgreSQL, MySQL, SQLite)", "MongoDB (Document DB)", "Firebase Firestore Realtime", "Reglas de Seguridad RBAC", "Optimización de Consultas & Índices"]
   },
   {
-    category: "Desarrollo Móvil Nativo",
-    summary: "Aplicaciones integradas para iOS y Android con Flutter a 60–120 FPS conectadas sincrónicamente con el backend.",
-    skills: ["Flutter 3.x & Dart 3.x", "State Management (Riverpod / Bloc)", "Resiliencia & Persistencia Local", "Integración GPS & Telemetría", "Clean Architecture & TDD"]
+    category: "Versionamiento, DevOps & Móvil/Web",
+    summary: "Control de versiones profesional, flujos CI/CD y desarrollo integral de aplicaciones nativas y consolas web.",
+    skills: ["Git & GitHub (GitFlow, CI/CD)", "Flutter 3.x & Dart (iOS & Android)", "React 19 & JavaScript Vanilla", "Tailwind CSS v4", "Docker & Despliegue Continuo"]
   }
 ];
 
 export const servicesOffer = [
   {
-    title: "Arquitectura Cloud & Backend Serverless",
-    subtitle: "Firebase Firestore & Cloud Functions",
-    desc: "Diseño e implemento sistemas backend en la nube reactivos y en tiempo real, funciones serverless en Node.js/TypeScript, reglas de seguridad RBAC estrictas y sincronización bidireccional de baja latencia (<38ms)."
+    title: "Arquitectura Backend, APIs & Microservicios",
+    subtitle: "Java Spring Boot & Python FastAPI",
+    desc: "Diseño e implemento arquitecturas backend robustas y microservicios escalables utilizando Java con Spring Boot y Python con FastAPI, con seguridad integral, endpoints RESTful y alto rendimiento."
+  },
+  {
+    title: "Gestión de Bases de Datos SQL & NoSQL",
+    subtitle: "PostgreSQL, MySQL, SQLite, MongoDB & Firestore",
+    desc: "Diseño de modelos de datos relacionales y documentales optimizados para consistencia, escalabilidad y consultas complejas, garantizando integridad y tiempos de respuesta ultra-bajos."
   },
   {
     title: "Ecosistemas Web & Consolas Operativas",
     subtitle: "Plataformas de Gestión & Dashboards",
-    desc: "Construcción de consolas administrativas y plataformas web de alta velocidad para el control de operaciones en vivo, despacho de tickets, gestión de cuadrillas y visualización estratégica de métricas."
+    desc: "Construcción de consolas administrativas y plataformas web de alta velocidad en React y Vanilla JS para el control de operaciones en vivo, despacho de tickets y analítica en tiempo real."
   },
   {
-    title: "Desarrollo de Apps Móviles Nativas",
-    subtitle: "iOS & Android con Flutter",
-    desc: "Desarrollo completo de aplicaciones móviles integradas a la infraestructura backend, con navegación a 60–120 FPS, firmado Android/iOS y despliegue real en Apple App Store y Google Play."
-  },
-  {
-    title: "Sistemas Empresariales & Automatización",
-    subtitle: "Power Platform, SharePoint & Power Automate",
-    desc: "Digitalización de procesos industriales y corporativos con validación de reglas de calidad, inicio de sesión seguro Microsoft 365 (SSO) y flujos automáticos de generación de reportes."
+    title: "Apps Móviles Nativas & Flujos CI/CD",
+    subtitle: "Flutter (iOS & Android) & Git/GitHub",
+    desc: "Desarrollo de aplicaciones móviles multiplataforma en Flutter a 60–120 FPS, integrado con control de versiones profesional en Git y GitHub y automatización de despliegues."
   }
 ];
 
 export const skillsList = [
   { 
-    category: "Backend & Cloud", 
+    category: "Backend & APIs", 
     items: [
-      "Firebase Firestore en Tiempo Real", 
+      "Java & Spring Boot", 
+      "Python & FastAPI", 
+      "Node.js & Express", 
       "Cloud Functions Serverless", 
-      "Reglas de Seguridad RBAC", 
-      "APIs REST & WebSockets", 
-      "Cloud Storage & Security"
+      "APIs RESTful & Microservicios"
     ] 
   },
   { 
-    category: "Web & Consolas Operativas", 
+    category: "Bases de Datos & Versionamiento", 
     items: [
-      "JavaScript Vanilla (0 KB Overhead)", 
-      "React 19 & Vite", 
-      "Tailwind CSS v4", 
-      "Power Apps & Power Automate", 
-      "Dashboards & ETL Analytics"
+      "SQL en General (PostgreSQL, MySQL, SQLite)", 
+      "MongoDB & Firebase Firestore", 
+      "Git & GitHub (GitFlow, CI/CD)", 
+      "Docker & Contenedores", 
+      "Reglas de Seguridad & RBAC"
     ] 
   },
   { 
-    category: "Móvil & Arquitectura", 
+    category: "Móvil & Consolas Web", 
     items: [
       "Flutter Nativo (iOS & Android)", 
       "Dart 3.x Moderno", 
-      "Gestión de Estado (Riverpod/Bloc)", 
-      "Publicación en Google Play Store", 
-      "Clean Architecture & TDD"
+      "JavaScript Vanilla (0 KB Overhead)", 
+      "React 19 & Vite", 
+      "Tailwind CSS v4"
     ] 
   }
 ];

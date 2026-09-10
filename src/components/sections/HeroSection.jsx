@@ -106,16 +106,16 @@ const HeroSection = React.memo(function HeroSection({ onExploreWorks, onExploreS
           {/* Technology Badges */}
           <div className="hero-fade flex flex-wrap items-center gap-1.5 sm:gap-2 font-mono text-[10px] sm:text-[11px] text-zinc-400">
             <span className="px-2 sm:px-3 py-0.5 sm:py-1 rounded-md bg-white/5 border border-white/10 text-zinc-200">
-              Backend Cloud & Serverless
+              Java • Spring Boot • Python • FastAPI
             </span>
             <span className="px-2 sm:px-3 py-0.5 sm:py-1 rounded-md bg-white/5 border border-white/10 text-zinc-200">
-              Firebase Realtime DB &lt;38ms
+              SQL & MongoDB
             </span>
             <span className="px-2 sm:px-3 py-0.5 sm:py-1 rounded-md bg-white/5 border border-white/10 text-zinc-200">
-              Consolas Web Administrativas
+              Git & GitHub
             </span>
             <span className="px-2 sm:px-3 py-0.5 sm:py-1 rounded-md bg-white/5 border border-white/10 text-zinc-200">
-              Apps Móviles Flutter Integradas
+              Flutter Móvil & Consolas Web
             </span>
           </div>
 

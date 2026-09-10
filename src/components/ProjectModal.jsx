@@ -1,6 +1,7 @@
 // src/components/ProjectModal.jsx
 import { useEffect } from 'react';
 import { X, ArrowUpRight, ShieldCheck, Cpu, MessageSquare } from 'lucide-react';
+import { personalInfo } from '../Data/projectsData';
 
 export default function ProjectModal({ project, onClose }) {
   useEffect(() => {
@@ -18,8 +19,8 @@ export default function ProjectModal({ project, onClose }) {
   if (!project) return null;
 
   const handleConsult = () => {
-    const msg = `¡Hola Inventus Studio! Vi el caso de estudio de *${project.title}* en su portafolio y me gustaría cotizar una solución técnica similar para mi empresa.`;
-    window.open(`https://wa.me/573000000000?text=${encodeURIComponent(msg)}`, '_blank');
+    const msg = `¡Hola ${personalInfo.name}! Vi el caso de estudio de *${project.title}* en tu portafolio y me gustaría cotizar una solución técnica similar para mi empresa.`;
+    window.open(`https://wa.me/${personalInfo.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
   return (

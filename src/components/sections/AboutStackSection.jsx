@@ -105,33 +105,58 @@ export default function AboutStackSection({ isActive = true }) {
   }, [isActive]);
 
   const technologies = [
-    { name: "Firebase Cloud & Firestore", desc: "Sistemas backend serverless en tiempo real, Auth y reglas de seguridad RBAC.", tag: "REALTIME DB" },
-    { name: "Cloud Functions & Node.js", desc: "Lógica de backend serverless, microservicios, APIs REST y WebSockets.", tag: "SERVERLESS" },
-    { name: "Consolas Web & Dashboards", desc: "Paneles administrativos de ultra-alta velocidad (0 KB overhead) en Vanilla JS / React.", tag: "WEB ADMIN" },
-    { name: "Flutter 3.x & Dart 3.x", desc: "Desarrollo de apps móviles nativas multiplataforma (iOS / Android) a 60–120 FPS.", tag: "FLUTTER" },
-    { name: "Power Platform & Enterprise", desc: "Digitalización industrial con Power Apps, SharePoint DB y Power Automate.", tag: "ENTERPRISE" }
+    { 
+      name: "Java & Spring Boot", 
+      desc: "Arquitectura backend empresarial, microservicios, APIs REST seguras y persistencia relacional.", 
+      tag: "JAVA / SPRING" 
+    },
+    { 
+      name: "Python & FastAPI", 
+      desc: "Servicios asíncronos de alta velocidad, validación estricta con Pydantic y microservicios modernos.", 
+      tag: "FASTAPI / PYTHON" 
+    },
+    { 
+      name: "SQL en General & MongoDB", 
+      desc: "Modelado relacional y NoSQL: PostgreSQL, MySQL, SQLite, MongoDB y bases de datos en tiempo real.", 
+      tag: "SQL & NOSQL" 
+    },
+    { 
+      name: "Git, GitHub & Flujos CI/CD", 
+      desc: "Control de versiones profesional, flujo GitFlow, code review, automatización y despliegue continuo.", 
+      tag: "GIT & DEVOPS" 
+    },
+    { 
+      name: "Flutter 3.x & Dart", 
+      desc: "Desarrollo de aplicaciones móviles nativas multiplataforma (iOS y Android) fluidas a 60–120 FPS.", 
+      tag: "MOBILE APPS" 
+    },
+    { 
+      name: "Web Apps & Cloud Services", 
+      desc: "Consolas administrativas en React / Vanilla JS (0 KB overhead), Node.js y cloud serverless.", 
+      tag: "WEB & CLOUD" 
+    }
   ];
 
   const services = [
     {
       num: "01",
-      title: "Arquitectura Backend & Cloud",
-      desc: "Diseño de infraestructura serverless, bases de datos Firestore reactivas, Cloud Functions y reglas de seguridad RBAC."
+      title: "Arquitectura Backend & APIs Robustas",
+      desc: "Diseño y construcción de APIs REST y microservicios con Java Spring Boot, Python FastAPI y Node.js con alta disponibilidad."
     },
     {
       num: "02",
-      title: "Consolas Web & Dashboards Operativos",
-      desc: "Creación de plataformas de gestión de operaciones, monitoreo en tiempo real, despacho de tickets y control de flotas."
+      title: "Bases de Datos SQL & NoSQL",
+      desc: "Modelado relacional y transaccional con PostgreSQL, MySQL, SQLite, junto a soluciones NoSQL como MongoDB y Firestore."
     },
     {
       num: "03",
-      title: "Desarrollo de Apps Móviles",
-      desc: "Desarrollo completo de aplicaciones nativas en Flutter conectadas sincrónicamente con el backend cloud."
+      title: "Consolas Web & Dashboards Operativos",
+      desc: "Creación de plataformas administrativas de alto rendimiento en React y JavaScript Vanilla con 0 KB de sobrecarga."
     },
     {
       num: "04",
-      title: "Automatización Industrial & Power Apps",
-      desc: "Digitalización de procesos corporativos en planta con validaciones en tiempo real y generación de informes automatizados."
+      title: "Desarrollo Móvil Nativo & DevOps",
+      desc: "Apps móviles nativas en Flutter (iOS/Android), versionamiento profesional con Git/GitHub y flujos CI/CD automatizados."
     }
   ];
 
@@ -142,7 +167,7 @@ export default function AboutStackSection({ isActive = true }) {
     <section 
       id="about-stack-section"
       ref={containerRef}
-      className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-20 sm:pt-20 pb-6 sm:pb-16 relative select-none custom-scroll"
+      className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-20 sm:pt-20 pb-16 sm:pb-20 relative select-none custom-scroll overflow-y-auto"
       style={{
         background: 'radial-gradient(ellipse 100% 100% at 50% 20%, #13141a 0%, #0a0b0f 55%, #050508 100%)'
       }}

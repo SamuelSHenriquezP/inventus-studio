@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { sounds } from '../utils/soundEngine';
+import { personalInfo } from '../Data/projectsData';
 
 export default function ProjectEstimator() {
   const [projectType, setProjectType] = useState('enterprise');
@@ -86,7 +87,7 @@ export default function ProjectEstimator() {
 
     const msg = `¡Hola Inventus Tech Studio! Me gustaría cotizar un proyecto:%0A%0A*Tipo de Proyecto:* ${chosenType}%0A*Tiempo estimado:* ~${calculateEstimate()} semanas (${timeline === 'urgent' ? 'Modo Sprint Rápido' : 'Desarrollo Estándar'})%0A%0A*Módulos requeridos:*%0A${chosenFeatures}%0A%0A¿Podemos agendar una llamada técnica de 15 minutos?`;
 
-    window.open(`https://wa.me/573000000000?text=${msg}`, '_blank');
+    window.open(`https://wa.me/${personalInfo.whatsapp}?text=${msg}`, '_blank');
   };
 
   return (
