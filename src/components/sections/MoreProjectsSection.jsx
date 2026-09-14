@@ -1,7 +1,7 @@
 // src/components/sections/MoreProjectsSection.jsx
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-import { ArrowUpRight, ExternalLink, Sparkles } from 'lucide-react';
+import { ArrowUpRight, ExternalLink, Sparkles, Code2, Smartphone, Globe } from 'lucide-react';
 import { secondaryProjectsData } from '../../Data/projectsData';
 import ProjectDetailModal from '../ProjectDetailModal';
 import { sounds } from '../../utils/soundEngine';
@@ -10,6 +10,7 @@ export default React.memo(function MoreProjectsSection({ isActive = true }) {
   const containerRef = useRef(null);
   const titleRef = useRef(null);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [activeFilter, setActiveFilter] = useState('all');
 
   useEffect(() => {
     const el = containerRef.current;
@@ -71,7 +72,7 @@ export default React.memo(function MoreProjectsSection({ isActive = true }) {
           y: 24,
           scale: 0.95,
           duration: 0.45,
-          stagger: 0.05,
+          stagger: 0.04,
           ease: 'power2.out',
           clearProps: 'all',
         },
@@ -80,17 +81,23 @@ export default React.memo(function MoreProjectsSection({ isActive = true }) {
     }, el);
 
     return () => ctx.revert();
-  }, [isActive]);
+  }, [isActive, activeFilter]);
 
   const mainWord = "Trabajo".split("");
   const hlWord = "Adicional".split("");
+
+  const filteredProjects = secondaryProjectsData.filter(p => {
+    if (activeFilter === 'flutter') return p.deviceType === 'phone-vertical';
+    if (activeFilter === 'web') return p.deviceType === 'laptop';
+    return true;
+  });
 
   return (
     <>
       <section
         id="more-projects-section"
         ref={containerRef}
-        className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-20 sm:pt-20 pb-6 sm:pb-16 relative select-none custom-scroll"
+        className="w-full min-h-full flex flex-col justify-start md:justify-center px-3 sm:px-8 md:px-12 lg:px-20 pt-20 sm:pt-20 pb-16 sm:pb-24 relative select-none custom-scroll overflow-y-auto"
         style={{
           background: 'radial-gradient(ellipse 100% 100% at 50% 15%, #0f111a 0%, #0a0b10 55%, #050508 100%)'
         }}
@@ -98,17 +105,17 @@ export default React.memo(function MoreProjectsSection({ isActive = true }) {
         {/* Subtle Ambient Glow */}
         <div className="absolute top-1/4 right-1/4 w-96 sm:w-112.5 h-96 sm:h-112.5 bg-violet-600/10 rounded-full blur-[130px] pointer-events-none -z-10" />
 
-        <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-3 sm:space-y-6 perspective-[1000px]">
+        <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-3 sm:space-y-4.5 perspective-[1000px]">
 
           {/* Section Header */}
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-white/10 pb-3.5 sm:pb-4">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-white/10 pb-3 sm:pb-3.5">
             <div className="space-y-1 sm:space-y-1.5">
               <div className="more-header-anim inline-flex items-center gap-2 text-xs font-mono text-violet-400">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-violet-500" />
                 </span>
-                <span>07 // MÁS PROYECTOS & HERRAMIENTAS</span>
+                <span>07 // MÁS PROYECTOS & HERRAMIENTAS ({secondaryProjectsData.length})</span>
               </div>
 
               {/* Animated 3D Cinematic Title */}
@@ -129,27 +136,43 @@ export default React.memo(function MoreProjectsSection({ isActive = true }) {
                 </span>
               </h2>
 
-              <p className="more-header-anim text-xs sm:text-sm text-zinc-400 font-sans max-w-lg leading-relaxed">
-                Proyectos complementarios y herramientas de ingeniería que demuestran el alcance técnico — toca cualquier tarjeta para abrir el simulador interactivo.
+              <p className="more-header-anim text-xs sm:text-sm text-zinc-400 font-sans max-w-xl leading-relaxed">
+                Ecosistema de proyectos desarrollados en la suite de ingeniería — pulsa en cualquier tarjeta para abrir su simulador interactivo y explorar su código en GitHub.
               </p>
             </div>
 
-            <div className="more-header-anim hidden sm:flex items-center gap-2 text-xs font-mono text-zinc-500">
-              <Sparkles className="w-3.5 h-3.5 text-violet-400 animate-pulse" />
-              <span>Simuladores Interactivos Habilitados</span>
+            {/* Filter Tabs */}
+            <div className="more-header-anim flex items-center gap-1.5 p-1 rounded-full bg-white/5 border border-white/10 font-mono text-[10.5px]">
+              {[
+                { id: 'all', label: 'Todos' },
+                { id: 'flutter', label: 'Flutter Apps' },
+                { id: 'web', label: 'Web & SaaS' }
+              ].map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={() => { sounds.playClick(); setActiveFilter(tab.id); }}
+                  className={`px-3 py-1 rounded-full transition-all cursor-pointer ${
+                    activeFilter === tab.id
+                      ? 'bg-violet-500 text-white font-bold shadow-sm shadow-violet-500/30'
+                      : 'text-zinc-400 hover:text-white'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
             </div>
           </div>
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 pb-6 sm:pb-0">
-            {secondaryProjectsData.map((project) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-3.5 pb-6 sm:pb-0">
+            {filteredProjects.map((project) => (
               <button
                 key={project.id}
                 onClick={() => {
                   sounds.playClick();
                   setSelectedProject(project);
                 }}
-                className="more-card-anim group text-left p-3.5 sm:p-4.5 xl:p-5 rounded-2xl bg-white/2 border border-white/5 hover:bg-white/5 hover:border-white/20 transition-all duration-300 cursor-pointer space-y-2.5 sm:space-y-3.5 relative overflow-hidden active:scale-[0.98] hover:shadow-[0_15px_35px_rgba(0,0,0,0.6)]"
+                className="more-card-anim group text-left p-3.5 sm:p-4 rounded-2xl bg-white/2 border border-white/5 hover:bg-white/5 hover:border-white/20 transition-all duration-300 cursor-pointer space-y-2 sm:space-y-2.5 relative overflow-hidden active:scale-[0.98] hover:shadow-[0_15px_35px_rgba(0,0,0,0.6)]"
               >
                 {/* Top dynamic accent bar */}
                 <div
@@ -160,26 +183,40 @@ export default React.memo(function MoreProjectsSection({ isActive = true }) {
                 {/* Category & Year */}
                 <div className="flex items-center justify-between font-mono text-[10px]">
                   <span className="text-zinc-400 group-hover:text-zinc-200 transition-colors font-medium">{project.category}</span>
-                  <span className="text-zinc-500">{project.year}</span>
+                  <div className="flex items-center gap-1.5">
+                    {project.githubUrl && (
+                      <span className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-white/5 border border-white/5 text-zinc-400 group-hover:text-violet-300 transition-colors">
+                        <Code2 className="w-2.5 h-2.5" />
+                        <span>Git</span>
+                      </span>
+                    )}
+                    {project.liveUrl && (
+                      <span className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 group-hover:text-emerald-300 transition-colors">
+                        <Globe className="w-2.5 h-2.5" />
+                        <span>En vivo</span>
+                      </span>
+                    )}
+                    <span className="text-zinc-500">{project.year}</span>
+                  </div>
                 </div>
 
                 {/* Title & Subtitle */}
-                <div className="space-y-1">
+                <div className="space-y-0.5">
                   <div className="flex items-start justify-between gap-2">
-                    <h3 className="text-sm sm:text-base font-display font-bold text-white tracking-tight leading-tight group-hover:text-violet-200 transition-colors">
+                    <h3 className="text-xs sm:text-sm font-display font-bold text-white tracking-tight leading-tight group-hover:text-violet-200 transition-colors">
                       {project.title}
                     </h3>
                     <ExternalLink
-                      className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-zinc-500 group-hover:text-violet-400 group-hover:rotate-12 transition-all shrink-0 mt-0.5"
+                      className="w-3.5 h-3.5 text-zinc-500 group-hover:text-violet-400 group-hover:rotate-12 transition-all shrink-0 mt-0.5"
                     />
                   </div>
-                  <p className="text-[11px] sm:text-xs text-zinc-400 font-sans leading-relaxed line-clamp-2">
+                  <p className="text-[10.5px] sm:text-[11px] text-zinc-400 font-sans leading-relaxed line-clamp-2">
                     {project.subtitle}
                   </p>
                 </div>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-1 font-mono text-[9.5px] sm:text-[10px]">
+                <div className="flex flex-wrap gap-1 font-mono text-[9px] sm:text-[9.5px]">
                   {project.tags.slice(0, 3).map(t => (
                     <span
                       key={t}
@@ -189,7 +226,7 @@ export default React.memo(function MoreProjectsSection({ isActive = true }) {
                     </span>
                   ))}
                   {project.tags.length > 3 && (
-                    <span className="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-zinc-500">
+                    <span className="px-1.5 py-0.5 rounded-md bg-white/5 border border-white/5 text-zinc-500">
                       +{project.tags.length - 3}
                     </span>
                   )}
@@ -197,11 +234,18 @@ export default React.memo(function MoreProjectsSection({ isActive = true }) {
 
                 {/* Bottom CTA hint */}
                 <div
-                  className="flex items-center gap-1.5 font-mono text-[10px] sm:text-[10.5px] font-semibold transition-all duration-300 group-hover:translate-x-1"
-                  style={{ color: project.accent }}
+                  className="flex items-center justify-between font-mono text-[10px] pt-0.5 border-t border-white/5"
                 >
-                  <span>Probar simulador</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <span
+                    className="flex items-center gap-1 font-semibold transition-all duration-300 group-hover:translate-x-0.5"
+                    style={{ color: project.accent }}
+                  >
+                    <span>Probar simulador</span>
+                    <ArrowUpRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </span>
+                  <span className="text-zinc-500 text-[9px]">
+                    {project.deviceType === 'phone-vertical' ? 'Mobile' : 'Web'}
+                  </span>
                 </div>
               </button>
             ))}

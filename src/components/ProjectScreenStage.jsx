@@ -1062,7 +1062,7 @@ const ProjectScreenStage = memo(function ProjectScreenStage({ project, onPlayDem
                 </button>
 
                 <a
-                  href={project.googlePlayUrl || "https://play.google.com/store/apps/details?id=com.inventus.sopasenior"}
+                  href={project.googlePlayUrl || "https://play.google.com/store/apps/details?id=com.sunliesstudio.sopadeletras"}
                   target="_blank"
                   rel="noreferrer"
                   data-cursor="PLAYSTORE"

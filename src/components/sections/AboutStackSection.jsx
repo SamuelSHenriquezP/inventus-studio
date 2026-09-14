@@ -105,58 +105,36 @@ export default function AboutStackSection({ isActive = true }) {
   }, [isActive]);
 
   const technologies = [
-    { 
-      name: "Java & Spring Boot", 
-      desc: "Arquitectura backend empresarial, microservicios, APIs REST seguras y persistencia relacional.", 
-      tag: "JAVA / SPRING" 
-    },
-    { 
-      name: "Python & FastAPI", 
-      desc: "Servicios asíncronos de alta velocidad, validación estricta con Pydantic y microservicios modernos.", 
-      tag: "FASTAPI / PYTHON" 
-    },
-    { 
-      name: "SQL en General & MongoDB", 
-      desc: "Modelado relacional y NoSQL: PostgreSQL, MySQL, SQLite, MongoDB y bases de datos en tiempo real.", 
-      tag: "SQL & NOSQL" 
-    },
-    { 
-      name: "Git, GitHub & Flujos CI/CD", 
-      desc: "Control de versiones profesional, flujo GitFlow, code review, automatización y despliegue continuo.", 
-      tag: "GIT & DEVOPS" 
-    },
-    { 
-      name: "Flutter 3.x & Dart", 
-      desc: "Desarrollo de aplicaciones móviles nativas multiplataforma (iOS y Android) fluidas a 60–120 FPS.", 
-      tag: "MOBILE APPS" 
-    },
-    { 
-      name: "Web Apps & Cloud Services", 
-      desc: "Consolas administrativas en React / Vanilla JS (0 KB overhead), Node.js y cloud serverless.", 
-      tag: "WEB & CLOUD" 
-    }
+    { name: "Java & Spring Boot",           tag: "JAVA / SPRING",     icon: "☕" },
+    { name: "Python & FastAPI",             tag: "FASTAPI / PYTHON",  icon: "🐍" },
+    { name: "Automatización n8n",           tag: "N8N & WEBHOOKS",    icon: "⚙️" },
+    { name: "IA & APIs LLM",               tag: "AI / LLM APIS",     icon: "🤖" },
+    { name: "SQL & MongoDB",               tag: "SQL & NOSQL",       icon: "🗄️" },
+    { name: "Git, GitHub & CI/CD",         tag: "GIT & DEVOPS",      icon: "🔀" },
+    { name: "Flutter & Dart Nativo",        tag: "MOBILE APPS",       icon: "📱" },
+    { name: "React, Vite & Web",           tag: "WEB & CLOUD",       icon: "🌐" },
   ];
 
   const services = [
     {
       num: "01",
       title: "Arquitectura Backend & APIs Robustas",
-      desc: "Diseño y construcción de APIs REST y microservicios con Java Spring Boot, Python FastAPI y Node.js con alta disponibilidad."
+      desc: "Diseño y construcción de APIs REST y microservicios con Java Spring Boot, Python FastAPI y Node.js con alta disponibilidad y seguridad."
     },
     {
       num: "02",
-      title: "Bases de Datos SQL & NoSQL",
-      desc: "Modelado relacional y transaccional con PostgreSQL, MySQL, SQLite, junto a soluciones NoSQL como MongoDB y Firestore."
+      title: "Automatización n8n & Soluciones con IA",
+      desc: "Orquestación de flujos de trabajo autónomos con n8n e integración de APIs de Inteligencia Artificial (OpenAI, Claude, Gemini) para tareas complejas."
     },
     {
       num: "03",
-      title: "Consolas Web & Dashboards Operativos",
-      desc: "Creación de plataformas administrativas de alto rendimiento en React y JavaScript Vanilla con 0 KB de sobrecarga."
+      title: "Bases de Datos SQL & NoSQL Optimizadas",
+      desc: "Modelado relacional y transaccional con PostgreSQL, MySQL, SQLite, junto a soluciones NoSQL como MongoDB y Firestore."
     },
     {
       num: "04",
-      title: "Desarrollo Móvil Nativo & DevOps",
-      desc: "Apps móviles nativas en Flutter (iOS/Android), versionamiento profesional con Git/GitHub y flujos CI/CD automatizados."
+      title: "Desarrollo Móvil Flutter & Consolas Web",
+      desc: "Apps móviles nativas en Flutter (iOS/Android), consolas web en React y versionamiento profesional con Git/GitHub y flujos CI/CD."
     }
   ];
 
@@ -175,10 +153,10 @@ export default function AboutStackSection({ isActive = true }) {
       {/* Subtle Ambient Glow */}
       <div className="absolute top-1/3 left-1/4 w-96 sm:w-112.5 h-96 sm:h-112.5 bg-emerald-600/10 rounded-full blur-[140px] pointer-events-none -z-10" />
 
-      <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-2.5 sm:space-y-4.5 perspective-[1000px]">
+      <div className="max-w-7xl w-full mx-auto flex flex-col my-auto space-y-2.5 sm:space-y-4 perspective-[1000px]">
         
         {/* Clean Header Bar */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-white/10 pb-3.5 sm:pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-white/10 pb-3 sm:pb-3.5">
           <div className="space-y-1 sm:space-y-1.5">
             <div className="about-header-anim inline-flex items-center gap-2 text-xs font-mono text-emerald-400">
               <span className="relative flex h-2 w-2">
@@ -233,50 +211,47 @@ export default function AboutStackSection({ isActive = true }) {
         </div>
 
         {/* 2-Column Minimalist Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-12 items-start pb-6 sm:pb-0">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-start pb-4 sm:pb-0">
           
-          {/* Column 1: Tecnologías & Enfoque */}
-          <div className="lg:col-span-5 space-y-3 sm:space-y-4">
+          {/* Column 1: Tecnologías — compact 2×4 grid */}
+          <div className="lg:col-span-5 space-y-2.5 sm:space-y-3">
             <div className="about-header-anim font-mono text-xs font-bold uppercase tracking-wider text-zinc-400 border-b border-white/10 pb-2 flex items-center justify-between">
               <span>Tecnologías que Domino</span>
               <span className="text-[10px] text-emerald-400">STACK 2026</span>
             </div>
 
-            <div className="space-y-2 sm:space-y-2.5 font-sans">
+            <div className="grid grid-cols-2 gap-2 font-sans">
               {technologies.map((t) => (
                 <div 
                   key={t.name} 
-                  className="about-tech-item group p-2 sm:p-2.5 rounded-xl bg-white/1.5 border border-white/5 hover:bg-white/4 hover:border-white/15 transition-all duration-300 space-y-0.5"
+                  className="about-tech-item group p-2.5 sm:p-3 rounded-xl bg-white/2 border border-white/5 hover:bg-white/5 hover:border-emerald-500/25 transition-all duration-300 space-y-1 cursor-default"
                 >
-                  <div className="text-xs sm:text-sm font-semibold text-white flex items-center justify-between">
-                    <div className="flex items-center gap-1.5 sm:gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399] group-hover:scale-125 transition-transform" />
-                      <span className="group-hover:text-emerald-200 transition-colors">{t.name}</span>
+                  <div className="flex items-center justify-between gap-1">
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_5px_#34d399] group-hover:scale-125 transition-transform shrink-0" />
+                      <span className="text-[11px] sm:text-xs font-semibold text-white group-hover:text-emerald-200 transition-colors leading-tight">{t.name}</span>
                     </div>
-                    <span className="font-mono text-[9px] sm:text-[9.5px] px-1.5 py-0.5 rounded bg-white/5 text-zinc-400 group-hover:text-emerald-300 group-hover:bg-emerald-500/10 transition-all">
-                      {t.tag}
-                    </span>
                   </div>
-                  <p className="text-[11px] sm:text-xs text-zinc-400 pl-3 leading-relaxed">
-                    {t.desc}
-                  </p>
+                  <span className="font-mono text-[9px] px-1.5 py-0.5 rounded bg-white/5 text-zinc-400 group-hover:text-emerald-300 group-hover:bg-emerald-500/10 transition-all inline-block">
+                    {t.tag}
+                  </span>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Column 2: Lo que puedo ofrecer */}
-          <div className="lg:col-span-7 space-y-3 sm:space-y-4">
+          {/* Column 2: Servicios */}
+          <div className="lg:col-span-7 space-y-2.5 sm:space-y-3">
             <div className="about-header-anim font-mono text-xs font-bold uppercase tracking-wider text-zinc-400 border-b border-white/10 pb-2 flex items-center justify-between">
               <span>Servicios de Software</span>
               <span className="text-[10px] text-zinc-500">LLAVE EN MANO</span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
               {services.map((s) => (
                 <div 
                   key={s.num} 
-                  className="about-service-card group p-3.5 sm:p-4.5 rounded-xl sm:rounded-2xl bg-white/2 border border-white/5 hover:bg-white/5 hover:border-emerald-500/30 transition-all duration-300 space-y-1.5 sm:space-y-2 relative overflow-hidden active:scale-[0.98] hover:shadow-[0_12px_30px_rgba(0,0,0,0.5)]"
+                  className="about-service-card group p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white/2 border border-white/5 hover:bg-white/5 hover:border-emerald-500/30 transition-all duration-300 space-y-1.5 relative overflow-hidden active:scale-[0.98] hover:shadow-[0_12px_30px_rgba(0,0,0,0.5)]"
                 >
                   {/* Subtle Top Accent */}
                   <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-emerald-500/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -285,10 +260,10 @@ export default function AboutStackSection({ isActive = true }) {
                     <span className="text-emerald-400 group-hover:drop-shadow-[0_0_8px_rgba(52,211,153,0.5)]">{s.num} // SERVICIO</span>
                     <Sparkles className="w-3.5 h-3.5 text-zinc-600 group-hover:text-emerald-400 transition-colors" />
                   </div>
-                  <div className="text-xs sm:text-sm font-bold text-white font-display group-hover:text-emerald-100 transition-colors">
+                  <div className="text-xs sm:text-sm font-bold text-white font-display group-hover:text-emerald-100 transition-colors leading-tight">
                     {s.title}
                   </div>
-                  <p className="text-[11px] sm:text-xs text-zinc-400 font-sans leading-relaxed">
+                  <p className="text-[10.5px] sm:text-xs text-zinc-400 font-sans leading-relaxed">
                     {s.desc}
                   </p>
                 </div>
@@ -302,3 +277,4 @@ export default function AboutStackSection({ isActive = true }) {
     </section>
   );
 }
+

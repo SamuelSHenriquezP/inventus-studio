@@ -4,8 +4,8 @@ export const personalInfo = {
   name: "Samuel Henríquez",
   studio: "Inventus Tech Studio",
   role: "Full-Stack Software Architect & Cloud Engineer",
-  specialization: "Backend Empresarial (Java & Spring Boot, Python & FastAPI), SQL & NoSQL, Git & GitHub, Flutter & Web",
-  bio: "Diseño y construyo arquitecturas backend escalables (Java, Spring Boot, Python, FastAPI), gestión avanzada de bases de datos relacionales SQL y NoSQL (MongoDB), junto a aplicaciones móviles nativas en Flutter y consolas web de alto rendimiento.",
+  specialization: "Backend Empresarial (Java & Spring Boot, Python & FastAPI), Automatización n8n, APIs de IA, SQL & NoSQL, Flutter & Web",
+  bio: "Diseño y construyo arquitecturas backend escalables (Java, Spring Boot, Python, FastAPI), orquestación con n8n y APIs de Inteligencia Artificial, bases de datos relacionales SQL y NoSQL, junto a aplicaciones móviles nativas en Flutter y consolas web.",
   location: "Cartagena, Colombia (GMT-5)",
   email: "contacto@inventustech.com",
   phone: "+57 305 220 5525",
@@ -206,9 +206,9 @@ With(
     image: "/assets/projects/serviintel.png",
     tags: ["Flutter Nativo", "Google Play Store", "Google AdMob", "In-App Purchases", "Procedural Engine", "Android SDK"],
     demoType: "store",
-    googlePlayUrl: "https://play.google.com/store/apps/details?id=com.inventus.sopasenior",
+    googlePlayUrl: "https://play.google.com/store/apps/details?id=com.sunliesstudio.sopadeletras",
     githubUrl: "https://github.com/SamuelSHenriquezP/Sopa-de-letras",
-    demoUrl: "https://play.google.com/store/apps/details?id=com.inventus.sopasenior",
+    demoUrl: "https://play.google.com/store/apps/details?id=com.sunliesstudio.sopadeletras",
     accent: "#f59e0b",
     accentGlow: "rgba(245, 158, 11, 0.25)",
     bgGradient: "radial-gradient(ellipse 80% 80% at 50% -10%, rgba(245, 158, 11, 0.16), rgba(38, 22, 5, 0.95) 60%, #0d0701 100%)",
@@ -464,42 +464,42 @@ class StyleProvider extends ChangeNotifier {
 
 export const technologiesStudy = [
   {
-    category: "Backend Empresarial & APIs",
-    summary: "Arquitectura de microservicios robustos, APIs asíncronas de alto rendimiento y lógica de servidor escalable.",
-    skills: ["Java & Spring Boot (Microservicios)", "Python & FastAPI (Async APIs)", "Node.js & Express", "Cloud Functions Serverless", "Arquitectura Hexagonal & Limpia"]
+    category: "Backend Empresarial, APIs & Automatización",
+    summary: "Arquitectura de microservicios robustos, APIs asíncronas de alto rendimiento y flujos automatizados con n8n.",
+    skills: ["Java & Spring Boot (Microservicios)", "Python & FastAPI (Async APIs)", "Automatización n8n & Webhooks", "Node.js & Express Serverless", "Arquitectura Limpia & Hexagonal"]
   },
   {
-    category: "Bases de Datos (SQL & NoSQL)",
-    summary: "Modelado relacional y NoSQL de alta integridad, consultas optimizadas, transaccionalidad y sincronización.",
-    skills: ["SQL en General (PostgreSQL, MySQL, SQLite)", "MongoDB (Document DB)", "Firebase Firestore Realtime", "Reglas de Seguridad RBAC", "Optimización de Consultas & Índices"]
+    category: "Inteligencia Artificial & Bases de Datos",
+    summary: "Integración de modelos y APIs de IA, procesamiento inteligente y modelado relacional y NoSQL de alta integridad.",
+    skills: ["APIs de IA (OpenAI, Gemini, Claude)", "Agentes & Automatizaciones Inteligentes", "SQL en General (PostgreSQL, MySQL, SQLite)", "MongoDB & Firebase Firestore", "Optimización de Consultas & Índices"]
   },
   {
-    category: "Versionamiento, DevOps & Móvil/Web",
-    summary: "Control de versiones profesional, flujos CI/CD y desarrollo integral de aplicaciones nativas y consolas web.",
-    skills: ["Git & GitHub (GitFlow, CI/CD)", "Flutter 3.x & Dart (iOS & Android)", "React 19 & JavaScript Vanilla", "Tailwind CSS v4", "Docker & Despliegue Continuo"]
+    category: "Móvil, Web & Versionamiento CI/CD",
+    summary: "Desarrollo integral de aplicaciones móviles nativas, consolas web y control de versiones profesional.",
+    skills: ["Flutter 3.x & Dart (iOS & Android)", "Git & GitHub (GitFlow, CI/CD)", "React 19 & JavaScript Vanilla", "Tailwind CSS v4", "Docker & Despliegue Continuo"]
   }
 ];
 
 export const servicesOffer = [
   {
-    title: "Arquitectura Backend, APIs & Microservicios",
+    title: "Arquitectura Backend & APIs de Alto Rendimiento",
     subtitle: "Java Spring Boot & Python FastAPI",
-    desc: "Diseño e implemento arquitecturas backend robustas y microservicios escalables utilizando Java con Spring Boot y Python con FastAPI, con seguridad integral, endpoints RESTful y alto rendimiento."
+    desc: "Diseño e implemento arquitecturas backend robustas y microservicios escalables utilizando Java con Spring Boot y Python con FastAPI, con seguridad integral, endpoints RESTful y baja latencia."
   },
   {
-    title: "Gestión de Bases de Datos SQL & NoSQL",
+    title: "Automatización con n8n & Soluciones con IA",
+    subtitle: "Flujos de Trabajo Autónomos & APIs de LLMs",
+    desc: "Construyo pipelines de automatización con n8n orquestando webhooks y APIs de Inteligencia Artificial (OpenAI, Gemini, Claude) para clasificar datos, generar alertas y agilizar operaciones empresariales."
+  },
+  {
+    title: "Bases de Datos SQL & NoSQL de Alta Fidelidad",
     subtitle: "PostgreSQL, MySQL, SQLite, MongoDB & Firestore",
-    desc: "Diseño de modelos de datos relacionales y documentales optimizados para consistencia, escalabilidad y consultas complejas, garantizando integridad y tiempos de respuesta ultra-bajos."
+    desc: "Diseño modelos de datos relacionales y documentales optimizados para transaccionalidad, integridad, consultas complejas y sincronización reactiva en tiempo real."
   },
   {
-    title: "Ecosistemas Web & Consolas Operativas",
-    subtitle: "Plataformas de Gestión & Dashboards",
-    desc: "Construcción de consolas administrativas y plataformas web de alta velocidad en React y Vanilla JS para el control de operaciones en vivo, despacho de tickets y analítica en tiempo real."
-  },
-  {
-    title: "Apps Móviles Nativas & Flujos CI/CD",
-    subtitle: "Flutter (iOS & Android) & Git/GitHub",
-    desc: "Desarrollo de aplicaciones móviles multiplataforma en Flutter a 60–120 FPS, integrado con control de versiones profesional en Git y GitHub y automatización de despliegues."
+    title: "Apps Móviles Nativas & Ecosistemas Web",
+    subtitle: "Flutter (iOS/Android), React 19 & Git/GitHub",
+    desc: "Desarrollo aplicaciones móviles multiplataforma fluidas a 60–120 FPS en Flutter y plataformas web de control operacional en React y Vanilla JS, respaldado por flujos profesionales en Git y CI/CD."
   }
 ];
 
@@ -509,9 +509,19 @@ export const skillsList = [
     items: [
       "Java & Spring Boot", 
       "Python & FastAPI", 
+      "APIs RESTful & Microservicios", 
       "Node.js & Express", 
-      "Cloud Functions Serverless", 
-      "APIs RESTful & Microservicios"
+      "Cloud Functions Serverless"
+    ] 
+  },
+  { 
+    category: "IA & Automatización", 
+    items: [
+      "Automatización n8n & Webhooks", 
+      "APIs de IA (OpenAI, Gemini, Claude)", 
+      "Orquestación de Pipelines", 
+      "Procesamiento con Agentes IA", 
+      "Extracción & Análisis Inteligente"
     ] 
   },
   { 
@@ -539,48 +549,375 @@ export const skillsList = [
 // Secondary / Additional Projects — displayed in the "Más Proyectos" grid
 export const secondaryProjectsData = [
   {
-    id: "serviintel-operario",
-    title: "Servi Intel Operarios",
-    subtitle: "App móvil para operarios de campo",
-    category: "App Móvil de Campo & Geolocalización",
+    id: "crucigramas",
+    title: "Crucigramas Pro",
+    subtitle: "Juego móvil de palabras cruzadas y vocabulario en Flutter",
+    category: "Juego Móvil & Algoritmos 2D",
     year: "2026",
-    accent: "#0284c7",
+    accent: "#f59e0b",
     deviceType: "phone-vertical",
-    description: "Aplicación móvil en Flutter para operarios en campo con recepción de tickets reactivos, navegación GPS y firmado de órdenes con evidencia fotográfica.",
-    tags: ["Flutter", "Google Maps", "Firestore Sync", "Background GPS"],
+    githubUrl: "https://github.com/SamuelSHenriquezP/Crucigramas",
+    description: "Aplicación de crucigramas inteligentes para Android desarrollada con Flutter. Integra un motor algorítmico de generación de cuadrículas, pistas contextuales, teclado virtual optimizado y persistencia local de partidas resueltas con SharedPreferences.",
+    tags: ["Flutter Nativo", "Dart 3.x", "Generación Procedural", "SharedPreferences", "Provider", "Android Release"],
     highlights: [
-      "Recepción y actualización de estado de tickets en tiempo real.",
-      "Captura de evidencia fotográfica con almacenamiento en Cloud Storage.",
-      "Modo bajo consumo de batería durante seguimiento satelital."
+      "Cuadrícula matricial interactiva 5x5 a 15x15 con navegación por celdas asistida.",
+      "Algoritmo de validación inmediata de palabras horizontales y verticales.",
+      "Persistencia de puntajes históricos y sistema de pistas progresivas."
     ],
     metrics: [
-      { label: "Plataforma", val: "Android / iOS" },
-      { label: "Sincronización", val: "Firestore Realtime" },
-      { label: "Firmado Release", val: "Google Play Signed" },
-      { label: "Estado", val: "Producción" }
+      { label: "Plataforma", val: "Android Nativo" },
+      { label: "Rendimiento", val: "60 FPS Fluidos" },
+      { label: "Release", val: "APK Firmado" },
+      { label: "Estado", val: "Listo para Despliegue" }
     ],
     codeSnippet: {
       language: "dart",
-      filename: "operator_ticket_view.dart",
-      code: `// lib/views/operator_ticket_view.dart
-class OperatorTicketView extends StatelessWidget {
-  final String ticketId;
-  const OperatorTicketView({required this.ticketId});
+      filename: "crossword_game_screen.dart",
+      code: `// lib/views/game/crossword_game_screen.dart
+class CrosswordGameScreen extends StatefulWidget {
+  final CrosswordPuzzle puzzle;
+  const CrosswordGameScreen({Key? key, required this.puzzle}) : super(key: key);
+
+  @override
+  State<CrosswordGameScreen> createState() => _CrosswordGameState();
+}`
+    },
+    appSimulator: "crucigramas"
+  },
+  {
+    id: "lev-sanctuary",
+    title: "Lev — Santuario & Bienestar",
+    subtitle: "App de mindfulness, hábitos conscientes y paisajes sonoros",
+    category: "Bienestar & Audio Reactivo",
+    year: "2026",
+    accent: "#10b981",
+    deviceType: "phone-vertical",
+    githubUrl: "https://github.com/SamuelSHenriquezP/Lev",
+    description: "Santuario digital para el equilibrio mental y la introspección personal desarrollado en Flutter. Cuenta con ejercicios somáticos guiados, paisajes sonoros espaciales 3D en frecuencias curativas (432Hz/528Hz), registro de emociones diarias y seguimiento de hábitos con estadísticas.",
+    tags: ["Flutter", "Audioplayers", "Audio 3D 432Hz", "Hábitos Conscientes", "Shared Preferences", "Clean Architecture"],
+    highlights: [
+      "Reproducción multicanal de paisajes sonoros de fondo con Audioplayers.",
+      "Temporizador somático de respiración sincronizada con pulsos orgánicos.",
+      "Reframing cognitivo diario y diario íntimo cifrado localmente."
+    ],
+    metrics: [
+      { label: "Audio", val: "Frecuencias 432Hz" },
+      { label: "Persistencia", val: "Cifrado Local" },
+      { label: "Release", val: "APK Producción" },
+      { label: "Estado", val: "Completo" }
+    ],
+    codeSnippet: {
+      language: "dart",
+      filename: "companion_chat_screen.dart",
+      code: `// lib/features/companion/presentation/companion_chat_screen.dart
+class CompanionChatScreen extends StatelessWidget {
+  const CompanionChatScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<DocumentSnapshot>(
-      stream: FirebaseFirestore.instance.collection('tickets').doc(ticketId).snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) return const CircularProgressIndicator();
-        final data = snapshot.data!.data() as Map<String, dynamic>;
-        return TicketStatusCard(data: data);
-      },
+    return Scaffold(
+      backgroundColor: AppColors.darkBgPrimary,
+      body: SanctuaryWeatherSheet(),
     );
   }
 }`
     },
-    appSimulator: "serviintel-operario"
+    appSimulator: "lev"
+  },
+  {
+    id: "office-clicker",
+    title: "Corp Empire — Office Clicker",
+    subtitle: "Juego tycoon corporativo incremental con física económica",
+    category: "Juego Móvil & Economía 2D",
+    year: "2025 – 2026",
+    accent: "#f59e0b",
+    deviceType: "phone-vertical",
+    githubUrl: "https://github.com/Ssrx890/office_clicker",
+    description: "Videojuego incremental y de estrategia económica en Flutter donde el jugador construye un imperio corporativo de tecnología. Incluye cálculo de ingresos pasivos por segundo, compras de edificios e infraestructura cloud, mecánicas de prestigio y monetización con AdMob e In-App Purchases.",
+    tags: ["Flutter Game", "AdMob", "In-App Purchases", "Economía Incremental", "Fl Chart", "Audioplayers"],
+    highlights: [
+      "Motor de simulación matemática para flujos de caja exponenciales sin overflow.",
+      "Animación de partículas y monedas flotantes en Canvas nativo.",
+      "Métricas en vivo de ingresos/segundo con gráficos de crecimiento interactivos."
+    ],
+    metrics: [
+      { label: "Motor", val: "Flutter 60 FPS" },
+      { label: "Monetización", val: "AdMob & IAP" },
+      { label: "Release", val: "APK Firmado" },
+      { label: "Estado", val: "Producción" }
+    ],
+    codeSnippet: {
+      language: "dart",
+      filename: "game_screen.dart",
+      code: `// lib/screens/game_screen.dart
+class GameScreen extends StatefulWidget {
+  const GameScreen({Key? key}) : super(key: key);
+
+  @override
+  State<GameScreen> createState() => _GameScreenState();
+}`
+    },
+    appSimulator: "office-clicker"
+  },
+  {
+    id: "sudoku-zen",
+    title: "Sudoku Zen",
+    subtitle: "Juego matemático clásico con estética zen japonesa",
+    category: "Juego Móvil & Lógica Mental",
+    year: "2026",
+    accent: "#f59e0b",
+    deviceType: "phone-vertical",
+    githubUrl: "https://github.com/SamuelSHenriquezP/sudoku",
+    description: "Juego mental de Sudoku 9x9 con validación algorítmica matemática instantánea, 4 modos de dificultad (Fácil, Medio, Difícil, Zen), modo borrador/notas para candidatos numéricos y un diseño estético sereno inspirado en texturas de madera y piedra japonesa.",
+    tags: ["Flutter", "Algoritmo Backtracking", "9x9 Matrix", "Modo Notas", "Game Storage", "Minimalista"],
+    highlights: [
+      "Generador de tableros con algoritmo de backtracking y solución garantizada única.",
+      "Modo lápiz dinámico para pre-anotación de posibles candidatos numéricos.",
+      "Detección inteligente de conflictos por fila, columna y cuadrante 3x3."
+    ],
+    metrics: [
+      { label: "Algoritmo", val: "Backtracking 9x9" },
+      { label: "Dificultad", val: "4 Niveles" },
+      { label: "Release", val: "APK Firmado" },
+      { label: "Estado", val: "Producción" }
+    ],
+    codeSnippet: {
+      language: "dart",
+      filename: "sudoku_engine.dart",
+      code: `// lib/managers/game_storage.dart
+class GameStorage {
+  static const String _boardKey = 'active_zen_sudoku';
+  Future<void> saveCurrentGame(List<List<int>> board) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_boardKey, jsonEncode(board));
+  }
+}`
+    },
+    appSimulator: "sudoku-zen"
+  },
+  {
+    id: "ink-wright",
+    title: "Ink Wright — Studio Editorial",
+    subtitle: "Estudio editorial móvil para escritores con compilación a PDF",
+    category: "Productividad & Motores de Impresión",
+    year: "2026",
+    accent: "#e4e4e7",
+    deviceType: "phone-vertical",
+    githubUrl: "https://github.com/SamuelSHenriquezP/ink_wright",
+    description: "Entorno editorial minimalista para novelistas y autores profesionales desarrollado en Flutter. Permite la estructuración por capítulos, mapas de personajes y tramas, contador dinámico de métricas de lectura y exportación directa a archivos PDF de imprenta a 300 DPI con sangrado editorial.",
+    tags: ["Flutter", "PDF Engine (300 DPI)", "Printing", "Estructuración Literaria", "Zen Editor", "Monochrome"],
+    highlights: [
+      "Motor de compilación vectorial en Dart para renderizado de libros en formato PDF/X.",
+      "Editor de texto libre de distracciones con modo máquina de escribir y conteo WPM.",
+      "Mapa mental de líneas temporales de tramas y fichas de personajes vinculadas."
+    ],
+    metrics: [
+      { label: "Salida", val: "PDF 300 DPI Imprenta" },
+      { label: "Tipografía", val: "Baskerville Pro" },
+      { label: "Release", val: "APK Release (81 MB)" },
+      { label: "Estado", val: "Completo" }
+    ],
+    codeSnippet: {
+      language: "dart",
+      filename: "zen_editor_screen.dart",
+      code: `// lib/screens/zen_editor_screen.dart
+class ZenEditorScreen extends StatefulWidget {
+  final ChapterModel chapter;
+  const ZenEditorScreen({super.key, required this.chapter});
+
+  @override
+  State<ZenEditorScreen> createState() => _ZenEditorScreenState();
+}`
+    },
+    appSimulator: "ink-wright"
+  },
+  {
+    id: "finance-today",
+    title: "FinanceToday",
+    subtitle: "Control de gastos con automatización n8n y análisis predictivo con IA",
+    category: "Fintech, IA & Automatización n8n",
+    year: "2025 – 2026",
+    accent: "#22d3ee",
+    deviceType: "phone-vertical",
+    githubUrl: "https://github.com/Ssrx890/financetoday",
+    description: "Aplicación móvil para el control financiero personal y corporativo construida en Flutter. Integra almacenamiento local ultra-rápido en Hive NoSQL, orquestación de reportes y webhooks hacia flujos automatizados en n8n, y análisis predictivo de gastos mediante APIs de Inteligencia Artificial.",
+    tags: ["Flutter", "Automatización n8n", "APIs de IA", "Hive NoSQL", "FlChart", "Fintech"],
+    highlights: [
+      "Sincronización reactiva por webhooks con n8n para orquestar alertas y reportes automáticos.",
+      "Análisis predictivo de patrones financieros e insights de ahorro con APIs de IA.",
+      "Base de datos NoSQL binaria en Hive con gráficos interactivos en FlChart."
+    ],
+    metrics: [
+      { label: "Automatización", val: "n8n Cloud Webhooks" },
+      { label: "Inteligencia", val: "APIs de IA (LLMs)" },
+      { label: "Base de Datos", val: "Hive NoSQL Local" },
+      { label: "Release", val: "APK Firmado (47 MB)" }
+    ],
+    codeSnippet: {
+      language: "dart",
+      filename: "main.dart",
+      code: `// lib/main.dart
+Future<bool> sendReportToN8n(String email, List expenses) async {
+  const webhookUrl = "https://fluttersam.app.n8n.cloud/webhook/finance-report";
+  final response = await http.post(
+    Uri.parse(webhookUrl),
+    headers: {"Content-Type": "application/json"},
+    body: jsonEncode({"email": email, "expenses": expenses, "timestamp": DateTime.now().toIso8601String()}),
+  );
+  return response.statusCode == 200;
+}`
+    },
+    appSimulator: "finance-today"
+  },
+  {
+    id: "tribunall",
+    title: "Tribunall",
+    subtitle: "Juego social móvil de juicios, acusados y sentencias cómicas",
+    category: "Juego Móvil Social & Multijugador",
+    year: "2025",
+    accent: "#ffbd2e",
+    deviceType: "phone-vertical",
+    githubUrl: "https://github.com/Ssrx890/Tribunall",
+    description: "Juego party y social desarrollado en Flutter donde los jugadores asumen roles de juez, acusados y jurado. Incluye generación procedural de cargos absurdos, cuenta regresiva de defensa de 30 segundos, deliberación con golpe de mazo y sentencias hilarantes.",
+    tags: ["Flutter", "Juego Social", "Multijugador", "Audioplayers", "Oswald Font", "Party Game"],
+    highlights: [
+      "Motor de asignación aleatoria de juez, acusados y cargos delictivos humorísticos.",
+      "Temporizador de defensa contrarreloj con efectos sonoros de mazo judicial.",
+      "Veredictos dinámicos de culpabilidad y sentencias de castigo entre amigos."
+    ],
+    metrics: [
+      { label: "Género", val: "Party Game Social" },
+      { label: "Modos", val: "Local & Multijugador" },
+      { label: "Arquitectura", val: "Clean / Provider" },
+      { label: "Estado", val: "Producción" }
+    ],
+    codeSnippet: {
+      language: "dart",
+      filename: "pantalla_juicio.dart",
+      code: `// lib/screens/pantalla_juicio.dart
+class PantallaJuicio extends StatefulWidget {
+  const PantallaJuicio({super.key});
+
+  @override
+  State<PantallaJuicio> createState() => _PantallaJuicioState();
+}`
+    },
+    appSimulator: "tribunall"
+  },
+  {
+    id: "den-electricos",
+    title: "DEN Eléctricos",
+    subtitle: "Catálogo e ingeniería de instalaciones eléctricas y domótica Loxone",
+    category: "Web Industrial & Domótica",
+    year: "2026",
+    accent: "#eab308",
+    deviceType: "laptop",
+    githubUrl: "https://github.com/SamuelSHenriquezP/DEN",
+    description: "Plataforma web de ingeniería eléctrica y domótica inteligente desarrollada en React 19 y Tailwind CSS. Cuenta con visor interactivo de servicios industriales, simulador de control de cargas eléctricas, cálculo de presupuestos unifilares y presentación de certificaciones RETIE.",
+    tags: ["React 19", "Vite", "Tailwind CSS", "Domótica Loxone", "RETIE", "Cotizador Web"],
+    highlights: [
+      "Cotizador paramétrico para proyectos de automatización de iluminación y potencia.",
+      "Arquitectura SPA ultraligera optimizada con tiempos de carga menores a 0.4s.",
+      "Integración directa con canal prioritario de WhatsApp para consultas técnicas."
+    ],
+    metrics: [
+      { label: "Framework", val: "React 19 + Vite" },
+      { label: "Estilo", val: "Tailwind CSS v4" },
+      { label: "Especialidad", val: "Domótica Loxone" },
+      { label: "Estado", val: "Completada" }
+    ],
+    codeSnippet: {
+      language: "javascript",
+      filename: "App.jsx",
+      code: `// src/App.jsx
+export default function App() {
+  const [activeSectionIdx, setActiveSectionIdx] = useState(0);
+  const [isQuoteOpen, setIsQuoteOpen] = useState(false);
+  return (
+    <div className="bg-[#0B0D14] text-white">
+      <SystemActivationHero onQuote={() => setIsQuoteOpen(true)} />
+      <LoxoneDomoticaSection />
+    </div>
+  );
+}`
+    },
+    appSimulator: "den-electricos"
+  },
+  {
+    id: "grow-wellness",
+    title: "Grow — Skincare & Wellness",
+    subtitle: "E-commerce editorial y quiz de diagnóstico cosmético interactivo",
+    category: "E-Commerce & Experiencia Web",
+    year: "2025",
+    accent: "#f472b6",
+    deviceType: "laptop",
+    githubUrl: "https://github.com/SamuelSHenriquezP/Grow",
+    description: "Tienda online y portal interactivo de cosmética botánica creado con React y Tailwind. Cuenta con un quiz dinámico de diagnóstico de piel en tiempo real, carrito de compras deslizante sin recarga de página y diseño editorial moderno.",
+    tags: ["React 19", "E-Commerce", "Skin Quiz", "Shopping Cart", "Tailwind CSS"],
+    highlights: [
+      "Quiz interactivo de 5 pasos con recomendación algorítmica de rutina cosmética.",
+      "Drawer de carrito de compras reactivo con actualización instantánea de totales.",
+      "Micro-interacciones fluidas y fotografía editorial de producto."
+    ],
+    metrics: [
+      { label: "Frontend", val: "React 19 SPA" },
+      { label: "Checkout", val: "WhatsApp Cart Sync" },
+      { label: "Diseño", val: "Editorial Warm" },
+      { label: "Estado", val: "Completada" }
+    ],
+    codeSnippet: {
+      language: "javascript",
+      filename: "App.jsx",
+      code: `// src/App.jsx
+export function App() {
+  const [cartItems, setCartItems] = useState([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  return (
+    <div className="bg-amber-50/20 text-zinc-900">
+      <ProductShowcase onAddToCart={handleAddToCart} />
+      <GlowQuizModal isOpen={isQuizOpen} />
+    </div>
+  );
+}`
+    },
+    appSimulator: "grow-wellness"
+  },
+  {
+    id: "aluma-candles",
+    title: "Aluma — Velas Aromáticas",
+    subtitle: "Portal web de velas botánicas artesanales con tipografía editorial",
+    category: "Boutique Web & Diseño Editorial",
+    year: "2025",
+    accent: "#3e6b61",
+    deviceType: "laptop",
+    githubUrl: "https://github.com/SamuelSHenriquezP/Aluma",
+    liveUrl: "https://aluma.inventustech.workers.dev/",
+    demoUrl: "https://aluma.inventustech.workers.dev/",
+    description: "Experiencia web editorial para una marca de velas aromáticas vertidas a mano con ceras vegetales de soja y coco. Destaca por su cuidada dirección de arte con tipografías Playfair Display e Inter, catálogo de notas olfativas y diseño minimalista cálido.",
+    tags: ["Vanilla JS", "CSS3 Custom Properties", "Playfair Display", "Diseño Editorial", "Boutique"],
+    highlights: [
+      "Desglose de pirámides olfativas (Notas de salida, corazón y fondo) por vela.",
+      "0 KB de sobrecarga de frameworks, velocidad de carga instantánea.",
+      "Paleta cromática inspirada en arcilla, lino y salvia blanca."
+    ],
+    metrics: [
+      { label: "Overhead", val: "0 KB Framework" },
+      { label: "Tipografía", val: "Playfair Display" },
+      { label: "Paleta", val: "Warm Sand & Sage" },
+      { label: "Estado", val: "Completada" }
+    ],
+    codeSnippet: {
+      language: "html",
+      filename: "index.html",
+      code: `<!-- index.html -->
+<section class="hero-section">
+  <div class="hero-content">
+    <h1 class="font-serif">Velas Botánicas Hechas a Mano</h1>
+    <p>Ceras naturales de soja y esencias puras para transformar tus espacios.</p>
+  </div>
+</section>`
+    },
+    appSimulator: "aluma-candles"
   },
   {
     id: "inventus-web",
@@ -590,6 +927,7 @@ class OperatorTicketView extends StatelessWidget {
     year: "2026",
     accent: "#a78bfa",
     deviceType: "laptop",
+    githubUrl: "https://github.com/SamuelSHenriquezP/inventus-studio",
     description: "Portafolio profesional de alta fidelidad construido con React 19, GSAP para transiciones cinematográficas y mockups 3D interactivos que ejecutan demos reales de aplicaciones dentro de hardware fotorrealista.",
     tags: ["React 19", "Vite", "GSAP", "Tailwind CSS v4", "Three.js"],
     highlights: [
