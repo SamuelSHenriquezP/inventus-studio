@@ -29,3 +29,7 @@ GEMINI.md
 .env
 .env.*
 
+# APKs binaries
+apks/
+*.apk
+
